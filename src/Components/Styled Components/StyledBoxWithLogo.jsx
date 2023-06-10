@@ -1,5 +1,5 @@
-import {StyledLightCircleBox, StyledRotatePurpleBox, StyledSmallLogoBox} from "./styledComponents";
-import {CityCircleSmallLogoLogIn} from "./styledCityCircleLogoLogIn";
+// import {StyledLightCircleBox, StyledRotatePurpleBox, StyledSmallLogoBox} from "./styledComponents";
+// import {CityCircleSmallLogoLogIn} from "./styledCityCircleLogoLogIn";
 import Box from "@mui/material/Box";
 import * as React from "react";
 import {styled} from "@mui/material/styles";
@@ -51,7 +51,7 @@ const SmallLogoBoxBottom = styled(Box)(({ theme })=> ({
     border:`0.5rem solid ${theme.palette.secondary.main}`,
     backgroundColor:'white',
     position: "absolute",
-    bottom : '-2.8rem',
+    bottom : '-3.3rem',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',

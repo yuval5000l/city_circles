@@ -9,6 +9,8 @@ import {ThemeProvider} from "@mui/material/styles";
 import CirclesPageComponent from "./routes/circles/CirclesPage.component";
 import FriendsPageComponent from "./routes/friends/FriendsPage.component";
 import ProfilePageComponent from "./routes/profile/ProfilePage.component";
+import SignInPage from "./routes/logIn&signUp/SignInPage";
+import SignUpPage from "./routes/logIn&signUp/SignUpPage";
 
 
 function App() {
@@ -24,6 +26,8 @@ function App() {
                     <Route path="ProfilePageComponent" element={<ProfilePageComponent/>}/>
                 </Route>
                 <Route path="SearchPageComponent" element={<SearchPageComponent />} />
+                <Route path="signInPage" element={<SignInPage/>}/>
+                <Route path="SignUpPage" element={<SignUpPage/>}/>
             </Routes>
             </ThemeProvider>
         </div>
