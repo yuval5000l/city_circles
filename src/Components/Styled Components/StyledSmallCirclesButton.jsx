@@ -48,7 +48,7 @@ export default function StyledSmallCircleButton({userID, circles_ = []}) {
                     backgroundColor: `${theme.palette.primary.main}`,
                     border: `0.2rem solid ${theme.palette.secondary.main}`
                 }}>
-                    <Stack direction="column" spacing={2}>
+                    <Stack direction="column" spacing={2} alignItems="flex-start">
                         {(circles === []) ?
                             (<div> Error Loading the circles </div>) :
                             (<div>
@@ -57,7 +57,7 @@ export default function StyledSmallCircleButton({userID, circles_ = []}) {
                                                justifyContent="center"
                                                alignItems="center"
                                                spacing={1}>
-                                            <StyledCirclesIcon/>
+                                            <StyledCirclesIcon sx={{color:"white"}}/>
                                             <StyledDialogTitle>{circle}</StyledDialogTitle>
                                         </Stack>)}
                                 </div>

@@ -283,3 +283,4 @@ export const StyledBottomNavigation = styled(BottomNavigation)(({theme}) => ({
         fontSize: "5rem"
     }
 }));
+

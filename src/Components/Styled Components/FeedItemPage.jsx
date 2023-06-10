@@ -24,7 +24,6 @@ export default function FeedItemPage()
     }
 
     return(<Box>
-
         {listReviews.map((review) =>
           <StyledFeedItem user_name={review.user_name} profile_photo_url={review.profile_photo_url}
             circles = {review.circles} time={review.time}

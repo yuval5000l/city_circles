@@ -1,5 +1,6 @@
 import {Component} from "react";
 import {Typography} from "@mui/material";
+import FeedItemPage from "../../Components/Styled Components/FeedItemPage";
 
 
 class HomePageComponent extends Component{
@@ -9,9 +10,7 @@ class HomePageComponent extends Component{
     render(){
         return(
             <div>
-                <Typography>
-                    Home Page
-                </Typography>
+                <FeedItemPage/>
             </div>
         );
     }
