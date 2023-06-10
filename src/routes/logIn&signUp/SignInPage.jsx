@@ -51,7 +51,7 @@ export default function UserRegistrationForm () {
             {/*    <StyledLogoLogIn sx={{alignSelf: "center"}}/>*/}
             {/*</StyledPurpleBox>*/}
             <Box sx={{justifySelf: "center"}}>
-                <Typography variant="h2" marginTop={4   }>
+                <Typography variant="h2" marginTop={4}>
                     Sign-Up
                 </Typography>
                 <Stack direction="column" spacing={5} marginBottom={4} marginTop={4}>
