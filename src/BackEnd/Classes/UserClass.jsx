@@ -170,15 +170,17 @@ export const SignIn = async ({email}, {password})=>{
                 profile_pic: "",
                 friends: [],
             }
-            console.log(cred.user.uid)
-            const ref = await addDoc(collection(db, "Users", cred.user.uid), data);
-
+            await setDoc(doc(db, "Users", cred.user.uid), data);
+            return true;
             // await setDoc(ref, data);
 
         });
     } catch (err) {
         console.error(err);
+        return false;
     }
+    return true;
+
     // handleRefresh();
 };
 

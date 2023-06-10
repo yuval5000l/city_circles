@@ -2,22 +2,19 @@ import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
 import {
     StyledAutoComplete,
     StyledCircleBox,
-    StyledDialogInputBusiness,
     StyledDialogReviewIcon,
     StyledDialogSecondTitle, StyledDialogTextFieldReview,
     StyledDialogTitle, StyledRating
 } from "./styledComponents";
 import {useEffect, useState} from "react";
 import Dialog from "@mui/material/Dialog";
-import {Autocomplete, Button, DialogActions, DialogContent, Stack} from "@mui/material";
+import {Button, DialogActions, DialogContent, Stack} from "@mui/material";
 import TextField from "@mui/material/TextField";
-// import {auth} from "../config/firebase";
 import Box from "@mui/material/Box";
 import theme from "../../Theme/Theme";
-// import {getUserById} from "../Classes/UserClass";
-// import Business, {getBusinessByName} from "../Classes/BusinessClass";
-// import User from "../Classes";
-// import getUserById from "../Classes";
+import Business, {getBusinessByName} from "../../BackEnd/Classes/BusinessClass"
+import {auth} from "../../BackEnd/config/firebase"
+import {getUserById} from "../../BackEnd/Classes/UserClass"
 
 
 export default function StyledCircleReview({closeSmallDialog = () => {}}) {

@@ -115,6 +115,7 @@ export default class Business
             console.error('Error geocoding address:', error);
             return [0,0];
         }
+        // eslint-disable-next-line no-unreachable
         return [0,0];
     };
 

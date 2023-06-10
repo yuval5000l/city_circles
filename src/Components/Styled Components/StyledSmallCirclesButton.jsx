@@ -4,10 +4,10 @@ import {
 } from "./styledComponents";
 import Dialog from "@mui/material/Dialog";
 import {useEffect, useState} from "react";
-import {getUserCircles} from "../Classes/UserClass";
+import {getUserCircles} from "../../BackEnd/Classes/UserClass";
 import Box from "@mui/material/Box";
 import {DialogContent, Stack} from "@mui/material";
-import theme from "../Theme/Theme";
+import theme from "../../Theme/Theme";
 
 export default function StyledSmallCircleButton({userID, circles_ = []}) {
     const [open, setOpen] = useState(false);

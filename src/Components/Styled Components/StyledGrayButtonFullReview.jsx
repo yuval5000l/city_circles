@@ -1,9 +1,7 @@
 import React, {useState} from 'react';
 import {StyledButtonGray} from "./styledComponents";
-import theme from "../Theme/Theme";
-import {DialogContent, Stack, Typography} from "@mui/material";
-import StyledCircleReview from "./StyledCircleReview";
-import StyledCircleFootprint from "./StyledCircleFootprints";
+import theme from "../../Theme/Theme";
+import {DialogContent, Typography} from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 
 const StyledGrayButtonFullReview = ({content}) => {

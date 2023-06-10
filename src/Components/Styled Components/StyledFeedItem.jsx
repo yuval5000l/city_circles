@@ -3,13 +3,12 @@ import {
     StyledAvatarUserFeed,
     StyledBusinessFeed,
     StyledRating,
-    StyledSmallCirclesButton,
     StyledTypographyReview
 } from "./styledComponents";
 import StyledGrayButtonFullReview from "./StyledGrayButtonFullReview";
 import StyledGrayButtonVisitBusiness from "./StyledGrayButtonVisitBusiness";
 import {useState} from "react";
-import {timestamp} from "../config/firebase"
+import {timestamp} from "../../BackEnd/config/firebase"
 import StyledSmallCircleButton from "./StyledSmallCirclesButton";
 
 

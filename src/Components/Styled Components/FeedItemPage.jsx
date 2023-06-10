@@ -1,6 +1,6 @@
 import {useEffect, useState} from "react";
-import User from "../Classes/UserClass";
-import {auth} from "../config/firebase";
+import User from "../../BackEnd/Classes/UserClass";
+import {auth} from "../../BackEnd/config/firebase";
 import Box from "@mui/material/Box";
 import StyledFeedItem from "./StyledFeedItem";
 export default function FeedItemPage()

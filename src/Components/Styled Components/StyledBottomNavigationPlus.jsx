@@ -1,10 +1,6 @@
-import {StyledBottomNavigationAction} from "./styledComponents";
-import AddIcon from "@mui/icons-material/Add";
 import {useState} from "react";
 import Dialog from "@mui/material/Dialog";
-import DialogTitle from "@mui/material/DialogTitle";
-import {Button, DialogActions, DialogContent, DialogContentText, Stack} from "@mui/material";
-import PersonIcon from "@mui/icons-material/Person";
+import {DialogContent, Stack} from "@mui/material";
 import StyledCircleReview from "./StyledCircleReview";
 import StyledCircleFootprint from "./StyledCircleFootprints";
 import theme from "../../Theme/Theme";

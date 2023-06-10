@@ -10,12 +10,6 @@ import {
     Toolbar, Typography
 } from "@mui/material";
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import InboxIcon from "@mui/icons-material/Inbox";
-import MailIcon from "@mui/icons-material/Mail";
-import MenuIcon from "@mui/icons-material/Menu";
-import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
-import DraftsRoundedIcon from '@mui/icons-material/DraftsRounded';
-import StarRoundedIcon from '@mui/icons-material/StarRounded';
 import {Link} from "react-router-dom";
 import GroupIcon from "@mui/icons-material/Group";
 import HistoryIcon from '@mui/icons-material/History';

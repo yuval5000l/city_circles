@@ -1,22 +1,19 @@
-import AccessibilityNewIcon from "@mui/icons-material/AccessibilityNew";
 import {
     StyledCircleBox,
-    StyledDialogInputBusiness,
-    StyledDialogReviewIcon, StyledDialogFootprintIcon,
-    StyledDialogSecondTitle, StyledDialogTextFieldReview,
-    StyledDialogTitle, StyledRating, StyledAutoComplete
+    StyledDialogFootprintIcon,
+    StyledDialogSecondTitle,
+    StyledDialogTitle, StyledAutoComplete
 } from "./styledComponents";
 import {ReactComponent as FootprintsIcon} from "./Icons/footprints-svgrepo-com.svg";
 import Box from "@mui/material/Box";
-import {Autocomplete, Button, DialogActions, DialogContent, Stack} from "@mui/material";
+import {Button, DialogActions, DialogContent, Stack} from "@mui/material";
 import theme from "../../Theme/Theme";
 import Dialog from "@mui/material/Dialog";
 import {useEffect, useState} from "react";
-import {doc, getDoc} from "firebase/firestore";
-// import {auth, db} from "../config/firebase";
-// import {getUserById} from "../Classes/UserClass";
-// import Business, {getBusinessByName} from "../Classes/BusinessClass";
 import TextField from "@mui/material/TextField";
+import Business, {getBusinessByName} from "../../BackEnd/Classes/BusinessClass"
+import {auth} from "../../BackEnd/config/firebase"
+import {getUserById} from "../../BackEnd/Classes/UserClass"
 
 export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
 

@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import {StyledButtonGray} from "./styledComponents";
-import theme from "../Theme/Theme";
 
 const StyledGrayButtonVisitBusiness = () => {
     const [clicked, setClicked] = useState(false);
