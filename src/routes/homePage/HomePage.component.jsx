@@ -1,6 +1,5 @@
 import {Component} from "react";
 import {Typography} from "@mui/material";
-import StyledHamburgerButtonWithCanvas from "../../Components/Styled Components/StyledHamburgerButtonWithCanvas";
 
 
 class HomePageComponent extends Component{
@@ -13,7 +12,6 @@ class HomePageComponent extends Component{
                 <Typography>
                     Home Page
                 </Typography>
-                <StyledHamburgerButtonWithCanvas/>
             </div>
         );
     }

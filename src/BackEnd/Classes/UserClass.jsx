@@ -1,7 +1,7 @@
 import {auth, db, timestamp} from "../config/firebase";
 import "firebase/auth";
 import {createUserWithEmailAndPassword} from "firebase/auth";
-import {addDoc, collection, doc, getDoc, setDoc} from "firebase/firestore";
+import {doc, getDoc, setDoc} from "firebase/firestore";
 import {getBusinessByName} from "./BusinessClass";
 // import {auth} from "./config/firebase";
 
@@ -54,10 +54,9 @@ export default class User
         await this.saveToFirebase();
     }
 
-    async addBusinessFootprint(businessID, rating) {
+    async addBusinessFootprint(businessID) {
         const footprint = {
             businessID: businessID,
-            rating: rating,
             timestamp: timestamp.now().toDate(),
         };
         this.footprints.push(footprint);

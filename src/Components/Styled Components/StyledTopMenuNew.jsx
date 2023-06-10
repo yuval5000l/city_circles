@@ -1,17 +1,18 @@
 import {Stack} from "@mui/material";
-import {StyledAppBarTop, StyledHamburgerButton, StyledSearchBar} from "./styledComponents";
+import {StyledAppBarTop, StyledSearchBar} from "./styledComponents";
 import logoNew from "./Icons/logo-all-white.png";
 import StyledHamburgerButtonWithCanvas from "./StyledHamburgerButtonWithCanvas";
+import Box from "@mui/material/Box";
 
 function StyledTopMenuNew(){
 
     return(
         <StyledAppBarTop>
             <Stack direction = "row" alignItems="center" spacing={1} justifyContent="space-evenly">
-                <item sx={{display:"flex"}}>
+                <Box sx={{display:"flex"}}>
                     <StyledHamburgerButtonWithCanvas/>
-                </item>
-                <item sx={{display:"flex"}}>
+                </Box>
+                <Box sx={{display:"flex"}}>
                     <StyledSearchBar
                         // disabled
                         autoFocus={true}
@@ -21,10 +22,10 @@ function StyledTopMenuNew(){
                         placeholder='search business..'
                         // onChange={onSearchChange}
                     />
-                </item>
-                <item sx={{display:"flex"}}>
+                </Box>
+                <Box sx={{display:"flex"}}>
                     <img src={logoNew} alt={logoNew} width="72px"/>
-                </item>
+                </Box>
             </Stack>
         </StyledAppBarTop>
     );

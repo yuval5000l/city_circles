@@ -30,9 +30,10 @@ function ResponsiveDrawer(props) {
         setMobileOpen(!mobileOpen);
     };
 
-    function sendToCreateBusiness() {
-        window.location.replace('/BusinessRegistrationPage1');
-    }
+    // TODO maybe get this function back?
+    // function sendToCreateBusiness() {
+    //     window.location.replace('/BusinessRegistrationPage1');
+    // }
 
     const drawer_content = [
         {text: 'Add a new business', path: "/BusinessRegistrationPage1", icon: <AddBoxOutlinedIcon />},

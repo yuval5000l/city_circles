@@ -19,26 +19,25 @@ import {getUserById} from "../../BackEnd/Classes/UserClass"
 
 export default function StyledCircleReview({closeSmallDialog = () => {}}) {
     const [open, setOpen] = useState(false);
-    // const [review, setReview] = useState("");
-    // const [rating, setRating] = useState(0);
-    // const [chosenBusiness, setChosenBusiness] = useState("");
-    //
-    // useEffect(() => {
-    //     getBusinesses()
-    // }, [])
-    //
-    //
-    // const [lstBusiness, setLstBusiness] = useState([]);
-    // const getBusinesses = ()=> {
-    //     Business.getAllBusinesses().then((lst) => {
-    //         setLstBusiness(lst);
-    //         // console.log(lstBusiness);
-    //     }).catch((error) => {
-    //         console.error(error);
-    //     });
-    // }
-    // console.log(business_id);
-    // console.log(auth?.currentUser.uid);
+    const [review, setReview] = useState("");
+    const [rating, setRating] = useState(0);
+    const [chosenBusiness, setChosenBusiness] = useState("");
+
+    useEffect(() => {
+        getBusinesses()
+    }, [])
+
+
+    const [lstBusiness, setLstBusiness] = useState([]);
+    const getBusinesses = ()=> {
+        Business.getAllBusinesses().then((lst) => {
+            setLstBusiness(lst);
+            // console.log(lstBusiness);
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
+    // console.log(auth?.currentUser?.uid);
     const handleClickOpen = () => {
         setOpen(true);
 
@@ -56,24 +55,30 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
     //
     //
     //
-    // const HandleSend = async () => {
-    //     if (chosenBusiness !== "")
-    //     {
-    //         const business = await getBusinessByName(chosenBusiness);
-    //
-    //         const user = await getUserById(auth?.currentUser?.uid);
-    //         if (business !== null) {
-    //             await user.addBusinessReview(chosenBusiness, review, rating)
-    //         }
-    //
-    //         if (business !== null)
-    //         {
-    //             await business.addUserReview(auth?.currentUser?.uid, review, rating);
-    //         }
-    //
-    //         handleClose();
-    //     }
-    // }
+    const HandleSend = async () => {
+        if (chosenBusiness !== "")
+        {
+            if (auth?.currentUser?.uid !== undefined)
+            {
+                const business = await getBusinessByName(chosenBusiness);
+
+                const user = await getUserById(auth?.currentUser?.uid);
+                if (business !== null) {
+                    await user.addBusinessReview(chosenBusiness, review, rating)
+                }
+
+                if (business !== null) {
+                    await business.addUserReview(auth?.currentUser?.uid, review, rating);
+                }
+            }
+            else
+            {
+                console.error("No one is signed in! so no review sent");
+            }
+
+            handleClose();
+        }
+    }
 
     return (
         <Box>
@@ -101,28 +106,27 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
                         </Stack>
                         <Stack direction="column" spacing={1}>
                             <StyledDialogSecondTitle>I went to..</StyledDialogSecondTitle>
-                            {/*TODO change front*/}
                             <StyledAutoComplete
                                 disablePortal
-                                // inputValue={chosenBusiness}
-                                // onInputChange={(event, newInputValue) => {
-                                //     setChosenBusiness(newInputValue);
-                                // }}
-                                // id="combo-box-demo"
-                                // options={lstBusiness}
-                                // renderInput={(params) => <TextField
-                                //     {...params}
-                                //     label="Business"/>
+                                inputValue={chosenBusiness}
+                                onInputChange={(event, newInputValue) => {
+                                    setChosenBusiness(newInputValue);
+                                }}
+                                id="combo-box-demo"
+                                options={lstBusiness}
+                                renderInput={(params) => <TextField
+                                    {...params}
+                                    label="Business"/>}
+
                             />
-                            {/*<StyledDialogInputBusiness placeholder={"where did you go???!"}/>*/}
                         </Stack>
                         <Stack direction="column">
                             <StyledDialogSecondTitle>It was..</StyledDialogSecondTitle>
                             <StyledRating
-                                // value={rating}
-                                // onChange={(event, newValue) => {
-                                //     setRating(newValue);
-                                // }}
+                                value={rating}
+                                onChange={(event, newValue) => {
+                                    setRating(newValue);
+                                }}
                             />
                         </Stack>
                         <Stack direction="column" spacing={1}>
@@ -136,16 +140,16 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
                                 type="email"
                                 fullWidth
                                 variant="standard"
-                                // value={review}
-                                // onChange={e => setReview(e.target.value)}
+                                value={review}
+                                onChange={e => setReview(e.target.value)}
                             />
                         </Stack>
                         <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
                             <DialogActions>
                                 <Button onClick={handleClose}
                                         sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Cancel</Button>
-                                {/*<Button onClick={HandleSend} sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Send*/}
-                                {/*    Review</Button>*/}
+                                <Button onClick={HandleSend} sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Send
+                                    Review</Button>
                             </DialogActions>
                         </Stack>
                     </Stack>
