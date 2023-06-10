@@ -263,6 +263,7 @@ export const StyledAutoComplete = styled(Autocomplete)(({theme}) => ({
 }));
 
 export const StyledBottomNavigationAction = styled(BottomNavigationAction)(({theme}) => ({
+
     [theme.breakpoints.up('xs')]: {
         fontSize: "3rem"
     },
@@ -272,7 +273,9 @@ export const StyledBottomNavigationAction = styled(BottomNavigationAction)(({the
 }));
 
 export const StyledBottomNavigation = styled(BottomNavigation)(({theme}) => ({
-
+    position:"fixed",
+    bottom:"0",
+    width:"100%",
     [theme.breakpoints.up('xs')]: {
         height: "4.5rem"
     },

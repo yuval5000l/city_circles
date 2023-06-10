@@ -21,23 +21,23 @@ import TextField from "@mui/material/TextField";
 export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
 
     const [open, setOpen] = useState(false);
-    const [rating, setRating] = useState(0);
-    const [chosenBusiness, setChosenBusiness] = useState("");
-
-    useEffect(() => {
-        getBusinesses()
-    }, [])
-
-    const [lstBusiness, setLstBusiness] = useState([]);
-
-    const getBusinesses = ()=> {
-        Business.getAllBusinesses().then((lst) => {
-            setLstBusiness(lst);
-            // console.log(lstBusiness);
-        }).catch((error) => {
-            console.error(error);
-        });
-    }
+    // const [rating, setRating] = useState(0);
+    // const [chosenBusiness, setChosenBusiness] = useState("");
+    //
+    // useEffect(() => {
+    //     getBusinesses()
+    // }, [])
+    //
+    // const [lstBusiness, setLstBusiness] = useState([]);
+    //
+    // const getBusinesses = ()=> {
+    //     Business.getAllBusinesses().then((lst) => {
+    //         setLstBusiness(lst);
+    //         // console.log(lstBusiness);
+    //     }).catch((error) => {
+    //         console.error(error);
+    //     });
+    // }
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -48,23 +48,23 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
         closeSmallDialog();
     };
 
-    const HandleSend = async () => {
-        if (chosenBusiness !== "")
-        {
-            const business = await getBusinessByName(chosenBusiness);
-
-            const user = await getUserById(auth?.currentUser?.uid);
-            if (business !== null) {
-                await user.addBusinessFootprint(chosenBusiness, rating)
-            }
-
-            if (business !== null)
-            {
-                await business.addUserFootprint(auth?.currentUser?.uid, rating);
-            }
-            handleClose();
-        }
-    }
+    // const HandleSend = async () => {
+    //     if (chosenBusiness !== "")
+    //     {
+    //         const business = await getBusinessByName(chosenBusiness);
+    //
+    //         const user = await getUserById(auth?.currentUser?.uid);
+    //         if (business !== null) {
+    //             await user.addBusinessFootprint(chosenBusiness, rating)
+    //         }
+    //
+    //         if (business !== null)
+    //         {
+    //             await business.addUserFootprint(auth?.currentUser?.uid, rating);
+    //         }
+    //         handleClose();
+    //     }
+    // }
 
     return(
         <Box>
@@ -95,17 +95,17 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
                             {/*TODO change front*/}
                             <StyledAutoComplete
                                 disablePortal
-                                inputValue={chosenBusiness}
-                                onInputChange={(event, newInputValue) => {
-                                    setChosenBusiness(newInputValue);
-                                }}
-                                id="combo-box-demo"
-                                options={lstBusiness}
-                                // sx={{ width: 300 }}
-                                renderInput={(params) => <TextField
-                                    {...params}
-                                    label="Business"
-                                />}
+                                // inputValue={chosenBusiness}
+                                // onInputChange={(event, newInputValue) => {
+                                //     setChosenBusiness(newInputValue);
+                                // }}
+                                // id="combo-box-demo"
+                                // options={lstBusiness}
+                                // // sx={{ width: 300 }}
+                                // renderInput={(params) => <TextField
+                                //     {...params}
+                                //     label="Business"
+                                // />}
                             />
                         </Stack>
                         <Stack direction="column">
@@ -128,8 +128,8 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
                             <DialogActions>
                                 <Button onClick={handleClose}
                                         sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Cancel</Button>
-                                <Button onClick={HandleSend} sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Send
-                                    Footprint</Button>
+                                {/*<Button onClick={HandleSend} sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Send*/}
+                                {/*    Footprint</Button>*/}
                             </DialogActions>
                         </Stack>
                     </Stack>

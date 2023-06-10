@@ -1,0 +1,136 @@
+import {useState} from "react";
+import {
+    Box,
+    Divider, Drawer, IconButton,
+    List,
+    ListItem,
+    ListItemButton,
+    ListItemIcon,
+    ListItemText, Stack,
+    Toolbar, Typography
+} from "@mui/material";
+import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
+import InboxIcon from "@mui/icons-material/Inbox";
+import MailIcon from "@mui/icons-material/Mail";
+import MenuIcon from "@mui/icons-material/Menu";
+import EmailRoundedIcon from '@mui/icons-material/EmailRounded';
+import DraftsRoundedIcon from '@mui/icons-material/DraftsRounded';
+import StarRoundedIcon from '@mui/icons-material/StarRounded';
+import {Link} from "react-router-dom";
+import GroupIcon from "@mui/icons-material/Group";
+import HistoryIcon from '@mui/icons-material/History';
+import WorkIcon from '@mui/icons-material/Work';
+import SettingsIcon from '@mui/icons-material/Settings';
+import {StyledAvatarUserFeed, StyledHamburgerButton} from "./styledComponents";
+import theme from "../../Theme/Theme";
+// import BusinessRegistration1 from "../../routes/business_registratin_pages/BusinessRegistrationPage1";
+
+
+const drawerWidth = '60%';
+function ResponsiveDrawer(props) {
+    const Static_Name = "static name"
+    const { window } = props;
+    const [mobileOpen, setMobileOpen] = useState(false);
+
+    const handleDrawerToggle = () => {
+        setMobileOpen(!mobileOpen);
+    };
+
+    function sendToCreateBusiness() {
+        window.location.replace('/BusinessRegistrationPage1');
+    }
+
+    const drawer_content = [
+        {text: 'Add a new business', path: "/BusinessRegistrationPage1", icon: <AddBoxOutlinedIcon />},
+        {text: 'Import Contacts', path: "/", icon: <GroupIcon />},
+        {text: 'History', path: "/", icon: <HistoryIcon />},
+        {text: 'All Businesses', path: "/", icon: <WorkIcon />},
+        {text: 'Settings', path:"/", icon:<SettingsIcon/>}
+    ];
+
+    const drawer = (
+        <Box sx={{backgroundColor:theme.palette.primary.light, color:"black", borderRight:`0.7rem solid ${theme.palette.secondary.main}`, height:"100%"}}>
+            <Toolbar sx={{backgroundColor:theme.palette.primary.main,color:"white"}}>
+                <Stack
+                    sx={{marginLeft:"auto", marginRight:"auto", padding:"1rem"}}
+                    direction="column"
+                    justifyContent="center"
+                    alignItems="center"
+                    spacing={2}
+                >
+                    <StyledAvatarUserFeed sx={{marginLeft:"auto", marginRight:"auto"}}/>
+                    <Typography>Hi, {Static_Name}</Typography>
+                </Stack>
+            </Toolbar>
+            <Divider />
+            <List>
+                {drawer_content.map((key, index) => (
+                    <ListItem key={key.text} disablePadding>
+                        <ListItemButton component={Link} to={key.path} >
+                            <ListItemIcon>
+                                {/*{index % 2 === 0 ? <AddBoxOutlinedIcon /> : <MailIcon />}*/}
+                                {key.icon}
+                            </ListItemIcon>
+                            <ListItemText primary={key.text} />
+                        </ListItemButton>
+                    </ListItem>
+                ))}
+            </List>
+        </Box>
+    );
+
+    const container = window !== undefined ? () => window().document.body : undefined;
+    return (
+        <Box sx={{ display: 'flex' }}>
+            <IconButton
+                color="inherit"
+                aria-label="open drawer"
+                edge="start"
+                onClick={handleDrawerToggle}
+            >
+                <StyledHamburgerButton />
+            </IconButton>
+            <Box
+                component="nav"
+                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                aria-label="mailbox folders"
+            >
+                {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
+                <Drawer
+                    container={container}
+                    variant="temporary"
+                    open={mobileOpen}
+                    onClose={handleDrawerToggle}
+                    ModalProps={{
+                        keepMounted: false, // Better open performance on mobile.
+                    }}
+                    sx={{
+                        display: { xs: 'block' },
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                    }}
+                >
+                    {drawer}
+                </Drawer>
+                <Drawer
+                    variant="permanent"
+                    sx={{
+
+                        display:
+                            {
+                                xs: 'none',
+                                sm: 'block',
+                            },
+                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, display:"none"},
+                    }}
+
+                    open
+                >
+                    {drawer}
+                </Drawer>
+            </Box>
+        </Box>
+    );
+}
+
+
+export default ResponsiveDrawer;

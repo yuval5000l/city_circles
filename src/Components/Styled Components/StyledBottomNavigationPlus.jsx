@@ -40,7 +40,7 @@ export default function StyledBottomNavigationPlus() {
                     border: `0.2rem solid ${theme.palette.secondary.main}`
                 }}>
 
-                <Stack direction = "row" spacing={2}>
+                <Stack direction = "row" spacing={2} justifyContent="center" alignItems={"center"}>
                     <StyledCircleReview closeSmallDialog={handleCloseSmallDialog}/>
                     <StyledCircleFootprint closeSmallDialog={handleCloseSmallDialog}/>
                 </Stack>

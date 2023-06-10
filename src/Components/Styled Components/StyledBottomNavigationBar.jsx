@@ -22,7 +22,7 @@ export default function StyledBottomNavigationBar() {
                 }}
             />}
             />
-            <StyledBottomNavigationAction component={Link} to="/" label="circles" icon={<SupervisedUserCircleIcon
+            <StyledBottomNavigationAction component={Link} to="/CirclesPageComponent" label="circles" icon={<SupervisedUserCircleIcon
                 sx={{
                     fontSize: {
                         xs: "3rem",
@@ -32,7 +32,7 @@ export default function StyledBottomNavigationBar() {
             />}
             />
             <StyledBottomNavigationPlus/>
-            <StyledBottomNavigationAction component={Link} to="/" label="friends" icon={<GroupIcon
+            <StyledBottomNavigationAction component={Link} to="/FriendsPageComponent" label="friends" icon={<GroupIcon
                 sx={{
                     fontSize: {
                         xs: "3rem",
@@ -41,7 +41,7 @@ export default function StyledBottomNavigationBar() {
                 }}
             />}
             />
-            <StyledBottomNavigationAction component={Link} to="/" label="profile" icon={<PersonIcon
+            <StyledBottomNavigationAction component={Link} to="/ProfilePageComponent" label="profile" icon={<PersonIcon
                 sx={{
                     fontSize: {
                         xs: "3rem",

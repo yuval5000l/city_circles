@@ -6,6 +6,9 @@ import NotificationsComponent from "./routes/notifications/Notifications.compone
 import SearchPageComponent from "./routes/search_page/SearchPage.component";
 import Theme from "./Theme/Theme";
 import {ThemeProvider} from "@mui/material/styles";
+import CirclesPageComponent from "./routes/circles/CirclesPage.component";
+import FriendsPageComponent from "./routes/friends/FriendsPage.component";
+import ProfilePageComponent from "./routes/profile/ProfilePage.component";
 
 
 function App() {
@@ -16,6 +19,9 @@ function App() {
                 <Route path="/" element={<NavigationComponent />}>
                     <Route index element={<HomePageComponent />} />
                     <Route path="NotificationsComponent" element={<NotificationsComponent/>}/>
+                    <Route path="CirclesPageComponent" element={<CirclesPageComponent/>}/>
+                    <Route path="FriendsPageComponent" element={<FriendsPageComponent/>}/>
+                    <Route path="ProfilePageComponent" element={<ProfilePageComponent/>}/>
                 </Route>
                 <Route path="SearchPageComponent" element={<SearchPageComponent />} />
             </Routes>
