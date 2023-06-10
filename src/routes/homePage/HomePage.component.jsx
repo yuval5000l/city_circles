@@ -1,5 +1,4 @@
 import {Component} from "react";
-import {Typography} from "@mui/material";
 import FeedItemPage from "../../Components/Styled Components/FeedItemPage";
 
 

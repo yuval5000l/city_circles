@@ -1,6 +1,6 @@
 import {auth, db, timestamp} from "../config/firebase";
 import "firebase/auth";
-import {createUserWithEmailAndPassword} from "firebase/auth";
+import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import {doc, getDoc, setDoc} from "firebase/firestore";
 import {getBusinessByName} from "./BusinessClass";
 // import {auth} from "./config/firebase";
@@ -37,6 +37,10 @@ export default class User
             console.error(err);
         }
     };
+
+    getUserName(){
+        return this.name_;
+    }
 
     toString() {
         return "the user name is: "+this.name_ + ", the user ID is: " + this.userID_;
@@ -205,4 +209,21 @@ const userConverter = {
     },
 };
 
+export const LogIn = async({email}, {password}) => {
+    console.log("this is email", email)
+    console.log("this is password", password)
+    try
+    {
+        await signInWithEmailAndPassword(auth, email, password).then((userCredential)=>
+        {
+            // Signed in
+            const user = userCredential.user;
+            console.log(user);
+            window.location.replace("/")
+            // ...
+        })
+    } catch (err) {
+        console.error(err);
+    }
+};
 

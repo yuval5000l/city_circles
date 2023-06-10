@@ -9,6 +9,7 @@ import {
     ListItemText, Stack,
     Toolbar, Typography
 } from "@mui/material";
+import LogoutIcon from '@mui/icons-material/Logout';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import {Link} from "react-router-dom";
 import GroupIcon from "@mui/icons-material/Group";
@@ -17,6 +18,8 @@ import WorkIcon from '@mui/icons-material/Work';
 import SettingsIcon from '@mui/icons-material/Settings';
 import {StyledAvatarUserFeed, StyledHamburgerButton} from "./styledComponents";
 import theme from "../../Theme/Theme";
+import {signOut} from "firebase/auth";
+import {auth} from "../../BackEnd/config/firebase";
 // import BusinessRegistration1 from "../../routes/business_registratin_pages/BusinessRegistrationPage1";
 
 
@@ -30,6 +33,15 @@ function ResponsiveDrawer(props) {
         setMobileOpen(!mobileOpen);
     };
 
+    const logout = async() =>{
+        try
+        {
+            await signOut(auth);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
     // TODO maybe get this function back?
     // function sendToCreateBusiness() {
     //     window.location.replace('/BusinessRegistrationPage1');
@@ -41,6 +53,7 @@ function ResponsiveDrawer(props) {
         {text: 'History', path: "/", icon: <HistoryIcon />},
         {text: 'All Businesses', path: "/", icon: <WorkIcon />},
         {text: 'Settings', path:"/", icon:<SettingsIcon/>}
+
     ];
 
     const drawer = (
@@ -70,6 +83,14 @@ function ResponsiveDrawer(props) {
                         </ListItemButton>
                     </ListItem>
                 ))}
+                <ListItem disablePadding>
+                    <ListItemButton onClick={logout}>
+                        <ListItemIcon>
+                            <LogoutIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary='Log-Out' />
+                    </ListItemButton>
+                </ListItem>
             </List>
         </Box>
     );
