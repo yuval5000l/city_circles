@@ -7,6 +7,7 @@ import SearchPageComponent from "./routes/search_page/SearchPage.component";
 import Theme from "./Theme/Theme";
 import {ThemeProvider} from "@mui/material/styles";
 
+
 function App() {
     return (
         <div className="App">
