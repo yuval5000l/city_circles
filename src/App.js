@@ -16,10 +16,8 @@ function App() {
                 <Route path="/" element={<NavigationComponent />}>
                     <Route index element={<HomePageComponent />} />
                     <Route path="NotificationsComponent" element={<NotificationsComponent/>}/>
-
                 </Route>
                 <Route path="SearchPageComponent" element={<SearchPageComponent />} />
-
             </Routes>
             </ThemeProvider>
         </div>

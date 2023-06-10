@@ -1,5 +1,5 @@
 import {StyledLogoBox, StyledSmallLogoBox} from "./styledComponents";
-import CityCircleLogo from "../Icons/logo-new.png";
+import CityCircleLogo from "./Icons/logo-new.png";
 
 
 export function StyledLogoLogIn () {

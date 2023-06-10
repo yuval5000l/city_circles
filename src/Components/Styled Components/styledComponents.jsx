@@ -15,7 +15,7 @@ import Avatar from "@mui/material/Avatar";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import DialogTitle from "@mui/material/DialogTitle";
 import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
-import {ReactComponent as FootprintsIcon} from "../Icons/footprints-svgrepo-com.svg";
+import {ReactComponent as FootprintsIcon} from "./Icons/footprints-svgrepo-com.svg";
 import TextField from "@mui/material/TextField";
 
 export const StyledButtonGray = styled(Button)(({theme}) => ({
@@ -59,19 +59,13 @@ export const StyledRotatePurpleBox = styled(AppBar)(({ theme })=> ({
     }
 }));
 
-// export const StyledSearchBar = styled(Input)(({ theme })=> ({
-//     backgroundColor: "white",
-//     color: theme.palette.info.dark,
-//     marginLeft: "auto",
-//     marginRight: "auto",
-//     borderRadius: "10px",
-// }));
 export const StyledSearchBar = styled(Input)(({theme}) => ({
     backgroundColor: "white",
     color: theme.palette.info.dark,
     marginLeft: "auto",
     marginRight: "auto",
     borderRadius: "10px",
+    padding:"0.3rem",
     [theme.breakpoints.up('xs')]: {
         height: '3rem',
     }

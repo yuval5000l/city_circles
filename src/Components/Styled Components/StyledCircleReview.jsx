@@ -11,11 +11,11 @@ import {useEffect, useState} from "react";
 import Dialog from "@mui/material/Dialog";
 import {Autocomplete, Button, DialogActions, DialogContent, Stack} from "@mui/material";
 import TextField from "@mui/material/TextField";
-import {auth} from "../config/firebase";
+// import {auth} from "../config/firebase";
 import Box from "@mui/material/Box";
-import theme from "../Theme/Theme";
-import {getUserById} from "../Classes/UserClass";
-import Business, {getBusinessByName} from "../Classes/BusinessClass";
+import theme from "../../Theme/Theme";
+// import {getUserById} from "../Classes/UserClass";
+// import Business, {getBusinessByName} from "../Classes/BusinessClass";
 // import User from "../Classes";
 // import getUserById from "../Classes";
 

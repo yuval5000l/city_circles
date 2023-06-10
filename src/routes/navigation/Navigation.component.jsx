@@ -16,6 +16,9 @@
 // import {auth} from "../../config/firebase";
 
 import {Outlet} from "react-router-dom";
+import StyledTopMenuNew from "../../Components/Styled Components/StyledTopMenuNew";
+import {BottomNavigation} from "@mui/material";
+import StyledBottomNavigationBar from "../../Components/Styled Components/StyledBottomNavigationBar";
 
 const NavigationComponent = () => {
     // const [value, setValue] = useState(0);
@@ -32,8 +35,10 @@ const NavigationComponent = () => {
 
     return (
         <div>
+            <StyledTopMenuNew/>
             <Outlet/>
             Nav Stuff
+            <StyledBottomNavigationBar/>
         </div>
         // <Fragment>
         //     {

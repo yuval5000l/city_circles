@@ -4,7 +4,7 @@ import Box from "@mui/material/Box";
 import * as React from "react";
 import {styled} from "@mui/material/styles";
 import {AppBar, Typography} from "@mui/material";
-import CityCircleLogo from "../Icons/logo-new.png";
+import CityCircleLogo from "./Icons/logo-new.png";
 
 
 const RotatePurpleBox = styled(AppBar)(({ theme })=> ({
