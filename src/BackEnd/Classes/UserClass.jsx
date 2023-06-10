@@ -134,6 +134,10 @@ export default class User
 
 
 export async function getUserById(id) {
+    if (id === null || id === undefined)
+    {
+        return null;
+    }
     const ref = doc(db, "Users", id).withConverter(userConverter);
     const docSnap = await getDoc(ref);
     if (docSnap.exists()) {
@@ -216,14 +220,14 @@ export const LogIn = async({email}, {password}) => {
     {
         await signInWithEmailAndPassword(auth, email, password).then((userCredential)=>
         {
-            // Signed in
             const user = userCredential.user;
             console.log(user);
-            window.location.replace("/")
-            // ...
+            return true;
         })
     } catch (err) {
         console.error(err);
+        return false;
     }
+    return true;
 };
 

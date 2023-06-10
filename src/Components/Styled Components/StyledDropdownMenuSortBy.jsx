@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import {Button, Menu, MenuItem, Stack} from '@mui/material';
-import {StyledButtonGray, StyledCircleBox, StyledPurpleBox} from "./styledComponents";
+import {Menu, MenuItem, Stack} from '@mui/material';
+import {StyledButtonGray, StyledCircleBox} from "./styledComponents";
 import theme from "../../Theme/Theme";
 import Box from "@mui/material/Box";
 

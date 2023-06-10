@@ -1,19 +1,29 @@
-import {Component} from "react";
+import {useEffect} from "react";
+import {onAuthStateChanged} from "firebase/auth";
+import {auth} from "../../BackEnd/config/firebase";
 
 
-class SearchPageComponent extends Component {
+const SearchPageComponent = () => {
+
+    useEffect(() => {
+        check_sign_in();
+    }, []);
+
+    const check_sign_in = () => {
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.replace("/signInPage");
+            }
+        });
+    };
 
 
-
-
-    render() {
-
-        return (
-            <div> SearchPage</div>
+    return (
+        <div> SearchPage</div>
 
     );
 
-    }
+
 }
 
 export default SearchPageComponent;

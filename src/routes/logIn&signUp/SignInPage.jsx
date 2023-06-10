@@ -1,7 +1,5 @@
-// import {StyledLogoLogIn} from "../../Components/Styled Components/styledCityCircleLogoLogIn";
 import {StyledButtonGray} from "../../Components/Styled Components/styledComponents";
 import Box from "@mui/material/Box";
-// import {StyledPurpleBox, StyledDialogTextFieldReview} from "../../Components/Styled Components/styledComponents";
 import {Stack, Typography} from "@mui/material";
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import TextField from "@mui/material/TextField";
@@ -9,15 +7,11 @@ import InputAdornment from '@mui/material/InputAdornment';
 import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
 import React, {useState} from "react";
 import {SignIn} from "../../BackEnd/Classes/UserClass";
-import {signOut} from "firebase/auth";
-import {auth} from "../../BackEnd/config/firebase";
-// import {LogIn} from "../../BackEnd/Classes/UserClass";
+import {LogIn} from "../../BackEnd/Classes/UserClass";
 import {TopBoxWithLogo} from "../../Components/Styled Components/StyledBoxWithLogo";
-// import SignupPage from "../../routes/SignUpPage";
 
 
 export default function UserRegistrationForm () {
-    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
@@ -35,14 +29,31 @@ export default function UserRegistrationForm () {
             console.log("ERROR");
         }
     };
-    const logout = async() =>{
-        try
+
+    const handleLogIn = async(e) =>
+    {
+        e.preventDefault();
+
+        let check_log_in = await LogIn({email}, {password});
+
+        if (check_log_in)
         {
-            await signOut(auth);
-        } catch (err) {
-            console.error(err);
+            await window.location.replace('/');
         }
+        else
+        {
+            console.log("ERROR");
+        }
+
     }
+    // const logout = async() =>{
+    //     try
+    //     {
+    //         await signOut(auth);
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // }
 
     return(
         <>
@@ -65,7 +76,6 @@ export default function UserRegistrationForm () {
                             id="input-with-icon-textfield"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
-                            // label="TextField"
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -86,7 +96,6 @@ export default function UserRegistrationForm () {
                             id="input-with-icon-textfield"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
-                            // label="TextField"
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
@@ -102,7 +111,7 @@ export default function UserRegistrationForm () {
                     <StyledButtonGray onClick={handleSignUp}>
                         Register
                     </StyledButtonGray>
-                    {/*<StyledButtonGray onClick={LogIn(email, password)}>Log In</StyledButtonGray>*/}
+                    <StyledButtonGray onClick={handleLogIn}>Log In</StyledButtonGray>
                 </Stack>
             </Box>
         </>

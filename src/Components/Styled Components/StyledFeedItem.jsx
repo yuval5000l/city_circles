@@ -1,4 +1,4 @@
-import {Stack, Typography} from "@mui/material";
+import {Stack, Typography, Box} from "@mui/material";
 import {
     StyledAvatarUserFeed,
     StyledBusinessFeed,
@@ -53,30 +53,30 @@ export default function StyledFeedItem({user_name="name", profile_photo_url="",
         setOpen(false);
     };
     return (
-        <box>
+        <Box>
             <Stack direction="column" spacing={2} sx={{padding:"0.4rem", boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', borderBottom: '0.1rem solid #C3ED5B'}}>
-                <item>
+                <Box>
                     <Stack direction="row" spacing={1}>
-                        <item>
+                        <Box>
                             {(profile_photo_url==="") ?
                                 (<StyledAvatarUserFeed/>) :
                                 (<StyledAvatarUserFeed src={profile_photo_url}/>)
                             }
-                        </item>
-                        <item>
+                        </Box>
+                        <Box>
                             <Stack direction="column" justifyContent="center" alignItems="flex-start">
                                 <Typography variant="h4"> {user_name} </Typography>
                                 <Typography variant="h5">
                                     {calculateTime(time)}
                                 </Typography>
                             </Stack>
-                        </item>
-                        <item>
+                        </Box>
+                        <Box>
                             <StyledSmallCircleButton userID={user_name} circles_={circles} />
-                        </item>
+                        </Box>
                     </Stack>
-                </item>
-                <item>
+                </Box>
+                <Box>
                     <Stack direction = "column" spacing={2}>
                         <Stack direction = "row" spacing={1} justifyContent="flex-start" alignItems="center">
                             <Typography variant="h3" textAlign="left">{business_name}</Typography>
@@ -85,24 +85,24 @@ export default function StyledFeedItem({user_name="name", profile_photo_url="",
                         <Stack direction = "row" spacing={1} justifyContent="flex-start" alignItems="center">
                             <StyledBusinessFeed/>
                             <Stack direction = "column" justifyContent="flex-start" spacing={1}>
-                                <item>
+                                <Box>
                                     <StyledTypographyReview>
                                         {review}
                                     </StyledTypographyReview>
-                                </item>
-                                <item>
+                                </Box>
+                                <Box>
                                     <Stack direction = "row" spacing = {0.5}>
                                         <StyledGrayButtonFullReview content={review}/>
                                         <StyledGrayButtonVisitBusiness/>
                                     </Stack>
-                                </item>
+                                </Box>
                             </Stack>
                         </Stack>
 
                     </Stack>
-                </item>
+                </Box>
             </Stack>
 
-        </box>
+        </Box>
     )
 }

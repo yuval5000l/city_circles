@@ -1,5 +1,5 @@
 import {Stack} from "@mui/material";
-import {StyledAppBarTop, StyledHamburgerButton, StyledSearchBar} from "./styledComponents";
+import {StyledAppBarTop, StyledSearchBar} from "./styledComponents";
 import logoNew from "./Icons/logo-all-white.png";
 import StyledHamburgerButtonWithCanvas from "./StyledHamburgerButtonWithCanvas";
 

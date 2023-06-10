@@ -8,7 +8,6 @@ import {
 } from "../../Components/Styled Components/styledComponents";
 import {Stack, Typography} from "@mui/material";
 import {auth} from "../../BackEnd/config/firebase";
-// import {palette} from "@mui/system";
 import * as React from 'react';
 import dayjs from 'dayjs';
 import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
@@ -16,14 +15,26 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
 import TextField from "@mui/material/TextField";
-import {useState} from "react";
-// import {CityCircleSmallLogoLogIn} from "../../Components/Styled Components/styledCityCircleLogoLogIn";
-// import Box from "@mui/material/Box";
+import {useEffect, useState} from "react";
+
 import {BottomBoxWithLogo} from "../../Components/Styled Components/StyledBoxWithLogo";
 import {getUserById} from "../../BackEnd/Classes/UserClass";
+import {onAuthStateChanged} from "firebase/auth";
 
 
 export default function SignupPage() {
+
+    useEffect(() => {
+        check_sign_in();
+    }, []);
+
+    const check_sign_in = () => {
+        onAuthStateChanged(auth, (user) => {
+            if (!user) {
+                window.location.replace("/signInPage");
+            }
+        });
+    };
     // const userID = auth?.currentUser?.uid;
     const [name, setName] = useState("")
     const [value, setValue] = React.useState(dayjs('2022-04-17'));

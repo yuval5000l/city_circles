@@ -1,9 +1,9 @@
 import {Component} from "react";
-import {StyledPurpleBox} from "../../Components/Styled Components/styledComponents";
+// import {StyledPurpleBox} from "../../Components/Styled Components/styledComponents";
 import theme from "../../Theme/Theme";
 import Box from "@mui/material/Box";
 import StyledCirclesSearchItem from "../../Components/Styled Components/StyledCirclesSearchItem";
-import {Stack, Typography} from "@mui/material";
+import {Stack} from "@mui/material";
 import StyledDropdownMenuSortBy from "../../Components/Styled Components/StyledDropdownMenuSortBy";
 import StyledDropdownMenuFilter from "../../Components/Styled Components/StyledDropdownMenuFilter";
 

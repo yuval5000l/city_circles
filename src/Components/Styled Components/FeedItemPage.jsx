@@ -3,6 +3,8 @@ import User from "../../BackEnd/Classes/UserClass";
 import {auth} from "../../BackEnd/config/firebase";
 import Box from "@mui/material/Box";
 import StyledFeedItem from "./StyledFeedItem";
+import {onAuthStateChanged} from "firebase/auth";
+
 export default function FeedItemPage()
 {
 
@@ -16,12 +18,16 @@ export default function FeedItemPage()
     // user_name, profile_pic, circles, time, business_name, business_photo_url
     // rating, url_to_business, review,
     const getFriendsReviewsHelper = ()=> {
-        User.getFriendsReviews(auth?.currentUser?.uid).then((lst) => {
-            setListReviews(lst);
-        }).catch((error) => {
-            console.error(error);
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                User.getFriendsReviews(auth?.currentUser?.uid).then((lst) => {
+                    setListReviews(lst);
+                }).catch((error) => {
+                    console.error(error);
+                });
+            }
         });
-    }
+    };
 
     return(<Box>
         {listReviews.map((review) =>

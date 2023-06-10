@@ -1,4 +1,4 @@
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import {
     Box,
     Divider, Drawer, IconButton,
@@ -18,14 +18,35 @@ import WorkIcon from '@mui/icons-material/Work';
 import SettingsIcon from '@mui/icons-material/Settings';
 import {StyledAvatarUserFeed, StyledHamburgerButton} from "./styledComponents";
 import theme from "../../Theme/Theme";
-import {signOut} from "firebase/auth";
+import {onAuthStateChanged, signOut} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
+import {getUserById} from "../../BackEnd/Classes/UserClass";
 // import BusinessRegistration1 from "../../routes/business_registratin_pages/BusinessRegistrationPage1";
 
 
 const drawerWidth = '60%';
 function ResponsiveDrawer(props) {
-    const Static_Name = "static name"
+    let [name, setName] = useState("static name");
+    useEffect(() => {
+        getName()
+    }, []);
+    const getName = () =>
+    {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                getUserById(auth?.currentUser?.uid).then((user) => {
+                    if (user !== null)
+                    {
+                        setName(user.getUserName());
+                    }
+                }).catch((error) => {
+                    console.error(error);
+                });
+            }
+        });
+
+    }
+
     const { window } = props;
     const [mobileOpen, setMobileOpen] = useState(false);
 
@@ -67,7 +88,7 @@ function ResponsiveDrawer(props) {
                     spacing={2}
                 >
                     <StyledAvatarUserFeed sx={{marginLeft:"auto", marginRight:"auto"}}/>
-                    <Typography>Hi, {Static_Name}</Typography>
+                    <Typography>Hi, {name}</Typography>
                 </Stack>
             </Toolbar>
             <Divider />
