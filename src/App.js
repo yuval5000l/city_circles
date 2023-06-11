@@ -11,6 +11,7 @@ import FriendsPageComponent from "./routes/friends/FriendsPage.component";
 import ProfilePageComponent from "./routes/profile/ProfilePage.component";
 import SignInPage from "./routes/logIn&signUp/SignInPage";
 import SignUpPage from "./routes/logIn&signUp/SignUpPage";
+import BusinessRegistrationStepper from "./routes/businessRegistrationPage/BusinessRegistrationStepper";
 
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
                     <Route path="CirclesPageComponent" element={<CirclesPageComponent/>}/>
                     <Route path="FriendsPageComponent" element={<FriendsPageComponent/>}/>
                     <Route path="ProfilePageComponent" element={<ProfilePageComponent/>}/>
+                    <Route path="BusinessRegistrationStepperComponent" element={<BusinessRegistrationStepper/>}/>
                 </Route>
                 <Route path="SearchPageComponent" element={<SearchPageComponent />} />
                 <Route path="signInPage" element={<SignInPage/>}/>

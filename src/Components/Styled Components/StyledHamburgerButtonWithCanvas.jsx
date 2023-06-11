@@ -69,7 +69,7 @@ function ResponsiveDrawer(props) {
     // }
 
     const drawer_content = [
-        {text: 'Add a new business', path: "/BusinessRegistrationPage1", icon: <AddBoxOutlinedIcon />},
+        {text: 'Add a new business', path: "/BusinessRegistrationStepperComponent", icon: <AddBoxOutlinedIcon />},
         {text: 'Import Contacts', path: "/", icon: <GroupIcon />},
         {text: 'History', path: "/", icon: <HistoryIcon />},
         {text: 'All Businesses', path: "/", icon: <WorkIcon />},
