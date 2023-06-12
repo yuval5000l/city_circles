@@ -13,11 +13,9 @@ export default function StyledSmallCircleButton({userID, circles_ = []}) {
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
-        if (circles !== [])
-        {
+        if (circles !== []) {
             setCircles(circles_);
-        }
-        else{
+        } else {
             getUserCirclesHelper(userID)
         }
     }, [])
@@ -53,13 +51,15 @@ export default function StyledSmallCircleButton({userID, circles_ = []}) {
                             (<div> Error Loading the circles </div>) :
                             (<div>
                                     {circles.map((circle) =>
-                                        <Stack direction="row"
-                                               justifyContent="center"
-                                               alignItems="center"
-                                               spacing={1}>
-                                            <StyledCirclesIcon sx={{color:"white"}}/>
-                                            <StyledDialogTitle>{circle}</StyledDialogTitle>
-                                        </Stack>)}
+                                        <li key={circle}>
+                                            <Stack direction="row"
+                                                   justifyContent="center"
+                                                   alignItems="center"
+                                                   spacing={1}>
+                                                <StyledCirclesIcon sx={{color: "white"}}/>
+                                                <StyledDialogTitle>{circle}</StyledDialogTitle>
+                                            </Stack>
+                                        </li>)}
                                 </div>
                             )
                         }

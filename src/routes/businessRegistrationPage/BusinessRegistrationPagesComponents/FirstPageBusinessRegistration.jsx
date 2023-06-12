@@ -7,7 +7,7 @@ import RowRadioButtonsGroup from "./RadioButton.component";
 import {Stack} from "@mui/material";
 import {useState} from "react";
 import {addDoc, collection} from "firebase/firestore";
-import {auth, db} from "../../BackEnd/config/firebase";
+import {auth, db} from "../../../BackEnd/config/firebase";
 // import {ref, uploadBytes} from "firebase/storage";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";

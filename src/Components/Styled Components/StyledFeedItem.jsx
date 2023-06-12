@@ -7,7 +7,6 @@ import {
 } from "./styledComponents";
 import StyledGrayButtonFullReview from "./StyledGrayButtonFullReview";
 import StyledGrayButtonVisitBusiness from "./StyledGrayButtonVisitBusiness";
-import {useState} from "react";
 import {timestamp} from "../../BackEnd/config/firebase"
 import StyledSmallCircleButton from "./StyledSmallCirclesButton";
 
@@ -43,15 +42,15 @@ export default function StyledFeedItem({user_name="name", profile_photo_url="",
                                        review_address=""})
 {
 
-    const [open, setOpen] =  useState(false);
-
-    const handleClickOpen = () => {
-        setOpen(true);
-    };
-
-    const handleClose = () => {
-        setOpen(false);
-    };
+    // const [open, setOpen] =  useState(false);
+    //
+    // const handleClickOpen = () => {
+    //     setOpen(true);
+    // };
+    //
+    // const handleClose = () => {
+    //     setOpen(false);
+    // };
     return (
         <Box>
             <Stack direction="column" spacing={2} sx={{padding:"0.4rem", boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', borderBottom: '0.1rem solid #C3ED5B'}}>

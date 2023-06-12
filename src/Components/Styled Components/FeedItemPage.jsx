@@ -5,8 +5,7 @@ import Box from "@mui/material/Box";
 import StyledFeedItem from "./StyledFeedItem";
 import {onAuthStateChanged} from "firebase/auth";
 
-export default function FeedItemPage()
-{
+export default function FeedItemPage() {
 
     useEffect(() => {
         getFriendsReviewsHelper()
@@ -17,7 +16,7 @@ export default function FeedItemPage()
     // Review:
     // user_name, profile_pic, circles, time, business_name, business_photo_url
     // rating, url_to_business, review,
-    const getFriendsReviewsHelper = ()=> {
+    const getFriendsReviewsHelper = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 User.getFriendsReviews(auth?.currentUser?.uid).then((lst) => {
@@ -29,14 +28,16 @@ export default function FeedItemPage()
         });
     };
 
-    return(<Box>
+    return (<Box>
         {listReviews.map((review) =>
-          <StyledFeedItem user_name={review.user_name} profile_photo_url={review.profile_photo_url}
-            circles = {review.circles} time={review.time}
-            business_name={review.business_name} business_photo_url={review.business_photo_url}
-            rating={review.rating} url_to_business={review.url_to_business}
-            review={review.review}
-            review_address={review.rating}></StyledFeedItem>
+            <li key={review.user_name+review.business_name+review.review}>
+                <StyledFeedItem user_name={review.user_name} profile_photo_url={review.profile_photo_url}
+                                circles={review.circles} time={review.time}
+                                business_name={review.business_name} business_photo_url={review.business_photo_url}
+                                rating={review.rating} url_to_business={review.url_to_business}
+                                review={review.review}
+                                review_address={review.rating}></StyledFeedItem>
+            </li>
         )}
     </Box>)
 }

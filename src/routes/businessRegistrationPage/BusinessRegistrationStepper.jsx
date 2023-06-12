@@ -5,10 +5,10 @@ import Step from '@mui/material/Step';
 import StepLabel from '@mui/material/StepLabel';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
-import FirstPageBusinessRegistration from '../../Components/BusinessRegistrationPagesComponents/FirstPageBusinessRegistration';
-import SecondPageBusinessRegistration from '../../Components/BusinessRegistrationPagesComponents/SecondPageBusinessRegistration';
-import ThirdPageBusinessRegistration from '../../Components/BusinessRegistrationPagesComponents/ThirdPageBusinessRegistration';
-import FourthPageBusinessRegistration from '../../Components/BusinessRegistrationPagesComponents/FourthPageBusinessRegistration';
+import FirstPageBusinessRegistration from './BusinessRegistrationPagesComponents/FirstPageBusinessRegistration';
+import SecondPageBusinessRegistration from './BusinessRegistrationPagesComponents/SecondPageBusinessRegistration';
+import ThirdPageBusinessRegistration from './BusinessRegistrationPagesComponents/ThirdPageBusinessRegistration';
+import FourthPageBusinessRegistration from './BusinessRegistrationPagesComponents/FourthPageBusinessRegistration';
 import Business from '../../BackEnd/Classes/BusinessClass';
 
 
@@ -84,14 +84,16 @@ export default function BusinessStepper() {
 
     const handleMakeBusiness = async () =>
     {
-        let b = await Business.makeBusiness(
+        await Business.makeBusiness(
             firstPageData[0], // Name
             firstPageData[1], // Type
             thirdPageData[0], // address
             thirdPageData.slice(1), // openingHours
             secondPageData,
         );
-        console.log(b);
+        // TODO verifying submit
+        window.location.replace("/");
+
     }
 
 
