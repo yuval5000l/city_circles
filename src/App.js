@@ -12,7 +12,7 @@ import ProfilePageComponent from "./routes/profile/ProfilePage.component";
 import SignInPage from "./routes/logIn&signUp/SignInPage";
 import SignUpPage from "./routes/logIn&signUp/SignUpPage";
 import BusinessRegistrationStepper from "./routes/businessRegistrationPage/BusinessRegistrationStepper";
-
+import BusinessPage from "./routes/businessPage/BusinessPage.component";
 
 function App() {
     return (
@@ -30,6 +30,7 @@ function App() {
                 <Route path="SearchPageComponent" element={<SearchPageComponent />} />
                 <Route path="signInPage" element={<SignInPage/>}/>
                 <Route path="SignUpPage" element={<SignUpPage/>}/>
+                <Route path="BusinessPage" element={<BusinessPage/>}/>
             </Routes>
             </ThemeProvider>
         </div>

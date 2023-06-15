@@ -9,31 +9,33 @@ import StyledGrayButtonFullReview from "./StyledGrayButtonFullReview";
 import StyledGrayButtonVisitBusiness from "./StyledGrayButtonVisitBusiness";
 import {timestamp} from "../../BackEnd/config/firebase"
 import StyledSmallCircleButton from "./StyledSmallCirclesButton";
+import React from "react";
+import {Link} from "react-router-dom";
+import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 
-
-function calculateTime(time)
-{
-    const now = new Date();
-    const timeDiff = now.getTime() - time.getTime();
-    const seconds = Math.floor(timeDiff / 1000);
-    const minutes = Math.floor(seconds / 60);
-    const hours = Math.floor(minutes / 60);
-    const days = Math.floor(hours / 24);
-
-    return(<div>
-            {(seconds > 60) ?
-                (<div>
-                    {(minutes > 60) ?
-                        (<div>{(hours > 23) ? (<div>{days} days</div>) :
-                            (<div>{hours} hours</div>)}</div>)
-                        :
-                        (<div>{minutes} minutes</div>)}
-                </div>)
-                :
-                (<div>{seconds} seconds</div>)}
-        </div>
-    )
-}
+// function calculateTime(time)
+// {
+//     const now = new Date();
+//     const timeDiff = now.getTime() - time.getTime();
+//     const seconds = Math.floor(timeDiff / 1000);
+//     const minutes = Math.floor(seconds / 60);
+//     const hours = Math.floor(minutes / 60);
+//     const days = Math.floor(hours / 24);
+//
+//     return(<div>
+//             {(seconds > 60) ?
+//                 (<div>
+//                     {(minutes > 60) ?
+//                         (<div>{(hours > 23) ? (<div>{days} days</div>) :
+//                             (<div>{hours} hours</div>)}</div>)
+//                         :
+//                         (<div>{minutes} minutes</div>)}
+//                 </div>)
+//                 :
+//                 (<div>{seconds} seconds</div>)}
+//         </div>
+//     )
+// }
 
 export default function StyledFeedItem({user_name="name", profile_photo_url="",
                                        circles = [], time= new timestamp(),
@@ -92,7 +94,7 @@ export default function StyledFeedItem({user_name="name", profile_photo_url="",
                                 <Box>
                                     <Stack direction = "row" spacing = {0.5}>
                                         <StyledGrayButtonFullReview content={review}/>
-                                        <StyledGrayButtonVisitBusiness/>
+                                        <Link to="./BusinessPage" state={{ from: business_name}}><StyledGrayButtonVisitBusiness/></Link>
                                     </Stack>
                                 </Box>
                             </Stack>

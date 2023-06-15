@@ -32,19 +32,19 @@ export default function SecondPageBusinessRegistration({onNext}) {
             <Typography variant="h4">Socials (if exists..)</Typography>
             <Stack direction="row">
                 <InstagramIcon sx={{fontSize: 56, alignSelf: "center"}}/>
-                <TextField fieldName={'@example'} onChange={(e) => setInsta(e.target.value)}/>
+                <TextField fieldname={'@example'} onChange={(e) => setInsta(e.target.value)}/>
             </Stack>
             <Stack direction="row">
                 <FacebookIcon sx={{fontSize: 56, alignSelf: "center"}}/>
-                <TextField fieldName={'facebook page'} onChange={(e) => setFace(e.target.value)}/>
+                <TextField fieldname={'facebook page'} onChange={(e) => setFace(e.target.value)}/>
             </Stack>
             <Stack direction="row">
                 <LinkedInIcon sx={{fontSize: 56, alignSelf: "center"}}/>
-                <TextField fieldName={'linkedin page'} onChange={(e) => setLinkedin(e.target.value)}/>
+                <TextField fieldname={'linkedin page'} onChange={(e) => setLinkedin(e.target.value)}/>
             </Stack>
             <Stack direction="row">
                 <LanguageIcon sx={{fontSize: 56, alignSelf: "center"}}/>
-                <TextField fieldName={'website URL'} onChange={(e) => setWeb(e.target.value)}/>
+                <TextField fieldname={'website URL'} onChange={(e) => setWeb(e.target.value)}/>
             </Stack>
             <Button onClick={handleOnNext}>
                 {'Next'}
