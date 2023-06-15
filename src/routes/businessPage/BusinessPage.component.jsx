@@ -24,8 +24,6 @@ function showTime(arr_time) {
 }
 
 export function showBusiness(business) {
-    console.log(business.footprints);
-    console.log(business.reviews);
     return (
         <div>
             {/*Top Rectangle*/}
@@ -76,20 +74,29 @@ export function showBusiness(business) {
 
             </Box>
             {/*Lower Part*/}
-            <p>
+            <ul>
                 FootPrints:
                 {business.footprints.map((footprint) =>
-                <div>
+                <li key={footprint.id}>
                     footprint id: {footprint.userID}
-                    {/*footprint time: {calculateTime(footprint.timestamp)}*/}
-                </div>
+                    {/*footprint time: {footprint.timestamp}*/}
+                    footprint time: {calculateTime(footprint.timestamp.toDate())}
+                </li>
                 )}
-            </p>
+            </ul>
 
-            <p>
+            <ul>
                 Reviews:
+                {business.reviews.map((review) =>
+                    <li key={review.userID}>
+                        userID: {review.userID},
+                        content: {review.content},
+                        rating: {review.rating},
+                        footprint time: {calculateTime(review.timestamp.toDate())}
+                    </li>
+                )}
 
-            </p>
+            </ul>
         </div>
     );
 }
