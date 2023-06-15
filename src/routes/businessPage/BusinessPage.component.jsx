@@ -77,7 +77,7 @@ export function showBusiness(business) {
             <ul>
                 FootPrints:
                 {business.footprints.map((footprint) =>
-                <li key={footprint.id}>
+                <li key={footprint.id+1}>
                     footprint id: {footprint.userID}
                     {/*footprint time: {footprint.timestamp}*/}
                     footprint time: {calculateTime(footprint.timestamp.toDate())}
