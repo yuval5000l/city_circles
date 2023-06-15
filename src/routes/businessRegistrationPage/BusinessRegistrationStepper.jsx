@@ -37,6 +37,7 @@ export default function BusinessStepper() {
             newSkipped = new Set(newSkipped.values());
             newSkipped.delete(activeStep);
         }
+        console.log(data);
 
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped(newSkipped);
@@ -92,7 +93,7 @@ export default function BusinessStepper() {
             secondPageData,
         );
         // TODO verifying submit
-        window.location.replace("/");
+        // window.location.replace("/");
 
     }
 

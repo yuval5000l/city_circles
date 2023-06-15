@@ -16,7 +16,7 @@ import Button from "@mui/material/Button";
 
 // const businessTypes = ['cosmetics', 'nails', 'barber', 'hair', 'sport', 'art', 'lifestyle', 'music']
 export default function FirstPageBusinessRegistration({onNext}) {
-    const [ newBusinessName, setNewBusinessName] = useState("");
+    const [newBusinessName, setNewBusinessName] = useState("");
     const [businessTypes, setBusinessTypes] = useState(() => []);
 
     const [newPreviewUrl, setNewPreviewUrl] = useState("");
@@ -53,7 +53,6 @@ export default function FirstPageBusinessRegistration({onNext}) {
     // }, []);
 
 
-
     function BusinessTypesSelection(businesses_types) {
 
 
@@ -68,7 +67,8 @@ export default function FirstPageBusinessRegistration({onNext}) {
                 // bgcolor: "primary.light",
                 // borderColor: "secondary.main",
                 // border: 2,
-                borderRadius: 2}}>
+                borderRadius: 2
+            }}>
                 <ToggleButtonGroup
                     value={businessTypes}
                     onChange={handleTypes}
@@ -76,9 +76,16 @@ export default function FirstPageBusinessRegistration({onNext}) {
                     style={{display: "flex", flexWrap: "wrap", margin: "1rem", justifyContent: "center"}}
                 >
                     {businesses_types.map(btype =>
-                        <ToggleButton value={btype} aria-label={btype} style={{margin: "1rem", width: 100, borderRadius: 6, boxShadow: "1px 2px 4px #000000"}}>
-                            {btype}
-                        </ToggleButton>)}
+
+                            <ToggleButton value={btype} aria-label={btype} style={{
+                                margin: "1rem",
+                                width: 100,
+                                borderRadius: 6,
+                                boxShadow: "1px 2px 4px #000000"
+                            }}>
+                                {btype}
+                            </ToggleButton>
+                    )}
                 </ToggleButtonGroup>
             </Box>
         );
@@ -102,8 +109,7 @@ export default function FirstPageBusinessRegistration({onNext}) {
             onNext([newBusinessName, businessTypes, newPreviewUrl, ownerName]);
 
             // getBusinessesList();
-        }catch (err)
-        {
+        } catch (err) {
             console.log(err);
         }
     }
@@ -111,7 +117,7 @@ export default function FirstPageBusinessRegistration({onNext}) {
         onNext([newBusinessName, businessTypes, newPreviewUrl, ownerName]);
     }
 
-    return(
+    return (
         <div>
             <Box sx={{margin: "1rem"}}>
                 <Typography variant="h4" textAlign="start">Category</Typography>
@@ -119,15 +125,16 @@ export default function FirstPageBusinessRegistration({onNext}) {
             </Box>
             <Stack direction="column" alignItems="start" margin="0.5rem">
                 <Typography variant="h4">Business Name</Typography>
-                <TextField id="outlined-basic" label="Business Name" variant="outlined" onChange={(e) => setNewBusinessName(e.target.value)} />
+                <TextField id="outlined-basic" label="Business Name" variant="outlined"
+                           onChange={(e) => setNewBusinessName(e.target.value)}/>
 
                 <Typography variant="h4">Owner Name</Typography>
-                <TextField fieldName={'Owner Name'} onChange={(e) => setOwnerName(e.target.value)}/>
+                <TextField onChange={(e) => setOwnerName(e.target.value)}/>
 
                 <Typography variant="h4">I’ve added businesses in the past</Typography>
                 <RowRadioButtonsGroup/>
                 <Typography variant="h4">Business owner facebook profile link:</Typography>
-                <TextField fieldName={'my profile page'} onChange={(e) => setNewPreviewUrl(e.target.value)}/>
+                <TextField onChange={(e) => setNewPreviewUrl(e.target.value)}/>
             </Stack>
             <button onClick={onSubmitBusiness}> Sign In!</button>
             <Button onClick={handleOnNext}>

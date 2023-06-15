@@ -1,5 +1,19 @@
 import {db, timestamp} from "../config/firebase";
-import {collection, doc, setDoc, getDocs, getDoc} from "firebase/firestore";
+import {collection, doc, setDoc, getDocs, getDoc, updateDoc, arrayUnion} from "firebase/firestore";
+// import {ref, getDownloadURL} from "firebase/storage";
+
+
+// let imageRef = ref(storage, "projectFiles/profile.jpg");
+// getDownloadURL(imageRef).then((url) => {
+//         //from url you can fetched the uploaded image easily
+//         console.log(url);
+//
+//         // setImageName(url);
+//     })
+//     .catch((e) => console.log('getting downloadURL of image error => ', e));
+// console.log(imageRef);
+
+
 
 export default class Business
 {
@@ -25,10 +39,12 @@ export default class Business
         {
             coord = [0,0];
         }
-        let new_business = new Business(name, type, address, coord, openingHours,
+
+        let new_business = new Business(name, type, address, coord, openingHours[0],
             contact, social, profilePic,
             pictures, rating, last_visited, reviews, footprints);
         await new_business.signIn();
+        new_business.openingHours = translateOpeningHoursToArrays(openingHours[0]);
         return new_business;
     }
 
@@ -40,7 +56,7 @@ export default class Business
         this.name = name;
         this.type = type;
         this.address = address;
-        this.openingHours = [];
+        this.openingHours = openingHours;
         this.contact = contact;
         this.social = social;
         this.profilePic = profilePic;
@@ -56,6 +72,9 @@ export default class Business
         try {
                 const ref = doc(db, "Business", this.name).withConverter(businessConverter);
                 await setDoc(ref, this);
+
+                await this.setOpeningHours(this.openingHours, ref);
+
             }catch (err) {
             console.error(err);
         }
@@ -114,8 +133,42 @@ export default class Business
         return [0,0];
     };
 
+    getRating()
+    {
+        return (this.rating !== 0) ? this.rating[0] / this.rating[1] : this.rating[1];
+    }
 
+    async setOpeningHours(openingHoursArray, ref)
+    {
+        this.openingHours = openingHoursArray;
+         await updateDoc(ref,
+             {
+                 openingHours: openingHoursArray
+             })
+        return true;
+    }
 }
+
+
+function translateOpeningHoursToArrays(openingHours) {
+    let lstDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    const regex = /(\d+),(\d+)/g;
+    let openingHoursArray = {};
+    for (let i = 0; i < 7; i++)
+    {
+        const matches = openingHours[lstDays[i]].matchAll(regex);
+        const result = [];
+
+        for (const match of matches) {
+            const hour = parseInt(match[1]);
+            const minute = parseInt(match[2]);
+            result.push([hour, minute]);
+        }
+        openingHoursArray[lstDays[i]] = result;
+    }
+    return openingHoursArray;
+}
+
 
 
 const businessConverter = {
@@ -124,7 +177,7 @@ const businessConverter = {
             name : business.name,
             type : business.type,
             address : business.address,
-            // openingHours : business.openingHours,
+            openingHours : business.openingHours,
             contact : business.contact,
             social : business.social,
             profilePic : business.profilePic,
@@ -138,7 +191,7 @@ const businessConverter = {
     },
     fromFirestore(snapshot, options) {
         const data = snapshot.data(options);
-        return new Business(data.name, data.type, data.address, data.coord,data.openingHours, data.contact,
+        return new Business(data.name, data.type, data.address, data.coord, translateOpeningHoursToArrays(data.openingHours), data.contact,
             data.social, data.profilePic, data.pictures, data.rating, data.last_visited, data.reviews, data.footprints);
     },
 };

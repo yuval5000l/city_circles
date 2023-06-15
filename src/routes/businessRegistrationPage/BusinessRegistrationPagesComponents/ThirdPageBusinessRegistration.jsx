@@ -23,6 +23,13 @@ import Button from "@mui/material/Button";
 import {useState} from "react";
 import TextField from "@mui/material/TextField";
 
+function getHoursAndMinutes(day)
+{
+    return "start "+day[0].format("HH")+","+day[0].format("MM")+ " end " + day[1].format("HH")+","+day[1].format("MM");
+    // return {"Start":[day[0].format("HH"), day[0].format("MM")],
+    //     "End":[day[1].format("HH"), day[1].format("MM"),]}
+}
+
 export default function ThirdPageBusinessRegistration({onNext}) {
     const [address, setAddress] = useState("");
     const [sunday, setSunday] = React.useState(() => [
@@ -54,7 +61,11 @@ export default function ThirdPageBusinessRegistration({onNext}) {
         dayjs(),
     ]);
     const handleOnNext = () => {
-        onNext([address, [sunday, monday, tuesday, wednesday, thursday, friday, saturday]]);
+        console.log(typeof(sunday));
+        onNext([address, {"Sunday": getHoursAndMinutes(sunday),
+            "Monday": getHoursAndMinutes(monday), "Tuesday": getHoursAndMinutes(tuesday),
+            "Wednesday": getHoursAndMinutes(wednesday), "Thursday": getHoursAndMinutes(thursday),
+            "Friday": getHoursAndMinutes(friday),"Saturday": getHoursAndMinutes(saturday)}]);
     }
     return(
         <div>
@@ -63,7 +74,7 @@ export default function ThirdPageBusinessRegistration({onNext}) {
                 <LocationOnIcon sx={{fontSize: 30, alignSelf: "center"}}/>
                 <Typography variant="h5">Location</Typography>
             </Stack>
-            <TextField fieldName={'business location'} onChange={(e)=> setAddress(e.target.value)}/>
+            <TextField fieldname={'business location'} onChange={(e)=> setAddress(e.target.value)}/>
 
             <Stack direction="row">
                 <AccessTimeIcon sx={{fontSize: 30, alignSelf: "center"}}/>
