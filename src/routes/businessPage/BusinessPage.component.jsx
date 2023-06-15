@@ -113,6 +113,8 @@ export default function BusinessPage() {
                 if (user) {
                     getBusinessByName(from).then((business_) => {
                         setBusiness(business_)
+                    }).catch((error) => {
+                        console.error(error);
                     });
                 }
             });

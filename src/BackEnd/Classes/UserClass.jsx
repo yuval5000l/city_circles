@@ -14,7 +14,7 @@ export default class User
         this.name_ = name;
         this.email_ = email;
         this.password_= password;
-        this.profile_pic  = "";
+        this.profile_pic  = profile_pic;
         // this.circles = [];
         // this.b_day = "";
         this.userID_ = userID_;
@@ -42,6 +42,11 @@ export default class User
         return this.name_;
     }
 
+    getUserId()
+    {
+        return this.userID_;
+    }
+
     toString() {
         return "the user name is: "+this.name_ + ", the user ID is: " + this.userID_;
     }
@@ -64,7 +69,7 @@ export default class User
             timestamp: timestamp.now().toDate(),
         };
         this.footprints.push(footprint);
-        console.log("footprint added: ", footprint);
+        // console.log("footprint added: ", footprint);
         await this.saveToFirebase();
     }
 
@@ -85,7 +90,10 @@ export default class User
         const ref = doc(db, "Users", this.userID_).withConverter(userConverter);
         await setDoc(ref, this);
     }
-
+    get_pic()
+    {
+        return this.profile_pic;
+    }
     static async getUserFriendsById(id)
     {
         const user = await getUserById(id);
@@ -202,12 +210,14 @@ const userConverter = {
             footprints: user.footprints,
             circles: user.circles,
             friends: user.friends,
+            profilePic: user.profile_pic
             // birthday: user.birthday
         };
     },
     fromFirestore(snapshot, options) {
         const data = snapshot.data(options);
-        return new User(data.email, data.password, data.FirstName, data.userID, data.reviews, data.footprints, data.circles, data.friends,
+        return new User(data.email, data.password, data.FirstName, data.userID, data.reviews, data.footprints,
+            data.circles, data.friends, data.profilePic
             // data.birthday
         );
     },
@@ -221,7 +231,6 @@ export const LogIn = async({email}, {password}) => {
         await signInWithEmailAndPassword(auth, email, password).then((userCredential)=>
         {
             const user = userCredential.user;
-            console.log(user);
             return true;
         })
     } catch (err) {

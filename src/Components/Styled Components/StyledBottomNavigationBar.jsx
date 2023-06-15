@@ -6,8 +6,7 @@ import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
 import StyledBottomNavigationPlus from "./StyledBottomNavigationPlus";
 import {useState} from "react";
-
-
+import {auth} from "../../BackEnd/config/firebase";
 
 export default function StyledBottomNavigationBar() {
     const [value, setValue] = useState(0);
@@ -28,14 +27,15 @@ export default function StyledBottomNavigationBar() {
                 }}
             />}
             />
-            <StyledBottomNavigationAction component={Link} to="/CirclesPageComponent" label="circles" icon={<SupervisedUserCircleIcon
-                sx={{
-                    fontSize: {
-                        xs: "3rem",
-                        sm: "5rem"
-                    }
-                }}
-            />}
+            <StyledBottomNavigationAction component={Link} to="/CirclesPageComponent" label="circles"
+                                          icon={<SupervisedUserCircleIcon
+                                              sx={{
+                                                  fontSize: {
+                                                      xs: "3rem",
+                                                      sm: "5rem"
+                                                  }
+                                              }}
+                                          />}
             />
             <StyledBottomNavigationPlus/>
             <StyledBottomNavigationAction component={Link} to="/FriendsPageComponent" label="friends" icon={<GroupIcon
@@ -47,7 +47,9 @@ export default function StyledBottomNavigationBar() {
                 }}
             />}
             />
-            <StyledBottomNavigationAction component={Link} to="/ProfilePageComponent" label="profile" icon={<PersonIcon
+            <StyledBottomNavigationAction component={Link} to="/ProfilePageComponent"
+                                          state={{from: auth?.currentUser?.uid}}
+                                          label="profile" icon={<PersonIcon
                 sx={{
                     fontSize: {
                         xs: "3rem",
