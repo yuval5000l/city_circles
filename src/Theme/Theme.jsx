@@ -68,19 +68,13 @@ let theme = createTheme({
             secondary: '#BFBFBF',
         },
     },
+    shadows: {
+        regular: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+        clicked: 'inset 0px 15px 4px rgba(0, 0, 0, 0.25)',
+    },
     shape: {
         borderRadius: 10
     },
-    components:{
-        MyThemeComponent:{
-            styleOverrides:{
-
-            }
-        }
-    }
-    // Customizing shadows
-
-    // Other customizations...
 });
 theme = responsiveFontSizes(theme)
 

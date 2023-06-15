@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {Grid, Menu, MenuItem, Stack} from '@mui/material';
 import {StyledButtonGray, StyledMenu} from "./styledComponents";
 import theme from "../../Theme/Theme";
@@ -7,32 +7,45 @@ import Box from "@mui/material/Box";
 const StyledDropdownMenuFilter = () => {
         const [anchorEl, setAnchorEl] = useState(null);
         const [selectedOption, setSelectedOption] = useState('');
-        const [backgroundcolor, setBGColor] = useState(theme.palette.primary.light);
-        const [boxShadow, setBoxShadow] = useState('rgba(0, 0, 0, 0.35) 0px 5px 15px');
-        const [color, setColor] = useState("black");
-        const handleClick = (event) => {
-            setAnchorEl(event.currentTarget);
-            setBGColor("white");
-            setBoxShadow("rgba(117, 91, 222, 0.7) 0px 30px 60px -12px inset,rgba(117, 91, 222, 0.7) 0px 18px 36px -18px inset");
-            setColor("white");
+        const [isClicked, setIsClicked] = useState(false);
+        const [buttonText, setButtonText] = useState('Sort By..');
+        const buttonStyles = {
+            color: isClicked ? "white" : 'black',
+            backgroundColor: isClicked ? theme.palette.info.main : theme.palette.info.light,
+            boxShadow: isClicked ? "inset 0px 15px 4px rgba(0, 0, 0, 0.25)" : "0px 4px 4px rgba(0, 0, 0, 0.25)",
         };
 
+        const handleClick = (event) => {
+            setAnchorEl(event.currentTarget);
+            setIsClicked((prevClicked) => !prevClicked);
+        };
+
+        const clearFilter =() =>{
+            setIsClicked((false));
+            setButtonText("Sort By..")
+            setAnchorEl(null)
+        }
         const handleClose = () => {
             setAnchorEl(null);
-            setBGColor("white");
-            setBoxShadow("rgba(117, 91, 222, 0.7) 0px 30px 60px -12px inset,rgba(117, 91, 222, 0.7) 0px 18px 36px -18px inset");
-            setColor("white");
+            if (buttonText === "Sort By.."){
+                setIsClicked((false));
+            }
         };
 
         const handleOptionClick = (option) => {
+            setButtonText(option)
             setSelectedOption(option);
             setAnchorEl(null);
+            setIsClicked((true));
+
         };
 
         return (
             <Box>
-                <StyledButtonGray variant="contained" onClick={handleClick} style={{boxShadow: boxShadow, backgroundColor:backgroundcolor,color:color}}>
-                    Filter:
+                <StyledButtonGray variant="contained" onClick={handleClick}
+                                  style={buttonStyles}
+                                  sx={{width: "10rem"}}>
+                    {buttonText}
                 </StyledButtonGray>
                 <StyledMenu
                     anchorEl={anchorEl}
@@ -42,17 +55,17 @@ const StyledDropdownMenuFilter = () => {
                         <MenuItem onClick={() => handleOptionClick('Footprints')}>
                             option 19
                         </MenuItem>
-                        <MenuItem onClick={() => handleOptionClick('Distance')}>
+                        <MenuItem onClick={() => handleOptionClick('2')}>
                             option 2
                         </MenuItem>
-                        <MenuItem onClick={() => handleOptionClick('Distance')}>
-                            option 2
+                        <MenuItem onClick={() => handleOptionClick('3')}>
+                            option 3
                         </MenuItem>
-                        <MenuItem onClick={() => handleOptionClick('Distance')}>
-                            option 2
+                        <MenuItem onClick={() => handleOptionClick('4')}>
+                            option 4
                         </MenuItem>
-                        <MenuItem onClick={() => handleOptionClick('Distance')}>
-                            option 2
+                        <MenuItem onClick={() => handleOptionClick('5')}>
+                            option 5
                         </MenuItem>
                         <MenuItem onClick={() => handleOptionClick('Distance')}>
                             option 2
@@ -67,6 +80,7 @@ const StyledDropdownMenuFilter = () => {
                             option 2
                         </MenuItem>
                     </Grid>
+                    <StyledButtonGray onClick ={clearFilter}>Clear Filter</StyledButtonGray>
                 </StyledMenu>
             </Box>
         )

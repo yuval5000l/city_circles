@@ -14,10 +14,10 @@ class CirclesPageComponent extends Component {
             <>
                 <Box sx={{
                     backgroundColor: theme.palette.primary.main,
-                    borderBottom: `0.5rem solid ${theme.palette.secondary.main}`
+                    borderBottom: `0.5rem solid ${theme.palette.secondary.main}`,
                 }}>
-                    <Stack direction="column" spacing={2} alignItems="center" justifyContent="center">
-                        <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem" >
+                    <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
+                        <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem">
                             <StyledCirclesSearchItem name={"Circle1"}/>
                             <StyledCirclesSearchItem name={"Circle2"}/>
                             <StyledCirclesSearchItem name={"Circle3"}/>
@@ -25,13 +25,10 @@ class CirclesPageComponent extends Component {
                         <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem" >
                             <StyledDropdownMenuSortBy/>
                             <StyledDropdownMenuFilter/>
-
                         </Stack>
                     </Stack>
-
                 </Box>
             </>
-
         );
     }
 }

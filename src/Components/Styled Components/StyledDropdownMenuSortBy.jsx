@@ -1,32 +1,49 @@
 import React, { useState } from 'react';
-import {Menu, MenuItem, Stack} from '@mui/material';
-import {StyledButtonGray, StyledCircleBox} from "./styledComponents";
+import {MenuItem, Stack} from '@mui/material';
+import {StyledButtonGray, StyledCircleBox, StyledMenu} from "./styledComponents";
 import theme from "../../Theme/Theme";
 import Box from "@mui/material/Box";
+import StyledCirclesSearchItem from "./StyledSortByButton";
 
 const StyledDropdownMenuSortBy = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedOption, setSelectedOption] = useState('');
+    const [isClicked, setIsClicked] = useState(false);
+    const [buttonText, setButtonText] = useState('Filter By..');
 
+    const buttonStyles = {
+        color: isClicked ? "white" : 'black',
+        backgroundColor: isClicked ? theme.palette.info.main : theme.palette.info.light,
+        boxShadow: isClicked ? "inset 0px 15px 4px rgba(0, 0, 0, 0.25)" : "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    };
+    const clearFilter =() =>{
+        setIsClicked((false));
+        setButtonText("Filter By..")
+        setAnchorEl(null)
+    }
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
+        setIsClicked((prevClicked) => !prevClicked);
     };
 
     const handleClose = () => {
         setAnchorEl(null);
+        setIsClicked((prevClicked) => !prevClicked);
     };
 
     const handleOptionClick = (option) => {
+        setButtonText(option)
+        setIsClicked((true));
         setSelectedOption(option);
         setAnchorEl(null);
     };
 
     return (
         <Box>
-            <StyledButtonGray variant="contained" onClick={handleClick}>
-                Sort By:
+            <StyledButtonGray variant="contained" onClick={handleClick} style={buttonStyles} sx={{width:"10rem"}}>
+                {buttonText}
             </StyledButtonGray>
-            <Menu
+            <StyledMenu
                 anchorEl={anchorEl}
                 open={Boolean(anchorEl)}
                 onClose={handleClose}
@@ -39,17 +56,14 @@ const StyledDropdownMenuSortBy = () => {
             >
                 <Stack direction="row">
                     <MenuItem onClick={() => handleOptionClick('Footprints')}>
-                        <StyledCircleBox>
-                            Footprints
-                        </StyledCircleBox>
+                        <StyledCirclesSearchItem name="Footprints" oonClick={() => handleOptionClick('Footprints')}/>
                     </MenuItem>
                     <MenuItem onClick={() => handleOptionClick('Distance')}>
-                        <StyledCircleBox>
-                            Distance
-                        </StyledCircleBox>
+                        <StyledCirclesSearchItem name="Distance" onClick={() => handleOptionClick('Distance')}/>
                     </MenuItem>
                 </Stack>
-            </Menu>
+                <StyledButtonGray onClick ={clearFilter}>Clear Filter</StyledButtonGray>
+            </StyledMenu>
         </Box>
     );
 };

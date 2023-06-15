@@ -30,8 +30,8 @@ export default function StyledCirclesSearchItem({name}){
     //
     // }
     return(
-        <StyledCircleBox onClick = {handleClick} style={{boxShadow: boxShadow, backgroundColor:backgroundcolor,color:color,border:border}}>
-            <Typography variant="h4">
+        <StyledCircleBox onClick = {handleClick} style={{boxShadow: boxShadow, backgroundColor:backgroundcolor,color:color,border:border}} >
+            <Typography variant="h5" fontWeight="700">
                 {name}
             </Typography>
         </StyledCircleBox>

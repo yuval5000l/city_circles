@@ -5,13 +5,19 @@ import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
 import StyledBottomNavigationPlus from "./StyledBottomNavigationPlus";
+import {useState} from "react";
 
 
 
 export default function StyledBottomNavigationBar() {
+    const [value, setValue] = useState(0);
     return (
         <StyledBottomNavigation
             showLabels
+            value={value}
+            onChange={(event, newValue) => {
+                setValue(newValue);
+            }}
         >
             <StyledBottomNavigationAction component={Link} to="/" label="Home" icon={<HomeIcon
                 sx={{
