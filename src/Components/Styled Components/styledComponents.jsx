@@ -311,3 +311,13 @@ export const StyledMenu = styled((props) => (
         },
     },
 }));
+
+export const StyledTypeBox = styled(Box)(({theme}) => ({
+    backgroundColor: theme.palette.secondary.main,
+    color:"white",
+    ...theme.typography.p,
+    borderRadius:"15px",
+    padding:"3px",
+    [theme.breakpoints.up('xs')]: {
+    }
+}));

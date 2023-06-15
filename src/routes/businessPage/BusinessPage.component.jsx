@@ -1,13 +1,18 @@
 import {useLocation} from 'react-router-dom';
-import {useEffect, useState} from "react";
+import React, {useEffect, useState} from "react";
 import {getBusinessByName} from "../../BackEnd/Classes/BusinessClass";
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import theme from "../../Theme/Theme";
-import {Box, Avatar, Grid} from "@mui/material";
+import {Box, Avatar, Grid, Stack, Typography} from "@mui/material";
 import StyledHamburgerButtonWithCanvas from "../../Components/Styled Components/StyledHamburgerButtonWithCanvas";
 import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
-
+import logoNew from "../../Components/Styled Components/Icons/logo-all-white.png";
+import StyledLogo from "../../Components/Styled Components/StyledLogo";
+import {StyledRating, StyledTypeBox} from "../../Components/Styled Components/styledComponents";
+import FmdGoodIcon from '@mui/icons-material/FmdGood';
+import AccessTimeIcon from '@mui/icons-material/AccessTime';
+import StyledTimeTable from "./StyledTimeTable";
 function showTime(arr_time) {
     let times = [];
     for (let i = 0; i < 2; i++) {
@@ -28,60 +33,97 @@ export function showBusiness(business) {
         <div>
             {/*Top Rectangle*/}
             <Box sx={{
-                backgroundColor: theme.palette.primary.main,
-                borderBottom: `0.5rem solid ${theme.palette.secondary.main}`
+                backgroundColor: theme.palette.primary.dark,
+                borderBottom: `0.5rem solid ${theme.palette.secondary.main}`,
+                display: 'flex',
             }}>
+                <Stack direction="row" spacing={5} justifyContent="space-between"
+                       sx={{marginTop: "5.5rem"}} width="100%" padding="1.5rem">
+                    <Stack direction="column" color="white" spacing={2}   alignItems="flex-start" >
+                        <Typography variant="h2">
+                            {business.name}
+                        </Typography>
+                        <Stack direction="row" spacing={1}>
+                            {business.type.map((category) => <StyledTypeBox key={category}>{category}</StyledTypeBox>)}
+                        </Stack>
+                        <Stack direction="row" spacing={1}>
+                            <Typography>{business.getRating()}</Typography>
+                            <StyledRating value={business.getRating()}/>
+                            <Typography>({business.rating[1]})</Typography>
+                        </Stack>
+                        <Stack direction="row" spacing={1} alignItems="flex-start">
+                            <FmdGoodIcon/>
+                            <Typography sx={{textAlign:"left"}}>
+                                {business.address}
+                            </Typography>
+                        </Stack>
+                        <Stack direction="row" spacing={1} alignItems="flex-start">
+                            <AccessTimeIcon/>
+                            <StyledTimeTable business={business}/>
+                        </Stack>
+                    </Stack>
 
-                <Grid container spacing={5}>
-                    {/*Left Side*/}
-                    <Grid item xs={8.5} sx={{textAlign: 'left'}}>
-                        <h2>{business.name}</h2>
-                        rating num: {business.getRating()} total ratings: {business.rating[1]}
-                        <p></p>
-                        categories: {business.type.map((category) =>
-                        <li key={category}> {category} </li>)}
-                        <p></p>
-                        address: {business.address}
-                        <p></p>
-                        Opening Hours:
-                        <ul>
-                            {Object.entries(business.openingHours).map(([key, value]) => (
-                                showTime([key, value])
-                            ))}
-                        </ul>
-
-                    </Grid>
-                    {/*Right Side*/}
-                    <Grid item xs={3} sx={{textAlign: 'right'}}>
+                    <Box width="7rem">
                         {
                             (business.profile_pic === "") ?
-                                (<Avatar alt={business.name}
-                                         sx={{
-                                             width: 60, height: 60, boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.50)',
-                                             bgcolor: 'white'
-                                         }}/>)
+                                (<Avatar alt={business.name} width="6.5rem"/>)
                                 :
-                                (<Avatar alt={business.name}
-                                         src={business.profilePic}
-                                    // src={require('../../databases/businessPhotos/' + business.id + '/profile.jpg')}
-                                         sx={{
-                                             width: 60, height: 60, boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.50)',
-                                             bgcolor: 'white'
-                                         }}/>)
+                                (<Avatar alt={business.name}  width="6.5rem"
+                                         src={business.profilePic}/>)
                         }
-                    </Grid>
-                </Grid>
+                    </Box>
+                </Stack>
+                {/*<Grid container spacing={2} sx={{marginTop: "5.5rem"}}*/}
+                {/*>*/}
+                {/*    /!*Left Side*!/*/}
+                {/*    <Grid item xs={8.5} sx={{textAlign: 'left'}}>*/}
+                {/*        <h2>{business.name}</h2>*/}
+                {/*        rating num: {business.getRating()} total ratings: {business.rating[1]}*/}
+                {/*        <p></p>*/}
+                {/*        categories: {business.type.map((category) =>*/}
+                {/*        <li key={category}> {category} </li>)}*/}
+                {/*        <p></p>*/}
+                {/*        address: {business.address}*/}
+                {/*        <p></p>*/}
+                {/*        Opening Hours:*/}
+                {/*        <ul>*/}
+                {/*            {Object.entries(business.openingHours).map(([key, value]) => (*/}
+                {/*                showTime([key, value])*/}
+                {/*            ))}*/}
+                {/*        </ul>*/}
+
+                {/*    </Grid>*/}
+                {/*    /!*Right Side*!/*/}
+                {/*    <Grid item xs={3} sx={{textAlign: 'right'}}>*/}
+                {/*        {*/}
+                {/*            (business.profile_pic === "") ?*/}
+                {/*                (<Avatar alt={business.name}*/}
+                {/*                         sx={{*/}
+                {/*                             width: 60, height: 60, boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.50)',*/}
+                {/*                             bgcolor: 'white'*/}
+                {/*                         }}/>)*/}
+                {/*                :*/}
+                {/*                (<Avatar alt={business.name}*/}
+                {/*                         src={business.profilePic}*/}
+                {/*                    // src={require('../../databases/businessPhotos/' + business.id + '/profile.jpg')}*/}
+                {/*                         sx={{*/}
+                {/*                             width: 60, height: 60, boxShadow: '0px 2px 4px rgba(0, 0, 0, 0.50)',*/}
+                {/*                             bgcolor: 'white'*/}
+                {/*                         }}/>)*/}
+                {/*        }*/}
+                {/*    </Grid>*/}
+                {/*</Grid>*/}
 
             </Box>
             {/*Lower Part*/}
             <ul>
                 FootPrints:
                 {business.footprints.map((footprint) =>
-                <li key={footprint.id+1}>
-                    footprint id: {footprint.userID}
-                    {/*footprint time: {footprint.timestamp}*/}
-                    footprint time: {calculateTime(footprint.timestamp.toDate())}
-                </li>
+                    <li key={footprint.id + 1}>
+                        footprint id: {footprint.userID}
+                        {/*footprint time: {footprint.timestamp}*/}
+                        footprint time: {calculateTime(footprint.timestamp.toDate())}
+                    </li>
                 )}
             </ul>
 
@@ -122,11 +164,18 @@ export default function BusinessPage() {
 
     return (
         <div>
-            <Box sx={{
-                display: "flex",
-                backgroundColor: theme.palette.primary.main,
-            }}>
-                <StyledHamburgerButtonWithCanvas/>
+            <Box
+                sx={{
+                    backgroundColor: theme.palette.primary.main,
+                    position: "fixed",
+                    width: "100%",
+                    height: "5.5rem",
+                }}>
+                <Stack direction="row" justifyContent="space-between" spacing={2} alignItems="center"
+                       width="100%">
+                    <StyledHamburgerButtonWithCanvas/>
+                    <StyledLogo/>
+                </Stack>
             </Box>
             {(business === "") ?
                 (<div> Can't find business! </div>) :
