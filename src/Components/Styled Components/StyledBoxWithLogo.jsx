@@ -27,6 +27,16 @@ const PurpleBox = styled(AppBar)(({ theme })=> ({
     }
 }));
 
+const SmallPurpleBox = styled(AppBar)(({ theme })=> ({
+    backgroundColor:theme.palette.primary.main,
+    borderBottom:`0.65rem solid ${theme.palette.secondary.main}`,
+    // position:"fixed",
+    position: 'relative',
+    [theme.breakpoints.up('xs')]: {
+        height:'10rem',
+    }
+}));
+
 
 const SmallLogoBox = styled(Box)(({ theme })=> ({
     borderRadius:"50%",
@@ -63,6 +73,7 @@ const SmallLogoBoxBottom = styled(Box)(({ theme })=> ({
 }));
 
 
+
 export function BottomBoxWithLogo({children}) {
     return (
         <RotatePurpleBox>
@@ -81,5 +92,15 @@ export function TopBoxWithLogo() {
                 <img src={CityCircleLogo} alt="logo" width="80rem" height="80rem"/>
             </SmallLogoBoxBottom>
         </PurpleBox>
+    );
+}
+
+export function TopBoxWithProfileImg({img_url}) {
+    return (
+        <SmallPurpleBox>
+            <SmallLogoBoxBottom>
+                <img src={img_url} alt="profile image" width="80rem" height="80rem"/>
+            </SmallLogoBoxBottom>
+        </SmallPurpleBox>
     );
 }

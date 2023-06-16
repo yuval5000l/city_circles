@@ -22,6 +22,8 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import Button from "@mui/material/Button";
 import {useState} from "react";
 import TextField from "@mui/material/TextField";
+import {MobileTimePicker, TimePicker} from "@mui/x-date-pickers";
+import {MultiInputTimeRangeField} from "@mui/x-date-pickers-pro";
 
 function getHoursAndMinutes(day)
 {
@@ -82,12 +84,20 @@ export default function ThirdPageBusinessRegistration({onNext}) {
             </Stack>
             {/*<BasicTextFields fieldName={'Sunday'}/>*/}
             <LocalizationProvider dateAdapter={AdapterDayjs}>
+                {/*<MobileTimePicker>*/}
+                    <MultiInputTimeRangeField
+                        slotProps={{
+                            textField: ({ position }) => ({
+                                label: position === 'start' ? 'From' : 'To',
+                            }),
+                        }}
+                    />
+                {/*</MobileTimePicker>*/}
                 <SingleInputTimeRangeField
                     label="Sunday"
                     value={sunday}
                     onChange={(newValue) => setSunday(newValue)}
-                    ampm={false}
-                />
+                    ampm={false}/>
                 <SingleInputTimeRangeField
                     label="Monday"
                     value={monday}
