@@ -32,6 +32,7 @@ function showTime(arr_time) {
 }
 
 export function showBusiness(business) {
+    console.log(business);
     return (
         <Box>
             {/*Top Rectangle*/}
@@ -79,7 +80,10 @@ export function showBusiness(business) {
                     </Stack>
                     <Stack direction="row">
                         <Typography variant = "h4">
-                            Contact:
+                            Contact: {
+                            business.contact.filter(contact => contact !== "").map((filteredContact) =>
+                            <StyledTypeBox key={filteredContact + "S"}>{filteredContact}</StyledTypeBox>
+                        )}
                         </Typography>
                         <StyledSocialIcons/>
                     </Stack>
