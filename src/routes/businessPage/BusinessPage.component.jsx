@@ -16,23 +16,9 @@ import StyledTimeTable from "./StyledTimeTable";
 import StyledSocialIcons from "./StyledSocialIcons";
 import StyledBusinessTabs from "./StyledBusinessTabs";
 
-function showTime(arr_time) {
-    let times = [];
-    for (let i = 0; i < 2; i++) {
-        for (let j = 0; j < 2; j++) {
-            times.push((arr_time[1][i][j] < 10) ? "0" + arr_time[1][i][j].toString() : arr_time[1][i][j].toString());
-        }
-    }
 
-    return (
-        <li key={arr_time[0]}>
-            <strong>{arr_time[0]}:</strong> {times[2]}: {times[3]}, {times[0]}: {times[1]}
-        </li>
-    );
-}
 
 export function showBusiness(business) {
-    console.log(business);
     return (
         <Box>
             {/*Top Rectangle*/}
