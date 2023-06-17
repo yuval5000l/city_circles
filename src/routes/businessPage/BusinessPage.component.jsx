@@ -86,7 +86,7 @@ export function showBusiness(business) {
                 </Stack>
             </Box>
             {/*Lower Part*/}
-            <StyledBusinessTabs/>
+            <StyledBusinessTabs business ={business}/>
             {/*<ul>*/}
             {/*    FootPrints:*/}
             {/*    {business.footprints.map((footprint) =>*/}

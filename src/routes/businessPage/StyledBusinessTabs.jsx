@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import {Tabs, Tab, Typography, Box, ListItem, List} from '@mui/material';
 import StyledFeedItem from "../../Components/Styled Components/StyledFeedItem";
+import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 
 function TabPanel({ children, value, index }) {
     return (
@@ -15,9 +16,8 @@ function TabPanel({ children, value, index }) {
     );
 }
 
-export default function StyledBusinessTabs() {
+export default function StyledBusinessTabs({business}) {
     const [value, setValue] = useState(0);
-
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -32,23 +32,40 @@ export default function StyledBusinessTabs() {
             <TabPanel value={value} index={0}>
                 <Typography variant="h6">Footprints List</Typography>
                 <List spacing={8}>
-                    <ListItem>1</ListItem>
-                    <ListItem>2</ListItem>
-                    <ListItem>3</ListItem>
-                    <ListItem>4</ListItem>
-                    <ListItem>5</ListItem>
-                    <ListItem>6</ListItem>
-                    <ListItem>7</ListItem>
-                    <ListItem>8</ListItem>
-                    <ListItem>8</ListItem>
-                    <ListItem>8</ListItem>
-                    <ListItem>8</ListItem>
-                    <ListItem>8</ListItem>
+                    {business.footprints.map((footprint) =>
+                        <ListItem>
+                            id: {footprint.userID % 10}  time: {calculateTime(footprint.timestamp.toDate())}
+                        </ListItem>)
+                    }
+
+                    {/*<ListItem>1</ListItem>*/}
+                    {/*<ListItem>2</ListItem>*/}
+                    {/*<ListItem>3</ListItem>*/}
+                    {/*<ListItem>4</ListItem>*/}
+                    {/*<ListItem>5</ListItem>*/}
+                    {/*<ListItem>6</ListItem>*/}
+                    {/*<ListItem>7</ListItem>*/}
+                    {/*<ListItem>8</ListItem>*/}
+                    {/*<ListItem>8</ListItem>*/}
+                    {/*<ListItem>8</ListItem>*/}
+                    {/*<ListItem>8</ListItem>*/}
+                    {/*<ListItem>8</ListItem>*/}
                 </List>
             </TabPanel>
 
             <TabPanel value={value} index={1}>
                 <Typography variant="h6">Reviews List</Typography>
+                <List spacing={8}>
+
+                {business.reviews.map((review) =>
+                        <ListItem>
+                            userID: {review.userID % 10}, <br></br>
+                            content: {review.content}, <br></br>
+                            rating: {review.rating}, <br></br>
+                            time: {calculateTime(review.timestamp.toDate())}
+                        </ListItem>
+                    )}
+                </List>
             </TabPanel>
 
         </div>
