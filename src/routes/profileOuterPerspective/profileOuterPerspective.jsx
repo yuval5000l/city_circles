@@ -10,13 +10,15 @@ import {TopBoxWithProfileImg} from "../../Components/Styled Components/StyledBox
 import {StyledLightCircleBox} from "../../Components/Styled Components/styledComponents";
 import * as React from "react";
 import {getUserCircles} from "../../BackEnd/Classes/UserClass";
-import {SmallPurpleBox} from "../../Components/Styled Components/OuterProfileComponents";
+import {SmallPurpleBox, StyledLightCircleBoxForProfile, GoToCard} from "../../Components/Styled Components/OuterProfileComponents";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
-
+import {ReactComponent as FootprintsIcon} from "../../Components/Styled Components/Icons/footprints-svgrepo-com.svg";
 
 function showUserProfile(user) {
     // const userID = user.getUserId()
     // const userCircles = getUserCircles(userID)
+    // const footprints = user.get_user_footprints()
+    const footprints = [{businessID: 'business 1'},{businessID: 'business 2'}, {businessID: 'business 3'}, {businessID: 'business 4'}]
     const userCircles = ['school', 'hobby', 'neighborhood']
     return (<div>
         <TopBoxWithProfileImg img_url=""
@@ -28,54 +30,47 @@ function showUserProfile(user) {
                 {/*{user.getUserName()}*/}
             </Typography>
 
-            {/*<Box margin="1rem">*/}
-                {/*<Stack direction="row" spacing={2} justifyContent="center">*/}
-                    <SmallPurpleBox>
+            <SmallPurpleBox>
                         <Stack direction="row" spacing={2} justifyContent="center" margin="auto">
                         <SupervisedUserCircleIcon sx={{height: "2.5rem", width: "2.5rem", position: "start"}}/>
                         <Stack direction="row" spacing={2} justifyContent="center" margin="auto">
-                        <StyledLightCircleBox>
-                            <Typography variant="h5" color="black">
-                                {userCircles[0]}
-                            </Typography>
-                        </StyledLightCircleBox>
-                        <StyledLightCircleBox>
-                            <Typography variant="h5" color="black">
-                                {userCircles[1]}
-                            </Typography>
-                        </StyledLightCircleBox>
-                        <StyledLightCircleBox>
-                            <Typography variant="h5" color="black">
-                                {userCircles[2]}
-                            </Typography>
-                        </StyledLightCircleBox>
+                            {userCircles.map(circle =>
+                                <StyledLightCircleBox>
+                                    <Typography variant="h5" color="black">
+                                        {circle}
+                                    </Typography>
+                                </StyledLightCircleBox>
+                            )}
                         </Stack>
                         </Stack>
-                    </SmallPurpleBox>
-                {/*</Stack>*/}
-            {/*</Box>*/}
+            </SmallPurpleBox>
+
             <SmallPurpleBox>
                 <Stack direction="row" spacing={2} justifyContent="center" margin="auto">
-                    <SupervisedUserCircleIcon sx={{height: "2.5rem", width: "2.5rem", position: "start"}}/>
-                    <Stack direction="row" spacing={2} justifyContent="center" margin="auto">
-                        <StyledLightCircleBox>
-                            <Typography variant="h5" color="black">
-                                {userCircles[0]}
-                            </Typography>
-                        </StyledLightCircleBox>
-                        <StyledLightCircleBox>
-                            <Typography variant="h5" color="black">
-                                {userCircles[1]}
-                            </Typography>
-                        </StyledLightCircleBox>
-                        <StyledLightCircleBox>
-                            <Typography variant="h5" color="black">
-                                {userCircles[2]}
-                            </Typography>
-                        </StyledLightCircleBox>
+                    <FootprintsIcon width="2.5rem" height="2.5rem" sx={{
+                        fontSize:"3rem",
+                        margin:"auto",
+                        fill:"white",
+                    }}/>
+                    <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
+                        {footprints.map(footprint =>
+                            <Stack direction="column" spacing={'0.5rem'}>
+                                <StyledLightCircleBoxForProfile>
+                                    <Avatar sx={{width: '95%', height: '95%'}}
+                                        // src={}
+                                    />
+                                </StyledLightCircleBoxForProfile>
+                                <Typography variant="h5" color="black">
+                                    {footprint["businessID"]}
+                                </Typography>
+                            </Stack>
+                        )}
+
                     </Stack>
                 </Stack>
             </SmallPurpleBox>
+
+           <GoToCard user={user} />
 
         </Stack>
     </div>);

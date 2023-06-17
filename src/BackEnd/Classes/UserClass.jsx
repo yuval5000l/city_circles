@@ -94,6 +94,11 @@ export default class User
     {
         return this.profile_pic;
     }
+
+    get_user_footprints(){
+        return this.footprints;
+    }
+
     static async getUserFriendsById(id)
     {
         const user = await getUserById(id);
@@ -162,8 +167,8 @@ export async function getUserCircles(id) {
     const user = await getUserById(id);
     return user.circles
 
-
 }
+
 
 export const SignIn = async ({email}, {password})=>{
     // const ref = doc(collection(db, "Users")).withConverter(userConverter);
