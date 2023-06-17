@@ -25,9 +25,9 @@ const StyledTimeTable = (business) => {
     return (
         <Box>
             <Box display="flex" alignItems="center">
-                <Typography variant="h6">Opening Hours</Typography>
-                <IconButton onClick={handleToggle}>
-                    <ExpandMoreIcon style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
+                <Typography variant="h4">Opening Hours</Typography>
+                <IconButton onClick={handleToggle} color="white">
+                    <ExpandMoreIcon  style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                 </IconButton>
             </Box>
             {isOpen && (
