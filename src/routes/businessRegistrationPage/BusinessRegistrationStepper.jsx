@@ -12,14 +12,12 @@ import FourthPageBusinessRegistration from './BusinessRegistrationPagesComponent
 import Business from '../../BackEnd/Classes/BusinessClass';
 
 
-
 export default function BusinessStepper() {
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
-
-    const [firstPageData, setFirstPageData] =  React.useState(null);
-    const [secondPageData, setSecondPageData] =  React.useState(null);
-    const [thirdPageData, setThirdPageData] =  React.useState(null);
+    const [firstPageData, setFirstPageData] = React.useState(null);
+    const [secondPageData, setSecondPageData] = React.useState(null);
+    const [thirdPageData, setThirdPageData] = React.useState(null);
     // const [fourthPageData, setFourthPageData] =  React.useState(null);
 
 
@@ -83,8 +81,7 @@ export default function BusinessStepper() {
         setActiveStep(0);
     };
 
-    const handleMakeBusiness = async () =>
-    {
+    const handleMakeBusiness = async () => {
         await Business.makeBusiness(
             firstPageData[0], // Name
             firstPageData[1], // Type
@@ -99,24 +96,27 @@ export default function BusinessStepper() {
 
 
     const steps = [
-        {label: 'Basic Details',
+        {
+            label: 'Basic Details',
             content: <FirstPageBusinessRegistration onNext={handleNext}/>,
-
         },
-        {label: 'Socials',
+        {
+            label: 'Socials',
             content: <SecondPageBusinessRegistration onNext={handleNext} onBack={handleBack}/>,
         },
-        {label: 'More Details',
+        {
+            label: 'More Details',
             content: <ThirdPageBusinessRegistration onNext={handleNext} onBack={handleBack}/>,
         },
-        {label: 'Approving',
+        {
+            label: 'Approving',
             content: <FourthPageBusinessRegistration onNext={handleNext} onBack={handleBack}/>,
         },
     ];
 
 
     return (
-        <Box sx={{ width: '100%' }}>
+        <Box sx={{width: '100%'}}>
             <Stepper activeStep={activeStep}>
                 {steps.map((step, index) => {
                     const stepProps = {};
@@ -138,35 +138,35 @@ export default function BusinessStepper() {
             </Stepper>
             {activeStep === steps.length ? (
                 <React.Fragment>
-                    <Typography sx={{ mt: 2, mb: 1 }}>
+                    <Typography sx={{mt: 2, mb: 1}}>
                         All steps completed!
                     </Typography>
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
-                        <Box sx={{ flex: '1 1 auto' }} />
+                    <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
+                        <Box sx={{flex: '1 1 auto'}}/>
                         <Button onClick={handleReset}>Reset</Button>
                     </Box>
                 </React.Fragment>
             ) : (
                 <React.Fragment>
-                    <Typography sx={{ mt: 2, mb: 1 }}>Step {activeStep + 1}</Typography>
+                    <Typography sx={{mt: 2, mb: 1}}>Step {activeStep + 1}</Typography>
                     {steps[activeStep].content}
-                    <Box sx={{ display: 'flex', flexDirection: 'row', pt: 2 }}>
+                    <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
                         <Button
                             color="inherit"
                             disabled={activeStep === 0}
                             onClick={handleBack}
-                            sx={{ mr: 1 }}
+                            sx={{mr: 1}}
                         >
                             Back
                         </Button>
-                        <Box sx={{ flex: '1 1 auto' }} />
+                        <Box sx={{flex: '1 1 auto'}}/>
                         {isStepOptional(activeStep) && (
-                            <Button color="inherit" onClick={handleSkip} sx={{ mr: 1 }}>
+                            <Button color="inherit" onClick={handleSkip} sx={{mr: 1}}>
                                 Skip
                             </Button>
                         )}
 
-                        {activeStep === steps.length-1 ?
+                        {activeStep === steps.length - 1 ?
                             (<Button onClick={handleMakeBusiness}>
                                 Finish
                             </Button>) : (<div></div>)}

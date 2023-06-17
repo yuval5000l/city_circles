@@ -94,10 +94,9 @@ function ResponsiveDrawer(props) {
             <Divider />
             <List>
                 {drawer_content.map((key, index) => (
-                    <ListItem key={key.text} disablePadding>
-                        <ListItemButton component={Link} to={key.path} >
+                    <ListItem key={key.text} disablePaddi   ng>
+                        <ListItemButton component={Link} to={key.path} onClick={handleDrawerToggle} >
                             <ListItemIcon>
-                                {/*{index % 2 === 0 ? <AddBoxOutlinedIcon /> : <MailIcon />}*/}
                                 {key.icon}
                             </ListItemIcon>
                             <ListItemText primary={key.text} />

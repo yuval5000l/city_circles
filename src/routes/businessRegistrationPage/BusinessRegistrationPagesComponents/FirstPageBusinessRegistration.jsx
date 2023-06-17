@@ -55,7 +55,6 @@ export default function FirstPageBusinessRegistration({onNext}) {
 
     function BusinessTypesSelection(businesses_types) {
 
-
         const handleTypes = (event, newFormats) => {
             setBusinessTypes(newFormats);
             // console.log(businessTypes);
@@ -122,6 +121,7 @@ export default function FirstPageBusinessRegistration({onNext}) {
             <Box sx={{margin: "1rem"}}>
                 <Typography variant="h4" textAlign="start">Category</Typography>
                 {BusinessTypesSelection(['cosmetics', 'nails', 'barber', 'hair', 'sport', 'art', 'lifestyle', 'music'])}
+
             </Box>
             <Stack direction="column" alignItems="start" margin="0.5rem">
                 <Typography variant="h4">Business Name</Typography>

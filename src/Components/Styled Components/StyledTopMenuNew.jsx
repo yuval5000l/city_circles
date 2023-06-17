@@ -3,6 +3,7 @@ import {StyledAppBarTop, StyledSearchBar} from "./styledComponents";
 import logoNew from "./Icons/logo-all-white.png";
 import StyledHamburgerButtonWithCanvas from "./StyledHamburgerButtonWithCanvas";
 import Box from "@mui/material/Box";
+import StyledLogo from "./StyledLogo";
 
 function StyledTopMenuNew() {
     const currentURL = window.location.href;
@@ -12,6 +13,9 @@ function StyledTopMenuNew() {
             window.location.href = "http://localhost:3000/CirclesPageComponent";
         }
 
+    }
+    const goHome = () =>{
+        window.location.href = "/";
     }
 
     return (
@@ -32,9 +36,7 @@ function StyledTopMenuNew() {
                         // onChange={onSearchChange}
                     />
                 </Box>
-                <Box sx={{display: "flex"}}>
-                    <img src={logoNew} alt={logoNew} width="72px"/>
-                </Box>
+                <StyledLogo/>
             </Stack>
         </StyledAppBarTop>
     );
