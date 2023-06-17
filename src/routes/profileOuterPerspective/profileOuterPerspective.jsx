@@ -24,7 +24,7 @@ function showUserProfile(user) {
         <TopBoxWithProfileImg img_url=""
         // img_url={user.get_pic()}
         />
-        <Stack direction="column" spacing={4}>
+        <Stack direction="column" spacing={4} marginTop="2rem">
             <Typography variant="h3">
                 current user name...
                 {/*{user.getUserName()}*/}
@@ -69,8 +69,9 @@ function showUserProfile(user) {
                     </Stack>
                 </Stack>
             </SmallPurpleBox>
-
-           <GoToCard user={user} />
+            {/*<SmallPurpleBox>*/}
+                <GoToCard user={user} />
+            {/*</SmallPurpleBox>*/}
 
         </Stack>
     </div>);
