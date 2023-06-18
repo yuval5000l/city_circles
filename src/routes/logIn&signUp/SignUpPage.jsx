@@ -42,6 +42,7 @@ export default function SignupPage() {
     const [chosenNeighborhood, setChosenNeighborhood] = useState("");
     const [chosenHobby, setChosenHobby] = useState("");
 
+    // TODO: in the future- create a data base of circles and connect it to firebase/firestore
     const SchoolsLst = ['HUJI', 'HAC', 'Azrieli', 'Bezalel', 'Shalem', 'David Yalin'];
     const NeighborhoodLst = ['Rehavia', 'City Center', 'Nahlaot', 'Ramot', 'Talabia', 'Beit Hakerem', 'Resko', 'Katamon', 'Gilo'];
     const HobbyLst = ['Sport', 'Art', 'Cooking', 'Travel', 'Music', 'Gaming', 'Design', 'Reading'];

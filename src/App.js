@@ -13,6 +13,7 @@ import SignInPage from "./routes/logIn&signUp/SignInPage";
 import SignUpPage from "./routes/logIn&signUp/SignUpPage";
 import BusinessRegistrationStepper from "./routes/businessRegistrationPage/BusinessRegistrationStepper";
 import BusinessPage from "./routes/businessPage/BusinessPage.component";
+import OuterPerspectiveUserProfileComponent from "./routes/profileOuterPerspective/profileOuterPerspective";
 
 function App() {
     return (
@@ -25,6 +26,7 @@ function App() {
                     <Route path="CirclesPageComponent" element={<CirclesPageComponent/>}/>
                     <Route path="FriendsPageComponent" element={<FriendsPageComponent/>}/>
                     <Route path="ProfilePageComponent" element={<ProfilePageComponent/>}/>
+                    <Route path="OuterPerspectiveUserProfileComponent" element={<OuterPerspectiveUserProfileComponent/>}/>
                     <Route path="BusinessRegistrationStepperComponent" element={<BusinessRegistrationStepper/>}/>
                 </Route>
                 <Route path="SearchPageComponent" element={<SearchPageComponent />} />
