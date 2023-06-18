@@ -77,7 +77,7 @@ export default class User
         await this.saveToFirebase();
     }
 
-    async AddUserMoreInfo(name, school, neighborhood, hobby) {
+    async AddUserMoreInfo(name, school, neighborhood, hobby, pic) {
         const circlesLst = {
             school: school,
             neighborhood: neighborhood,
@@ -85,6 +85,7 @@ export default class User
         };
         this.circles.push(circlesLst);
         this.name_ = name;
+        this.profile_pic = pic;
         // this.birthday = birthday;
         // console.log("footprint added: ", footprint);
         await this.saveToFirebase();
