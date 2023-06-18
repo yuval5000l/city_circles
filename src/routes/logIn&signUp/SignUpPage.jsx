@@ -47,10 +47,9 @@ export default function SignupPage() {
     const SchoolsLst = ['HUJI', 'HAC', 'Azrieli', 'Bezalel', 'Shalem', 'David Yalin'];
     const NeighborhoodLst = ['Rehavia', 'City Center', 'Nahlaot', 'Ramot', 'Talabia', 'Beit Hakerem', 'Resko', 'Katamon', 'Gilo'];
     const HobbyLst = ['Sport', 'Art', 'Cooking', 'Travel', 'Music', 'Gaming', 'Design', 'Reading'];
-
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(auth?.currentUser?.uid)
+        console.log(auth?.currentUser?.uid);
         const user = await getUserById(auth?.currentUser?.uid);
         await user.AddUserMoreInfo(name, chosenSchool, chosenNeighborhood, chosenHobby, picturePath);
         // console.log("after user")
@@ -58,9 +57,11 @@ export default function SignupPage() {
     };
     const handleUploadPic = async (e) =>
     {
-        let path = await uploadFile(file);
-        setPicturePath(path);
-        console.log(path);
+        uploadFile(file).then((pathy) => {
+            setPicturePath(pathy);
+        }).catch((error) => {
+            console.error(error);
+        });
     }
     return(
         <>

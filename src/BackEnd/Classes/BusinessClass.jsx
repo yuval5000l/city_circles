@@ -1,17 +1,6 @@
 import {db, timestamp} from "../config/firebase";
 import {collection, doc, setDoc, getDocs, getDoc, updateDoc, arrayUnion} from "firebase/firestore";
-// import {ref, getDownloadURL} from "firebase/storage";
 
-
-// let imageRef = ref(storage, "projectFiles/profile.jpg");
-// getDownloadURL(imageRef).then((url) => {
-//         //from url you can fetched the uploaded image easily
-//         console.log(url);
-//
-//         // setImageName(url);
-//     })
-//     .catch((e) => console.log('getting downloadURL of image error => ', e));
-// console.log(imageRef);
 
 
 
