@@ -51,6 +51,10 @@ export default class User
         return "the user name is: "+this.name_ + ", the user ID is: " + this.userID_;
     }
 
+    getCircles(){
+        return this.circles;
+    }
+
     async addBusinessReview(businessID, reviewContent, rating) {
         const review = {
             businessID: businessID,

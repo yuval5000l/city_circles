@@ -8,6 +8,11 @@ import Typography from '@mui/material/Typography';
 import {Link} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
+import {useEffect, useState} from "react";
+import User from "../../BackEnd/Classes/UserClass";
+import {auth} from "../../BackEnd/config/firebase";
+import StyledFeedItem from "./StyledFeedItem";
+import {onAuthStateChanged} from "firebase/auth";
 
 export const SmallPurpleBox = styled(AppBar)(({ theme })=> ({
     backgroundColor:theme.palette.primary.main,
@@ -94,7 +99,7 @@ function BoxWithLock(){
     )
 }
 
-export function GoToCard(user) {
+export function GoToCard(Gotoss) {
     const Gotos = [{businessID: 'business1'}, {businessID: 'business2'}, {businessID: 'business3'}];
     return (
         <MediumPurpleBox>
@@ -141,69 +146,49 @@ export function GoToCard(user) {
             </Stack>
             </Stack>
         </MediumPurpleBox>
-        // <Container sx={{flexWrap: "wrap", display: "flex", m: 1, justifyContent: "center", alignItems: "center"}}>
-        //     {Gotos.map(goto =>
-        //         // <Link to={'../BusinessPageComponent'} state={{ from: businesses.id}}
-        //             // className="link-container"
-        //         // >
-        //
-        //             <Card sx={{ maxWidth: 345, m: 2, width: 300 }}>
-        //                 <CardActionArea>
-        //                     <CardMedia
-        //                         component="img"
-        //                         height="140"
-        //                         src={'B'}
-        //                         // src={`https://robohash.org/${businesses.id}?set=set2&size=180x180`}
-        //                         // alt={businesses.name}
-        //                     />
-        //                     <CardContent>
-        //                         <Typography gutterBottom variant="h5" component="div">
-        //                             {goto.businessID}
-        //                         </Typography>
-        //                         <Typography variant="body2" color="text.secondary">
-        //                             {/*{businesses.title}*/}
-        //                         </Typography>
-        //                     </CardContent>
-        //                 </CardActionArea>
-        //             </Card>
-        //         // </Link>
-        //     )}
-        //
-        // </Container>
-        //
-        //
-        // //
-        // // <Box sx={{flexGrow: 1, overflow: 'hidden', px: 3}}>
-        // //     {Gotos.map(goto =>
-        // //         // <Link to={'/BusinessPage'} state={{from: businesses.id}} className="link-container">
-        // //             <Item
-        // //                 sx={{
-        // //                     my: 1,
-        // //                     mx: 'auto',
-        // //                     p: 2,
-        // //                 }}>
-        // //                 <Stack spacing={2} direction="row" alignItems="center">
-        // //                     <Avatar />
-        // //                     {/*<BusinessAvatar business={{*/}
-        // //                     {/*    "name": businesses.name,*/}
-        // //                     {/*    "id": businesses.id,*/}
-        // //                     {/*    "profile_img": businesses.profile_img,*/}
-        // //                     {/*    "size": true*/}
-        // //                     {/*}}/>*/}
-        // //
-        // //                     <Stack spacing={2} direction="column" alignItems="start">
-        // //                         <Typography variant="h5" display="flex" flexWrap="wrap"
-        // //                                     textAlign="left">{goto.businessID}</Typography>
-        // //                         {/*<Typography variant="h6" noWrap>{businesses.title}</Typography>*/}
-        // //                         {/*<Typography variant="h7" noWrap>{businesses.address} meters from your location</Typography>*/}
-        // //
-        // //                     </Stack>
-        // //
-        // //                 </Stack>
-        // //             </Item>
-        // //         // </Link>
-        // //     )};
-        // //
-        // // </Box>
+
     );
+}
+
+
+
+export function FeedItem() {
+
+    useEffect(() => {
+        getFriendsReviewsHelper()
+    }, [])
+
+
+    const [listReviews, setListReviews] = useState([]);
+    // Review:
+    // user_name, profile_pic, circles, time, business_name, business_photo_url
+    // rating, url_to_business, review,
+    const getFriendsReviewsHelper = () => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                User.getFriendsReviews(auth?.currentUser?.uid).then((lst) => {
+                    setListReviews(lst);
+                }).catch((error) => {
+                    console.error(error);
+                });
+            }
+        });
+    };
+
+    const review = listReviews[0]
+
+    return (<Box>
+        {/*{listReviews.map((review) =>*/}
+            <Box key={review.user_name+review.business_name+review.review}>
+                <StyledFeedItem
+                    // user_id ={review.user_id}
+                                user_name={review.user_name} profile_photo_url={review.profile_photo_url}
+                                circles={review.circles} time={review.time}
+                                business_name={review.business_name} business_photo_url={review.business_photo_url}
+                                rating={review.rating} url_to_business={review.url_to_business}
+                                review={review.review}
+                                review_address={review.rating}></StyledFeedItem>
+            </Box>
+        {/*)}*/}
+    </Box>)
 }

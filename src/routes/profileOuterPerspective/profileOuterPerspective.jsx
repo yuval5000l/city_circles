@@ -5,11 +5,9 @@ import {auth} from "../../BackEnd/config/firebase";
 import {getUserById} from "../../BackEnd/Classes/UserClass";
 import {Box, Button, Stack, Typography} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
-import theme from "../../Theme/Theme";
 import {TopBoxWithProfileImg} from "../../Components/Styled Components/StyledBoxWithLogo";
 import {StyledLightCircleBox} from "../../Components/Styled Components/styledComponents";
 import * as React from "react";
-import {getUserCircles} from "../../BackEnd/Classes/UserClass";
 import {SmallPurpleBox, StyledLightCircleBoxForProfile, GoToCard} from "../../Components/Styled Components/OuterProfileComponents";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import {ReactComponent as FootprintsIcon} from "../../Components/Styled Components/Icons/footprints-svgrepo-com.svg";
@@ -17,7 +15,7 @@ import StyledFeedItem from "../../Components/Styled Components/StyledFeedItem";
 
 function showUserProfile(user) {
     // const userID = user.getUserId()
-    // const userCircles = getUserCircles(userID)
+    // const userCircles = user.getCircles()
     // const footprints = user.get_user_footprints()
     const footprints = [{businessID: 'business 1'},{businessID: 'business 2'}, {businessID: 'business 3'}, {businessID: 'business 4'}]
     const userCircles = ['school', 'hobby', 'neighborhood']

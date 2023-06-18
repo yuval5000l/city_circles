@@ -5,6 +5,7 @@ import * as React from "react";
 import {styled} from "@mui/material/styles";
 import {AppBar} from "@mui/material";
 import CityCircleLogo from "./Icons/logo-new.png";
+import Avatar from "@mui/material/Avatar";
 
 
 const RotatePurpleBox = styled(AppBar)(({ theme })=> ({
@@ -99,7 +100,8 @@ export function TopBoxWithProfileImg({img_url}) {
     return (
         <SmallPurpleBox>
             <SmallLogoBoxBottom>
-                <img src={img_url} alt="profile image" width="80rem" height="80rem"/>
+                {(img_url==="") ? (<Avatar width="95%" height="95%"/>) : (<img src={img_url} alt="profile image" width="95%" height="95%"/>)}
+
             </SmallLogoBoxBottom>
         </SmallPurpleBox>
     );
