@@ -64,11 +64,11 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
 
                 const user = await getUserById(auth?.currentUser?.uid);
                 if (business !== null) {
-                    await user.addBusinessReview(chosenBusiness, review, rating)
+                    await user.addBusinessReview(chosenBusiness, chosenBusiness, business.getProfilePic(), review, rating)
                 }
 
                 if (business !== null) {
-                    await business.addUserReview(auth?.currentUser?.uid, review, rating);
+                    await business.addUserReview(auth?.currentUser?.uid, user.getUserName(), user.getPic(), review, rating);
                 }
             }
             else

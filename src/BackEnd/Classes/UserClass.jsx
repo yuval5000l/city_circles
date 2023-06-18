@@ -51,9 +51,11 @@ export default class User
         return "the user name is: "+this.name_ + ", the user ID is: " + this.userID_;
     }
 
-    async addBusinessReview(businessID, reviewContent, rating) {
+    async addBusinessReview(businessID, businessName, Photo, reviewContent, rating) {
         const review = {
             businessID: businessID,
+            businessName: businessName,
+            businessPhoto: Photo,
             content: reviewContent,
             rating: rating,
             timestamp: timestamp.now().toDate(),
@@ -63,9 +65,11 @@ export default class User
         await this.saveToFirebase();
     }
 
-    async addBusinessFootprint(businessID) {
+    async addBusinessFootprint(businessID, businessName, Photo) {
         const footprint = {
             businessID: businessID,
+            businessName: businessName,
+            businessPhoto: Photo,
             timestamp: timestamp.now().toDate(),
         };
         this.footprints.push(footprint);
