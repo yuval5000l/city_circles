@@ -32,7 +32,7 @@ function showMyProfile(user) {
                 }}
             >
                 <Avatar
-                    src={user.get_pic()}
+                    src={user.getPic()}
                     sx={{ width: 100, height: 100 }}
                 />
                 <Box sx={{ display: 'flex', gap: '8px', marginTop: '8px' }}>

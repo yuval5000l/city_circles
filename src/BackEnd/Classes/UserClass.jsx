@@ -90,7 +90,7 @@ export default class User
         const ref = doc(db, "Users", this.userID_).withConverter(userConverter);
         await setDoc(ref, this);
     }
-    get_pic()
+    getPic()
     {
         return this.profile_pic;
     }
@@ -129,8 +129,7 @@ export default class User
     }
     static feedItemConverter(user, review, business)
     {
-
-        return {user_name: user.name_, profile_photo_url: user.profile_pic,
+        return {user_id: user.userID_, user_name: user.name_, profile_photo_url: user.profile_pic,
             circles: user.circles, time: review.timestamp.toDate(),
             business_name: business.name, business_photo_url: business.profilePic,
             rating: (business.rating[0]/ business.rating[1]),

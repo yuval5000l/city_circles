@@ -37,7 +37,7 @@ import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 //     )
 // }
 
-export default function StyledFeedItem({user_name="name", profile_photo_url="",
+export default function StyledFeedItem({user_id, user_name="name", profile_photo_url="",
                                        circles = [], time= new timestamp(),
                                        business_name="name", business_photo_url="none",
                                        rating=5, url_to_business="", review="",
@@ -58,12 +58,12 @@ export default function StyledFeedItem({user_name="name", profile_photo_url="",
             <Stack direction="column" spacing={2} sx={{padding:"0.4rem", boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', borderBottom: '0.1rem solid #C3ED5B'}}>
                 <Box>
                     <Stack direction="row" spacing={1}>
-                        <Box>
+                        <Link to="/ProfilePageComponent" state ={{from: user_id}}>
                             {(profile_photo_url==="") ?
                                 (<StyledAvatarUserFeed/>) :
                                 (<StyledAvatarUserFeed src={profile_photo_url}/>)
                             }
-                        </Box>
+                        </Link>
                         <Box>
                             <Stack direction="column" justifyContent="center" alignItems="flex-start">
                                 <Typography variant="h4"> {user_name} </Typography>
