@@ -98,7 +98,7 @@ export function GoToCard(user) {
     const Gotos = [{businessID: 'business1'}, {businessID: 'business2'}, {businessID: 'business3'}];
     return (
         <MediumPurpleBox>
-            <Stack direction="row">
+            <Stack direction="row" justifyContent="center" margin="auto">
             <LockOutlinedIcon sx={{height: "2.5rem", width: "2.5rem", position: "start"}}/>
             <Stack direction="row" spacing={"1rem"} justifyContent="center" alignItems="center" display="flex" alignContent="center">
             {Gotos.map(goto =>

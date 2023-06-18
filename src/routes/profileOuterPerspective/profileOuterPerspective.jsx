@@ -13,6 +13,7 @@ import {getUserCircles} from "../../BackEnd/Classes/UserClass";
 import {SmallPurpleBox, StyledLightCircleBoxForProfile, GoToCard} from "../../Components/Styled Components/OuterProfileComponents";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import {ReactComponent as FootprintsIcon} from "../../Components/Styled Components/Icons/footprints-svgrepo-com.svg";
+import StyledFeedItem from "../../Components/Styled Components/StyledFeedItem";
 
 function showUserProfile(user) {
     // const userID = user.getUserId()
@@ -72,7 +73,12 @@ function showUserProfile(user) {
             {/*<SmallPurpleBox>*/}
                 <GoToCard user={user} />
             {/*</SmallPurpleBox>*/}
-
+            {/*<StyledFeedItem user_name={review.user_name} profile_photo_url={review.profile_photo_url}*/}
+            {/*                circles={review.circles} time={review.time}*/}
+            {/*                business_name={review.business_name} business_photo_url={review.business_photo_url}*/}
+            {/*                rating={review.rating} url_to_business={review.url_to_business}*/}
+            {/*                review={review.review}*/}
+            {/*                review_address={review.rating}/>*/}
         </Stack>
     </div>);
 }
