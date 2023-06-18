@@ -54,22 +54,41 @@ function showUserProfile(user) {
                         margin:"auto",
                         fill:"white",
                     }}/>
-                    {(user.get_user_footprints() === []) ? (<Typography variant="h4" color="black">No Footprints</Typography>) :
-                        (<Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
-                            {user.get_user_footprints().map(footprint =>
-                                <Stack direction="column" spacing={'0.5rem'}>
-                                    <StyledLightCircleBoxForProfile>
-                                        <Avatar sx={{width: '95%', height: '95%'}}
-                                            // src={}
-                                        />
-                                    </StyledLightCircleBoxForProfile>
-                                    <Typography variant="h5" color="black">
-                                        {footprint["businessID"]}
-                                    </Typography>
-                                </Stack>
-                            )}
+                    {/*{(user.get_user_footprints() === []) ? (<Typography variant="h4" color="black">No Footprints</Typography>) :*/}
+                    {/*    (<Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">*/}
+                    {/*        {user.get_user_footprints().map(footprint =>*/}
+                    {/*            <Stack direction="column" spacing={'0.5rem'}>*/}
+                    {/*                <StyledLightCircleBoxForProfile>*/}
+                    {/*                    <Avatar sx={{width: '95%', height: '95%'}}*/}
+                    {/*                        // src={}*/}
+                    {/*                    />*/}
+                    {/*                </StyledLightCircleBoxForProfile>*/}
+                    {/*                <Typography variant="h5" color="black">*/}
+                    {/*                    {footprint}*/}
+                    {/*                </Typography>*/}
+                    {/*            </Stack>*/}
+                    {/*        )}*/}
 
-                        </Stack>)}
+                    {/*    </Stack>)}*/}
+                    <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
+                        {user.get_user_footprints().map(footprint =>
+                            <Stack direction="column" spacing={'0.5rem'}>
+                                {/*{console.log(footprint)}*/}
+
+                                {/*{console.log(footprint["businessID"])}*/}
+                                <StyledLightCircleBoxForProfile>
+                                    <Avatar sx={{width: '95%', height: '95%'}}
+                                        // src={}
+                                    />
+                                </StyledLightCircleBoxForProfile>
+
+                                <Typography variant="h5" color="black">
+                                    {footprint['businessID']}
+                                </Typography>
+                            </Stack>
+                        )}
+
+                    </Stack>
 
 
                 </Stack>

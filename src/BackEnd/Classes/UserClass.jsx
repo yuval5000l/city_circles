@@ -55,6 +55,10 @@ export default class User
         return this.circles;
     }
 
+    getFootprints() {
+        return this.footprints;
+    }
+
     async addBusinessReview(businessID, businessName, Photo, reviewContent, rating) {
         const review = {
             businessID: businessID,
