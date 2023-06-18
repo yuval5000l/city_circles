@@ -83,10 +83,12 @@ export default class Business
     {
         return "Business name: " + this.name_ + "\nBusiness address: " + this.address + "Coord: "+this.coord;
     }
-    async addUserReview(userID, reviewContent, rating)
+    async addUserReview(userID, userName, userPhoto, reviewContent, rating)
     {
         const review = {
             userID: userID,
+            userName: userName,
+            userPhoto: userPhoto,
             content: reviewContent,
             rating: rating,
             timestamp: timestamp.now().toDate(),
@@ -97,11 +99,13 @@ export default class Business
         await this.saveToFirebase();
     }
 
-    async addUserFootprint(userID)
+    async addUserFootprint(userID, userName, userPhoto)
     {
         const footprint =
             {
                 userID: userID,
+                userName: userName,
+                userPhoto: userPhoto,
                 timestamp: timestamp.now().toDate(),
             }
         this.footprints.push(footprint);
@@ -137,6 +141,11 @@ export default class Business
     {
         return (this.rating !== 0) ? this.rating[0] / this.rating[1] : this.rating[1];
     }
+    getProfilePic()
+    {
+        return this.profilePic;
+    }
+
 
     async setOpeningHours(openingHoursArray, ref)
     {

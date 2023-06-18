@@ -6,7 +6,7 @@ import {
     // StyledRotatePurpleBox,
     StyledButtonGray
 } from "../../Components/Styled Components/styledComponents";
-import {Stack, Typography} from "@mui/material";
+import {Button, Stack, Typography} from "@mui/material";
 import {auth} from "../../BackEnd/config/firebase";
 import * as React from 'react';
 import dayjs from 'dayjs';
@@ -20,7 +20,7 @@ import {useEffect, useState} from "react";
 import {BottomBoxWithLogo} from "../../Components/Styled Components/StyledBoxWithLogo";
 import {getUserById} from "../../BackEnd/Classes/UserClass";
 import {onAuthStateChanged} from "firebase/auth";
-
+import {uploadFile} from "../../BackEnd/Classes/GeneralFunctionsFireBase";
 
 export default function SignupPage() {
 
@@ -41,7 +41,8 @@ export default function SignupPage() {
     const [chosenSchool, setChosenSchool] = useState("");
     const [chosenNeighborhood, setChosenNeighborhood] = useState("");
     const [chosenHobby, setChosenHobby] = useState("");
-
+    const [picturePath, setPicturePath] = useState("");
+    const [file, setFile] = useState(null);
     // TODO: in the future- create a data base of circles and connect it to firebase/firestore
     const SchoolsLst = ['HUJI', 'HAC', 'Azrieli', 'Bezalel', 'Shalem', 'David Yalin'];
     const NeighborhoodLst = ['Rehavia', 'City Center', 'Nahlaot', 'Ramot', 'Talabia', 'Beit Hakerem', 'Resko', 'Katamon', 'Gilo'];
@@ -51,11 +52,16 @@ export default function SignupPage() {
         e.preventDefault();
         console.log(auth?.currentUser?.uid)
         const user = await getUserById(auth?.currentUser?.uid);
-        await user.AddUserMoreInfo(name, chosenSchool, chosenNeighborhood, chosenHobby);
+        await user.AddUserMoreInfo(name, chosenSchool, chosenNeighborhood, chosenHobby, picturePath);
         // console.log("after user")
         window.location.replace('/');
     };
-
+    const handleUploadPic = async (e) =>
+    {
+        let path = await uploadFile(file);
+        setPicturePath(path);
+        console.log(path);
+    }
     return(
         <>
             <Typography variant="h1" sx={{color: 'primary.main', textAlign: "start", margin: '1rem'}}>
@@ -166,6 +172,10 @@ export default function SignupPage() {
                     </StyledLightCircleBox>
                 </Stack>
             </BottomBoxWithLogo>
+            <input
+                type="file"
+                onChange={(e) => setFile(e.target.files[0])}/>
+            <button onClick={handleUploadPic}> Upload File</button>
 
             <StyledButtonGray onClick={handleSubmit}>Finish!</StyledButtonGray>
 

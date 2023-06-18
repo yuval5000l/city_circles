@@ -55,9 +55,11 @@ export default class User
         return this.circles;
     }
 
-    async addBusinessReview(businessID, reviewContent, rating) {
+    async addBusinessReview(businessID, businessName, Photo, reviewContent, rating) {
         const review = {
             businessID: businessID,
+            businessName: businessName,
+            businessPhoto: Photo,
             content: reviewContent,
             rating: rating,
             timestamp: timestamp.now().toDate(),
@@ -67,9 +69,11 @@ export default class User
         await this.saveToFirebase();
     }
 
-    async addBusinessFootprint(businessID) {
+    async addBusinessFootprint(businessID, businessName, Photo) {
         const footprint = {
             businessID: businessID,
+            businessName: businessName,
+            businessPhoto: Photo,
             timestamp: timestamp.now().toDate(),
         };
         this.footprints.push(footprint);
@@ -77,7 +81,7 @@ export default class User
         await this.saveToFirebase();
     }
 
-    async AddUserMoreInfo(name, school, neighborhood, hobby) {
+    async AddUserMoreInfo(name, school, neighborhood, hobby, pic) {
         const circlesLst = {
             school: school,
             neighborhood: neighborhood,
@@ -85,6 +89,7 @@ export default class User
         };
         this.circles.push(circlesLst);
         this.name_ = name;
+        this.profile_pic = pic;
         // this.birthday = birthday;
         // console.log("footprint added: ", footprint);
         await this.saveToFirebase();

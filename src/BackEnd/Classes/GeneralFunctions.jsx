@@ -40,3 +40,4 @@ export default function calculateTime(time)
     return days.toString() + " days";
 
 }
+

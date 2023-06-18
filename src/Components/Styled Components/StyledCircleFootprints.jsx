@@ -53,12 +53,12 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
 
                 const user = await getUserById(auth?.currentUser?.uid);
                 if (business !== null) {
-                    await user.addBusinessFootprint(chosenBusiness)
+                    await user.addBusinessFootprint(chosenBusiness, chosenBusiness, business.getProfilePic())
                 }
 
                 if (business !== null)
                 {
-                    await business.addUserFootprint(auth?.currentUser?.uid);
+                    await business.addUserFootprint(auth?.currentUser?.uid, user.getUserName(), user.getPic());
                 }
             }
             else
