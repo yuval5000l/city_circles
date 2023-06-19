@@ -25,18 +25,17 @@ import {getUserById} from "../../BackEnd/Classes/UserClass";
 
 
 const drawerWidth = '60%';
+
 function ResponsiveDrawer(props) {
     let [name, setName] = useState("static name");
     useEffect(() => {
         getName()
     }, []);
-    const getName = () =>
-    {
+    const getName = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 getUserById(auth?.currentUser?.uid).then((user) => {
-                    if (user !== null)
-                    {
+                    if (user !== null) {
                         setName(user.getUserName());
                     }
                 }).catch((error) => {
@@ -47,16 +46,15 @@ function ResponsiveDrawer(props) {
 
     }
 
-    const { window } = props;
+    const {window} = props;
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const handleDrawerToggle = () => {
         setMobileOpen(!mobileOpen);
     };
 
-    const logout = async() =>{
-        try
-        {
+    const logout = async () => {
+        try {
             await signOut(auth);
         } catch (err) {
             console.error(err);
@@ -69,37 +67,43 @@ function ResponsiveDrawer(props) {
     // }
 
     const drawer_content = [
-        {text: 'Add a new business', path: "/BusinessRegistrationStepperComponent", icon: <AddBoxOutlinedIcon />},
-        {text: 'Import Contacts', path: "/", icon: <GroupIcon />},
-        {text: 'History', path: "/", icon: <HistoryIcon />},
-        {text: 'All Businesses', path: "/", icon: <WorkIcon />},
-        {text: 'Settings', path:"/", icon:<SettingsIcon/>}
+        {text: 'Add a new business', path: "/BusinessRegistrationStepperComponent", icon: <AddBoxOutlinedIcon/>},
+        {text: 'Import Contacts', path: "/", icon: <GroupIcon/>},
+        {text: 'History', path: "/", icon: <HistoryIcon/>},
+        {text: 'All Businesses', path: "/", icon: <WorkIcon/>},
+        {text: 'Settings', path: "/", icon: <SettingsIcon/>}
 
     ];
 
     const drawer = (
-        <Box sx={{backgroundColor:theme.palette.primary.light, color:"black", borderRight:`0.7rem solid ${theme.palette.secondary.main}`, height:"100%"}}>
-            <Toolbar sx={{backgroundColor:theme.palette.primary.main,color:"white"}}>
+        <Box sx={{
+            backgroundColor: theme.palette.primary.light,
+            color: "black",
+            borderRight: `0.7rem solid ${theme.palette.secondary.main}`,
+            height: "100%"
+        }}>
+            <Toolbar sx={{backgroundColor: theme.palette.primary.main, color: "white"}}>
                 <Stack
-                    sx={{marginLeft:"auto", marginRight:"auto", padding:"1rem"}}
+                    sx={{marginLeft: "auto", marginRight: "auto", padding: "1rem"}}
                     direction="column"
                     justifyContent="center"
                     alignItems="center"
                     spacing={2}
                 >
-                    <StyledAvatarUserFeed sx={{marginLeft:"auto", marginRight:"auto"}}/>
+                    <StyledAvatarUserFeed sx={{marginLeft: "auto", marginRight: "auto"}}/>
                     <Typography>Hi, {name}</Typography>
                 </Stack>
             </Toolbar>
-            <Divider />
+            <Divider/>
             <List>
                 {drawer_content.map((key, index) => (
-                    <ListItem key={key.text}>
-                        <ListItemButton component={Link} to={key.path} onClick={handleDrawerToggle} >
+                    // <ListItem key={key.text} disablePaddi   ng>
+                    <ListItem key={key.text} disablePadding>
+                        <ListItemButton component={Link} to={key.path} onClick={handleDrawerToggle}>
                             <ListItemIcon>
                                 {key.icon}
                             </ListItemIcon>
-                            <ListItemText primary={key.text} />
+                            <ListItemText primary={key.text}/>
                         </ListItemButton>
                     </ListItem>
                 ))}
@@ -108,7 +112,7 @@ function ResponsiveDrawer(props) {
                         <ListItemIcon>
                             <LogoutIcon/>
                         </ListItemIcon>
-                        <ListItemText primary='Log-Out' />
+                        <ListItemText primary='Log-Out'/>
                     </ListItemButton>
                 </ListItem>
             </List>
@@ -117,18 +121,18 @@ function ResponsiveDrawer(props) {
 
     const container = window !== undefined ? () => window().document.body : undefined;
     return (
-        <Box sx={{ display: 'flex' }}>
+        <Box sx={{display: 'flex'}}>
             <IconButton
                 color="inherit"
                 aria-label="open drawer"
                 edge="start"
                 onClick={handleDrawerToggle}
             >
-                <StyledHamburgerButton />
+                <StyledHamburgerButton/>
             </IconButton>
             <Box
                 component="nav"
-                sx={{ width: { sm: drawerWidth }, flexShrink: { sm: 0 } }}
+                sx={{width: {sm: drawerWidth}, flexShrink: {sm: 0}}}
                 aria-label="mailbox folders"
             >
                 {/* The implementation can be swapped with js to avoid SEO duplication of links. */}
@@ -141,8 +145,8 @@ function ResponsiveDrawer(props) {
                         keepMounted: false, // Better open performance on mobile.
                     }}
                     sx={{
-                        display: { xs: 'block' },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth },
+                        display: {xs: 'block'},
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth},
                     }}
                 >
                     {drawer}
@@ -156,7 +160,7 @@ function ResponsiveDrawer(props) {
                                 xs: 'none',
                                 sm: 'block',
                             },
-                        '& .MuiDrawer-paper': { boxSizing: 'border-box', width: drawerWidth, display:"none"},
+                        '& .MuiDrawer-paper': {boxSizing: 'border-box', width: drawerWidth, display: "none"},
                     }}
 
                     open

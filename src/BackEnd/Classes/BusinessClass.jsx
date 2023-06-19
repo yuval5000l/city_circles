@@ -82,6 +82,7 @@ export default class Business
             rating: rating,
             timestamp: timestamp.now().toDate(),
         };
+        console.log(review);
         this.reviews.push(review);
         this.rating[0] += rating;
         this.rating[1] += 1;

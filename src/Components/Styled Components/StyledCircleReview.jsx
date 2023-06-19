@@ -66,10 +66,12 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
                 if (business !== null) {
                     await user.addBusinessReview(chosenBusiness, chosenBusiness, business.getProfilePic(), review, rating)
                 }
-
+                console.log("Send User Review!");
                 if (business !== null) {
                     await business.addUserReview(auth?.currentUser?.uid, user.getUserName(), user.getPic(), review, rating);
                 }
+                console.log("Send Business Review!");
+
             }
             else
             {
