@@ -9,14 +9,39 @@ import theme from "../../Theme/Theme";
 import {TopBoxWithProfileImg} from "../../Components/Styled Components/StyledBoxWithLogo";
 import {StyledLightCircleBox} from "../../Components/Styled Components/styledComponents";
 import * as React from "react";
-import {SmallPurpleBox, StyledLightCircleBoxForProfile, GoToCard, FeedItem} from "../../Components/Styled Components/OuterProfileComponents";
+import {SmallPurpleBox, StyledLightCircleBoxForProfile, GoToCard,
+    // FeedItem
+} from "../../Components/Styled Components/OuterProfileComponents";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import {ReactComponent as FootprintsIcon} from "../../Components/Styled Components/Icons/footprints-svgrepo-com.svg";
 import StyledFeedItem from "../../Components/Styled Components/StyledFeedItem";
+import FeedItemPage from "../../Components/Styled Components/FeedItemPage";
+
+
+
+function FeedItem(user) {
+    const reviews = user.getUserReviews()
+    return (
+        <Box>
+        <StyledFeedItem
+            user_id ={user.getUserId()}
+            user_name={user.getUserName()} profile_photo_url={user.getPic()}
+            circles={user.getCircles()}
+            time={reviews[0]["timestamp"].toDate()}
+            business_name={reviews[0]["businessID"]}
+            // business_photo_url={review.business_photo_url}
+            rating={reviews[0]["rating"]}
+            // url_to_business={review.url_to_business}
+            review={reviews[0]["content"]}
+            // review_address={review.rating}
+        >
+        </StyledFeedItem>
+    </Box>)
+}
 
 function showUserProfile(user) {
-
-    // const footprints = [{businessID: 'business 1'},{businessID: 'business 2'}, {businessID: 'business 3'}, {businessID: 'business 4'}]
+    // console.log(user.getFootprints())
+    const footprints = [{businessID: 'business 1', rating: 5},{businessID: 'business 2', rating: 3}, {businessID: 'business 3', rating: 4}, {businessID: 'business 4'}]
     // const userCircles = ['school', 'hobby', 'neighborhood']
     return(
 
@@ -26,19 +51,19 @@ function showUserProfile(user) {
         <TopBoxWithProfileImg
             img_url={(user.getPic()==="") ? (""):(user.getPic())}
         />
-        <Stack direction="column" spacing={4} marginTop="2rem">
-            <Typography variant="h3">
+        <Stack direction="column" spacing={4} marginTop="4rem">
+            <Typography variant="h2">
                 {/*current user name...*/}
                 {user.getUserName()}
             </Typography>
 
             <SmallPurpleBox>
-                <Stack direction="row" spacing={2} justifyContent="center" margin="auto">
-                    <SupervisedUserCircleIcon sx={{height: "2.5rem", width: "2.5rem", position: "start"}}/>
+                <Stack direction="column" spacing="auto" justifyContent="center" margin="auto">
+                    <SupervisedUserCircleIcon sx={{height: "2.5rem", width: "2.5rem", position: "start", fill: "white"}}/>
                     <Stack direction="row" spacing={2} justifyContent="center" margin="auto">
                         {user.getCircles().map(circle =>
                             <StyledLightCircleBox>
-                                <Typography variant="h5" color="black">
+                                <Typography variant="h4" color="black">
                                     {circle}
                                 </Typography>
                             </StyledLightCircleBox>
@@ -48,7 +73,7 @@ function showUserProfile(user) {
             </SmallPurpleBox>
 
             <SmallPurpleBox>
-                <Stack direction="row" spacing={2} justifyContent="center" margin="auto">
+                <Stack direction="column" spacing="auto" justifyContent="center" margin="auto">
                     <FootprintsIcon width="2.5rem" height="2.5rem" sx={{
                         fontSize:"3rem",
                         margin:"auto",
@@ -71,7 +96,7 @@ function showUserProfile(user) {
 
                     {/*    </Stack>)}*/}
                     <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
-                        {user.get_user_footprints().map(footprint =>
+                        {footprints.map(footprint =>
                             <Stack direction="column" spacing={'0.5rem'}>
                                 {/*{console.log(footprint)}*/}
 
@@ -96,7 +121,9 @@ function showUserProfile(user) {
             {/*<SmallPurpleBox>*/}
             <GoToCard user={user} />
             {/*</SmallPurpleBox>*/}
+            {FeedItem(user)}
             {/*<FeedItem/>*/}
+            {/*<FeedItemPage/>*/}
             {/*<StyledFeedItem user_name={review.user_name} profile_photo_url={review.profile_photo_url}*/}
             {/*                circles={review.circles} time={review.time}*/}
             {/*                business_name={review.business_name} business_photo_url={review.business_photo_url}*/}

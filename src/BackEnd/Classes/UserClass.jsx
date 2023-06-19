@@ -59,6 +59,10 @@ export default class User
         return this.footprints;
     }
 
+    getUserReviews() {
+        return this.reviews;
+    }
+
     async addBusinessReview(businessID, businessName, Photo, reviewContent, rating) {
         const review = {
             businessID: businessID,
