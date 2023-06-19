@@ -86,12 +86,15 @@ export default class User
     }
 
     async AddUserMoreInfo(name, school, neighborhood, hobby, pic) {
-        const circlesLst = {
-            school: school,
-            neighborhood: neighborhood,
-            hobby: hobby,
-        };
-        this.circles.push(circlesLst);
+
+        // const circlesLst = {
+        //     school: school,
+        //     neighborhood: neighborhood,
+        //     hobby: hobby,
+        // };
+        this.circles.push(school);
+        this.circles.push(neighborhood);
+        this.circles.push(hobby);
         this.name_ = name;
         this.profile_pic = pic;
         // this.birthday = birthday;

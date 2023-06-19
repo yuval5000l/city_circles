@@ -20,10 +20,11 @@ import { SingleInputTimeRangeField } from '@mui/x-date-pickers-pro/SingleInputTi
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import Button from "@mui/material/Button";
-import {useState} from "react";
+import {useEffect, useState} from "react";
 import TextField from "@mui/material/TextField";
 import {MobileTimePicker, TimePicker} from "@mui/x-date-pickers";
 import {MultiInputTimeRangeField} from "@mui/x-date-pickers-pro";
+import {uploadFile} from "../../../BackEnd/Classes/GeneralFunctionsFireBase";
 
 function getHoursAndMinutes(day)
 {
@@ -34,6 +35,33 @@ function getHoursAndMinutes(day)
 
 export default function ThirdPageBusinessRegistration({onNext}) {
     const [address, setAddress] = useState("");
+    const [picturePath, setPicturePath] = useState("");
+    const [file, setFile] = useState(null);
+
+
+
+
+    useEffect(() =>
+    {
+        async function foo()
+        {
+            if (file !== null)
+            {
+                await handleUploadPic();
+            }
+        }
+        foo();
+    }, [file]);
+
+    const handleUploadPic = async () =>
+    {
+        uploadFile(file).then((pathy) => {
+            setPicturePath(pathy);
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
+
     const [sunday, setSunday] = React.useState(() => [
         dayjs(),
         dayjs(),
@@ -64,11 +92,14 @@ export default function ThirdPageBusinessRegistration({onNext}) {
     ]);
     const handleOnNext = () => {
         console.log(typeof(sunday));
-        onNext([address, {"Sunday": getHoursAndMinutes(sunday),
+        onNext([address, picturePath, {"Sunday": getHoursAndMinutes(sunday),
             "Monday": getHoursAndMinutes(monday), "Tuesday": getHoursAndMinutes(tuesday),
             "Wednesday": getHoursAndMinutes(wednesday), "Thursday": getHoursAndMinutes(thursday),
             "Friday": getHoursAndMinutes(friday),"Saturday": getHoursAndMinutes(saturday)}]);
     }
+
+
+
     return(
         <div>
             <Typography variant="h4">Details</Typography>
@@ -136,7 +167,9 @@ export default function ThirdPageBusinessRegistration({onNext}) {
                 />
             </LocalizationProvider>
             <Typography variant="h5" textAlign="start">Picture</Typography>
-            <button>upload here!</button>
+            <input
+                type="file"
+                onChange={(e) => setFile(e.target.files[0])}/>
             <Button onClick={handleOnNext}>
                 {'Next'}
             </Button>

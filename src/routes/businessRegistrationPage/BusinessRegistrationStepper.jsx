@@ -86,7 +86,8 @@ export default function BusinessStepper() {
             firstPageData[0], // Name
             firstPageData[1], // Type
             thirdPageData[0], // address
-            thirdPageData.slice(1), // openingHours
+            thirdPageData[1], // photoUrl
+            thirdPageData.slice(2), // openingHours
             secondPageData,
         );
         // TODO verifying submit
