@@ -82,7 +82,6 @@ export default class Business
             rating: rating,
             timestamp: timestamp.now().toDate(),
         };
-        console.log(review);
         this.reviews.push(review);
         this.rating[0] += rating;
         this.rating[1] += 1;
@@ -100,10 +99,6 @@ export default class Business
             }
         this.footprints.push(footprint);
         await this.saveToFirebase();
-    }
-    async saveToFirebase() {
-        const ref = doc(db, "Business", this.name).withConverter(businessConverter);
-        await setDoc(ref, this);
     }
     static async handleGeocode(address) {
         try {
@@ -146,9 +141,39 @@ export default class Business
              })
         return true;
     }
+    async saveToFirebase() {
+        const ref = doc(db, "Business", this.name).withConverter(businessConverter);
+        await setDoc(ref, this);
+    }
+
 
 }
-
+const businessConverter = {
+    toFirestore(business) {
+        return {
+            name : business.name,
+            type : business.type,
+            address : business.address,
+            openingHours : translateArraysToOpeningHours(business.openingHours), // TODO fix
+            contact : business.contact,
+            social : business.social,
+            profilePic : business.profilePic,
+            pictures : business.pictures,
+            rating: business.rating, //.map((rat)=> rat),
+            coord: business.coord, //.map((coo) => coo),
+            last_visited: business.last_visited,
+            reviews: business.reviews,
+            footprints: business.footprints,
+        };
+    },
+    fromFirestore(snapshot, options) {
+        const data = snapshot.data(options);
+        return new Business(data.name, data.type, data.address, data.coord,
+            translateOpeningHoursToArrays(data.openingHours), data.contact,
+            data.social, data.profilePic, data.pictures,
+            data.rating, data.last_visited, data.reviews, data.footprints);
+    },
+};
 
 function translateOpeningHoursToArrays(openingHours) {
     let lstDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
@@ -169,32 +194,28 @@ function translateOpeningHoursToArrays(openingHours) {
     return openingHoursArray;
 }
 
+function translateArraysToOpeningHours(openingHours) {
+    let lstDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+    let openingHoursArray = {};
+    for (let i = 0; i < 7; i++)
+    {
+        let openHours = ("0" + openingHours[lstDays[i]][0][0]).slice(-2);
+        let openMinutes = ("0" + openingHours[lstDays[i]][0][1]).slice(-2);
+        let closeHours = ("0" + openingHours[lstDays[i]][1][0]).slice(-2);
+        let closeMinutes = ("0" + openingHours[lstDays[i]][1][1]).slice(-2);
+        openingHoursArray[lstDays[i]] = "start "+
+            openHours+//.format("HH")+
+            ","+openMinutes+//.format("MM")+
+            " end " + closeHours+//.format("HH")+
+            ","+closeMinutes;//.format("MM");
+
+    }
+    // return "start "+day[0].format("HH")+","+day[0].format("MM")+ " end " + day[1].format("HH")+","+day[1].format("MM");
+    return openingHoursArray;
+}
 
 
-const businessConverter = {
-    toFirestore(business) {
-        return {
-            name : business.name,
-            type : business.type,
-            address : business.address,
-            openingHours : business.openingHours,
-            contact : business.contact,
-            social : business.social,
-            profilePic : business.profilePic,
-            pictures : business.pictures,
-            rating: business.rating,
-            coord: business.coord, //.map((coo) => coo),
-            last_visited: business.last_visited,
-            reviews: business.reviews,
-            footprints: business.footprints,
-        };
-    },
-    fromFirestore(snapshot, options) {
-        const data = snapshot.data(options);
-        return new Business(data.name, data.type, data.address, data.coord, translateOpeningHoursToArrays(data.openingHours), data.contact,
-            data.social, data.profilePic, data.pictures, data.rating, data.last_visited, data.reviews, data.footprints);
-    },
-};
+
 
 export async function getBusinessByName(name)
 {

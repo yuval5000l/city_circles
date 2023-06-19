@@ -90,7 +90,7 @@ export default function BusinessStepper() {
             secondPageData,
         );
         // TODO verifying submit
-        // window.location.replace("/");
+        window.location.replace("/");
 
     }
 
