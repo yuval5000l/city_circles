@@ -18,8 +18,8 @@ export default class Business
         return lst;
     }
 
-    static async makeBusiness(name, type, address, openingHours,
-                                     contact, social = [], profilePic = "",
+    static async makeBusiness(name, type, address, profilePic, openingHours,
+                                     contact, social = [],
                                      pictures = [],rating = [0,0], last_visited =[], reviews = [],
                               footprints = [])
     {
@@ -39,7 +39,7 @@ export default class Business
 
 
     constructor(name, type, address, coord, openingHours,
-                contact, social = [], profilePic = "",
+                contact, social = [], profilePic ,
                 pictures = [], rating = [0,0], last_visited =[], reviews =[],
                 footprints = []) {
         this.name = name;

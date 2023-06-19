@@ -1,4 +1,4 @@
-import {Component} from "react";
+import {Component, useEffect, useState} from "react";
 // import {StyledPurpleBox} from "../../Components/Styled Components/styledComponents";
 import theme from "../../Theme/Theme";
 import Box from "@mui/material/Box";
@@ -6,9 +6,30 @@ import StyledCirclesSearchItem from "../../Components/Styled Components/StyledCi
 import {Stack} from "@mui/material";
 import StyledDropdownMenuSortBy from "../../Components/Styled Components/StyledDropdownMenuSortBy";
 import StyledDropdownMenuFilter from "../../Components/Styled Components/StyledDropdownMenuFilter";
+import {onAuthStateChanged} from "firebase/auth";
+import {auth} from "../../BackEnd/config/firebase";
+import {getUserById} from "../../BackEnd/Classes/UserClass";
 
-class CirclesPageComponent extends Component {
-    render() {
+
+
+
+const CirclesPageComponent = (context) => {
+    console.log(context);
+    const [user, setUser] = useState(null);
+        useEffect(() => {
+            getUser();
+        }, [])
+        const getUser = () => {
+            onAuthStateChanged(auth, (usery) => {
+                if (usery) {
+                    getUserById(auth?.currentUser?.uid).then((useryy) => {
+                        setUser(useryy);
+                    }).catch((error) => {
+                        console.error(error);
+                    });
+                }
+            });
+        };
         // const position = [31.777587, 35.215094]; //[this.state.location.lat, this.state.location.lng];
         return (
             <>
@@ -18,9 +39,9 @@ class CirclesPageComponent extends Component {
                 }}>
                     <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
                         <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem">
-                            <StyledCirclesSearchItem name={"Circle1"}/>
-                            <StyledCirclesSearchItem name={"Circle2"}/>
-                            <StyledCirclesSearchItem name={"Circle3"}/>
+                            <StyledCirclesSearchItem name={(user === null) ? ("Circle1") : (user.getCircles()[0])}/>
+                            <StyledCirclesSearchItem name={(user === null) ? ("Circle2") : (user.getCircles()[1])}/>
+                            <StyledCirclesSearchItem name={(user === null) ? ("Circle3") : (user.getCircles()[2])}/>
                         </Stack>
                         <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem" >
                             <StyledDropdownMenuSortBy/>
@@ -30,7 +51,7 @@ class CirclesPageComponent extends Component {
                 </Box>
             </>
         );
-    }
+
 }
 
 export default CirclesPageComponent;

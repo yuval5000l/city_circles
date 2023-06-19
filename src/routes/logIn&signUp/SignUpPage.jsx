@@ -29,6 +29,7 @@ export default function SignupPage() {
         check_sign_in();
     }, []);
 
+
     const check_sign_in = () => {
         onAuthStateChanged(auth, (user) => {
             if (!user) {
@@ -44,10 +45,23 @@ export default function SignupPage() {
     const [chosenHobby, setChosenHobby] = useState("");
     const [picturePath, setPicturePath] = useState("");
     const [file, setFile] = useState(null);
+
     // TODO: in the future- create a data base of circles and connect it to firebase/firestore
     const SchoolsLst = ['HUJI', 'HAC', 'Azrieli', 'Bezalel', 'Shalem', 'David Yalin'];
     const NeighborhoodLst = ['Rehavia', 'City Center', 'Nahlaot', 'Ramot', 'Talabia', 'Beit Hakerem', 'Resko', 'Katamon', 'Gilo'];
     const HobbyLst = ['Sport', 'Art', 'Cooking', 'Travel', 'Music', 'Gaming', 'Design', 'Reading'];
+
+    useEffect(() =>
+    {
+        async function foo()
+        {
+            if (file !== null)
+            {
+                await handleUploadPic();
+            }
+        }
+        foo();
+    }, [file]);
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(auth?.currentUser?.uid);
@@ -56,7 +70,7 @@ export default function SignupPage() {
         // console.log("after user")
         window.location.replace('/');
     };
-    const handleUploadPic = async (e) =>
+    const handleUploadPic = async () =>
     {
         uploadFile(file).then((pathy) => {
             setPicturePath(pathy);
