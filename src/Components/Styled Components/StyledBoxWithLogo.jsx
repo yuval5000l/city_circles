@@ -32,6 +32,7 @@ const SmallPurpleBox = styled(Box)(({ theme })=> ({
     backgroundColor:theme.palette.primary.main,
     borderBottom:`0.65rem solid ${theme.palette.secondary.main}`,
     // position:"fixed",
+    justifyContent: "center",
     position: 'relative',
     [theme.breakpoints.up('xs')]: {
         height:'10rem',
@@ -65,6 +66,7 @@ const SmallLogoBoxBottom = styled(Box)(({ theme })=> ({
     bottom : '-3.3rem',
     display: 'flex',
     justifyContent: 'center',
+    margin: "auto",
     // justifyItems: "center",
     // justifySelf: "center",
     alignItems: 'center',

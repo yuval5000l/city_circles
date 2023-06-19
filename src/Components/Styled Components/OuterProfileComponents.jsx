@@ -103,12 +103,12 @@ export function GoToCard(Gotoss) {
     const Gotos = [{businessID: 'business1'}, {businessID: 'business2'}, {businessID: 'business3'}];
     return (
         <MediumPurpleBox>
-            <Stack direction="row" justifyContent="center" margin="auto">
-            <LockOutlinedIcon sx={{height: "2.5rem", width: "2.5rem", position: "start"}}/>
-            <Stack direction="row" spacing={"1rem"} justifyContent="center" alignItems="center" display="flex" alignContent="center">
+            <Stack direction="column" justifyContent="center" margin="auto" marginBottom={0}>
+            <LockOutlinedIcon sx={{height: "2.5rem", width: "2.5rem", position: "start", fill: "white"}}/>
+            <Stack direction="row" spacing="2rem" justifyContent="flex-start" alignItems="center" display="flex" alignContent="center" margin="1rem" overflow={"scroll"} >
             {Gotos.map(goto =>
-                <Box sx={{bgcolor: "info.light", paddingTop: "1rem",paddingRight:2, paddingLeft:2, borderRadius: 3, borderColor: "primary.main", border: 3}}>
-                <Stack direction="column" spcing={"0.5rem"} justifyContent="center" alignItems="center">
+                <Box height="100%" sx={{bgcolor: "info.light", paddingTop: "1rem",paddingRight:2, paddingLeft:2, borderRadius: 3, borderColor: "primary.main", border: 3}}>
+                <Stack direction="column" spcing="auto" justifyContent="center" alignItems="center">
                     <Avatar src="B"/>
                     <Typography variant="h4" sx={{color: "black"}}>
                         {goto.businessID}
@@ -123,7 +123,7 @@ export function GoToCard(Gotoss) {
                     <Box sx={{position: "relative",bgcolor: "white", bottom:0, width: "100%", padding: "1rem", borderBottomLeftRadius:25, borderBottomRightRadius:25, justifyContent: 'center',
                         alignItems: 'center',
                         alignSelf: "center", marginTop: "1rem"}}>
-                    <LockOutlinedIcon
+                    <LockOutlinedIcon fill="white"
                     sx={{
                         // position
                         position: "absolute",
@@ -152,43 +152,49 @@ export function GoToCard(Gotoss) {
 
 
 
-export function FeedItem() {
-
-    useEffect(() => {
-        getFriendsReviewsHelper()
-    }, [])
-
-
-    const [listReviews, setListReviews] = useState([]);
-    // Review:
-    // user_name, profile_pic, circles, time, business_name, business_photo_url
-    // rating, url_to_business, review,
-    const getFriendsReviewsHelper = () => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                User.getFriendsReviews(auth?.currentUser?.uid).then((lst) => {
-                    setListReviews(lst);
-                }).catch((error) => {
-                    console.error(error);
-                });
-            }
-        });
-    };
-
-    const review = listReviews[0]
-
-    return (<Box>
-        {/*{listReviews.map((review) =>*/}
-            <Box key={review.user_name+review.business_name+review.review}>
-                <StyledFeedItem
-                    // user_id ={review.user_id}
-                                user_name={review.user_name} profile_photo_url={review.profile_photo_url}
-                                circles={review.circles} time={review.time}
-                                business_name={review.business_name} business_photo_url={review.business_photo_url}
-                                rating={review.rating} url_to_business={review.url_to_business}
-                                review={review.review}
-                                review_address={review.rating}></StyledFeedItem>
-            </Box>
-        {/*)}*/}
-    </Box>)
-}
+// export function FeedItem(user) {
+//
+//     // useEffect(() => {
+//     //     getFriendsReviewsHelper()
+//     // }, [])
+//     //
+//     //
+//     // const [listReviews, setListReviews] = useState([]);
+//     // Review:
+//     // user_name, profile_pic, circles, time, business_name, business_photo_url
+//     // rating, url_to_business, review,
+//     // const getFriendsReviewsHelper = () => {
+//     //     onAuthStateChanged(auth, (user) => {
+//     //         if (user) {
+//     //             User.getFriendsReviews(auth?.currentUser?.uid).then((lst) => {
+//     //                 setListReviews(lst);
+//     //             }).catch((error) => {
+//     //                 console.error(error);
+//     //             });
+//     //         }
+//     //     });
+//     // };
+//
+//     const reviews = user.getUserReviews()
+//
+//     return (<Box>
+//         {/*{listReviews.map((review) =>*/}
+//         {/*    <Box*/}
+//         {/*        // key={review.user_name+review.business_name+review.review}*/}
+//         {/*    >*/}
+//                 <StyledFeedItem
+//                     user_id ={user.getId()}
+//                     user_name={user.getUserName()} profile_photo_url={user.getPic()}
+//                     circles={user.getCircles()}
+//                     time={reviews[0]["timestamp"]}
+//                     business_name={reviews[0]["businessID"]}
+//                     // business_photo_url={review.business_photo_url}
+//                     rating={reviews[0]["rating"]}
+//                     // url_to_business={review.url_to_business}
+//                     review={reviews[0]["content"]}
+//                     // review_address={review.rating}
+//                 ></StyledFeedItem>
+//             {/*</Box>*/}
+//         {/*)}*/}
+//     </Box>)
+// }

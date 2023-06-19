@@ -38,7 +38,8 @@ import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 // }
 
 export default function StyledFeedItem({user_id, user_name="name", profile_photo_url="",
-                                       circles = [], time= new timestamp(),
+                                       circles = [],
+                                           time= new timestamp(),
                                        business_name="name", business_photo_url="none",
                                        rating=5, url_to_business="", review="",
                                        review_address=""})
