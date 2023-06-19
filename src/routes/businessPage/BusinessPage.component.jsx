@@ -27,7 +27,9 @@ export function showBusiness(business) {
                 borderBottom: `0.5rem solid ${theme.palette.secondary.main}`,
                 display: 'flex',
             }}>
-                <Stack direction="column" sx={{marginTop: "5.5rem"}} width="100%" padding="1.5rem" color="white"
+                <Stack direction="column"
+                       // sx={{marginTop: "5.5rem"}}
+                       width="100%" padding="1.5rem" color="white"
                        spacing={2}>
                     <Stack direction="row" spacing={2} justifyContent="space-between">
                         <Stack direction="column" color="white" spacing={2} alignItems="flex-start">
@@ -47,9 +49,9 @@ export function showBusiness(business) {
                         <Box>
                             {
                                 (business.profile_pic === "") ?
-                                    (<Avatar sx = {{width: "6.25rem", height:"auto"}} alt={business.name}/>)
+                                    (<Avatar sx = {{width: "6.25rem", height:"6.25rem"}} alt={business.name}/>)
                                     :
-                                    (<Avatar sx = {{width: "6.25rem", height:"auto"}} alt={business.name}
+                                    (<Avatar sx = {{width: "6.25rem", height:"6.25rem"}} alt={business.name}
                                              src={business.profilePic}/>)
                             }
                         </Box>
@@ -127,20 +129,20 @@ export default function BusinessPage() {
 
     return (
         <div>
-            <Box
-                sx={{
-                    backgroundColor: theme.palette.primary.main,
-                    position: "fixed",
-                    width: "100%",
-                    height: "5.5rem",
-                    zIndex:"999",
-                }}>
-                <Stack direction="row" justifyContent="space-between" spacing={2} alignItems="center"
-                       width="100%">
-                    <StyledHamburgerButtonWithCanvas/>
-                    <StyledLogo/>
-                </Stack>
-            </Box>
+            {/*<Box*/}
+            {/*    sx={{*/}
+            {/*        backgroundColor: theme.palette.primary.main,*/}
+            {/*        position: "fixed",*/}
+            {/*        width: "100%",*/}
+            {/*        height: "5.5rem",*/}
+            {/*        zIndex:"999",*/}
+            {/*    }}>*/}
+            {/*    <Stack direction="row" justifyContent="space-between" spacing={2} alignItems="center"*/}
+            {/*           width="100%">*/}
+            {/*        <StyledHamburgerButtonWithCanvas/>*/}
+            {/*        <StyledLogo/>*/}
+            {/*    </Stack>*/}
+            {/*</Box>*/}
             {(business === "") ?
                 (<div> Can't find business! </div>) :
                 (<div> {showBusiness(business)} </div>)}

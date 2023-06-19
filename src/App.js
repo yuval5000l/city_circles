@@ -28,11 +28,13 @@ function App() {
                     <Route path="ProfilePageComponent" element={<ProfilePageComponent/>}/>
                     <Route path="OuterPerspectiveUserProfileComponent" element={<OuterPerspectiveUserProfileComponent/>}/>
                     <Route path="BusinessRegistrationStepperComponent" element={<BusinessRegistrationStepper/>}/>
+                    <Route path="BusinessPage" element={<BusinessPage/>}/>
+
                 </Route>
                 <Route path="SearchPageComponent" element={<SearchPageComponent />} />
                 <Route path="signInPage" element={<SignInPage/>}/>
                 <Route path="SignUpPage" element={<SignUpPage/>}/>
-                <Route path="BusinessPage" element={<BusinessPage/>}/>
+                {/*<Route path="BusinessPage" element={<BusinessPage/>}/>*/}
             </Routes>
             </ThemeProvider>
         </div>
