@@ -21,6 +21,7 @@ import {BottomBoxWithLogo} from "../../Components/Styled Components/StyledBoxWit
 import {getUserById} from "../../BackEnd/Classes/UserClass";
 import {onAuthStateChanged} from "firebase/auth";
 import {uploadFile} from "../../BackEnd/Classes/GeneralFunctionsFireBase";
+import Avatar from "@mui/material/Avatar";
 
 export default function SignupPage() {
 
@@ -177,6 +178,8 @@ export default function SignupPage() {
                 type="file"
                 onChange={(e) => setFile(e.target.files[0])}/>
             <button onClick={handleUploadPic}> Upload File</button>
+            {(picturePath ==="") ? (<Avatar sx={{ width: 100, height: 100 }}/>) :
+                (<Avatar src={picturePath} sx={{ width: 100, height: 100 }}/>)}
 
             <StyledButtonGray onClick={handleSubmit}>Finish!</StyledButtonGray>
 

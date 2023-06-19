@@ -94,7 +94,7 @@ function ResponsiveDrawer(props) {
             <Divider />
             <List>
                 {drawer_content.map((key, index) => (
-                    <ListItem key={key.text} disablePaddi   ng>
+                    <ListItem key={key.text}>
                         <ListItemButton component={Link} to={key.path} onClick={handleDrawerToggle} >
                             <ListItemIcon>
                                 {key.icon}

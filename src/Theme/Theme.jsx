@@ -68,10 +68,12 @@ let theme = createTheme({
             secondary: '#BFBFBF',
         },
     },
-    shadows: {
-        regular: '0px 4px 4px rgba(0, 0, 0, 0.25)',
-        clicked: 'inset 0px 15px 4px rgba(0, 0, 0, 0.25)',
-    },
+    // TODO where do we use shadows and how to fix?
+    shadows: Array(25).fill('none'),
+    // shadows: {
+    //     regular: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+    //     clicked: 'inset 0px 15px 4px rgba(0, 0, 0, 0.25)',
+    // },
     shape: {
         borderRadius: 10
     },
