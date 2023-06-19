@@ -39,7 +39,7 @@ const NavigationComponent = () => {
                 (<StyledTopMenuNew setSearch={setSearchRes}/>)
             }
             <Box sx={{marginTop: "6.5rem", marginBottom: "4.5rem"}}>
-                <Outlet context={{searchRes}}/>
+                <Outlet context={[searchRes, setSearchRes]}/>
             </Box>
             <StyledBottomNavigationBar/>
         </div>

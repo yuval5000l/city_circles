@@ -9,12 +9,14 @@ import StyledDropdownMenuFilter from "../../Components/Styled Components/StyledD
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import {getUserById} from "../../BackEnd/Classes/UserClass";
+import {useOutletContext} from "react-router-dom";
 
 
 
 
-const CirclesPageComponent = (context) => {
-    console.log(context);
+const CirclesPageComponent = () => {
+    const [searchRes, setSearchRes] = useOutletContext();
+
     const [user, setUser] = useState(null);
         useEffect(() => {
             getUser();
