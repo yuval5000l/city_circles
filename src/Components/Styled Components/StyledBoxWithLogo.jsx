@@ -28,7 +28,7 @@ const PurpleBox = styled(AppBar)(({ theme })=> ({
     }
 }));
 
-const SmallPurpleBox = styled(AppBar)(({ theme })=> ({
+const SmallPurpleBox = styled(Box)(({ theme })=> ({
     backgroundColor:theme.palette.primary.main,
     borderBottom:`0.65rem solid ${theme.palette.secondary.main}`,
     // position:"fixed",
@@ -65,6 +65,8 @@ const SmallLogoBoxBottom = styled(Box)(({ theme })=> ({
     bottom : '-3.3rem',
     display: 'flex',
     justifyContent: 'center',
+    // justifyItems: "center",
+    // justifySelf: "center",
     alignItems: 'center',
     alignSelf: "center",
     [theme.breakpoints.up('xs')]:{

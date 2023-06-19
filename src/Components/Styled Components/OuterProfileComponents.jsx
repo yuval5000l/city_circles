@@ -14,27 +14,27 @@ import {auth} from "../../BackEnd/config/firebase";
 import StyledFeedItem from "./StyledFeedItem";
 import {onAuthStateChanged} from "firebase/auth";
 
-export const SmallPurpleBox = styled(AppBar)(({ theme })=> ({
+export const SmallPurpleBox = styled(Box)(({ theme })=> ({
     backgroundColor:theme.palette.primary.main,
     // borderBottom:`0.65rem solid ${theme.palette.secondary.main}`,
     // position:"fixed",
     position: 'relative',
     borderRadius: 20,
-    width: "90%",
+    width: "100%",
     [theme.breakpoints.up('xs')]: {
-        height:'10rem',
+        height:'12rem',
     }
 }));
 
-export const MediumPurpleBox = styled(AppBar)(({ theme })=> ({
+export const MediumPurpleBox = styled(Box)(({ theme })=> ({
     backgroundColor:theme.palette.primary.main,
     // borderBottom:`0.65rem solid ${theme.palette.secondary.main}`,
     // position:"fixed",
     position: 'relative',
     borderRadius: 20,
-    width: "90%",
+    width: "100%",
     [theme.breakpoints.up('xs')]: {
-        height:'12rem',
+        height:'18rem',
     }
 }));
 
