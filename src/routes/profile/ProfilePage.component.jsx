@@ -9,14 +9,14 @@ import theme from "../../Theme/Theme";
 import {TopBoxWithProfileImg} from "../../Components/Styled Components/StyledBoxWithLogo";
 import {StyledLightCircleBox} from "../../Components/Styled Components/styledComponents";
 import * as React from "react";
-import {SmallPurpleBox, StyledLightCircleBoxForProfile, GoToCard,
+import {
+    SmallPurpleBox, StyledLightCircleBoxForProfile, GoToCard,
     // FeedItem
 } from "../../Components/Styled Components/OuterProfileComponents";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import {ReactComponent as FootprintsIcon} from "../../Components/Styled Components/Icons/footprints-svgrepo-com.svg";
 import StyledFeedItem from "../../Components/Styled Components/StyledFeedItem";
 import FeedItemPage from "../../Components/Styled Components/FeedItemPage";
-
 
 
 function FeedItem(user, lstOfReviews) {
@@ -33,39 +33,39 @@ function FeedItem(user, lstOfReviews) {
     //         }
     //     });
     // }, []);
-    if (lstOfReviews === [])
-    {
+    if (lstOfReviews === []) {
         return (<></>);
     }
     return (
         <Box>
             {lstOfReviews.map(review =>
-
-                <StyledFeedItem user_id ={review.user_id}
-                                user_name={review.user_name} profile_photo_url={review.profile_photo_url}
-                                circles={review.circles}
-                                time={review.time}
-                                business_name={review.business_name}
-                                business_photo_url={review.business_photo_url}
-                                rating={review.rating}
-                                url_to_business={review.url_to_business}
-                                review={review.review}
-                                review_address={review.rating}></StyledFeedItem>
+                <Box key={review.business_name}>
+                    <StyledFeedItem user_id={review.user_id}
+                                    user_name={review.user_name} profile_photo_url={review.profile_photo_url}
+                                    circles={review.circles}
+                                    time={review.time}
+                                    business_name={review.business_name}
+                                    business_photo_url={review.business_photo_url}
+                                    rating={review.rating}
+                                    url_to_business={review.url_to_business}
+                                    review={review.review}
+                                    review_address={review.rating}></StyledFeedItem>
+                </Box>
             )}
-        {/*<StyledFeedItem*/}
-        {/*    user_id ={user.getUserId()}*/}
-        {/*    user_name={user.getUserName()} profile_photo_url={user.getPic()}*/}
-        {/*    circles={user.getCircles()}*/}
-        {/*    time={reviews[0]["timestamp"].toDate()}*/}
-        {/*    business_name={reviews[0]["businessID"]}*/}
-        {/*    // business_photo_url={review.business_photo_url}*/}
-        {/*    rating={reviews[0]["rating"]}*/}
-        {/*    // url_to_business={review.url_to_business}*/}
-        {/*    review={reviews[0]["content"]}*/}
-        {/*    // review_address={review.rating}*/}
-        {/*>*/}
-        {/*</StyledFeedItem>*/}
-    </Box>)
+            {/*<StyledFeedItem*/}
+            {/*    user_id ={user.getUserId()}*/}
+            {/*    user_name={user.getUserName()} profile_photo_url={user.getPic()}*/}
+            {/*    circles={user.getCircles()}*/}
+            {/*    time={reviews[0]["timestamp"].toDate()}*/}
+            {/*    business_name={reviews[0]["businessID"]}*/}
+            {/*    // business_photo_url={review.business_photo_url}*/}
+            {/*    rating={reviews[0]["rating"]}*/}
+            {/*    // url_to_business={review.url_to_business}*/}
+            {/*    review={reviews[0]["content"]}*/}
+            {/*    // review_address={review.rating}*/}
+            {/*>*/}
+            {/*</StyledFeedItem>*/}
+        </Box>)
 }
 
 function showUserProfile(user, lstOfReviews) {
@@ -73,97 +73,100 @@ function showUserProfile(user, lstOfReviews) {
     // const footprints = [{businessName: 'business 1', rating: 5},{businessName: 'business 2', rating: 3}, {businessName: 'business 3', rating: 4}, {businessName: 'business 4'}]
     // const userCircles = ['school', 'hobby', 'neighborhood']
 
-    return(
+    return (
 
         <div>
             {(user === null) ? (<div> Loading... </div>) :
                 (<div>
-        <TopBoxWithProfileImg
-            img_url={(user.getPic()==="") ? (""):(user.getPic())}
-        />
-        <Stack direction="column" spacing={4} marginTop="4rem">
-            <Typography variant="h2">
-                {/*current user name...*/}
-                {user.getUserName()}
-            </Typography>
+                    <TopBoxWithProfileImg
+                        img_url={(user.getPic() === "") ? ("") : (user.getPic())}
+                    />
+                    <Stack direction="column" spacing={4} marginTop="4rem">
+                        <Typography variant="h2">
+                            {/*current user name...*/}
+                            {user.getUserName()}
+                        </Typography>
 
-            <SmallPurpleBox>
-                <Stack direction="column" spacing="auto" justifyContent="center" margin="auto">
-                    <SupervisedUserCircleIcon sx={{height: "2.5rem", width: "2.5rem", position: "start", fill: "white"}}/>
-                    <Stack direction="row" spacing={2} justifyContent="center" margin="auto">
-                        {user.getCircles().map(circle =>
-                            <StyledLightCircleBox>
-                                <Typography variant="h4" color="black">
-                                    {circle}
-                                </Typography>
-                            </StyledLightCircleBox>
-                        )}
-                    </Stack>
-                </Stack>
-            </SmallPurpleBox>
-
-            <SmallPurpleBox>
-                <Stack direction="column" spacing="auto" justifyContent="center" margin="auto">
-                    <FootprintsIcon width="2.5rem" height="2.5rem" sx={{
-                        fontSize:"3rem",
-                        margin:"auto",
-                        fill:"white",
-                    }}/>
-                    {/*{(user.get_user_footprints() === []) ? (<Typography variant="h4" color="black">No Footprints</Typography>) :*/}
-                    {/*    (<Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">*/}
-                    {/*        {user.get_user_footprints().map(footprint =>*/}
-                    {/*            <Stack direction="column" spacing={'0.5rem'}>*/}
-                    {/*                <StyledLightCircleBoxForProfile>*/}
-                    {/*                    <Avatar sx={{width: '95%', height: '95%'}}*/}
-                    {/*                        // src={}*/}
-                    {/*                    />*/}
-                    {/*                </StyledLightCircleBoxForProfile>*/}
-                    {/*                <Typography variant="h5" color="black">*/}
-                    {/*                    {footprint}*/}
-                    {/*                </Typography>*/}
-                    {/*            </Stack>*/}
-                    {/*        )}*/}
-
-                    {/*    </Stack>)}*/}
-                    <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
-                        {footprints2.map(footprint =>
-                            <Stack direction="column" spacing={'0.5rem'}>
-                                {/*{console.log(footprint)}*/}
-
-                                {/*{console.log(footprint["businessID"])}*/}
-                                <StyledLightCircleBoxForProfile>
-                                    <Avatar sx={{width: '95%', height: '95%'}}
-                                        // src={}
-                                    />
-                                </StyledLightCircleBoxForProfile>
-
-                                <Typography variant="h5" color="black">
-                                    {footprint['businessName']}
-                                </Typography>
+                        <SmallPurpleBox>
+                            <Stack direction="column" spacing="auto" justifyContent="center" margin="auto">
+                                <SupervisedUserCircleIcon
+                                    sx={{height: "2.5rem", width: "2.5rem", position: "start", fill: "white"}}/>
+                                <Stack direction="row" spacing={2} justifyContent="center" margin="auto">
+                                    {user.getCircles().map(circle =>
+                                        <Box key={circle}>
+                                            <StyledLightCircleBox>
+                                                <Typography variant="h4" color="black">
+                                                    {circle}
+                                                </Typography>
+                                            </StyledLightCircleBox>
+                                        </Box>
+                                    )}
+                                </Stack>
                             </Stack>
-                        )}
+                        </SmallPurpleBox>
 
+                        <SmallPurpleBox>
+                            <Stack direction="column" spacing="auto" justifyContent="center" margin="auto">
+                                <FootprintsIcon width="2.5rem" height="2.5rem" sx={{
+                                    fontSize: "3rem",
+                                    margin: "auto",
+                                    fill: "white",
+                                }}/>
+                                {/*{(user.get_user_footprints() === []) ? (<Typography variant="h4" color="black">No Footprints</Typography>) :*/}
+                                {/*    (<Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">*/}
+                                {/*        {user.get_user_footprints().map(footprint =>*/}
+                                {/*            <Stack direction="column" spacing={'0.5rem'}>*/}
+                                {/*                <StyledLightCircleBoxForProfile>*/}
+                                {/*                    <Avatar sx={{width: '95%', height: '95%'}}*/}
+                                {/*                        // src={}*/}
+                                {/*                    />*/}
+                                {/*                </StyledLightCircleBoxForProfile>*/}
+                                {/*                <Typography variant="h5" color="black">*/}
+                                {/*                    {footprint}*/}
+                                {/*                </Typography>*/}
+                                {/*            </Stack>*/}
+                                {/*        )}*/}
+
+                                {/*    </Stack>)}*/}
+                                <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
+                                    {footprints2.map(footprint =>
+                                        <Stack direction="column" spacing={'0.5rem'} key={footprint.businessID}>
+                                            {/*{console.log(footprint)}*/}
+
+                                            {/*{console.log(footprint["businessID"])}*/}
+                                            <StyledLightCircleBoxForProfile>
+                                                <Avatar sx={{width: '95%', height: '95%'}}
+                                                    // src={}
+                                                />
+                                            </StyledLightCircleBoxForProfile>
+
+                                            <Typography variant="h5" color="black">
+                                                {footprint['businessName']}
+                                            </Typography>
+                                        </Stack>
+                                    )}
+
+                                </Stack>
+
+
+                            </Stack>
+                        </SmallPurpleBox>
+                        {/*<SmallPurpleBox>*/}
+                        <GoToCard user={user}/>
+                        {/*</SmallPurpleBox>*/}
+                        {FeedItem(user, lstOfReviews)}
+                        {/*<FeedItem/>*/}
+                        {/*<FeedItemPage/>*/}
+                        {/*<StyledFeedItem user_name={review.user_name} profile_photo_url={review.profile_photo_url}*/}
+                        {/*                circles={review.circles} time={review.time}*/}
+                        {/*                business_name={review.business_name} business_photo_url={review.business_photo_url}*/}
+                        {/*                rating={review.rating} url_to_business={review.url_to_business}*/}
+                        {/*                review={review.review}*/}
+                        {/*                review_address={review.rating}/>*/}
                     </Stack>
-
-
-                </Stack>
-            </SmallPurpleBox>
-            {/*<SmallPurpleBox>*/}
-            <GoToCard user={user} />
-            {/*</SmallPurpleBox>*/}
-            {FeedItem(user, lstOfReviews)}
-            {/*<FeedItem/>*/}
-            {/*<FeedItemPage/>*/}
-            {/*<StyledFeedItem user_name={review.user_name} profile_photo_url={review.profile_photo_url}*/}
-            {/*                circles={review.circles} time={review.time}*/}
-            {/*                business_name={review.business_name} business_photo_url={review.business_photo_url}*/}
-            {/*                rating={review.rating} url_to_business={review.url_to_business}*/}
-            {/*                review={review.review}*/}
-            {/*                review_address={review.rating}/>*/}
-        </Stack>
                 </div>)
             }
-    </div>);
+        </div>);
 }
 
 
@@ -188,9 +191,9 @@ function showMyProfile(user) {
             >
                 <Avatar
                     src={user.getPic()}
-                    sx={{ width: 100, height: 100 }}
+                    sx={{width: 100, height: 100}}
                 />
-                <Box sx={{ display: 'flex', gap: '8px', marginTop: '8px' }}>
+                <Box sx={{display: 'flex', gap: '8px', marginTop: '8px'}}>
                     <Button variant="contained" color="secondary">
                         Edit Profile
                     </Button>
@@ -230,16 +233,13 @@ function ProfilePageComponent() {
         if (check_null !== true) {
             onAuthStateChanged(auth, (user_) => {
                 if (user_) {
-                    if (user === null)
-                    {
+                    if (user === null) {
                         getUserById(from).then((user__) => {
                             setUser(user__);
                         }).catch((error) => {
                             console.error(error);
                         });
-                    }
-                    else
-                    {
+                    } else {
                         user.getMyReviews().then((reviews) => {
                             setLstOfReviews(reviews);
                         }).catch((error) => {

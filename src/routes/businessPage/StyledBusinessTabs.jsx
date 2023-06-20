@@ -33,7 +33,7 @@ export default function StyledBusinessTabs({business}) {
                 <Typography variant="h6">Footprints List</Typography>
                 <List spacing={8}>
                     {business.footprints.map((footprint) =>
-                        <ListItem>
+                        <ListItem key={footprint.userID}>
                             id: {footprint.userID % 10}  time: {calculateTime(footprint.timestamp.toDate())}
                         </ListItem>)
                     }
@@ -58,7 +58,7 @@ export default function StyledBusinessTabs({business}) {
                 <List spacing={8}>
 
                 {business.reviews.map((review) =>
-                        <ListItem>
+                        <ListItem key={review.userID}>
                             userID: {review.userID % 10}, <br></br>
                             content: {review.content}, <br></br>
                             rating: {review.rating}, <br></br>

@@ -112,7 +112,7 @@ export function GoToCard(Gotoss) {
             />
             <Stack direction="row" spacing="2rem" justifyContent="flex-start" alignItems="center" display="flex" alignContent="center" margin="1rem" overflow={"scroll"} >
             {Gotos.map(goto =>
-                <Box height="11rem" sx={{bgcolor: "info.light", paddingTop: "1rem",
+                <Box key={goto.businessID} height="11rem" sx={{bgcolor: "info.light", paddingTop: "1rem",
                     paddingRight:2, paddingLeft:2,
                     borderRadius: 3, borderColor: "primary.main", border: 3}}>
                 <Stack direction="column" spcing={'auto'} justifyContent="center" alignItems="center">
