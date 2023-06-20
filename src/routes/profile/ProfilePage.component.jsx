@@ -15,7 +15,8 @@ import {
 } from "../../Components/Styled Components/OuterProfileComponents";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import {ReactComponent as FootprintsIcon} from "../../Components/Styled Components/Icons/footprints-svgrepo-com.svg";
-import StyledFeedItem from "../../Components/Styled Components/StyledFeedItem";
+// import StyledFeedItem from "../../Components/Styled Components/StyledFeedItem";
+import {StyledFeedItemProfile} from "../../Components/Styled Components/OuterProfileComponents";
 import FeedItemPage from "../../Components/Styled Components/FeedItemPage";
 
 
@@ -40,7 +41,7 @@ function FeedItem(user, lstOfReviews) {
         <Box>
             {lstOfReviews.map(review =>
                 <Box key={review.business_name}>
-                    <StyledFeedItem user_id={review.user_id}
+                    <StyledFeedItemProfile user_id={review.user_id}
                                     user_name={review.user_name} profile_photo_url={review.profile_photo_url}
                                     circles={review.circles}
                                     time={review.time}
@@ -49,7 +50,7 @@ function FeedItem(user, lstOfReviews) {
                                     rating={review.rating}
                                     url_to_business={review.url_to_business}
                                     review={review.review}
-                                    review_address={review.rating}></StyledFeedItem>
+                                    review_address={review.rating}></StyledFeedItemProfile>
                 </Box>
             )}
             {/*<StyledFeedItem*/}
@@ -152,7 +153,7 @@ function showUserProfile(user, lstOfReviews) {
                             </Stack>
                         </SmallPurpleBox>
                         {/*<SmallPurpleBox>*/}
-                        <GoToCard user={user}/>
+                        {/*<GoToCard user={user}/>*/}
                         {/*</SmallPurpleBox>*/}
                         {FeedItem(user, lstOfReviews)}
                         {/*<FeedItem/>*/}

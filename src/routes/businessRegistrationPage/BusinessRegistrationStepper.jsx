@@ -131,8 +131,12 @@ export default function BusinessStepper() {
                         stepProps.completed = false;
                     }
                     return (
-                        <Step key={step.label} {...stepProps}>
-                            <StepLabel {...labelProps}>{step.label}</StepLabel>
+                        <Step
+                            key={step.label}
+                            {...stepProps}>
+                            <StepLabel {...labelProps}>
+                                {/*{step.label}*/}
+                            </StepLabel>
                         </Step>
                     );
                 })}
