@@ -63,12 +63,18 @@ const SmallLogoBoxBottom = styled(Box)(({ theme })=> ({
     border:`0.5rem solid ${theme.palette.secondary.main}`,
     backgroundColor:'white',
     position: "absolute",
-    bottom : '-3.3rem',
+
+    // top: '50%',
+    left: '50%',
+    transform:' translate(-50%, -50%)',
+    // marginTop: '-100px',
+
+    bottom : '-6.5rem',
     display: 'flex',
     justifyContent: 'center',
-    margin: "auto",
-    // justifyItems: "center",
-    // justifySelf: "center",
+    // margin: "auto",
+    // // justifyItems: "center",
+    // // justifySelf: "center",
     alignItems: 'center',
     alignSelf: "center",
     [theme.breakpoints.up('xs')]:{
