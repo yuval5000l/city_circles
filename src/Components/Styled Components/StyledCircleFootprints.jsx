@@ -19,6 +19,7 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
 
     const [open, setOpen] = useState(false);
     const [chosenBusiness, setChosenBusiness] = useState("");
+    const [isDisabled, setIsDisabled] = useState(true)
 
     useEffect(() => {
         getBusinesses()
@@ -43,6 +44,21 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
         setOpen(false);
         closeSmallDialog();
     };
+
+    const IsBusinessSet = () => {
+        if (chosenBusiness !== "") {
+            setIsDisabled(false);
+            return false
+        }
+        if(chosenBusiness==="") {
+            setIsDisabled(true);
+            return true
+        }
+    }
+
+    // useEffect(() => {
+    //     IsBusinessSet();
+    // }, []);
 
     const HandleSend = async () => {
         if (chosenBusiness !== "")
@@ -99,12 +115,19 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
                                 inputValue={chosenBusiness}
                                 onInputChange={(event, newInputValue) => {
                                     setChosenBusiness(newInputValue);
+                                    if (newInputValue !== "") {
+                                        setIsDisabled(false);
+                                    }
+                                    if(newInputValue==="") {
+                                        setIsDisabled(true);
+                                    }
                                 }}
                                 id="combo-box-demo"
                                 options={lstBusiness}
                                 renderInput={(params) => <TextField
                                     {...params}
                                     label="Business"
+
                                 />}
                             />
                         </Stack>
@@ -114,7 +137,7 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
                             <DialogActions>
                                 <Button onClick={handleClose}
                                         sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Cancel</Button>
-                                <Button onClick={HandleSend} sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Send
+                                <Button disabled={isDisabled} onClick={HandleSend} sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Send
                                     Footprint</Button>
                             </DialogActions>
                         </Stack>

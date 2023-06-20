@@ -22,6 +22,7 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
     const [review, setReview] = useState("");
     const [rating, setRating] = useState(0);
     const [chosenBusiness, setChosenBusiness] = useState("");
+    const [isDisabled, setIsDisabled] = useState(true)
 
     useEffect(() => {
         getBusinesses()
@@ -110,6 +111,12 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
                                 inputValue={chosenBusiness}
                                 onInputChange={(event, newInputValue) => {
                                     setChosenBusiness(newInputValue);
+                                    if (newInputValue !== "" && review !== "" && rating !== 0) {
+                                        setIsDisabled(false);
+                                    }
+                                    if(newInputValue === "" || review === "" || rating === 0) {
+                                        setIsDisabled(true);
+                                    }
                                 }}
                                 id="combo-box-demo"
                                 options={lstBusiness}
@@ -125,6 +132,12 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
                                 value={rating}
                                 onChange={(event, newValue) => {
                                     setRating(newValue);
+                                    if (chosenBusiness !== "" && review !== "" && newValue !== null) {
+                                        setIsDisabled(false);
+                                    }
+                                    if(chosenBusiness === "" || review === "" || newValue === null) {
+                                        setIsDisabled(true);
+                                    }
                                 }}
                             />
                         </Stack>
@@ -140,14 +153,24 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
                                 fullWidth
                                 variant="standard"
                                 value={review}
-                                onChange={e => setReview(e.target.value)}
+                                onChange={e =>
+                                {
+                                    setReview(e.target.value);
+                                    if (chosenBusiness !== "" && e.target.value !== "" && rating !== 0) {
+                                        setIsDisabled(false);
+                                    }
+                                    if(chosenBusiness === "" || e.target.value === "" || rating === 0) {
+                                        setIsDisabled(true);
+                                    }
+                                }}
+
                             />
                         </Stack>
                         <Stack direction="row" spacing={2} justifyContent="center" alignItems="center">
                             <DialogActions>
                                 <Button onClick={handleClose}
                                         sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Cancel</Button>
-                                <Button onClick={HandleSend} sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Send
+                                <Button disabled={isDisabled} onClick={HandleSend} sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Send
                                     Review</Button>
                             </DialogActions>
                         </Stack>
