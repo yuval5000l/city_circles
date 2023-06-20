@@ -1,9 +1,11 @@
 import {useEffect, useState} from "react";
-import User from "../../BackEnd/Classes/UserClass";
+import User, {CompareUserTimeStamp} from "../../BackEnd/Classes/UserClass";
 import {auth} from "../../BackEnd/config/firebase";
 import Box from "@mui/material/Box";
 import StyledFeedItem from "./StyledFeedItem";
 import {onAuthStateChanged} from "firebase/auth";
+
+
 
 export default function FeedItemPage() {
 
@@ -20,14 +22,14 @@ export default function FeedItemPage() {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 User.getFriendsReviews(auth?.currentUser?.uid).then((lst) => {
-                    setListReviews(lst);
+                    // setListReviews(lst);
+                    setListReviews(lst.sort(CompareUserTimeStamp));
                 }).catch((error) => {
                     console.error(error);
                 });
             }
         });
     };
-
     return (<Box>
         {listReviews.map((review) =>
             <Box key={review.user_name+review.business_name+review.review}>
