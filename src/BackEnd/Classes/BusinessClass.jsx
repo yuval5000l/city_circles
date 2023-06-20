@@ -6,7 +6,7 @@ import {collection, doc, setDoc, getDocs, getDoc, updateDoc, arrayUnion} from "f
 
 export default class Business
 {
-    static async getAllBusinesses()
+    static async getAllBusinessesNamesLabels()
     {
         let lst = [];
         const querySnapshot = await getDocs(collection(db, "Business"));
@@ -17,7 +17,17 @@ export default class Business
         });
         return lst;
     }
-
+    static async getAllBusinesses()
+    {
+        let lst = [];
+        const querySnapshot = await getDocs(collection(db, "Business"));
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            // console.log(doc.id, " => ", doc.data());
+            lst.push(doc.data());
+        });
+        return lst;
+    }
     static async makeBusiness(name, type, address, profilePic, openingHours,
                                      contact, social = [],
                                      pictures = [],rating = [0,0], last_visited =[], reviews = [],

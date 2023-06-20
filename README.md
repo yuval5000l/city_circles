@@ -2,7 +2,7 @@
 
 
 - [ ] To make sure we add photo good
-- [ ] Add relevant circles in circle page
+- [X] Add relevant circles in circle page
 - [ ] Add search functionality
 
 

@@ -30,7 +30,7 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
 
     const [lstBusiness, setLstBusiness] = useState([]);
     const getBusinesses = ()=> {
-        Business.getAllBusinesses().then((lst) => {
+        Business.getAllBusinessesNamesLabels().then((lst) => {
             setLstBusiness(lst);
             // console.log(lstBusiness);
         }).catch((error) => {

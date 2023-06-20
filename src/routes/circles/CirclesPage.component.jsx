@@ -10,6 +10,7 @@ import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import {getUserById} from "../../BackEnd/Classes/UserClass";
 import {useOutletContext} from "react-router-dom";
+import Business from "../../BackEnd/Classes/BusinessClass";
 
 
 
@@ -18,20 +19,34 @@ const CirclesPageComponent = () => {
     const [searchRes, setSearchRes] = useOutletContext();
 
     const [user, setUser] = useState(null);
-        useEffect(() => {
-            getUser();
-        }, [])
-        const getUser = () => {
-            onAuthStateChanged(auth, (usery) => {
-                if (usery) {
-                    getUserById(auth?.currentUser?.uid).then((useryy) => {
-                        setUser(useryy);
-                    }).catch((error) => {
-                        console.error(error);
-                    });
-                }
-            });
-        };
+
+    const [lstBusiness, setLstBusiness] = useState([]);
+
+    useEffect(() => {
+        getUser();
+        getBusinesses();
+    }, []);
+
+    const getBusinesses = ()=> {
+        Business.getAllBusinesses().then((lst) => {
+            setLstBusiness(lst);
+            // console.log(lstBusiness);
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
+    const getUser = () => {
+        onAuthStateChanged(auth, (usery) => {
+            if (usery) {
+                getUserById(auth?.currentUser?.uid).then((useryy) => {
+                    setUser(useryy);
+                }).catch((error) => {
+                    console.error(error);
+                });
+            }
+        });
+    };
+    // console.log(lstBusiness);
         // const position = [31.777587, 35.215094]; //[this.state.location.lat, this.state.location.lng];
         return (
             <>
@@ -48,9 +63,20 @@ const CirclesPageComponent = () => {
                         <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem" >
                             <StyledDropdownMenuSortBy/>
                             <StyledDropdownMenuFilter/>
+
                         </Stack>
+
                     </Stack>
+
                 </Box>
+                {(lstBusiness === []) ? (<></>) : (lstBusiness.filter(business => (business.name.toLowerCase()).
+                includes(searchRes.toLowerCase())).
+                map(filteredBusiness =>
+                    (
+                        <li key={filteredBusiness.name}>
+                            {filteredBusiness.name}
+                        </li>
+                    )))}
             </>
         );
 
