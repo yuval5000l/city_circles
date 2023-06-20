@@ -104,11 +104,18 @@ export function GoToCard(Gotoss) {
     return (
         <MediumPurpleBox>
             <Stack direction="column" justifyContent="center" margin="auto" marginBottom={0}>
-            <LockOutlinedIcon sx={{height: "2.5rem", width: "2.5rem", position: "start", fill: "white"}}/>
+            <LockOutlinedIcon
+                sx={{height: "2.5rem",
+                    width: "2.5rem",
+                    position: "start",
+                    fill: "white"}}
+            />
             <Stack direction="row" spacing="2rem" justifyContent="flex-start" alignItems="center" display="flex" alignContent="center" margin="1rem" overflow={"scroll"} >
             {Gotos.map(goto =>
-                <Box height="100%" sx={{bgcolor: "info.light", paddingTop: "1rem",paddingRight:2, paddingLeft:2, borderRadius: 3, borderColor: "primary.main", border: 3}}>
-                <Stack direction="column" spcing="auto" justifyContent="center" alignItems="center">
+                <Box height="11rem" sx={{bgcolor: "info.light", paddingTop: "1rem",
+                    paddingRight:2, paddingLeft:2,
+                    borderRadius: 3, borderColor: "primary.main", border: 3}}>
+                <Stack direction="column" spcing={'auto'} justifyContent="center" alignItems="center">
                     <Avatar src="B"/>
                     <Typography variant="h4" sx={{color: "black"}}>
                         {goto.businessID}
@@ -120,14 +127,28 @@ export function GoToCard(Gotoss) {
                         address
                     </Typography>
                     {/*{BoxWithLock()}*/}
-                    <Box sx={{position: "relative",bgcolor: "white", bottom:0, width: "100%", padding: "1rem", borderBottomLeftRadius:25, borderBottomRightRadius:25, justifyContent: 'center',
+                    <Box sx={{position: "relative",bgcolor: "white", bottom:0,
+                        marginTop: "1rem",
+                        width: "100%",
+                        // padding: "0.4rem",
+                        paddingRight:2, paddingLeft:2,
+                        borderBottomLeftRadius:25, borderBottomRightRadius:25, justifyContent: 'center',
                         alignItems: 'center',
-                        alignSelf: "center", marginTop: "1rem"}}>
+                        alignSelf: "center",
+                        height: "3.6rem",
+                        // marginTop: "1rem",
+                        // margin: "1rem"
+                    }}>
                     <LockOutlinedIcon fill="white"
                     sx={{
                         // position
                         position: "absolute",
-                        top : '-1rem',
+                        top : '-0.05rem',
+                        // bottom : '-6.5rem',
+                        // display: 'flex',
+                        left: '50%',
+                        transform:' translate(-50%, -50%)',
+                        justifyContent: 'center',
                         margin: "auto",
                         display: 'flex',
                         textAlign: "center",
