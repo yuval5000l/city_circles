@@ -172,6 +172,7 @@ export default class User
         else{
             console.log("Ain't got no friends!");
         }
+
         return listOfReviews;
     }
     static feedItemConverter(user, review, business)
@@ -286,3 +287,7 @@ export const LogIn = async({email}, {password}) => {
     return true;
 };
 
+export const CompareUserTimeStamp = (user_a, user_b) =>
+{
+    return user_b.time - user_a.time;
+}
