@@ -3,8 +3,9 @@
 
 - [ ] To make sure we add photo good
 - [X] Add relevant circles in circle page
-- [ ] Add search functionality
-
+- [X] Add search functionality
+- [ ] Understand how to filter
+- [ ] Add friends data
 
 
 

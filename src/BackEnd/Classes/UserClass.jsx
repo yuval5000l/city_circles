@@ -60,7 +60,7 @@ export default class User
     }
 
     getUserReviews() {
-        return this.reviews;
+        return this.reviews; // [{businessID: "", businessName: "", businessPhoto: "", content: "", rating: "", timestamp: timestamp Object},...]
     }
 
     async addBusinessReview(businessID, businessName, Photo, reviewContent, rating) {
@@ -124,6 +124,28 @@ export default class User
         const user = await getUserById(id);
         return user?.friends;
     }
+
+    async getMyReviews()
+    {
+        let listOfReviews = [];
+        for (const review of this.reviews)
+        {
+            const business = await getBusinessByName(review.businessID);
+            listOfReviews.push(this.feedItemConverter(review, business));
+        }
+        return listOfReviews;
+    }
+
+    feedItemConverter(review, business)
+    {
+        return {user_id: this.userID_, user_name: this.name_, profile_photo_url: this.profile_pic,
+            circles: this.circles, time: review.timestamp.toDate(),
+            business_name: business.name, business_photo_url: business.profilePic,
+            rating: (business.rating[0]/ business.rating[1]),
+            url_to_business: business.id, review:review.content,
+            review_address: review.content}
+    }
+
     static async getFriendsReviews(userID)
     {
         const friends_id = await User.getUserFriendsById(userID);

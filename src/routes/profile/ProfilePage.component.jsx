@@ -2,7 +2,7 @@ import {useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
-import {getUserById} from "../../BackEnd/Classes/UserClass";
+import User, {getUserById} from "../../BackEnd/Classes/UserClass";
 import {Box, Button, Stack, Typography} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import theme from "../../Theme/Theme";
@@ -19,30 +19,60 @@ import FeedItemPage from "../../Components/Styled Components/FeedItemPage";
 
 
 
-function FeedItem(user) {
-    const reviews = user.getUserReviews()
+function FeedItem(user, lstOfReviews) {
+    // const [lstOfReviews, setLstOfReviews] = useState([]);
+
+    // useEffect(() => {
+    //     onAuthStateChanged(auth, (user_) => {
+    //         if (user_) {
+    //             user.getMyReviews().then((reviews) => {
+    //                 setLstOfReviews(reviews);
+    //             }).catch((error) => {
+    //                 console.error(error);
+    //             });
+    //         }
+    //     });
+    // }, []);
+    if (lstOfReviews === [])
+    {
+        return (<></>);
+    }
     return (
         <Box>
-        <StyledFeedItem
-            user_id ={user.getUserId()}
-            user_name={user.getUserName()} profile_photo_url={user.getPic()}
-            circles={user.getCircles()}
-            time={reviews[0]["timestamp"].toDate()}
-            business_name={reviews[0]["businessID"]}
-            // business_photo_url={review.business_photo_url}
-            rating={reviews[0]["rating"]}
-            // url_to_business={review.url_to_business}
-            review={reviews[0]["content"]}
-            // review_address={review.rating}
-        >
-        </StyledFeedItem>
+            {lstOfReviews.map(review =>
+
+                <StyledFeedItem user_id ={review.user_id}
+                                user_name={review.user_name} profile_photo_url={review.profile_photo_url}
+                                circles={review.circles}
+                                time={review.time}
+                                business_name={review.business_name}
+                                business_photo_url={review.business_photo_url}
+                                rating={review.rating}
+                                url_to_business={review.url_to_business}
+                                review={review.review}
+                                review_address={review.rating}></StyledFeedItem>
+            )}
+        {/*<StyledFeedItem*/}
+        {/*    user_id ={user.getUserId()}*/}
+        {/*    user_name={user.getUserName()} profile_photo_url={user.getPic()}*/}
+        {/*    circles={user.getCircles()}*/}
+        {/*    time={reviews[0]["timestamp"].toDate()}*/}
+        {/*    business_name={reviews[0]["businessID"]}*/}
+        {/*    // business_photo_url={review.business_photo_url}*/}
+        {/*    rating={reviews[0]["rating"]}*/}
+        {/*    // url_to_business={review.url_to_business}*/}
+        {/*    review={reviews[0]["content"]}*/}
+        {/*    // review_address={review.rating}*/}
+        {/*>*/}
+        {/*</StyledFeedItem>*/}
     </Box>)
 }
 
-function showUserProfile(user) {
-    // console.log(user.getFootprints())
-    const footprints = [{businessID: 'business 1', rating: 5},{businessID: 'business 2', rating: 3}, {businessID: 'business 3', rating: 4}, {businessID: 'business 4'}]
+function showUserProfile(user, lstOfReviews) {
+    const footprints2 = (user !== null) ? (user.getFootprints()) : ([]); // [{businessID: "", businessName: "", businessPhoto: "", timestamp: timestamp},..]
+    // const footprints = [{businessName: 'business 1', rating: 5},{businessName: 'business 2', rating: 3}, {businessName: 'business 3', rating: 4}, {businessName: 'business 4'}]
     // const userCircles = ['school', 'hobby', 'neighborhood']
+
     return(
 
         <div>
@@ -96,7 +126,7 @@ function showUserProfile(user) {
 
                     {/*    </Stack>)}*/}
                     <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
-                        {footprints.map(footprint =>
+                        {footprints2.map(footprint =>
                             <Stack direction="column" spacing={'0.5rem'}>
                                 {/*{console.log(footprint)}*/}
 
@@ -108,7 +138,7 @@ function showUserProfile(user) {
                                 </StyledLightCircleBoxForProfile>
 
                                 <Typography variant="h5" color="black">
-                                    {footprint['businessID']}
+                                    {footprint['businessName']}
                                 </Typography>
                             </Stack>
                         )}
@@ -121,7 +151,7 @@ function showUserProfile(user) {
             {/*<SmallPurpleBox>*/}
             <GoToCard user={user} />
             {/*</SmallPurpleBox>*/}
-            {FeedItem(user)}
+            {FeedItem(user, lstOfReviews)}
             {/*<FeedItem/>*/}
             {/*<FeedItemPage/>*/}
             {/*<StyledFeedItem user_name={review.user_name} profile_photo_url={review.profile_photo_url}*/}
@@ -194,20 +224,33 @@ function ProfilePageComponent() {
     const check_null = location.state === null;
     let {from} = (check_null === true) ? null : location.state;
     let [user, setUser] = useState(null);
+    const [lstOfReviews, setLstOfReviews] = useState([]);
+
     useEffect(() => {
         if (check_null !== true) {
             onAuthStateChanged(auth, (user_) => {
                 if (user_) {
-                    getUserById(from).then((user__) => {
-                        setUser(user__);
-                    }).catch((error) => {
-                        console.error(error);
-                    });
+                    if (user === null)
+                    {
+                        getUserById(from).then((user__) => {
+                            setUser(user__);
+                        }).catch((error) => {
+                            console.error(error);
+                        });
+                    }
+                    else
+                    {
+                        user.getMyReviews().then((reviews) => {
+                            setLstOfReviews(reviews);
+                        }).catch((error) => {
+                            console.error(error);
+                        });
+                    }
                 }
             });
         }
 
-    }, []);
+    }, [user]);
     return (
         <div>
             {
@@ -219,7 +262,7 @@ function ProfilePageComponent() {
                             {
                                 (user && (user?.getUserId() === auth?.currentUser?.uid)) ?
                                     (<div>{showMyProfile(user)}</div>) :
-                                    (<div>{showUserProfile(user)}</div>)
+                                    (<div>{showUserProfile(user, lstOfReviews)}</div>)
                             }
 
                         </div>)

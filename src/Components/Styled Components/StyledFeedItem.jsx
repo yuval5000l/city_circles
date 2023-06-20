@@ -40,7 +40,7 @@ import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 export default function StyledFeedItem({user_id, user_name="name", profile_photo_url="",
                                        circles = [],
                                            time= new timestamp(),
-                                       business_name="name", business_photo_url="none",
+                                       business_name="name", business_photo_url="",
                                        rating=5, url_to_business="", review="",
                                        review_address=""})
 {
@@ -85,7 +85,11 @@ export default function StyledFeedItem({user_id, user_name="name", profile_photo
                             <StyledRating value={rating}/>
                         </Stack>
                         <Stack direction = "row" spacing={1} justifyContent="flex-start" alignItems="center">
-                            <StyledBusinessFeed/>
+                            {(business_photo_url==="") ?
+                                (<StyledBusinessFeed/>) :
+                                (<StyledBusinessFeed src={business_photo_url}/>)
+                            }
+
                             <Stack direction = "column" justifyContent="flex-start" spacing={1}>
                                 <Box>
                                     <StyledTypographyReview>
