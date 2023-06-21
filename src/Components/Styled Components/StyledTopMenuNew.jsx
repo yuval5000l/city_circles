@@ -5,13 +5,16 @@ import StyledHamburgerButtonWithCanvas from "./StyledHamburgerButtonWithCanvas";
 import Box from "@mui/material/Box";
 import StyledLogo from "./StyledLogo";
 import {useState} from "react";
+import {Link} from "react-router-dom";
 
-function StyledTopMenuNew({setSearch}) {
-    const currentURL = window.location.href;
+function StyledTopMenuNew({setSearch, setValue}) {
 
     const SendToSearch = () => {
+        let currentURL = window.location.href;
         if (currentURL !== "http://localhost:3000/CirclesPageComponent") {
             window.location.href = "http://localhost:3000/CirclesPageComponent";
+            setValue(1);
+
         }
 
     }
@@ -26,7 +29,7 @@ function StyledTopMenuNew({setSearch}) {
                     <StyledHamburgerButtonWithCanvas/>
                 </Box>
                 <Box sx={{display: "flex"}}>
-
+                {/*<Link to={"/CirclesPageComponent"}>*/}
                     <StyledSearchBar
                         // disabled
                         autoFocus={true}
@@ -36,10 +39,13 @@ function StyledTopMenuNew({setSearch}) {
                         // value={searchContent}
                         placeholder='search business..'
                         onClick={SendToSearch}
-                        onChange={e => setSearch(e.target.value)}
+                        onChange={(e) => {
+                            setSearch(e.target.value)
+                        }}
                         // onChange={onSearchChange}
-                        href={"/CirclesPageComponent"}
+                        // href={"/CirclesPageComponent"}
                     />
+                {/*</Link>*/}
                 </Box>
                 <StyledLogo/>
             </Stack>

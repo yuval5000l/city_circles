@@ -1,5 +1,5 @@
 import {StyledBottomNavigation, StyledBottomNavigationAction} from "./styledComponents";
-import {Link} from "react-router-dom";
+import {Link, useLocation} from "react-router-dom";
 import HomeIcon from "@mui/icons-material/Home";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import GroupIcon from '@mui/icons-material/Group';
@@ -8,14 +8,19 @@ import StyledBottomNavigationPlus from "./StyledBottomNavigationPlus";
 import {useState} from "react";
 import {auth} from "../../BackEnd/config/firebase";
 
-export default function StyledBottomNavigationBar() {
+export default function StyledBottomNavigationBar({value1, setValue1}) {
+    const location = useLocation();
+    // console.log(value1);
+    // console.log(setValue1);
+    // console.log(location.pathname);
+    // console.log(location.pathname === '/CirclesPageComponent');
     const [value, setValue] = useState(0);
     return (
         <StyledBottomNavigation
             showLabels
-            value={value}
+            value={value1}
             onChange={(event, newValue) => {
-                setValue(newValue);
+                setValue1(newValue);
             }}
         >
             <StyledBottomNavigationAction component={Link} to="/" label="Home" icon={<HomeIcon
@@ -25,6 +30,7 @@ export default function StyledBottomNavigationBar() {
                         sm: "5rem"
                     }
                 }}
+                selected={location.pathname === '/'}
             />}
             />
             <StyledBottomNavigationAction component={Link} to="/CirclesPageComponent" label="circles"
@@ -36,6 +42,8 @@ export default function StyledBottomNavigationBar() {
                                                   }
                                               }}
                                           />}
+                                          selected={location.pathname === '/CirclesPageComponent'}
+
             />
             <StyledBottomNavigationPlus/>
             <StyledBottomNavigationAction component={Link} to="/FriendsPageComponent" label="friends" icon={<GroupIcon
@@ -45,6 +53,7 @@ export default function StyledBottomNavigationBar() {
                         sm: "5rem"
                     }
                 }}
+                selected={location.pathname === '/FriendsPageComponent'}
             />}
             />
             <StyledBottomNavigationAction component={Link} to="/ProfilePageComponent"
@@ -56,6 +65,8 @@ export default function StyledBottomNavigationBar() {
                         sm: "5rem"
                     }
                 }}
+                selected={location.pathname === '/ProfilePageComponent'}
+
             />}
             />
         </StyledBottomNavigation>
