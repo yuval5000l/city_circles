@@ -12,7 +12,7 @@ function TabPanel({ children, value, index }) {
             id={`tabpanel-${index}`}
             aria-labelledby={`tab-${index}`}
         >
-            {value === index && <Box p={3}>{children}</Box>}
+            {value === index && <Box>{children}</Box>}
         </div>
     );
 }
@@ -31,7 +31,7 @@ export default function StyledBusinessTabs({business}) {
             </Tabs>
 
             <TabPanel value={value} index={0}>
-                <List spacing={8}>
+                <List>
                     {business.footprints.map((footprint) =>
                         <StyledFootprintForUser
                             businessPhoto= {business.getProfilePic()}
@@ -39,7 +39,6 @@ export default function StyledBusinessTabs({business}) {
                             timestamp={footprint.timestamp.toDate()}
                             BigName={footprint.userName}
                             key={footprint.userID}>
-                            {/*id: {footprint.userID % 10}  time: {calculateTime(footprint.timestamp.toDate())}*/}
                         </StyledFootprintForUser>)
                     }
                 </List>
