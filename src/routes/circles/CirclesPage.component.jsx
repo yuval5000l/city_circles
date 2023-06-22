@@ -58,6 +58,7 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod})
             (
                 <li key={filteredBusiness.name}>
                     {filteredBusiness.name}
+                    <StyledBusinessFeedItem/>
                 </li>
             )))}
         </>

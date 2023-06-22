@@ -3,26 +3,22 @@ import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
 import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
-// import BusinessTypesSelection from "./BusinessTypeSelect/BusinessTypeSelect.components";
-// import BasicTextFields from "../TextField.components";
-// import RowRadioButtonsGroup from "./RadioButton.component";
 import {Stack} from "@mui/material";
 import {useState} from "react";
 import {addDoc, collection} from "firebase/firestore";
+import Business from "../../../BackEnd/Classes/BusinessClass";
 import {auth, db} from "../../../BackEnd/config/firebase";
-// import {ref, uploadBytes} from "firebase/storage";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import FormControl from "@mui/material/FormControl";
-import FormLabel from "@mui/material/FormLabel";
 import RadioGroup from "@mui/material/RadioGroup";
 import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { SnackbarProvider, useSnackbar } from 'notistack';
+import { useSnackbar } from 'notistack';
 
 
 
@@ -230,7 +226,7 @@ export default function FirstPageBusinessRegistration({onNext}) {
                     <Typography variant="h4">Business owner facebook profile link:</Typography>
                     <TextField onChange={(e) => setNewPreviewUrl(e.target.value)}/>
                 </Stack>
-                <Button onClick={onSubmitBusiness}> Sign In!</Button>
+                {/*<Button onClick={onSubmitBusiness}> Sign In!</Button>*/}
                 <Button onClick={handleOnNext}>
                     {'Next'}
                 </Button>

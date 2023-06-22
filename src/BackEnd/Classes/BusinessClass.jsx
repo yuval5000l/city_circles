@@ -44,16 +44,20 @@ export default class Business {
     static async makeBusiness(name, type, address, profilePic, openingHours,
                               contact, social = [],
                               pictures = [], rating = [0, 0], last_visited = [], reviews = [],
-                              footprints = [], circlesFootprint = {}, circlesReviews = {}) {
+                              footprints = [], circlesFootprint = new Map(), circlesReviews = new Map()) {
         let coord = await Business.handleGeocode(address);
         if (coord === undefined) {
             coord = [0, 0];
         }
-        if (circlesFootprint === {}) {
+        // console.log(circlesFootprint instanceof Object);
+        if (circlesFootprint.size === 0) {
             User.ListOfCircles.ForEach(b_type => circlesFootprint[b_type] = 0);
+            console.log("After adding: ", circlesFootprint);
         }
-        if (circlesReviews === {}) {
+        if (circlesReviews.size === 0) {
             User.ListOfCircles.ForEach(b_type => circlesReviews[b_type] = 0);
+            console.log("After adding: ", circlesFootprint);
+
         }
         let new_business = new Business(name, type, address, coord, openingHours[0],
             contact, social, profilePic,
