@@ -18,8 +18,8 @@ const StyledDropdownMenuSortBy = ({setSortMethod}) => {
     };
     const clearFilter =() =>{
         setIsClicked((false));
-        setButtonText("Filter By..");
-        setAnchorEl(null);
+        setButtonText("Sort By..")
+        setAnchorEl(null)
         setSortMethod("");
     }
     const handleClick = (event) => {
@@ -64,14 +64,10 @@ const StyledDropdownMenuSortBy = ({setSortMethod}) => {
                         <StyledCirclesSearchItem name="Distance" onClick={() => handleOptionClick('Distance')}/>
                     </MenuItem>
                 </Stack>
-                <StyledButtonGray onClick ={clearFilter}>Clear Filter</StyledButtonGray>
+                <StyledButtonGray onClick ={clearFilter}>Clear Sort</StyledButtonGray>
             </StyledMenu>
         </Box>
     );
-
-
-
-
 };
 
 export default StyledDropdownMenuSortBy;

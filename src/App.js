@@ -14,7 +14,6 @@ import SignUpPage from "./routes/logIn&signUp/SignUpPage";
 import BusinessRegistrationStepper from "./routes/businessRegistrationPage/BusinessRegistrationStepper";
 import BusinessPage from "./routes/businessPage/BusinessPage.component";
 import OuterPerspectiveUserProfileComponent from "./routes/profileOuterPerspective/profileOuterPerspective";
-
 function App() {
     return (
         <div className="App">

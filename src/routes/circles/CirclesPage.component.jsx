@@ -11,6 +11,7 @@ import {auth} from "../../BackEnd/config/firebase";
 import {getUserById} from "../../BackEnd/Classes/UserClass";
 import {useOutletContext} from "react-router-dom";
 import Business from "../../BackEnd/Classes/BusinessClass";
+import StyledBusinessFeedItem from "../../Components/Styled Components/StyledBusinessFeedItem";
 
 
 
@@ -137,8 +138,8 @@ const CirclesPageComponent = () => {
                         </Stack>
 
                     </Stack>
-
                 </Box>
+                {/*<StyledBusinessFeedItem/>*/}
                 <BigFilter lstBusiness={lstBusiness} circles={circlesFilter}
                            searchRes={searchRes} businessType={filterTypeBusiness} sortMethod={sortMethod}/>
                 {/*{(lstBusiness === []) ? (<></>) : (lstBusiness.filter(business => (business.name.toLowerCase()).*/}

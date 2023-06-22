@@ -27,7 +27,7 @@ const StyledGrayButtonFullReview = ({content}) => {
                     boxShadow: clicked ? 'inset 0 0 10px rgba(0, 0, 0, 0.5)' : '0 2px 5px rgba(0, 0, 0, 0.3)',
                 }}
             >
-                read full review
+                full review
             </StyledButtonGray>
             <Dialog open={openDialog} onClose={handleClose}>
                 <DialogContent sx={{

@@ -1,6 +1,6 @@
-import React, {useState} from 'react';
-import {Grid, MenuItem} from '@mui/material';
-import {StyledButtonGray, StyledMenu} from "./styledComponents";
+import React, {useEffect, useRef, useState} from 'react';
+import {Grid, Menu, MenuItem, Stack} from '@mui/material';
+import {StyledButtonGray, StyledButtonGreen, StyledMenu} from "./styledComponents";
 import theme from "../../Theme/Theme";
 import Box from "@mui/material/Box";
 
@@ -20,7 +20,7 @@ const StyledDropdownMenuFilter = ({setFilterMethod}) => {
             setIsClicked((prevClicked) => !prevClicked);
         };
 
-        const clearFilter =() =>{
+        const clearFilter = () => {
             setIsClicked((false));
             setButtonText("Filter By..")
             setAnchorEl(null)
@@ -28,7 +28,7 @@ const StyledDropdownMenuFilter = ({setFilterMethod}) => {
         }
         const handleClose = () => {
             setAnchorEl(null);
-            if (buttonText === "Filter By.."){
+            if (buttonText === "Filter By..") {
                 setIsClicked((false));
             }
         };
@@ -53,36 +53,55 @@ const StyledDropdownMenuFilter = ({setFilterMethod}) => {
                     anchorEl={anchorEl}
                     open={Boolean(anchorEl)}
                     onClose={handleClose}>
-                    <Grid container spacing={1} alignItems="center" justifyContent="center">
-                        <MenuItem onClick={() => handleOptionClick('Footprints')}>
-                            option 19
+                    <Grid container alignItems="center" justifyContent="center" width="100%">
+                        <MenuItem onClick={() => handleOptionClick('Consulting')}>
+                            <StyledButtonGreen>
+                                Consulting
+                            </StyledButtonGreen>
                         </MenuItem>
-                        <MenuItem onClick={() => handleOptionClick('2')}>
-                            option 2
+                        <MenuItem onClick={() => handleOptionClick('Health & Wellness')}>
+                            <StyledButtonGreen>
+                                Health & Wellness
+                            </StyledButtonGreen>
                         </MenuItem>
-                        <MenuItem onClick={() => handleOptionClick('3')}>
-                            option 3
+                        <MenuItem onClick={() => handleOptionClick('Lifestyle & Home')}>
+                            <StyledButtonGreen>
+                                Lifestyle & Home
+                            </StyledButtonGreen>
                         </MenuItem>
-                        <MenuItem onClick={() => handleOptionClick('4')}>
-                            option 4
+                        <MenuItem onClick={() => handleOptionClick('Outdoors')}>
+                            <StyledButtonGreen>
+                                Outdoors
+                            </StyledButtonGreen>
                         </MenuItem>
-                        <MenuItem onClick={() => handleOptionClick('5')}>
-                            option 5
+                        <MenuItem onClick={() => handleOptionClick('Music')}>
+                            <StyledButtonGreen>
+                                Music
+                            </StyledButtonGreen>
                         </MenuItem>
-                        <MenuItem onClick={() => handleOptionClick('Distance')}>
-                            option 2
+                        <MenuItem onClick={() => handleOptionClick('Handmade Crafts')}>
+                            <StyledButtonGreen>
+                                Handmade Crafts
+                            </StyledButtonGreen>
                         </MenuItem>
-                        <MenuItem onClick={() => handleOptionClick('Distance')}>
-                            option 2
+                        <MenuItem onClick={() => handleOptionClick('Food & Drinks')}>
+                            <StyledButtonGreen>
+                                Food & Drinks
+                            </StyledButtonGreen>
                         </MenuItem>
-                        <MenuItem onClick={() => handleOptionClick('Distance')}>
-                            option 2
+                        <MenuItem onClick={() => handleOptionClick('Creative Services')}>
+                            <StyledButtonGreen>
+                                Creative Services
+                            </StyledButtonGreen>
                         </MenuItem>
-                        <MenuItem onClick={() => handleOptionClick('Distance')}>
-                            option 2
+
+                        <MenuItem onClick={() => handleOptionClick('Technology Solutions')}>
+                            <StyledButtonGreen>
+                                Technology Solutions
+                            </StyledButtonGreen>
                         </MenuItem>
                     </Grid>
-                    <StyledButtonGray onClick ={clearFilter}>Clear Filter</StyledButtonGray>
+                    <StyledButtonGray onClick={clearFilter}>Clear Filter</StyledButtonGray>
                 </StyledMenu>
             </Box>
         )
