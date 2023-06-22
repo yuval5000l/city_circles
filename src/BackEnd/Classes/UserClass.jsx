@@ -209,7 +209,7 @@ User.ListOfCirclesPersonalities = [
     "INFP",
     "ENFJ"
 ]
-User.ListOfCircles = new Array(User.ListOfCirclesNeighborhoods + User.ListOfCirclesSchools + User.ListOfCirclesPersonalities);
+User.ListOfCircles = [...User.ListOfCirclesNeighborhoods , ...User.ListOfCirclesSchools, ...User.ListOfCirclesPersonalities];
 
 export async function getUserById(id) {
     if (id === null || id === undefined) {

@@ -51,13 +51,14 @@ export default class Business {
         }
         // console.log(circlesFootprint instanceof Object);
         if (circlesFootprint.size === 0) {
-            User.ListOfCircles.ForEach(b_type => circlesFootprint[b_type] = 0);
-            console.log("After adding: ", circlesFootprint);
+            circlesFootprint = {};
+            // console.log(User.ListOfCircles);
+            User.ListOfCircles.forEach(b_type => circlesFootprint[b_type] = 0);
+
         }
         if (circlesReviews.size === 0) {
-            User.ListOfCircles.ForEach(b_type => circlesReviews[b_type] = 0);
-            console.log("After adding: ", circlesFootprint);
-
+            circlesReviews = {}
+            User.ListOfCircles.forEach(b_type => circlesReviews[b_type] = 0);
         }
         let new_business = new Business(name, type, address, coord, openingHours[0],
             contact, social, profilePic,
@@ -218,6 +219,7 @@ Business.ListOfTypes = ["Creative Services" , "Food & Drinks", "Music", "Outdoor
 
 const businessConverter = {
     toFirestore(business) {
+        console.log(business);
         return {
             name: business.name,
             type: business.type,
