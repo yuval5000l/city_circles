@@ -120,6 +120,7 @@ const CirclesPageComponent = () => {
         }
         return inner;
     }
+    // console.log(lstBusiness[0].getReviews()[0].rating);
         // const position = [31.777587, 35.215094]; //[this.state.location.lat, this.state.location.lng];
         return (
             <>
@@ -141,8 +142,14 @@ const CirclesPageComponent = () => {
                 </Box>
                 <BigFilter lstBusiness={lstBusiness} circles={circlesFilter}
                            searchRes={searchRes} businessType={filterTypeBusiness} sortMethod={sortMethod}/>
+                {(lstBusiness !== undefined && lstBusiness[0] !== undefined) ? (<StyledReviewForUser BusinessName={lstBusiness[0].getReviews()[0].userName}
+                                                                     review={lstBusiness[0].getReviews()[0].content}
+                                                                     businessPhoto={lstBusiness[0].getProfilePic()}
+                                                                     userPhoto={lstBusiness[0].getReviews()[0].userPhoto}
+                                                                     rating={lstBusiness[0].getReviews()[0].rating}/>)
+                :(<></>)}
                 {/*<StyledFootprintForUser/>*/}
-                {/*<StyledReviewForUser/>*/}
+
                 {/*<StyledBusinessFeedItem/>*/}
 
 
