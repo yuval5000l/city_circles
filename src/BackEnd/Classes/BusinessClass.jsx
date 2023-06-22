@@ -161,6 +161,7 @@ export default class Business {
         return [0, 0];
     };
 
+    getName(){ return this.name;}
     getRating() {
         return (this.rating !== 0) ? this.rating[0] / this.rating[1] : this.rating[1];
     }
@@ -182,7 +183,14 @@ export default class Business {
         // this.circlesFootprints.forEach(circle => {combined_dictionary[circle] = this.circlesFootprints[circle] + this.circlesReviews[circle]});
         return combined_dictionary; //{"HUJI":5, "YoYo": 0, "RockNRoll": 0};
     }
-
+    getReviews()
+    {
+        return this.reviews;
+    }
+    getFootprints()
+    {
+        return this.footprints;
+    }
     getSumFootprintsAndReviews(ListOfCirclesToInclude)
     {
         let SumFootprintsAndReviews = 0;

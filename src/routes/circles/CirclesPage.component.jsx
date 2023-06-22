@@ -59,8 +59,7 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod})
             {(searchLayerFilter === []) ? (<></>) : (searchLayerFilter.map(filteredBusiness =>
             (
                 <li key={filteredBusiness.name}>
-                    {filteredBusiness.name}
-                    <StyledBusinessFeedItem/>
+                    <StyledBusinessFeedItem business={filteredBusiness}/>
                 </li>
             )))}
         </>
@@ -140,19 +139,13 @@ const CirclesPageComponent = () => {
                         </Stack>
                     </Stack>
                 </Box>
-                {/*<StyledBusinessFeedItem/>*/}
                 <BigFilter lstBusiness={lstBusiness} circles={circlesFilter}
                            searchRes={searchRes} businessType={filterTypeBusiness} sortMethod={sortMethod}/>
-                <StyledFootprintForUser/>
-                <StyledReviewForUser/>
-                <StyledBusinessFeedItem/>
-                {/*{(lstBusiness === []) ? (<></>) : (lstBusiness.filter(business => (business.name.toLowerCase()).*/}
-                {/*includes(searchRes.toLowerCase())).map(filteredBusiness =>*/}
-                {/*    (*/}
-                {/*        <li key={filteredBusiness.name}>*/}
-                {/*            {filteredBusiness.name}*/}
-                {/*        </li>*/}
-                {/*    )))}*/}
+                {/*<StyledFootprintForUser/>*/}
+                {/*<StyledReviewForUser/>*/}
+                {/*<StyledBusinessFeedItem/>*/}
+
+
             </>
         );
 
