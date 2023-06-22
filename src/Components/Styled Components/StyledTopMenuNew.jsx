@@ -1,11 +1,9 @@
 import {Stack} from "@mui/material";
 import {StyledAppBarTop, StyledSearchBar} from "./styledComponents";
-import logoNew from "./Icons/logo-all-white.png";
 import StyledHamburgerButtonWithCanvas from "./StyledHamburgerButtonWithCanvas";
 import Box from "@mui/material/Box";
 import StyledLogo from "./StyledLogo";
-import {useState} from "react";
-import {Link} from "react-router-dom";
+
 
 function StyledTopMenuNew({setSearch, setValue}) {
 
@@ -29,7 +27,6 @@ function StyledTopMenuNew({setSearch, setValue}) {
                     <StyledHamburgerButtonWithCanvas/>
                 </Box>
                 <Box sx={{display: "flex"}}>
-                {/*<Link to={"/CirclesPageComponent"}>*/}
                     <StyledSearchBar
                         // disabled
                         autoFocus={true}
@@ -45,7 +42,6 @@ function StyledTopMenuNew({setSearch, setValue}) {
                         // onChange={onSearchChange}
                         // href={"/CirclesPageComponent"}
                     />
-                {/*</Link>*/}
                 </Box>
                 <StyledLogo/>
             </Stack>
