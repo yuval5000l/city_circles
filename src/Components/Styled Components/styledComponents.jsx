@@ -2,7 +2,7 @@ import {styled} from "@mui/material/styles";
 import {
     alpha,
     AppBar,
-    Autocomplete,
+    Autocomplete, Badge,
     BottomNavigation, BottomNavigationAction,
     Button,
     DialogContentText,
@@ -22,7 +22,8 @@ import TextField from "@mui/material/TextField";
 export const StyledButtonGray = styled(Button)(({theme}) => ({
     backgroundColor: theme.palette.info.light,
     color: "black",
-    padding: '0.5rem',
+    maxWidth:"fit-content",
+    padding: '0.3rem',
     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
     borderRadius: '15px',
     [theme.breakpoints.up('xs')]: {
@@ -153,8 +154,8 @@ export const StyledSmallLogoBox = styled(Box)(({ theme })=> ({
 export const StyledAvatarUserFeed = styled(Avatar)(({ theme })=> ({
     boxShadow : "0px 4px 4px rgba(0, 0, 0, 0.25)",
     [theme.breakpoints.up('xs')]:{
-        width:"2.5rem",
-        height:"2.5rem"
+        width:"3.5rem",
+        height:"3.5rem"
 // export const StyledAvatarUserFeed = styled(Avatar)(({theme}) => ({
 //     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
 //     [theme.breakpoints.up('xs')]: {
@@ -166,8 +167,8 @@ export const StyledAvatarUserFeed = styled(Avatar)(({ theme })=> ({
 export const StyledAvatarBusinessFeed = styled(Avatar)(({ theme })=> ({
     boxShadow : "0px 4px 4px rgba(0, 0, 0, 0.25)",
     [theme.breakpoints.up('xs')]:{
-        width:"6rem",
-        height:"6rem"
+        width:"7rem",
+        height:"7rem"
     }}));
 
 export const StyledSmallCirclesButton = styled(SupervisedUserCircleIcon)(({theme}) => ({
@@ -344,4 +345,58 @@ export const StyledTypeBox = styled(Box)(({theme}) => ({
     padding:"3px",
     [theme.breakpoints.up('xs')]: {
     }
+}));
+
+export const StyledInfoBox = styled(Box)(({theme}) => ({
+    backgroundColor: "white",
+    border:`0.2rem solid ${theme.palette.secondary.main}`,
+    width:"contain",
+    color:"black",
+    maxWidth:"fit-content",
+    ...theme.typography.p,
+    borderRadius:"15px",
+    padding:"3px",
+    [theme.breakpoints.up('xs')]: {
+    }
+}));
+
+export const StyledGreenBorderBox = styled(Box)(({theme}) => ({
+    border:`0.2rem solid ${theme.palette.secondary.main}`,
+    [theme.breakpoints.up('xs')]: {
+    }
+}));
+
+export const StyledBadge = styled(Badge)(({theme}) => ({
+    '& .MuiBadge-badge': {
+        backgroundColor: '#44b700',
+        color: '#44b700',
+        boxShadow: `0 0 0 2px ${theme.palette.background.paper}`,
+        '&::after': {
+            position: 'absolute',
+            top: 0,
+            left: 0,
+            width: '100%',
+            height: '100%',
+            borderRadius: '50%',
+            animation: 'ripple 1.2s infinite ease-in-out',
+            border: '1px solid currentColor',
+            content: '""',
+        },
+    },
+    '@keyframes ripple': {
+        '0%': {
+            transform: 'scale(.8)',
+            opacity: 1,
+        },
+        '100%': {
+            transform: 'scale(2.4)',
+            opacity: 0,
+        },
+    },
+}));
+
+export const SmallAvatar = styled(Avatar)(({ theme }) => ({
+    width: 22,
+    height: 22,
+    border: `2px solid black`,
 }));
