@@ -3,13 +3,14 @@ import {Typography} from "@mui/material";
 import theme from "../../Theme/Theme";
 import {useState} from "react";
 
-export default function StyledCirclesSearchItem({name}){
+export default function StyledCirclesSearchItem({name, checkFunction}){
     const [isClicked, setIsClicked] = useState(false);
     const [backgroundcolor, setBGColor] = useState(theme.palette.secondary.main);
     const [boxShadow, setBoxShadow] = useState('0px 4px 4px rgba(0, 0, 0, 0.25)');
     const [color, setColor] = useState(theme.palette.primary.main);
     const[border, setBorder] = useState(`0.4rem solid ${theme.palette.primary.main}`)
     const handleClick = () => {
+        checkFunction();
         setIsClicked((prevClicked) => {
             if (prevClicked) {
                 setBGColor(theme.palette.secondary.main)

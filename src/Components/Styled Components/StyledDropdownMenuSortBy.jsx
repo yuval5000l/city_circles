@@ -5,11 +5,11 @@ import theme from "../../Theme/Theme";
 import Box from "@mui/material/Box";
 import StyledCirclesSearchItem from "./StyledSortByButton";
 
-const StyledDropdownMenuSortBy = () => {
+const StyledDropdownMenuSortBy = ({setSortMethod}) => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedOption, setSelectedOption] = useState('');
     const [isClicked, setIsClicked] = useState(false);
-    const [buttonText, setButtonText] = useState('Filter By..');
+    const [buttonText, setButtonText] = useState('Sort By..');
 
     const buttonStyles = {
         color: isClicked ? "white" : 'black',
@@ -18,8 +18,9 @@ const StyledDropdownMenuSortBy = () => {
     };
     const clearFilter =() =>{
         setIsClicked((false));
-        setButtonText("Filter By..")
-        setAnchorEl(null)
+        setButtonText("Filter By..");
+        setAnchorEl(null);
+        setSortMethod("");
     }
     const handleClick = (event) => {
         setAnchorEl(event.currentTarget);
@@ -36,6 +37,7 @@ const StyledDropdownMenuSortBy = () => {
         setIsClicked((true));
         setSelectedOption(option);
         setAnchorEl(null);
+        setSortMethod(option);
     };
 
     return (
@@ -66,6 +68,10 @@ const StyledDropdownMenuSortBy = () => {
             </StyledMenu>
         </Box>
     );
+
+
+
+
 };
 
 export default StyledDropdownMenuSortBy;

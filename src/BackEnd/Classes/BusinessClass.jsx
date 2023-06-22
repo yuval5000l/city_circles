@@ -17,7 +17,7 @@ export default class Business
         });
         return lst;
     }
-    static async getAllBusinesses()
+    static async getAllBusinessesData()
     {
         let lst = [];
         const querySnapshot = await getDocs(collection(db, "Business"));
@@ -28,6 +28,22 @@ export default class Business
         });
         return lst;
     }
+    static async getAllBusinesses()
+    {
+        let lst = [];
+        const querySnapshot = await getDocs(collection(db, "Business"));
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            // console.log(doc.id, " => ", doc.data());
+            // console.log(new Business({name: doc.data().name, type:doc.data().type,
+            // address: doc.data().address, openingHours: doc.data().openingHours,
+            // contact: doc.data().contact, social: doc.data().social, }));
+            const options = doc.data();
+            lst.push(businessConverter["fromFirestore"](doc, options));
+        });
+        return lst;
+    }
+
     static async makeBusiness(name, type, address, profilePic, openingHours,
                                      contact, social = [],
                                      pictures = [],rating = [0,0], last_visited =[], reviews = [],
@@ -140,7 +156,18 @@ export default class Business
     {
         return this.profilePic;
     }
-
+    getBusinessType()
+    {
+        return this.type;
+    }
+    getCirclesCount() // Todo
+    {
+        return {"HUJI":5, "YoYo": 0, "RockNRoll": 0};
+    }
+    getSumFootprintsAndReviews(ListOfCirclesToInclude) // Todo
+    {
+        return 0;
+    }
 
     async setOpeningHours(openingHoursArray, ref)
     {

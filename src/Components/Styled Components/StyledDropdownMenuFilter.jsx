@@ -4,11 +4,11 @@ import {StyledButtonGray, StyledMenu} from "./styledComponents";
 import theme from "../../Theme/Theme";
 import Box from "@mui/material/Box";
 
-const StyledDropdownMenuFilter = () => {
+const StyledDropdownMenuFilter = ({setFilterMethod}) => {
         const [anchorEl, setAnchorEl] = useState(null);
         const [selectedOption, setSelectedOption] = useState('');
         const [isClicked, setIsClicked] = useState(false);
-        const [buttonText, setButtonText] = useState('Sort By..');
+        const [buttonText, setButtonText] = useState('Filter By..');
         const buttonStyles = {
             color: isClicked ? "white" : 'black',
             backgroundColor: isClicked ? theme.palette.info.main : theme.palette.info.light,
@@ -22,12 +22,13 @@ const StyledDropdownMenuFilter = () => {
 
         const clearFilter =() =>{
             setIsClicked((false));
-            setButtonText("Sort By..")
+            setButtonText("Filter By..")
             setAnchorEl(null)
+            setFilterMethod("");
         }
         const handleClose = () => {
             setAnchorEl(null);
-            if (buttonText === "Sort By.."){
+            if (buttonText === "Filter By.."){
                 setIsClicked((false));
             }
         };
@@ -37,6 +38,7 @@ const StyledDropdownMenuFilter = () => {
             setSelectedOption(option);
             setAnchorEl(null);
             setIsClicked((true));
+            setFilterMethod(option);
 
         };
 

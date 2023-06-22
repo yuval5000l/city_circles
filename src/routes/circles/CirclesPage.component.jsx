@@ -1,4 +1,4 @@
-import {Component, useEffect, useState} from "react";
+import {useEffect, useState} from "react";
 // import {StyledPurpleBox} from "../../Components/Styled Components/styledComponents";
 import theme from "../../Theme/Theme";
 import Box from "@mui/material/Box";
@@ -14,6 +14,54 @@ import Business from "../../BackEnd/Classes/BusinessClass";
 
 
 
+function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod})
+{
+    // console.log("List Business ", lstBusiness);
+    // console.log("Circles ", circles);
+    // console.log("search Result ",searchRes);
+    // console.log("business Type ",businessType);
+    // console.log("Sort Method ", sortMethod);
+
+    function sortBy(a, b)
+    {
+        if (sortMethod === "Distance")
+        {
+            return a.getSumFootprintsAndReviews(circles) - b.getSumFootprintsAndReviews(circles);;
+        }
+        return a.getSumFootprintsAndReviews(circles) - b.getSumFootprintsAndReviews(circles);
+    }
+
+    function checkCircles(business)
+    {
+        // return business.getCirclesCount()[circles[0]] > 0;
+        return (circles.length === 0) || circles.some(circle => business.getCirclesCount()[circle] > 0); // Checks if there is at least 1 circle relevant
+    }
+
+    // Check if this business has any reviews in the relevant circle(s)
+    const firstLayerFilter = lstBusiness.filter(checkCircles);
+
+    let secondLayerFilter = firstLayerFilter.filter(business =>
+    {
+        return (businessType === "")|| (business.getBusinessType().includes(businessType));
+    });
+    // console.log("second Layer Sort", secondLayerFilter);
+
+    let thirdLayerSort = secondLayerFilter.sort(sortBy);
+    // console.log("third Layer Sort", thirdLayerSort);
+
+    let searchLayerFilter = thirdLayerSort.filter(business => (business.name.toLowerCase()).includes(searchRes.toLowerCase()));
+    // console.log("search Layer Filter", searchLayerFilter);
+    return (
+        <>
+            {(searchLayerFilter === []) ? (<></>) : (searchLayerFilter.map(filteredBusiness =>
+            (
+                <li key={filteredBusiness.name}>
+                    {filteredBusiness.name}
+                </li>
+            )))}
+        </>
+    );
+}
 
 const CirclesPageComponent = () => {
     const [searchRes, setSearchRes, setButtomBarValue] = useOutletContext();
@@ -22,6 +70,14 @@ const CirclesPageComponent = () => {
 
     const [lstBusiness, setLstBusiness] = useState([]);
 
+    // const circleButtons = [false, false, false];
+    const [circleButtons, setCircleButtons] = useState([false, false, false]);
+    // let circlesFilter = []; // Filters by circles, first filter (empty list if null)
+    const [circlesFilter, setCirclesFilter] = useState([]); // Filters by circles, first filter
+    // const [labelFilter, setLabelFilter] = useState([]); // Filter by labels, second filter (empty list if null)
+    const [sortMethod, setSortMethod]  = useState(""); // Sort by Footprints or Distance (empty string if null)
+    const [filterTypeBusiness, setFilterTypeBusiness] = useState(""); // Filters by the type of business (empty string if null)
+    // console.log(filterTypeBusiness);
     useEffect(() => {
         getUser();
         getBusinesses();
@@ -46,7 +102,24 @@ const CirclesPageComponent = () => {
             }
         });
     };
-    // console.log(lstBusiness);
+
+    function CircleClicked(num)
+    {   function inner()
+        {
+            let tempList = [];
+            let tempList2 = circleButtons;
+            tempList2[num] = !tempList2[num];
+            setCircleButtons(tempList2);
+            for (let i = 0; i < 3; i++)
+            {
+                if (circleButtons[i]){ tempList.push(user.getCircles()[i]);}
+            }
+
+            // circlesFilter = tempList;
+            setCirclesFilter(tempList);
+        }
+        return inner;
+    }
         // const position = [31.777587, 35.215094]; //[this.state.location.lat, this.state.location.lng];
         return (
             <>
@@ -56,27 +129,28 @@ const CirclesPageComponent = () => {
                 }}>
                     <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
                         <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem">
-                            <StyledCirclesSearchItem name={(user === null) ? ("Circle1") : (user.getCircles()[0])}/>
-                            <StyledCirclesSearchItem name={(user === null) ? ("Circle2") : (user.getCircles()[1])}/>
-                            <StyledCirclesSearchItem name={(user === null) ? ("Circle3") : (user.getCircles()[2])}/>
+                            <StyledCirclesSearchItem name={(user === null) ? ("Circle1") : (user.getCircles()[0])} checkFunction={CircleClicked(0)}/>
+                            <StyledCirclesSearchItem name={(user === null) ? ("Circle2") : (user.getCircles()[1])} checkFunction={CircleClicked(1)}/>
+                            <StyledCirclesSearchItem name={(user === null) ? ("Circle3") : (user.getCircles()[2])} checkFunction={CircleClicked(2)}/>
                         </Stack>
                         <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem" >
-                            <StyledDropdownMenuSortBy/>
-                            <StyledDropdownMenuFilter/>
+                            <StyledDropdownMenuSortBy setSortMethod={setSortMethod}/>
+                            <StyledDropdownMenuFilter setFilterMethod={setFilterTypeBusiness}/>
 
                         </Stack>
 
                     </Stack>
 
                 </Box>
-                {(lstBusiness === []) ? (<></>) : (lstBusiness.filter(business => (business.name.toLowerCase()).
-                includes(searchRes.toLowerCase())).
-                map(filteredBusiness =>
-                    (
-                        <li key={filteredBusiness.name}>
-                            {filteredBusiness.name}
-                        </li>
-                    )))}
+                <BigFilter lstBusiness={lstBusiness} circles={circlesFilter}
+                           searchRes={searchRes} businessType={filterTypeBusiness} sortMethod={sortMethod}/>
+                {/*{(lstBusiness === []) ? (<></>) : (lstBusiness.filter(business => (business.name.toLowerCase()).*/}
+                {/*includes(searchRes.toLowerCase())).map(filteredBusiness =>*/}
+                {/*    (*/}
+                {/*        <li key={filteredBusiness.name}>*/}
+                {/*            {filteredBusiness.name}*/}
+                {/*        </li>*/}
+                {/*    )))}*/}
             </>
         );
 
