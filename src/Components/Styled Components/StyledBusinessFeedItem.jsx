@@ -15,7 +15,26 @@ import StyledAvatarWithBadge from "./StyledAvatarWithBadge";
 import StyledReviewForUser from "./StyledReviewForUser";
 import StyledFootprintForUser from "./StyledFootprintForUser";
 
+function getUnion(array1, array2) {
+    const difference = array1.filter(
+        review =>
+        {
+            let check = true;
+            array2.forEach(footprint=>{ if (footprint.userName === review.userName)
+
+                check = false;
+            });
+            return check;
+
+        }
+    );
+
+    return [...difference, ...array2];
+}
 export default function StyledBusinessFeedItem({business}) {
+
+    const allUsers = getUnion(business.getReviews(), business.getFootprints());
+    // console.log(allUsers);
     return (
         <Box sx={{padding: "0.4rem", boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', borderBottom: '0.1rem solid #C3ED5B'}}>
             <Stack direction="column" alignItems="flex-start" spacing={1}>
@@ -50,9 +69,10 @@ export default function StyledBusinessFeedItem({business}) {
                     </Stack>
                 </Stack>
                 <AvatarGroup max={7} spacing={0.5}>
-                    {business.getReviews().map(review => <Avatar alt={review.userName} src={review.userPhoto}/>)}
-                    {business.getFootprints().map(footprint => <Avatar alt={footprint.userName}
-                                                                       src={footprint.userPhoto}/>)}
+                    {allUsers.map(review => <Avatar alt={review.userName} src={review.userPhoto}/>)}
+                    {/*{business.getReviews().map(review => <Avatar alt={review.userName} src={review.userPhoto}/>)}*/}
+                    {/*{business.getFootprints().map(footprint => <Avatar alt={footprint.userName}*/}
+                    {/*                                                   src={footprint.userPhoto}/>)}*/}
                 </AvatarGroup>
             </Stack>
         </Box>

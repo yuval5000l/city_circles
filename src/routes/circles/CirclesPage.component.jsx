@@ -29,9 +29,13 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod})
     {
         if (sortMethod === "Distance")
         {
-            return a.getSumFootprintsAndReviews(circles) - b.getSumFootprintsAndReviews(circles);;
+            return b.getSumFootprintsAndReviews(circles) - a.getSumFootprintsAndReviews(circles);;
         }
-        return a.getSumFootprintsAndReviews(circles) - b.getSumFootprintsAndReviews(circles);
+        else if (sortMethod === "Footprints")
+        {
+            return b.getSumFootprintsAndReviews(circles) - a.getSumFootprintsAndReviews(circles);
+        }
+        return 0;
     }
 
     function checkCircles(business)
