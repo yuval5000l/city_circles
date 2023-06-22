@@ -33,6 +33,21 @@ export const StyledButtonGray = styled(Button)(({theme}) => ({
     }
 }));
 
+export const StyledButtonGreen = styled(Button)(({theme}) => ({
+    backgroundColor: theme.palette.secondary.light,
+    color: theme.palette.primary.dark,
+    padding: '0.5rem',
+    boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
+    borderRadius: '15px',
+    [theme.breakpoints.up('xs')]: {
+        fontSize: '0.8rem',
+    },
+    [theme.breakpoints.up('md')]: {
+        fontSize: '2.5rem',
+    }
+}));
+
+
 export const StyledAppBarTop = styled(AppBar)(({theme}) => ({
     backgroundColor: theme.palette.primary.main,
     borderBottom: `0.65rem solid ${theme.palette.secondary.main}`,
@@ -148,6 +163,13 @@ export const StyledAvatarUserFeed = styled(Avatar)(({ theme })=> ({
 //     }
 }}));
 
+export const StyledAvatarBusinessFeed = styled(Avatar)(({ theme })=> ({
+    boxShadow : "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    [theme.breakpoints.up('xs')]:{
+        width:"6rem",
+        height:"6rem"
+    }}));
+
 export const StyledSmallCirclesButton = styled(SupervisedUserCircleIcon)(({theme}) => ({
     color: theme.palette.primary.main,
     [theme.breakpoints.up('xs')]: {
@@ -173,7 +195,7 @@ export const StyledBusinessFeed = styled(Avatar)(({theme}) => ({
 }));
 
 export const StyledRating = styled(Rating)(({theme}) => ({
-    color: theme.palette.secondary.dark,
+    color: theme.palette.secondary.main,
     "&:hover": {
         color: theme.palette.secondary.main,
     },
@@ -314,7 +336,9 @@ export const StyledMenu = styled((props) => (
 
 export const StyledTypeBox = styled(Box)(({theme}) => ({
     backgroundColor: theme.palette.secondary.main,
+    width:"contain",
     color:"white",
+    maxWidth:"fit-content",
     ...theme.typography.p,
     borderRadius:"15px",
     padding:"3px",

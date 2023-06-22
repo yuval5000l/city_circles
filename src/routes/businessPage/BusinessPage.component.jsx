@@ -13,7 +13,7 @@ import {StyledRating, StyledTypeBox} from "../../Components/Styled Components/st
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import StyledTimeTable from "./StyledTimeTable";
-import StyledSocialIcons from "./StyledSocialIcons";
+import StyledSocialIcon from "./StyledSocialIcon";
 import StyledBusinessTabs from "./StyledBusinessTabs";
 
 
@@ -41,8 +41,8 @@ export function showBusiness(business) {
                                     key={category}>{category}</StyledTypeBox>)}
                             </Stack>
                             <Stack direction="row" spacing={1}>
-                                <Typography>{business.getRating()}</Typography>
-                                <StyledRating value={business.getRating()}/>
+                                <Typography>{business.getRating().toFixed(2)}</Typography>
+                                <StyledRating value={business.getRating()} />
                                 <Typography>({business.rating[1]})</Typography>
                             </Stack>
                         </Stack>
@@ -70,10 +70,11 @@ export function showBusiness(business) {
                         <Typography variant = "h4">
                             Contact: {
                             business.contact.filter(contact => contact !== "").map((filteredContact) =>
-                            <StyledTypeBox key={filteredContact + "S"}>{filteredContact}</StyledTypeBox>
+                            <Box key={filteredContact + "S"}>{filteredContact}
+                            </Box>
                         )}
                         </Typography>
-                        <StyledSocialIcons/>
+                        <StyledSocialIcon/>
                     </Stack>
                 </Stack>
             </Box>

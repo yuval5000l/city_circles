@@ -9,7 +9,7 @@ const StyledDropdownMenuSortBy = () => {
     const [anchorEl, setAnchorEl] = useState(null);
     const [selectedOption, setSelectedOption] = useState('');
     const [isClicked, setIsClicked] = useState(false);
-    const [buttonText, setButtonText] = useState('Filter By..');
+    const [buttonText, setButtonText] = useState('Sort By..');
 
     const buttonStyles = {
         color: isClicked ? "white" : 'black',
@@ -18,7 +18,7 @@ const StyledDropdownMenuSortBy = () => {
     };
     const clearFilter =() =>{
         setIsClicked((false));
-        setButtonText("Filter By..")
+        setButtonText("Sort By..")
         setAnchorEl(null)
     }
     const handleClick = (event) => {
@@ -62,7 +62,7 @@ const StyledDropdownMenuSortBy = () => {
                         <StyledCirclesSearchItem name="Distance" onClick={() => handleOptionClick('Distance')}/>
                     </MenuItem>
                 </Stack>
-                <StyledButtonGray onClick ={clearFilter}>Clear Filter</StyledButtonGray>
+                <StyledButtonGray onClick ={clearFilter}>Clear Sort</StyledButtonGray>
             </StyledMenu>
         </Box>
     );

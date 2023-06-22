@@ -6,7 +6,7 @@ import {
 } from "./styledComponents";
 import {ReactComponent as FootprintsIcon} from "./Icons/footprints-svgrepo-com.svg";
 import Box from "@mui/material/Box";
-import {Button, DialogActions, DialogContent, Stack} from "@mui/material";
+import {Button, DialogActions, DialogContent, Stack, Typography} from "@mui/material";
 import theme from "../../Theme/Theme";
 import Dialog from "@mui/material/Dialog";
 import {useEffect, useState} from "react";
@@ -19,7 +19,9 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
 
     const [open, setOpen] = useState(false);
     const [chosenBusiness, setChosenBusiness] = useState("");
-    const [isDisabled, setIsDisabled] = useState(true)
+    const [isDisabled, setIsDisabled] = useState(true);
+    const [openSecond, setOpenSecond] = useState(false);
+
 
     useEffect(() => {
         getBusinesses()
@@ -63,6 +65,7 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
     const HandleSend = async () => {
         if (chosenBusiness !== "")
         {
+            handleOpenSecond()
             if (auth?.currentUser?.uid !== undefined)
             {
                 const business = await getBusinessByName(chosenBusiness);
@@ -84,7 +87,19 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
             handleClose();
         }
     }
+    const handleOpenSecond = () => {
+        setOpenSecond(true);
+        const timeout = setTimeout(() => {
+            handleCloseSecond();
+        }, 2500);
 
+        return () => {
+            clearTimeout(timeout);
+        };
+    };
+    const handleCloseSecond = () => {
+        setOpenSecond(false);
+    };
     return(
         <Box>
             <StyledCircleBox onClick={handleClickOpen}>
@@ -112,6 +127,7 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
                             <StyledDialogSecondTitle>I went to..</StyledDialogSecondTitle>
                             <StyledAutoComplete
                                 disablePortal
+                                rows={1}
                                 inputValue={chosenBusiness}
                                 onInputChange={(event, newInputValue) => {
                                     setChosenBusiness(newInputValue);
@@ -127,7 +143,6 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
                                 renderInput={(params) => <TextField
                                     {...params}
                                     label="Business"
-
                                 />}
                             />
                         </Stack>
@@ -139,6 +154,20 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
                                         sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Cancel</Button>
                                 <Button disabled={isDisabled} onClick={HandleSend} sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Send
                                     Footprint</Button>
+                                {openSecond && (
+                                    <Dialog open={openSecond} onClose={handleCloseSecond}>
+                                        <DialogContent sx={{
+                                            backgroundColor: `${theme.palette.primary.main}`,
+                                            border: `0.2rem solid ${theme.palette.secondary.main}`
+                                        }}>
+                                            <StyledDialogTitle>Your review was accepted</StyledDialogTitle>
+                                            <Typography variant="h4">
+                                                You care!
+                                            </Typography>
+                                            {/* Add additional components for the second dialog */}
+                                        </DialogContent>
+                                    </Dialog>
+                                )}
                             </DialogActions>
                         </Stack>
                     </Stack>

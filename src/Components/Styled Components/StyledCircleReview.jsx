@@ -8,21 +8,24 @@ import {
 } from "./styledComponents";
 import {useEffect, useState} from "react";
 import Dialog from "@mui/material/Dialog";
-import {Button, DialogActions, DialogContent, Stack} from "@mui/material";
+import {Button, DialogActions, DialogContent, Stack, Typography} from "@mui/material";
 import TextField from "@mui/material/TextField";
 import Box from "@mui/material/Box";
 import theme from "../../Theme/Theme";
 import Business, {getBusinessByName} from "../../BackEnd/Classes/BusinessClass"
 import {auth} from "../../BackEnd/config/firebase"
 import {getUserById} from "../../BackEnd/Classes/UserClass"
-
+import {doc} from "firebase/firestore";
+import DialogTitle from "@mui/material/DialogTitle";
 
 export default function StyledCircleReview({closeSmallDialog = () => {}}) {
     const [open, setOpen] = useState(false);
     const [review, setReview] = useState("");
     const [rating, setRating] = useState(0);
     const [chosenBusiness, setChosenBusiness] = useState("");
-    const [isDisabled, setIsDisabled] = useState(true)
+    const [isDisabled, setIsDisabled] = useState(true);
+    const [openSecond, setOpenSecond] = useState(false);
+
 
     useEffect(() => {
         getBusinesses()
@@ -39,9 +42,9 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
         });
     }
     // console.log(auth?.currentUser?.uid);
+
     const handleClickOpen = () => {
         setOpen(true);
-
     };
     //
     const handleClose = () => {
@@ -56,13 +59,15 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
     //
     //
     //
+
+
     const HandleSend = async () => {
         if (chosenBusiness !== "")
+        handleOpenSecond()
         {
             if (auth?.currentUser?.uid !== undefined)
             {
                 const business = await getBusinessByName(chosenBusiness);
-
                 const user = await getUserById(auth?.currentUser?.uid);
                 if (business !== null) {
                     await user.addBusinessReview(chosenBusiness, chosenBusiness, business.getProfilePic(), review, rating)
@@ -79,7 +84,20 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
             handleClose();
         }
     }
+    const handleOpenSecond = () => {
+        setOpenSecond(true);
+        const timeout = setTimeout(() => {
+            handleCloseSecond();
+        }, 2500);
 
+        return () => {
+            clearTimeout(timeout);
+        };
+    };
+
+    const handleCloseSecond = () => {
+        setOpenSecond(false);
+    };
     return (
         <Box>
             <StyledCircleBox onClick={handleClickOpen}>
@@ -172,11 +190,27 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
                                         sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Cancel</Button>
                                 <Button disabled={isDisabled} onClick={HandleSend} sx={{backgroundColor: `${theme.palette.secondary.main}`}}>Send
                                     Review</Button>
+                                {openSecond && (
+                                    <Dialog open={openSecond} onClose={handleCloseSecond}>
+                                        <DialogContent sx={{
+                                            backgroundColor: `${theme.palette.primary.main}`,
+                                            border: `0.2rem solid ${theme.palette.secondary.main}`
+                                        }}>
+                                        <StyledDialogTitle>Your review was accepted</StyledDialogTitle>
+                                            <Typography variant="h4">
+                                                You care!
+                                            </Typography>
+                                            {/* Add additional components for the second dialog */}
+                                        </DialogContent>
+                                    </Dialog>
+                                )}
                             </DialogActions>
                         </Stack>
                     </Stack>
                 </DialogContent>
             </Dialog>
+
         </Box>
     );
 }
+

@@ -11,6 +11,7 @@ import {auth} from "../../BackEnd/config/firebase";
 import {getUserById} from "../../BackEnd/Classes/UserClass";
 import {useOutletContext} from "react-router-dom";
 import Business from "../../BackEnd/Classes/BusinessClass";
+import StyledBusinessFeedItem from "../../Components/Styled Components/StyledBusinessFeedItem";
 
 
 
@@ -63,12 +64,11 @@ const CirclesPageComponent = () => {
                         <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem" >
                             <StyledDropdownMenuSortBy/>
                             <StyledDropdownMenuFilter/>
-
                         </Stack>
 
                     </Stack>
-
                 </Box>
+                <StyledBusinessFeedItem/>
                 {(lstBusiness === []) ? (<></>) : (lstBusiness.filter(business => (business.name.toLowerCase()).
                 includes(searchRes.toLowerCase())).
                 map(filteredBusiness =>

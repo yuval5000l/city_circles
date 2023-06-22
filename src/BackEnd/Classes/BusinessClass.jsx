@@ -60,7 +60,6 @@ export default class Business
         this.social = social;
         this.profilePic = profilePic;
         this.pictures = pictures;
-
         this.reviews = reviews;
         this.rating = rating;
         this.coord = coord;
