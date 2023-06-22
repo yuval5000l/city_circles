@@ -5,16 +5,15 @@ import {doc, getDoc, setDoc} from "firebase/firestore";
 import {getBusinessByName} from "./BusinessClass";
 // import {auth} from "./config/firebase";
 
-export default class User
-{
+export default class User {
     // TODO as little as I can
-    constructor( email, password, name="", userID_ = auth?.currentUser?.uid, review = [],
-                footprint = [], circles = [], friends = [], profile_pic="") {
+    constructor(email, password, name = "", userID_ = auth?.currentUser?.uid, review = [],
+                footprint = [], circles = [], friends = [], profile_pic = "") {
 
         this.name_ = name;
         this.email_ = email;
-        this.password_= password;
-        this.profile_pic  = profile_pic;
+        this.password_ = password;
+        this.profile_pic = profile_pic;
         // this.circles = [];
         // this.b_day = "";
         this.userID_ = userID_;
@@ -31,27 +30,26 @@ export default class User
                 this.userID_ = cred.user.uid;
                 const ref = doc(db, "Users", cred.user.uid).withConverter(userConverter);
                 await setDoc(ref, this);
-                console.log("id is: ",this.userID_)
+                console.log("id is: ", this.userID_)
             });
         } catch (err) {
             console.error(err);
         }
     };
 
-    getUserName(){
+    getUserName() {
         return this.name_;
     }
 
-    getUserId()
-    {
+    getUserId() {
         return this.userID_;
     }
 
     toString() {
-        return "the user name is: "+this.name_ + ", the user ID is: " + this.userID_;
+        return "the user name is: " + this.name_ + ", the user ID is: " + this.userID_;
     }
 
-    getCircles(){
+    getCircles() {
         return this.circles;
     }
 
@@ -110,87 +108,111 @@ export default class User
         const ref = doc(db, "Users", this.userID_).withConverter(userConverter);
         await setDoc(ref, this);
     }
-    getPic()
-    {
+
+    getPic() {
         return this.profile_pic;
     }
 
-    get_user_footprints(){
+    get_user_footprints() {
         return this.footprints;
     }
 
-    static async getUserFriendsById(id)
-    {
+    static async getUserFriendsById(id) {
         const user = await getUserById(id);
         return user?.friends;
     }
 
-    async getMyReviews()
-    {
+    async getMyReviews() {
         let listOfReviews = [];
-        for (const review of this.reviews)
-        {
+        for (const review of this.reviews) {
             const business = await getBusinessByName(review.businessID);
             listOfReviews.push(this.feedItemConverter(review, business));
         }
         return listOfReviews;
     }
 
-    feedItemConverter(review, business)
-    {
-        return {user_id: this.userID_, user_name: this.name_, profile_photo_url: this.profile_pic,
+    feedItemConverter(review, business) {
+        return {
+            user_id: this.userID_, user_name: this.name_, profile_photo_url: this.profile_pic,
             circles: this.circles, time: review.timestamp.toDate(),
             business_name: business.name, business_photo_url: business.profilePic,
-            rating: (business.rating[0]/ business.rating[1]),
-            url_to_business: business.id, review:review.content,
-            review_address: review.content}
+            rating: (business.rating[0] / business.rating[1]),
+            url_to_business: business.id, review: review.content,
+            review_address: review.content
+        }
     }
 
-    static async getFriendsReviews(userID)
-    {
+    static async getFriendsReviews(userID) {
         const friends_id = await User.getUserFriendsById(userID);
         let listOfReviews = [];
-        if (friends_id.length > 0)
-        {
+        if (friends_id.length > 0) {
             for (const friend_id of friends_id) {
                 const friend = await getUserById(friend_id);
-                if (friend !== null)
-                {
-                    for (const review of friend.reviews)
-                    {
+                if (friend !== null) {
+                    for (const review of friend.reviews) {
                         const business = await getBusinessByName(review.businessID);
                         listOfReviews.push(User.feedItemConverter(friend, review, business));
                     }
-                }
-                else
-                {
+                } else {
                     console.error("Error getting friend from database!");
                     return listOfReviews;
                 }
             }
-        }
-        else{
+        } else {
             console.log("Ain't got no friends!");
         }
 
         return listOfReviews;
     }
-    static feedItemConverter(user, review, business)
-    {
-        return {user_id: user.userID_, user_name: user.name_, profile_photo_url: user.profile_pic,
+
+    static feedItemConverter(user, review, business) {
+        return {
+            user_id: user.userID_, user_name: user.name_, profile_photo_url: user.profile_pic,
             circles: user.circles, time: review.timestamp.toDate(),
             business_name: business.name, business_photo_url: business.profilePic,
-            rating: (business.rating[0]/ business.rating[1]),
-            url_to_business: business.id, review:review.content,
-            review_address: review.content}
+            rating: (business.rating[0] / business.rating[1]),
+            url_to_business: business.id, review: review.content,
+            review_address: review.content
+        }
     }
 }
 
-
+User.ListOfCirclesNeighborhoods = ["Old City",
+    "Rehavia",
+    "Talbieh",
+    "German Colony",
+    "Nayot",
+    "Sheikh Jarrah",
+    "Silwan",
+    "Issawiya",
+    "French Hill",
+    "Katamon",
+    "Baka",
+    "Mea Shearim",
+    "Malha"];
+User.ListOfCirclesSchools = ["HUJI", "Bezalel", "Lev", "Hadassah", "Al-Quds", "Music Academy", "Azrieli", "Dacid Yelin", "Musrara", "Visual Theatre"]
+User.ListOfCirclesPersonalities = [
+    "ESTJ",
+    "ENTJ",
+    "ESFJ",
+    "ISTJ",
+    "ISFJ",
+    "INTJ",
+    "INFJ",
+    "ESTP",
+    "ESFP",
+    "ENTP",
+    "ENFP",
+    "ISTP",
+    "ISFP",
+    "INTP",
+    "INFP",
+    "ENFJ"
+]
+User.ListOfCircles = User.ListOfCirclesNeighborhoods + User.ListOfCirclesSchools + User.ListOfCirclesPersonalities;
 
 export async function getUserById(id) {
-    if (id === null || id === undefined)
-    {
+    if (id === null || id === undefined) {
         return null;
     }
     const ref = doc(db, "Users", id).withConverter(userConverter);
@@ -212,11 +234,10 @@ export async function getUserCircles(id) {
 }
 
 
-export const SignIn = async ({email}, {password})=>{
+export const SignIn = async ({email}, {password}) => {
     // const ref = doc(collection(db, "Users")).withConverter(userConverter);
 
-    try
-    {
+    try {
         await createUserWithEmailAndPassword(auth, email, password).then(async cred => {
 
             // Adds a user with the same uid
@@ -270,13 +291,11 @@ const userConverter = {
     },
 };
 
-export const LogIn = async({email}, {password}) => {
+export const LogIn = async ({email}, {password}) => {
     console.log("this is email", email)
     console.log("this is password", password)
-    try
-    {
-        await signInWithEmailAndPassword(auth, email, password).then((userCredential)=>
-        {
+    try {
+        await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
             const user = userCredential.user;
             return true;
         })
@@ -287,7 +306,6 @@ export const LogIn = async({email}, {password}) => {
     return true;
 };
 
-export const CompareUserTimeStamp = (user_a, user_b) =>
-{
+export const CompareUserTimeStamp = (user_a, user_b) => {
     return user_b.time - user_a.time;
 }

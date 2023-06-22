@@ -18,10 +18,11 @@ import TextField from "@mui/material/TextField";
 import {useEffect, useState} from "react";
 
 import {BottomBoxWithLogo} from "../../Components/Styled Components/StyledBoxWithLogo";
-import {getUserById} from "../../BackEnd/Classes/UserClass";
+import User, {getUserById} from "../../BackEnd/Classes/UserClass";
 import {onAuthStateChanged} from "firebase/auth";
 import {uploadFile} from "../../BackEnd/Classes/GeneralFunctionsFireBase";
 import Avatar from "@mui/material/Avatar";
+
 
 export default function SignupPage() {
 
@@ -47,9 +48,9 @@ export default function SignupPage() {
     const [file, setFile] = useState(null);
 
     // TODO: in the future- create a data base of circles and connect it to firebase/firestore
-    const SchoolsLst = ['HUJI', 'HAC', 'Azrieli', 'Bezalel', 'Shalem', 'David Yalin'];
-    const NeighborhoodLst = ['Rehavia', 'City Center', 'Nahlaot', 'Ramot', 'Talabia', 'Beit Hakerem', 'Resko', 'Katamon', 'Gilo'];
-    const HobbyLst = ['Sport', 'Art', 'Cooking', 'Travel', 'Music', 'Gaming', 'Design', 'Reading'];
+    const SchoolsLst = User.ListOfCirclesSchools;
+    const NeighborhoodLst = User.ListOfCirclesNeighborhoods;
+    const HobbyLst = User.ListOfCirclesPersonalities;
 
     useEffect(() =>
     {

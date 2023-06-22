@@ -1,12 +1,11 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Grid, Menu, MenuItem, Stack} from '@mui/material';
+import React, {useState} from 'react';
+import {Grid, MenuItem} from '@mui/material';
 import {StyledButtonGray, StyledButtonGreen, StyledMenu} from "./styledComponents";
 import theme from "../../Theme/Theme";
 import Box from "@mui/material/Box";
 
 const StyledDropdownMenuFilter = ({setFilterMethod}) => {
         const [anchorEl, setAnchorEl] = useState(null);
-        const [selectedOption, setSelectedOption] = useState('');
         const [isClicked, setIsClicked] = useState(false);
         const [buttonText, setButtonText] = useState('Filter By..');
         const buttonStyles = {
@@ -35,7 +34,6 @@ const StyledDropdownMenuFilter = ({setFilterMethod}) => {
 
         const handleOptionClick = (option) => {
             setButtonText(option)
-            setSelectedOption(option);
             setAnchorEl(null);
             setIsClicked((true));
             setFilterMethod(option);

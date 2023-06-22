@@ -1,8 +1,9 @@
 import {db, timestamp} from "../config/firebase";
 import {collection, doc, setDoc, getDocs, getDoc, updateDoc, arrayUnion} from "firebase/firestore";
-
+import User from "./UserClass"
 
 export default class Business {
+
     static async getAllBusinessesNamesLabels() {
         let lst = [];
         const querySnapshot = await getDocs(collection(db, "Business"));
@@ -49,10 +50,10 @@ export default class Business {
             coord = [0, 0];
         }
         if (circlesFootprint === {}) {
-            circlesFootprint = {"HUJI": 0, "YoYo": 0, "RockNRoll": 0, "Rehavia": 0, "Sport": 0};
+            User.ListOfCircles.ForEach(b_type => circlesFootprint[b_type] = 0);
         }
         if (circlesReviews === {}) {
-            circlesReviews = {"HUJI": 0, "YoYo": 0, "RockNRoll": 0, "Rehavia": 0, "Sport": 0};
+            User.ListOfCircles.ForEach(b_type => circlesReviews[b_type] = 0);
         }
         let new_business = new Business(name, type, address, coord, openingHours[0],
             contact, social, profilePic,
@@ -207,6 +208,10 @@ export default class Business {
 
 
 }
+
+Business.ListOfTypes = ["Creative Services" , "Food & Drinks", "Music", "Outdoors" ,
+    "Lifestyle & Home", "Health & Wellness", "Consulting", "Technology Solutions","Handmade Crafts"];
+
 const businessConverter = {
     toFirestore(business) {
         return {
