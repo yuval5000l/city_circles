@@ -195,7 +195,7 @@ export default function FirstPageBusinessRegistration({onNext}) {
             <div>
                 <Box sx={{margin: "1rem"}}>
                     <Typography variant="h4" textAlign="start">Category</Typography>
-                    {BusinessTypesSelection(['cosmetics', 'nails', 'barber', 'hair', 'sport', 'art', 'lifestyle', 'music'])}
+                    {BusinessTypesSelection(Business.ListOfTypes)}
 
                 </Box>
                 <Stack direction="column" alignItems="start" margin="0.5rem">
