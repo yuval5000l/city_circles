@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import {Tabs, Tab, Typography, Box, ListItem, List} from '@mui/material';
 import StyledFeedItem from "../../Components/Styled Components/StyledFeedItem";
 import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
+import StyledFootprintForUser from "../../Components/Styled Components/StyledFootprintForUser";
 
 function TabPanel({ children, value, index }) {
     return (
@@ -30,26 +31,17 @@ export default function StyledBusinessTabs({business}) {
             </Tabs>
 
             <TabPanel value={value} index={0}>
-                <Typography variant="h6">Footprints List</Typography>
                 <List spacing={8}>
                     {business.footprints.map((footprint) =>
-                        <ListItem key={footprint.userID}>
-                            id: {footprint.userID % 10}  time: {calculateTime(footprint.timestamp.toDate())}
-                        </ListItem>)
+                        <StyledFootprintForUser
+                            businessPhoto= {business.getProfilePic()}
+                            userPhoto={footprint.userPhoto}
+                            timestamp={footprint.timestamp.toDate()}
+                            BigName={footprint.userName}
+                            key={footprint.userID}>
+                            {/*id: {footprint.userID % 10}  time: {calculateTime(footprint.timestamp.toDate())}*/}
+                        </StyledFootprintForUser>)
                     }
-
-                    {/*<ListItem>1</ListItem>*/}
-                    {/*<ListItem>2</ListItem>*/}
-                    {/*<ListItem>3</ListItem>*/}
-                    {/*<ListItem>4</ListItem>*/}
-                    {/*<ListItem>5</ListItem>*/}
-                    {/*<ListItem>6</ListItem>*/}
-                    {/*<ListItem>7</ListItem>*/}
-                    {/*<ListItem>8</ListItem>*/}
-                    {/*<ListItem>8</ListItem>*/}
-                    {/*<ListItem>8</ListItem>*/}
-                    {/*<ListItem>8</ListItem>*/}
-                    {/*<ListItem>8</ListItem>*/}
                 </List>
             </TabPanel>
 

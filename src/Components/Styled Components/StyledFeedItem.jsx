@@ -13,29 +13,6 @@ import React from "react";
 import {Link} from "react-router-dom";
 import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 
-// function calculateTime(time)
-// {
-//     const now = new Date();
-//     const timeDiff = now.getTime() - time.getTime();
-//     const seconds = Math.floor(timeDiff / 1000);
-//     const minutes = Math.floor(seconds / 60);
-//     const hours = Math.floor(minutes / 60);
-//     const days = Math.floor(hours / 24);
-//
-//     return(<div>
-//             {(seconds > 60) ?
-//                 (<div>
-//                     {(minutes > 60) ?
-//                         (<div>{(hours > 23) ? (<div>{days} days</div>) :
-//                             (<div>{hours} hours</div>)}</div>)
-//                         :
-//                         (<div>{minutes} minutes</div>)}
-//                 </div>)
-//                 :
-//                 (<div>{seconds} seconds</div>)}
-//         </div>
-//     )
-// }
 
 export default function StyledFeedItem({user_id, user_name="name", profile_photo_url="",
                                        circles = [],
@@ -56,15 +33,6 @@ export default function StyledFeedItem({user_id, user_name="name", profile_photo
             setValueFunc(4);
         }
     };
-    // const [open, setOpen] =  useState(false);
-    //
-    // const handleClickOpen = () => {
-    //     setOpen(true);
-    // };
-    //
-    // const handleClose = () => {
-    //     setOpen(false);
-    // };
     return (
         <Box>
             <Stack direction="column" spacing={2} sx={{padding:"0.4rem", boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', borderBottom: '0.1rem solid #C3ED5B'}}>
