@@ -12,6 +12,8 @@ import {getUserById} from "../../BackEnd/Classes/UserClass";
 import {useOutletContext} from "react-router-dom";
 import Business from "../../BackEnd/Classes/BusinessClass";
 import StyledBusinessFeedItem from "../../Components/Styled Components/StyledBusinessFeedItem";
+import StyledFootprintForUser from "../../Components/Styled Components/StyledFootprintForUser";
+import StyledReviewForUser from "../../Components/Styled Components/StyledReviewForUser";
 
 
 
@@ -134,14 +136,15 @@ const CirclesPageComponent = () => {
                         <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem" >
                             <StyledDropdownMenuSortBy setSortMethod={setSortMethod}/>
                             <StyledDropdownMenuFilter setFilterMethod={setFilterTypeBusiness}/>
-
                         </Stack>
-
                     </Stack>
                 </Box>
                 {/*<StyledBusinessFeedItem/>*/}
                 <BigFilter lstBusiness={lstBusiness} circles={circlesFilter}
                            searchRes={searchRes} businessType={filterTypeBusiness} sortMethod={sortMethod}/>
+                <StyledFootprintForUser/>
+                <StyledReviewForUser/>
+                <StyledBusinessFeedItem/>
                 {/*{(lstBusiness === []) ? (<></>) : (lstBusiness.filter(business => (business.name.toLowerCase()).*/}
                 {/*includes(searchRes.toLowerCase())).map(filteredBusiness =>*/}
                 {/*    (*/}

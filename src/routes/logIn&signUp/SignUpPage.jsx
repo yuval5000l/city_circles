@@ -22,6 +22,7 @@ import {getUserById} from "../../BackEnd/Classes/UserClass";
 import {onAuthStateChanged} from "firebase/auth";
 import {uploadFile} from "../../BackEnd/Classes/GeneralFunctionsFireBase";
 import Avatar from "@mui/material/Avatar";
+import Box from "@mui/material/Box";
 
 export default function SignupPage() {
 
@@ -78,8 +79,8 @@ export default function SignupPage() {
             console.error(error);
         });
     }
-    return(
-        <>
+    return (
+        <Box marginTop="5rem !important">
             <Typography variant="h1" sx={{color: 'primary.main', textAlign: "start", margin: '1rem'}}>
                 Sign Up
             </Typography>
@@ -87,10 +88,12 @@ export default function SignupPage() {
                 Let’s get to know each other
             </Typography>
             <Typography variant="body1" sx={{textAlign: "start", margin: '1rem'}}>
-                We are CityCircle nice to meet you! We want your relocation process to be as comfortable as it gets. So... we are going to ask some question! Feel free to answer (you can change your decisions later).
+                We are CityCircle nice to meet you! We want your relocation process to be as comfortable as it gets.
+                So... we are going to ask some question! Feel free to answer (you can change your decisions later).
             </Typography>
             <Typography variant="body1" sx={{textAlign: "start", margin: '1rem'}}>
-                We want you to chose 3 CityCircles  to be a part of, so we will understand a little more about what you like. The rest will come naturally :)
+                We want you to chose 3 CityCircles to be a part of, so we will understand a little more about what you
+                like. The rest will come naturally :)
             </Typography>
             <Typography variant="h3" sx={{color: 'primary.main', textAlign: "start", margin: '1rem'}}>
                 So who are you?
@@ -99,7 +102,9 @@ export default function SignupPage() {
                 <Typography variant="h4">
                     Your Name Is..
                 </Typography>
-                <StyledDialogTextFieldReview value={name} onChange={(event) => {setName(event.target.value)}}/>
+                <StyledDialogTextFieldReview value={name} onChange={(event) => {
+                    setName(event.target.value)
+                }}/>
             </Stack>
             <Stack direction="column" alignItems="start" margin="1rem">
                 <Typography variant="h4">
@@ -116,7 +121,7 @@ export default function SignupPage() {
                 </LocalizationProvider>
 
             </Stack>
-            <Stack direction="column" margin="1rem" alignItems="start" >
+            <Stack direction="column" margin="1rem" alignItems="start">
                 <Typography variant="h4" textAlign="start">You are a student in..</Typography>
                 <StyledAutoComplete
                     disablePortal
@@ -126,14 +131,14 @@ export default function SignupPage() {
                     }}
                     id="combo-box-demo"
                     options={SchoolsLst}
-                    sx={{ width: 250 }}
+                    sx={{width: 250}}
                     renderInput={(params) => <TextField
                         {...params}
                         label="School"
                     />}
                 />
             </Stack>
-            <Stack direction="column" margin="1rem" alignItems="start" >
+            <Stack direction="column" margin="1rem" alignItems="start">
                 <Typography variant="h4" textAlign="start">You live in..</Typography>
                 <StyledAutoComplete
                     disablePortal
@@ -143,7 +148,7 @@ export default function SignupPage() {
                     }}
                     id="combo-box-demo"
                     options={NeighborhoodLst}
-                    sx={{ width: 250 }}
+                    sx={{width: 250}}
                     renderInput={(params) => <TextField
                         {...params}
                         label="Neighborhood"
@@ -152,7 +157,8 @@ export default function SignupPage() {
             </Stack>
 
             <Stack direction="column" margin="1rem" alignItems="start" marginBottom={5}>
-                <Typography variant="h4" textAlign="start">Your hobby is.. (for now, you can change it later :))</Typography>
+                <Typography variant="h4" textAlign="start">Your hobby is.. (for now, you can change it later
+                    :))</Typography>
                 <StyledAutoComplete
                     disablePortal
                     inputValue={chosenHobby}
@@ -161,7 +167,7 @@ export default function SignupPage() {
                     }}
                     id="combo-box-demo"
                     options={HobbyLst}
-                    sx={{ width: 250 }}
+                    sx={{width: 250}}
                     renderInput={(params) => <TextField
                         {...params}
                         label="Hobby"
@@ -192,12 +198,10 @@ export default function SignupPage() {
                 type="file"
                 onChange={(e) => setFile(e.target.files[0])}/>
             <button onClick={handleUploadPic}> Upload File</button>
-            {(picturePath ==="") ? (<Avatar sx={{ width: 100, height: 100 }}/>) :
-                (<Avatar src={picturePath} sx={{ width: 100, height: 100 }}/>)}
+            {(picturePath === "") ? (<Avatar sx={{width: 100, height: 100}}/>) :
+                (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}
 
             <StyledButtonGray onClick={handleSubmit}>Finish!</StyledButtonGray>
-
-
 
 
             {/*<Box sx={{position: 'relative'}}>*/}
@@ -211,6 +215,6 @@ export default function SignupPage() {
             <br/>
             <br/>
             <br/>
-        </>
-    )
+        </Box>
+    );
 }

@@ -7,8 +7,8 @@ import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 
 export default function StyledFootprintForUser() {
     return (
-        <box sx={{padding:"0.4rem", boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', borderBottom: '0.1rem solid #C3ED5B'}}>
-            <Stack direction="row" justifyContent="flex-start" spacing={2} padding="0.5rem">
+        <box >
+            <Stack direction="row" justifyContent="flex-start" spacing={2} padding="0.5rem" sx={{padding:"0.4rem", boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', borderBottom: '0.1rem solid #C3ED5B'}}>
                 <box>
                     <StyledAvatarWithBadge/>
                 </box>

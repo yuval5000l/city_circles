@@ -52,16 +52,22 @@ export default function StyledBusinessFeedItem(business) {
                         </Stack>
                     </Stack>
                 </Stack>
-                <AvatarGroup max={8}>
+                <AvatarGroup max={7} spacing={0.5}>
                     <Avatar alt="Remy Sharp" src="/static/images/avatar/1.jpg"/>
                     <Avatar alt="Travis Howard" src="/static/images/avatar/2.jpg"/>
                     <Avatar alt="Cindy Baker" src="/static/images/avatar/3.jpg"/>
                     <Avatar alt="Agnes Walker" src="/static/images/avatar/4.jpg"/>
                     <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg"/>
+                    <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg"/>
+                    <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg"/>
+                    <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg"/>
+                    <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg"/>
+                    <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg"/>
+                    <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg"/>
+                    <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg"/>
+                    <Avatar alt="Trevor Henderson" src="/static/images/avatar/5.jpg"/>
                 </AvatarGroup>
             </Stack>
-            <StyledReviewForUser/>
-            <StyledFootprintForUser/>
         </Box>
     );
 }

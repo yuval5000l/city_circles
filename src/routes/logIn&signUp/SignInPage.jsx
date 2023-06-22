@@ -61,13 +61,13 @@ export default function UserRegistrationForm () {
             {/*<StyledPurpleBox sx={{alignItems: "center", position: 'relative'}}>*/}
             {/*    <StyledLogoLogIn sx={{alignSelf: "center"}}/>*/}
             {/*</StyledPurpleBox>*/}
-            <Box sx={{justifySelf: "center"}}>
-                <Typography variant="h2" marginTop={4   }>
-                    Sign-Up
+            <Box sx={{justifySelf: "center"}} marginTop="5rem">
+                <Typography variant="h1" marginTop={4   }>
+                    Sign In
                 </Typography>
                 <Stack direction="column" spacing={5} marginBottom={4} marginTop={4}>
                     <Stack direction="column" spacing={1}>
-                        <Typography variant="h4">
+                        <Typography variant="h3">
                             Email
                         </Typography>
                         <TextField
@@ -78,8 +78,8 @@ export default function UserRegistrationForm () {
                             onChange={(e) => setEmail(e.target.value)}
                             InputProps={{
                                 startAdornment: (
-                                    <InputAdornment position="start">
-                                        <PersonRoundedIcon />
+                                    <InputAdornment fontSize="3rem !important" position="start">
+                                        <PersonRoundedIcon fontSize="large"/>
                                     </InputAdornment>
                                 ),
                             }}
@@ -87,7 +87,7 @@ export default function UserRegistrationForm () {
                         />
                     </Stack>
                     <Stack direction="column" spacing={1}>
-                        <Typography variant="h4">
+                        <Typography variant="h3">
                             Password
                         </Typography>
                         <TextField
@@ -99,7 +99,7 @@ export default function UserRegistrationForm () {
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
-                                        <HttpsOutlinedIcon />
+                                        <HttpsOutlinedIcon fontSize="large" />
                                     </InputAdornment>
                                 ),
                             }}
@@ -108,7 +108,7 @@ export default function UserRegistrationForm () {
                     </Stack>
                 </Stack>
                 <Stack direction="row" justifyContent="center" spacing={3} marginTop={5}>
-                    <StyledButtonGray onClick={handleSignUp}>
+                    <StyledButtonGray onClick={handleSignUp} >
                         Register
                     </StyledButtonGray>
                     <StyledButtonGray onClick={handleLogIn}>Log In</StyledButtonGray>

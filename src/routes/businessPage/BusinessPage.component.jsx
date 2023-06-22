@@ -31,15 +31,18 @@ export function showBusiness(business) {
                        // sx={{marginTop: "5.5rem"}}
                        width="100%" padding="1.5rem" color="white"
                        spacing={2}>
-                    <Stack direction="row" spacing={2} justifyContent="space-between">
-                        <Stack direction="column" color="white" spacing={2} alignItems="flex-start">
+                    <Stack direction="row" spacing={1} justifyContent="space-between">
+                        <Stack direction="column" color="white" spacing={2} alignItems="flex-start" maxWidth="15rem">
                             <Typography variant="h2">
                                 {business.name}
                             </Typography>
-                            <Stack direction="row" spacing={1}>
-                                {business.type.map((category) => <StyledTypeBox
+                            <Grid direction="column"
+                                  justifyContent="flex-start"
+                                  alignItems="flex-start"
+                                  spacing={3}>
+                                {business.type.map((category) => <StyledTypeBox marginTop="1rem"
                                     key={category}>{category}</StyledTypeBox>)}
-                            </Stack>
+                            </Grid>
                             <Stack direction="row" spacing={1}>
                                 <Typography>{business.getRating().toFixed(2)}</Typography>
                                 <StyledRating value={business.getRating()} />
