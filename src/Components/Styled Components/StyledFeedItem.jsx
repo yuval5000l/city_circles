@@ -42,9 +42,20 @@ export default function StyledFeedItem({user_id, user_name="name", profile_photo
                                            time= new timestamp(),
                                        business_name="name", business_photo_url="",
                                        rating=5, url_to_business="", review="",
-                                       review_address=""})
+                                       review_address="", setValueFunc = null})
 {
-
+    const setValueToBusiness = () =>{
+        if (setValueFunc !== null)
+        {
+            setValueFunc(1);
+        }
+    };
+    const setValueToProfile = () =>{
+        if (setValueFunc !== null)
+        {
+            setValueFunc(4);
+        }
+    };
     // const [open, setOpen] =  useState(false);
     //
     // const handleClickOpen = () => {
@@ -59,7 +70,7 @@ export default function StyledFeedItem({user_id, user_name="name", profile_photo
             <Stack direction="column" spacing={2} sx={{padding:"0.4rem", boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', borderBottom: '0.1rem solid #C3ED5B'}}>
                 <Box>
                     <Stack direction="row" spacing={1}>
-                        <Link to="/ProfilePageComponent" state ={{from: user_id}}>
+                        <Link to="/ProfilePageComponent" state ={{from: user_id}} onClick={setValueToProfile}>
                             {(profile_photo_url==="") ?
                                 (<StyledAvatarUserFeed/>) :
                                 (<StyledAvatarUserFeed src={profile_photo_url}/>)
@@ -99,7 +110,7 @@ export default function StyledFeedItem({user_id, user_name="name", profile_photo
                                 <Box>
                                     <Stack direction = "row" spacing = {0.5}>
                                         <StyledGrayButtonFullReview content={review}/>
-                                        <Link to="./BusinessPage" state={{ from: business_name}}><StyledGrayButtonVisitBusiness/></Link>
+                                        <Link to="./BusinessPage" state={{ from: business_name}} onClick={setValueToBusiness}><StyledGrayButtonVisitBusiness/></Link>
                                     </Stack>
                                 </Box>
                             </Stack>

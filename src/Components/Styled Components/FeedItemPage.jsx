@@ -7,7 +7,7 @@ import {onAuthStateChanged} from "firebase/auth";
 
 
 
-export default function FeedItemPage() {
+export default function FeedItemPage({setValue}) {
 
     useEffect(() => {
         getFriendsReviewsHelper()
@@ -39,7 +39,7 @@ export default function FeedItemPage() {
                                 business_name={review.business_name} business_photo_url={review.business_photo_url}
                                 rating={review.rating} url_to_business={review.url_to_business}
                                 review={review.review}
-                                review_address={review.rating}></StyledFeedItem>
+                                review_address={review.rating} setValueFunc={setValue}></StyledFeedItem>
             </Box>
         )}
     </Box>)

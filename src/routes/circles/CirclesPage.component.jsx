@@ -16,7 +16,7 @@ import Business from "../../BackEnd/Classes/BusinessClass";
 
 
 const CirclesPageComponent = () => {
-    const [searchRes, setSearchRes] = useOutletContext();
+    const [searchRes, setSearchRes, setButtomBarValue] = useOutletContext();
 
     const [user, setUser] = useState(null);
 

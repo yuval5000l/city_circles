@@ -1,18 +1,17 @@
 import {Component} from "react";
 import FeedItemPage from "../../Components/Styled Components/FeedItemPage";
+import {useOutletContext} from "react-router-dom";
 
 
-class HomePageComponent extends Component{
+const HomePageComponent = () => {
+    const [searchRes, setSearchRes, setButtomBarValue] = useOutletContext();
 
 
-
-    render(){
-        return(
-            <div>
-                <FeedItemPage/>
-            </div>
-        );
-    }
+    return (
+        <div>
+            <FeedItemPage setValue={setButtomBarValue}/>
+        </div>
+    );
 }
 
 export default HomePageComponent;

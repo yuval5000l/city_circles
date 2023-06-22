@@ -15,7 +15,7 @@ const NavigationComponent = () => {
     const pageDictionary = {'/':0, '/CirclesPageComponent':1,
     '/FriendsPageComponent': 3, "/ProfilePageComponent": 4};
     const [searchRes, setSearchRes] = useState("");
-    const [buttomBarValue, setButtomBarValue] = useState(0);
+    const [buttomBarValue, setButtomBarValue] = useState(0); // For BottomBarChosenThingy
 
 
     useEffect(() => {
@@ -23,7 +23,7 @@ const NavigationComponent = () => {
         setButtomBarValue(pageDictionary[location.pathname]);
 
     }, []);
-    console.log(buttomBarValue);
+    // console.log(buttomBarValue);
 
     const check_sign_in = () => {
         onAuthStateChanged(auth, (user) => {
@@ -46,7 +46,7 @@ const NavigationComponent = () => {
                 (<StyledTopMenuNew setSearch={setSearchRes} setValue={setButtomBarValue}/>)
             }
             <Box sx={{marginTop: "6.5rem", marginBottom: "4.5rem"}}>
-                <Outlet context={[searchRes, setSearchRes]}/>
+                <Outlet context={[searchRes, setSearchRes, setButtomBarValue]}/>
             </Box>
             <StyledBottomNavigationBar value1={buttomBarValue} setValue1={setButtomBarValue}/>
         </div>
