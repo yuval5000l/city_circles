@@ -1,5 +1,5 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {Grid, Menu, MenuItem, Stack} from '@mui/material';
+import React, {useState} from 'react';
+import {Grid, MenuItem} from '@mui/material';
 import {StyledButtonGray, StyledMenu} from "./styledComponents";
 import theme from "../../Theme/Theme";
 import Box from "@mui/material/Box";

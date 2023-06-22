@@ -70,14 +70,13 @@ const CirclesPageComponent = () => {
 
     const [lstBusiness, setLstBusiness] = useState([]);
 
-    // const circleButtons = [false, false, false];
     const [circleButtons, setCircleButtons] = useState([false, false, false]);
-    // let circlesFilter = []; // Filters by circles, first filter (empty list if null)
     const [circlesFilter, setCirclesFilter] = useState([]); // Filters by circles, first filter
     // const [labelFilter, setLabelFilter] = useState([]); // Filter by labels, second filter (empty list if null)
     const [sortMethod, setSortMethod]  = useState(""); // Sort by Footprints or Distance (empty string if null)
     const [filterTypeBusiness, setFilterTypeBusiness] = useState(""); // Filters by the type of business (empty string if null)
     // console.log(filterTypeBusiness);
+
     useEffect(() => {
         getUser();
         getBusinesses();
@@ -114,8 +113,6 @@ const CirclesPageComponent = () => {
             {
                 if (circleButtons[i]){ tempList.push(user.getCircles()[i]);}
             }
-
-            // circlesFilter = tempList;
             setCirclesFilter(tempList);
         }
         return inner;

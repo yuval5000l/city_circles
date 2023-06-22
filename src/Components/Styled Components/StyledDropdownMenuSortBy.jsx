@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import {MenuItem, Stack} from '@mui/material';
-import {StyledButtonGray, StyledCircleBox, StyledMenu} from "./styledComponents";
+import {StyledButtonGray, StyledMenu} from "./styledComponents";
 import theme from "../../Theme/Theme";
 import Box from "@mui/material/Box";
 import StyledCirclesSearchItem from "./StyledSortByButton";

@@ -74,7 +74,7 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
 
                 if (business !== null)
                 {
-                    await business.addUserFootprint(auth?.currentUser?.uid, user.getUserName(), user.getPic());
+                    await business.addUserFootprint(auth?.currentUser?.uid, user.getUserName(), user.getPic(), user.getCircles());
                 }
             }
             else

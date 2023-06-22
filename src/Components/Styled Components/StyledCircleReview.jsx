@@ -68,7 +68,7 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
                     await user.addBusinessReview(chosenBusiness, chosenBusiness, business.getProfilePic(), review, rating)
                 }
                 if (business !== null) {
-                    await business.addUserReview(auth?.currentUser?.uid, user.getUserName(), user.getPic(), review, rating);
+                    await business.addUserReview(auth?.currentUser?.uid, user.getUserName(), user.getPic(), review, rating, user.getCircles());
                 }
             }
             else
