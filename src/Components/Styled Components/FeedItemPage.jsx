@@ -21,7 +21,7 @@ export default function FeedItemPage({setValue}) {
     const getFriendsReviewsHelper = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                User.getAllUsersReviewsExceptCurrentUser().then((lst) => {
+                User.getAllUsersReviewsFootprintsExceptCurrentUser().then((lst) => {
                     // setListReviews(lst);
                     setListReviews(lst.sort(CompareUserTimeStamp));
                 }).catch((error) => {

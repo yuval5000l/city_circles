@@ -2,6 +2,7 @@ import React, {useState} from 'react';
 import {Tabs, Tab, Typography, Box, ListItem, List} from '@mui/material';
 import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 import StyledFootprintForUser from "../../Components/Styled Components/StyledFootprintForUser";
+import StyledReviewForUser from "../../Components/Styled Components/StyledReviewForUser";
 
 function TabPanel({children, value, index}) {
     return (
@@ -50,10 +51,13 @@ export default function StyledBusinessTabs({business}) {
 
                     {business.reviews.map((review) =>
                         <ListItem key={review.userID}>
-                            userID: {review.userID % 10}, <br></br>
-                            content: {review.content}, <br></br>
-                            rating: {review.rating}, <br></br>
-                            time: {calculateTime(review.timestamp.toDate())}
+                            <StyledReviewForUser BusinessName={review.userName} reviewContent={review.content}
+                                                 businessPhoto={review.userPhoto} userPhoto={business.getProfilePic()}
+                                                 rating={review.rating} timestamp={review.timestamp.toDate()} />
+                            {/*userID: {review.userID % 10}, <br></br>*/}
+                            {/*content: {review.content}, <br></br>*/}
+                            {/*rating: {review.rating}, <br></br>*/}
+                            {/*time: {calculateTime(review.timestamp.toDate())}*/}
                         </ListItem>
                     )}
                 </List>

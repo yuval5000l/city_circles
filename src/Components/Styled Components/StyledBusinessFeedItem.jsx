@@ -64,7 +64,7 @@ export default function StyledBusinessFeedItem({business}) {
                     </Stack>
                 </Stack>
                 <AvatarGroup max={7} spacing={0.5}>
-                    {allUsers.map(review => <Avatar border="0.2rem solid gray" alt={review.userName} src={review.userPhoto}/>)}
+                    {allUsers.map(review => <Avatar border="0.2rem solid gray" alt={review.userName} src={review.userPhoto} sx={{boxShadow : "0px 4px 4px rgba(0, 0, 0, 0.25)",}}/>)}
 
                 </AvatarGroup>
             </Stack>

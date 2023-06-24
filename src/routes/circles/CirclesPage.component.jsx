@@ -40,8 +40,9 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod})
 
     function checkCircles(business)
     {
+
         // return business.getCirclesCount()[circles[0]] > 0;
-        return (circles.length === 0) || circles.some(circle => business.getCirclesCount()[circle] > 0); // Checks if there is at least 1 circle relevant
+        return (circles.length === 0) || circles.every(circle => business.getCirclesCount()[circle] > 0); // Checks if there is at least 1 circle relevant
     }
 
     // Check if this business has any reviews in the relevant circle(s)

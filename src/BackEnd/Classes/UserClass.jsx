@@ -66,6 +66,7 @@ export default class User {
             content: reviewContent,
             rating: rating,
             timestamp: timestamp.now().toDate(),
+            circles: this.circles
         };
         this.reviews.push(review);
         // console.log("Review added: ", review);
@@ -78,6 +79,7 @@ export default class User {
             businessName: businessName,
             businessPhoto: Photo,
             timestamp: timestamp.now().toDate(),
+            circles: this.circles
         };
         this.footprints.push(footprint);
         // console.log("footprint added: ", footprint);
@@ -135,7 +137,7 @@ export default class User {
     feedItemConverter(review, business) {
         return {
             user_id: this.userID_, user_name: this.name_, profile_photo_url: this.profile_pic,
-            circles: this.circles, time: review.timestamp.toDate(),
+            circles: review.circles, time: review.timestamp.toDate(),
             business_name: business.name, business_photo_url: business.profilePic,
             rating: (business.rating[0] / business.rating[1]),
             url_to_business: business.id, review: review.content,
@@ -169,11 +171,19 @@ export default class User {
     static feedItemConverter(user, review, business) {
         return {
             user_id: user.userID_, user_name: user.name_, profile_photo_url: user.profile_pic,
-            circles: user.circles, time: review.timestamp.toDate(),
+            circles: review.circles, time: review.timestamp.toDate(),
             business_name: business.name, business_photo_url: business.profilePic,
             rating: (business.rating[0] / business.rating[1]),
             url_to_business: business.id, review: review.content,
             review_address: review.content
+        }
+    }
+    static feedItemFootprintConverter(user, review, business) {
+        return {
+            user_id: user.userID_, user_name: user.name_, profile_photo_url: user.profile_pic,
+            circles: review.circles, time: review.timestamp.toDate(),
+            business_name: business.name, business_photo_url: business.profilePic,
+            url_to_business: business.id
         }
     }
     static async getAllUsers()
@@ -192,7 +202,7 @@ export default class User {
         return lst;
     }
 
-    static async getAllUsersReviewsExceptCurrentUser()
+    static async getAllUsersReviewsFootprintsExceptCurrentUser()
     {
         let lstUsers = [];
         const querySnapshot = await getDocs(collection(db, "Users"));
@@ -217,6 +227,11 @@ export default class User {
                 const business = await getBusinessByName(review.businessID);
                 listOfReviews.push(User.feedItemConverter(user, review, business));
             }
+            // for (const review of user.getUserFootprints())
+            // {
+            //     const business = await getBusinessByName(review.businessID);
+            //     listOfReviews.push(User.feedItemFootprintConverter(user, review, business));
+            // }
         }
 
         return listOfReviews;
