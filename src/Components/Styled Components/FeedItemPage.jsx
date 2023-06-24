@@ -21,12 +21,19 @@ export default function FeedItemPage({setValue}) {
     const getFriendsReviewsHelper = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
-                User.getFriendsReviews(auth?.currentUser?.uid).then((lst) => {
+                User.getAllUsersReviewsExceptCurrentUser().then((lst) => {
                     // setListReviews(lst);
                     setListReviews(lst.sort(CompareUserTimeStamp));
                 }).catch((error) => {
                     console.error(error);
                 });
+
+                // User.getFriendsReviews(auth?.currentUser?.uid).then((lst) => {
+                //     // setListReviews(lst);
+                //     setListReviews(lst.sort(CompareUserTimeStamp));
+                // }).catch((error) => {
+                //     console.error(error);
+                // });
             }
         });
     };
