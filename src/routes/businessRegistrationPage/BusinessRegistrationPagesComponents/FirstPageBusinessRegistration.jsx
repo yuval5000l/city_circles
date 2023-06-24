@@ -5,9 +5,9 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {Stack} from "@mui/material";
 import {useState} from "react";
-import {addDoc, collection} from "firebase/firestore";
+import {collection} from "firebase/firestore";
 import Business from "../../../BackEnd/Classes/BusinessClass";
-import {auth, db} from "../../../BackEnd/config/firebase";
+import {db} from "../../../BackEnd/config/firebase";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
 import TextField from "@mui/material/TextField";
@@ -18,7 +18,7 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import {useSnackbar} from 'notistack';
+// import {useSnackbar} from 'notistack';
 import theme from "../../../Theme/Theme";
 
 
@@ -67,7 +67,7 @@ export default function FirstPageBusinessRegistration({onNext, data}) {
 
     // List of all Users
     // const [businessList, setBusinessList] = useState([]);
-    const businessesCollectionRef = collection(db, "Business");
+    // const businessesCollectionRef = collection(db, "Business");
 
     // const getBusinessesList = async () => {
     //     // READ THE DATA
@@ -137,7 +137,7 @@ export default function FirstPageBusinessRegistration({onNext, data}) {
                             margin: "1rem",
                             borderRadius: "15px",
                             boxShadow: "1px 2px 4px #000000"
-                        }}>
+                        }} key={btype}>
                             {btype}
                         </ToggleButton>
                     )}
