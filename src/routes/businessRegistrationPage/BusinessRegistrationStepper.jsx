@@ -10,15 +10,9 @@ import SecondPageBusinessRegistration from './BusinessRegistrationPagesComponent
 import ThirdPageBusinessRegistration from './BusinessRegistrationPagesComponents/ThirdPageBusinessRegistration';
 import FourthPageBusinessRegistration from './BusinessRegistrationPagesComponents/FourthPageBusinessRegistration';
 import Business from '../../BackEnd/Classes/BusinessClass';
-import {DialogActions, DialogContent, Stack} from "@mui/material";
+import {DialogContent, Stack} from "@mui/material";
 import theme from "../../Theme/Theme";
-import {
-    StyledAutoComplete,
-    StyledDialogFootprintIcon,
-    StyledDialogSecondTitle,
-    StyledDialogTitle
-} from "../../Components/Styled Components/styledComponents";
-import TextField from "@mui/material/TextField";
+
 import Dialog from "@mui/material/Dialog";
 import {useState} from "react";
 

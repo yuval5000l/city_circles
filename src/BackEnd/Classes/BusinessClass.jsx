@@ -260,7 +260,7 @@ const businessConverter = {
     },
 };
 
-function translateOpeningHoursToArrays(openingHours) {
+export function translateOpeningHoursToArrays(openingHours) {
     let lstDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
     const regex = /(\d+),(\d+)/g;
     let openingHoursArray = {};

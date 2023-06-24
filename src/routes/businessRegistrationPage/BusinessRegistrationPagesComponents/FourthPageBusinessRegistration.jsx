@@ -2,6 +2,7 @@ import * as React from 'react';
 import Typography from '@mui/material/Typography';
 import {Stack} from "@mui/material";
 import Checkbox from '@mui/material/Checkbox';
+import Button from "@mui/material/Button";
 
 function ControlledCheckbox() {
     const [checked, setChecked] = React.useState(false);
@@ -20,7 +21,10 @@ function ControlledCheckbox() {
 }
 
 export default function FourthPageBusinessRegistration({onBack, name, type, sddress, photoUrl, openHours, contacts}) {
-    console.log(name, type, sddress, photoUrl, openHours, contacts)
+    const handleOnBack = () => {
+        onBack([]);
+    }
+    console.log(name, type, sddress, photoUrl, openHours, contacts);
     return(
         <div>
             <Stack direction="column" justifyContent="flex-start" spacing={2} textAlign="center" padding="1rem">
@@ -32,6 +36,15 @@ export default function FourthPageBusinessRegistration({onBack, name, type, sddr
                     <Typography variant="h3">I approve that all the data is true and I am the business owner</Typography>
                 </Stack>
             </Stack>
+            <Button
+                color="inherit"
+                onClick={handleOnBack}
+                sx={{mr: 1}}
+            >
+                <Typography variant="h3">
+                    Back
+                </Typography>
+            </Button>
         </div>
     )
 }

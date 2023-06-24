@@ -1,18 +1,7 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
-// import BasicTextFields from "./TextField.components";
 import {Box, Stack} from "@mui/material";
-// import Box from '@mui/material/Box';
-// import RowRadioButtonsGroup from "./FirstPageOfBusinessRegistration/RadioButton.component";
-// import BusinessTypesSelection from "../BusinessTypeSelect/BusinessTypeSelect.components";
-//
-// import {useEffect, useState} from "react";
-// import {addDoc, collection, deleteDoc, doc, getDocs, updateDoc} from "firebase/firestore";
-// import {auth, db, storage} from "../../config/firebase";
-// import {ref, uploadBytes} from "firebase/storage";
-// import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-// import ToggleButton from "@mui/material/ToggleButton";
-// import TextField from "@mui/material/TextField";
+import {translateOpeningHoursToArrays} from "../../../BackEnd/Classes/BusinessClass";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import dayjs from "dayjs";
@@ -22,8 +11,6 @@ import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import Button from "@mui/material/Button";
 import {useEffect, useState} from "react";
 import TextField from "@mui/material/TextField";
-import {MobileTimePicker, TimePicker} from "@mui/x-date-pickers";
-import {MultiInputTimeRangeField} from "@mui/x-date-pickers-pro";
 import {uploadFile} from "../../../BackEnd/Classes/GeneralFunctionsFireBase";
 import Avatar from "@mui/material/Avatar";
 
@@ -34,8 +21,9 @@ function getHoursAndMinutes(day) {
 }
 
 export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
+
     const [address, setAddress] = useState("");
-    const [picturePath, setPicturePath] = useState("");
+    const [picturePath, setPicturePath] = useState((data!== null && data[0] !== "") ? (data[0]) :(""));
     const [file, setFile] = useState(null);
 
     const [city, setCity] = useState('');
@@ -48,6 +36,7 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
         return FullAddress
     }
 
+    const [openingHoursArray, setOpeningHoursArray] = useState({});
 
     useEffect(() => {
         async function foo() {
@@ -57,7 +46,19 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
         }
 
         foo();
-    }, [file]);
+        if (data !== null) {
+            console.log(data);
+            let lstDays = ["Sunday", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"];
+            let lstSetDays = [setSunday, setMonday, setTuesday, setWednesday, setThursday, setFriday, setSaturday]
+            setOpeningHoursArray(translateOpeningHoursToArrays(data[2]));
+            let Opening = translateOpeningHoursToArrays(data[2]);
+            for (let i = 0; i < 7; i++) {
+                let temp_start = dayjs().hour(Opening[lstDays[i]][0][0]).minute(Opening[lstDays[i]][0][1]);
+                let temp_end = dayjs().hour(Opening[lstDays[i]][1][0]).minute(Opening[lstDays[i]][1][1]);
+                lstSetDays[i]([temp_start, temp_end]);
+            }
+        }
+    }, [file, data]);
 
     const handleUploadPic = async () => {
         uploadFile(file).then((pathy) => {
@@ -95,6 +96,8 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
         dayjs(),
         dayjs(),
     ]);
+
+
     const handleOnNext = () => {
         const finalAddress = CreateAddress();
         // console.log("address is: " + address );
@@ -107,7 +110,14 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
         }]);
     }
     const handleOnBack = () => {
+
         const finalAddress = CreateAddress();
+        console.log([finalAddress, picturePath, {
+            "Sunday": getHoursAndMinutes(sunday),
+            "Monday": getHoursAndMinutes(monday), "Tuesday": getHoursAndMinutes(tuesday),
+            "Wednesday": getHoursAndMinutes(wednesday), "Thursday": getHoursAndMinutes(thursday),
+            "Friday": getHoursAndMinutes(friday), "Saturday": getHoursAndMinutes(saturday)
+        }]);
         onBack([finalAddress, picturePath, {
             "Sunday": getHoursAndMinutes(sunday),
             "Monday": getHoursAndMinutes(monday), "Tuesday": getHoursAndMinutes(tuesday),
