@@ -15,8 +15,7 @@ import theme from "../../Theme/Theme";
 import Business, {getBusinessByName} from "../../BackEnd/Classes/BusinessClass"
 import {auth} from "../../BackEnd/config/firebase"
 import {getUserById} from "../../BackEnd/Classes/UserClass"
-import {doc} from "firebase/firestore";
-import DialogTitle from "@mui/material/DialogTitle";
+
 
 export default function StyledCircleReview({closeSmallDialog = () => {}}) {
     const [open, setOpen] = useState(false);
@@ -196,8 +195,8 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
                                             backgroundColor: `${theme.palette.primary.main}`,
                                             border: `0.2rem solid ${theme.palette.secondary.main}`
                                         }}>
-                                        <StyledDialogTitle>Your review was accepted</StyledDialogTitle>
-                                            <Typography variant="h4">
+                                            <StyledDialogTitle>Your <strong>review</strong> was accepted</StyledDialogTitle>
+                                            <Typography variant="h4" color="white">
                                                 You care!
                                             </Typography>
                                             {/* Add additional components for the second dialog */}

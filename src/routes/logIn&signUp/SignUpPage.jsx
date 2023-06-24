@@ -3,21 +3,19 @@ import {
     StyledLightCircleBox,
     StyledDialogTextFieldReview,
     StyledAutoComplete,
-    // StyledRotatePurpleBox,
-    StyledButtonGray, StyledCircleBox, StyledPurpleBox
 } from "../../Components/Styled Components/styledComponents";
-import {Button, Stack, Typography} from "@mui/material";
+import {Button, List, ListItem, Stack, Typography} from "@mui/material";
 import {auth} from "../../BackEnd/config/firebase";
 import * as React from 'react';
-import dayjs from 'dayjs';
-import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
-import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
-import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
-import {DatePicker} from '@mui/x-date-pickers/DatePicker';
+// import dayjs from 'dayjs';
+// import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
+// import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+// import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+// import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import TextField from "@mui/material/TextField";
 import {useEffect, useState} from "react";
 
-import {BottomBoxWithLogo} from "../../Components/Styled Components/StyledBoxWithLogo";
+// import {BottomBoxWithLogo} from "../../Components/Styled Components/StyledBoxWithLogo";
 import User, {getUserById} from "../../BackEnd/Classes/UserClass";
 import {onAuthStateChanged} from "firebase/auth";
 import {uploadFile} from "../../BackEnd/Classes/GeneralFunctionsFireBase";
@@ -43,7 +41,6 @@ export default function SignupPage() {
     };
     // const userID = auth?.currentUser?.uid;
     const [name, setName] = useState("")
-    const [value, setValue] = React.useState(dayjs('2022-04-17'));
     const [chosenSchool, setChosenSchool] = useState("");
     const [chosenNeighborhood, setChosenNeighborhood] = useState("");
     const [chosenHobby, setChosenHobby] = useState("");
@@ -134,21 +131,6 @@ export default function SignupPage() {
                     }}/>
                 </Stack>
                 <Stack direction="column" alignItems="start" spacing={1}>
-                    <Typography variant="h3">
-                        Your Birthday is on..
-                    </Typography>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        <DemoContainer components={['DatePicker', 'DatePicker']}>
-                            <DatePicker
-                                label="birthday day"
-                                value={value}
-                                onChange={(newValue) => setValue(newValue)}
-                            />
-                        </DemoContainer>
-                    </LocalizationProvider>
-
-                </Stack>
-                <Stack direction="column" alignItems="start" spacing={1}>
                     <Typography variant="h3" textAlign="start">You are a student in..</Typography>
                     <StyledAutoComplete
                         disablePortal
@@ -165,7 +147,7 @@ export default function SignupPage() {
                         />}
                     />
                 </Stack>
-                <Stack direction="column" margin="1rem" alignItems="start">
+                <Stack direction="column" margin="1rem" alignItems="start" spacing={1}>
                     <Typography variant="h3" textAlign="start">You live in..</Typography>
                     <StyledAutoComplete
                         disablePortal
@@ -183,8 +165,23 @@ export default function SignupPage() {
                     />
                 </Stack>
 
-                <Stack direction="column" margin="1rem" alignItems="start">
+                <Stack direction="column" margin="1rem" alignItems="start" spacing={1}>
                     <Typography variant="h3" textAlign="start">Your personality type is..</Typography>
+                    <Typography variant = "h4">A combination of:</Typography>
+                    <List sx={{textAlign:"left"}}>
+                        <ListItem sx={{textAlign:"left"}}>
+                            <Typography variant = "h4"><strong>E</strong>xtrovert | <strong>I</strong>ntrovert</Typography>
+                        </ListItem>
+                        <ListItem sx={{textAlign:"left"}}>
+                            <Typography variant = "h4"><strong>S</strong>ensing | I<strong>N</strong>tuition</Typography>
+                        </ListItem>
+                        <ListItem>
+                            <Typography variant = "h4"><strong>T</strong>hinking | <strong>F</strong>eeling</Typography>
+                        </ListItem>
+                        <ListItem>
+                            <Typography variant = "h4"><strong>J</strong>udging | <strong>P</strong>erceiving</Typography>
+                        </ListItem>
+                    </List>
                     <StyledAutoComplete
                         disablePortal
                         inputValue={chosenHobby}

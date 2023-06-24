@@ -1,6 +1,5 @@
 import {styled} from "@mui/material/styles";
 import {
-    alpha,
     AppBar,
     Autocomplete, Badge,
     BottomNavigation, BottomNavigationAction,
@@ -23,7 +22,7 @@ import TextField from "@mui/material/TextField";
 export const StyledButtonGray = styled(Button)(({theme}) => ({
     backgroundColor: theme.palette.info.light,
     color: "black",
-    maxWidth:"fit-content",
+    maxWidth: "fit-content",
     padding: '0.3rem',
     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
     borderRadius: '15px',
@@ -53,27 +52,27 @@ export const StyledButtonGreen = styled(Button)(({theme}) => ({
 export const StyledAppBarTop = styled(AppBar)(({theme}) => ({
     backgroundColor: theme.palette.primary.main,
     position: "fixed",
-    maxWidth:"100%",
+    maxWidth: "100%",
     [theme.breakpoints.up('xs')]: {
         height: '6.5rem',
     }
 }));
 
-export const StyledPurpleBox = styled(AppBar)(({ theme })=> ({
-    backgroundColor:theme.palette.primary.main,
-    borderBottom:`0.65rem solid ${theme.palette.secondary.main}`,
+export const StyledPurpleBox = styled(AppBar)(({theme}) => ({
+    backgroundColor: theme.palette.primary.main,
+    borderBottom: `0.65rem solid ${theme.palette.secondary.main}`,
     // position:"fixed",
     [theme.breakpoints.up('xs')]: {
-        height:'16rem',
+        height: '16rem',
     }
 }));
 
-export const StyledRotatePurpleBox = styled(AppBar)(({ theme })=> ({
-    backgroundColor:theme.palette.primary.main,
-    borderTop:`0.65rem solid ${theme.palette.secondary.main}`,
+export const StyledRotatePurpleBox = styled(AppBar)(({theme}) => ({
+    backgroundColor: theme.palette.primary.main,
+    borderTop: `0.65rem solid ${theme.palette.secondary.main}`,
     // position:"fixed",
     [theme.breakpoints.up('xs')]: {
-        height:'16rem',
+        height: '16rem',
     }
 }));
 
@@ -83,7 +82,7 @@ export const StyledSearchBar = styled(Input)(({theme}) => ({
     marginLeft: "auto",
     marginRight: "auto",
     borderRadius: "10px",
-    padding:"0.3rem",
+    padding: "0.3rem",
     [theme.breakpoints.up('xs')]: {
         height: '3rem',
     }
@@ -131,53 +130,55 @@ export const StyledLightCircleBox = styled(Box)(({theme}) => ({
     }
 }));
 
-export const StyledLogoBox = styled(Box)(({ theme })=> ({
-    borderRadius:"50%",
+export const StyledLogoBox = styled(Box)(({theme}) => ({
+    borderRadius: "50%",
     boxShadow: 'rgb(38, 57, 77) 0px 20px 30px -10px',
-    border:`0.65rem solid ${theme.palette.secondary.main}`,
-    backgroundColor:'white',
+    border: `0.65rem solid ${theme.palette.secondary.main}`,
+    backgroundColor: 'white',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    [theme.breakpoints.up('xs')]:{
-        width:"9.5rem",
-        height:"9.5rem",
+    [theme.breakpoints.up('xs')]: {
+        width: "9.5rem",
+        height: "9.5rem",
     }
 }));
 
-export const StyledSmallLogoBox = styled(Box)(({ theme })=> ({
-    borderRadius:"50%",
+export const StyledSmallLogoBox = styled(Box)(({theme}) => ({
+    borderRadius: "50%",
     boxShadow: 'rgb(38, 57, 77) 0px 20px 30px -10px',
-    border:`0.65rem solid ${theme.palette.secondary.main}`,
-    backgroundColor:'white',
+    border: `0.65rem solid ${theme.palette.secondary.main}`,
+    backgroundColor: 'white',
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    [theme.breakpoints.up('xs')]:{
-        width:"5.5rem",
-        height:"5.5rem",
+    [theme.breakpoints.up('xs')]: {
+        width: "5.5rem",
+        height: "5.5rem",
     }
 }));
 
-export const StyledAvatarUserFeed = styled(Avatar)(({ theme })=> ({
-    boxShadow : "0px 4px 4px rgba(0, 0, 0, 0.25)",
-    [theme.breakpoints.up('xs')]:{
-        width:"3.5rem",
-        height:"3.5rem"
+export const StyledAvatarUserFeed = styled(Avatar)(({theme}) => ({
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    [theme.breakpoints.up('xs')]: {
+        width: "3.5rem",
+        height: "3.5rem"
 // export const StyledAvatarUserFeed = styled(Avatar)(({theme}) => ({
 //     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
 //     [theme.breakpoints.up('xs')]: {
 //         width: "2.5rem",
 //         height: "2.5rem"
 //     }
-}}));
+    }
+}));
 
-export const StyledAvatarBusinessFeed = styled(Avatar)(({ theme })=> ({
-    boxShadow : "0px 4px 4px rgba(0, 0, 0, 0.25)",
-    [theme.breakpoints.up('xs')]:{
-        width:"7rem",
-        height:"7rem"
-    }}));
+export const StyledAvatarBusinessFeed = styled(Avatar)(({theme}) => ({
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    [theme.breakpoints.up('xs')]: {
+        width: "7rem",
+        height: "7rem"
+    }
+}));
 
 export const StyledSmallCirclesButton = styled(SupervisedUserCircleIcon)(({theme}) => ({
     color: theme.palette.primary.main,
@@ -305,10 +306,11 @@ export const StyledBottomNavigationAction = styled(BottomNavigationAction)(({the
 }));
 
 export const StyledBottomNavigation = styled(BottomNavigation)(({theme}) => ({
-    position:"fixed",
-    bottom:"0",
-    width:"100%",
-    zIndex:"2000",
+    position: "fixed",
+    bottom: "0",
+    borderTop: "1px solid black",
+    width: "100%",
+    zIndex: "2000",
     [theme.breakpoints.up('xs')]: {
         height: "4.5rem"
     },
@@ -330,12 +332,12 @@ export const StyledMenu = styled((props) => (
         }}
         {...props}
     />
-))(({ theme }) => ({
+))(({theme}) => ({
     '& .MuiPaper-root': {
         borderRadius: 6,
         backgroundColor: theme.palette.primary.main,
-        color:"white",
-        border:`0.4rem solid ${theme.palette.secondary.main}`,
+        color: "white",
+        border: `0.4rem solid ${theme.palette.secondary.main}`,
         boxShadow:
             'rgb(255, 255, 255) 0px 0px 0px 0px, rgba(0, 0, 0, 0.05) 0px 0px 0px 1px, rgba(0, 0, 0, 0.1) 0px 10px 15px -3px, rgba(0, 0, 0, 0.05) 0px 4px 6px -2px',
         '& .MuiMenu-list': {
@@ -347,33 +349,30 @@ export const StyledMenu = styled((props) => (
 export const StyledTypeBox = styled(Box)(({theme}) => ({
     backgroundColor: theme.palette.secondary.main,
     border: `0.1rem solid ${theme.palette.info.main}`,
-    width:"contain",
-    color:"white",
-    maxWidth:"fit-content",
+    width: "contain",
+    color: "black",
+    maxWidth: "fit-content",
     ...theme.typography.h6,
-    borderRadius:"15px",
-    padding:"3px",
-    [theme.breakpoints.up('xs')]: {
-    }
+    borderRadius: "15px",
+    padding: "3px",
+    [theme.breakpoints.up('xs')]: {}
 }));
 
 export const StyledInfoBox = styled(Box)(({theme}) => ({
     backgroundColor: "white",
-    border:`0.2rem solid ${theme.palette.secondary.main}`,
-    width:"contain",
-    color:"black",
-    maxWidth:"fit-content",
+    border: `0.2rem solid ${theme.palette.secondary.main}`,
+    width: "contain",
+    color: "black",
+    maxWidth: "fit-content",
     ...theme.typography.p,
-    borderRadius:"15px",
-    padding:"3px",
-    [theme.breakpoints.up('xs')]: {
-    }
+    borderRadius: "15px",
+    padding: "3px",
+    [theme.breakpoints.up('xs')]: {}
 }));
 
 export const StyledGreenBorderBox = styled(Box)(({theme}) => ({
-    border:`0.2rem solid ${theme.palette.secondary.main}`,
-    [theme.breakpoints.up('xs')]: {
-    }
+    border: `0.2rem solid ${theme.palette.secondary.main}`,
+    [theme.breakpoints.up('xs')]: {}
 }));
 
 export const StyledBadge = styled(Badge)(({theme}) => ({
@@ -405,13 +404,13 @@ export const StyledBadge = styled(Badge)(({theme}) => ({
     },
 }));
 
-export const SmallAvatar = styled(Avatar)(({ theme }) => ({
+export const SmallAvatar = styled(Avatar)(({}) => ({
     width: 22,
     height: 22,
     border: `2px solid black`,
 }));
 
-export const StyledListItem = styled(ListItem)(({ theme }) => ({
+export const StyledListItem = styled(ListItem)(({}) => ({
     width: 22,
     height: 22,
     border: `2px solid black`,
