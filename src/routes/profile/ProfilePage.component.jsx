@@ -3,11 +3,11 @@ import {useEffect, useState} from "react";
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import {getUserById} from "../../BackEnd/Classes/UserClass";
-import {Box, Stack, Typography} from "@mui/material";
+import {Box, Button, Stack, Typography} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import theme from "../../Theme/Theme";
 import {TopBoxWithProfileImg} from "../../Components/Styled Components/StyledBoxWithLogo";
-import {StyledLightCircleBox} from "../../Components/Styled Components/styledComponents";
+import {StyledButtonGreen, StyledLightCircleBox} from "../../Components/Styled Components/styledComponents";
 import * as React from "react";
 import {
     SmallPurpleBox, StyledLightCircleBoxForProfile,
@@ -27,15 +27,15 @@ function FeedItem(user, lstOfReviews) {
             {lstOfReviews.map(review =>
                 <Box key={review.business_name}>
                     <StyledFeedItemProfile user_id={review.user_id}
-                                    user_name={review.user_name} profile_photo_url={review.profile_photo_url}
-                                    circles={review.circles}
-                                    time={review.time}
-                                    business_name={review.business_name}
-                                    business_photo_url={review.business_photo_url}
-                                    rating={review.rating}
-                                    url_to_business={review.url_to_business}
-                                    review={review.review}
-                                    review_address={review.rating}></StyledFeedItemProfile>
+                                           user_name={review.user_name} profile_photo_url={review.profile_photo_url}
+                                           circles={review.circles}
+                                           time={review.time}
+                                           business_name={review.business_name}
+                                           business_photo_url={review.business_photo_url}
+                                           rating={review.rating}
+                                           url_to_business={review.url_to_business}
+                                           review={review.review}
+                                           review_address={review.rating}></StyledFeedItemProfile>
                 </Box>
             )}
         </Box>)
@@ -61,7 +61,7 @@ function showUserProfile(user, lstOfReviews) {
                             <Stack direction="column" spacing="auto" justifyContent="center" margin="auto">
                                 <SupervisedUserCircleIcon
                                     sx={{height: "2.5rem", width: "2.5rem", position: "start", fill: "white"}}/>
-                                <Stack direction="row" spacing={2} justifyContent="center" margin="auto">
+                                <Stack>
                                     {user.getCircles().map(circle =>
                                         <Box key={circle}>
                                             <StyledLightCircleBox>
@@ -113,46 +113,44 @@ function showUserProfile(user, lstOfReviews) {
 
 
 function showMyProfile(user) {
-    return (<div>
-        <Box
-            sx={{
-                display: 'flex',
-                flexDirection: 'row',
-                justifyContent: 'center',
-                alignItems: 'center',
-                marginTop: '0px',
-                backgroundColor: theme.palette.primary.main,
-            }}
-        >
-                <Box
+    return (
+        <>
+            <Box
                 sx={{
                     display: 'flex',
-                    flexDirection: 'column',
+                    flexDirection: 'row',
+                    justifyContent: 'center',
                     alignItems: 'center',
-                    padding: '10px',
-                    borderRadius: '0px',
-                    marginTop: '0px',
+                    backgroundColor: theme.palette.primary.main,
                 }}
             >
-                <Avatar
-                    src={user.getPic()}
-                    sx={{width: 100, height: 100, marginTop: '0px'}}
-                />
-                <Box sx={{display: 'flex', gap: '8px', marginTop: '14px'}}>
-                    <Typography variant="h2" >
-                        {/*current user name...*/}
-                        {user.getUserName()}
-                    </Typography>
-                    {/*<Button variant="contained" color="secondary">*/}
-                    {/*    Edit Profile*/}
-                    {/*</Button>*/}
+                <Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center',
+                    }}
+                >
+                    <Stack direction="column" spacing={2} justifyContent="flex-start"
+                           alignItems="center">
+                        <Avatar
+                            src={user.getPic()}
+                            sx={{width: "8rem", height: "8rem"}}
+                        />
+                        <Box>
+                            <Typography variant="h2" color="white">
+                                {/*current user name...*/}
+                                {user.getUserName()}
+                            </Typography>
+                        </Box>
+                    </Stack>
                 </Box>
             </Box>
-        </Box>
-        <StyledProfileTabs user={user}/>
-    </div>);
+            <StyledProfileTabs user={user}/>
+        </>
+    )
+        ;
 }
-
 
 
 function ProfilePageComponent() {
@@ -167,27 +165,21 @@ function ProfilePageComponent() {
         if (check_null !== true) {
             onAuthStateChanged(auth, (user_) => {
                 if (user_) {
-                    if (user === null)
-                    {
+                    if (user === null) {
                         getUserById(from).then((user__) => {
                             setUser(user__);
 
                         }).catch((error) => {
                             console.error(error);
                         });
-                    }
-                    else if(user.getUserId() !== auth?.currentUser?.uid)
-                    {
+                    } else if (user.getUserId() !== auth?.currentUser?.uid) {
                         getUserById(from).then((user__) => {
                             setUser(user__);
                         }).catch((error) => {
                             console.error(error);
                         });
-                    }
-                    else
-                    {
-                        if (user)
-                        {
+                    } else {
+                        if (user) {
                             user.getMyReviews().then((reviews) => {
                                 setLstOfReviews(reviews);
                             }).catch((error) => {
@@ -214,7 +206,6 @@ function ProfilePageComponent() {
                                     (<div>{showMyProfile(user)}</div>) :
                                     (<div>{showUserProfile(user, lstOfReviews)}</div>)
                             }
-
                         </div>)
             }
         </div>

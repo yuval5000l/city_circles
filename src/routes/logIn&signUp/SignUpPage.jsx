@@ -4,16 +4,16 @@ import {
     StyledDialogTextFieldReview,
     StyledAutoComplete,
     // StyledRotatePurpleBox,
-    StyledButtonGray
+    StyledButtonGray, StyledCircleBox, StyledPurpleBox
 } from "../../Components/Styled Components/styledComponents";
 import {Button, Stack, Typography} from "@mui/material";
 import {auth} from "../../BackEnd/config/firebase";
 import * as React from 'react';
 import dayjs from 'dayjs';
-import { DemoContainer } from '@mui/x-date-pickers/internals/demo';
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
-import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
-import { DatePicker } from '@mui/x-date-pickers/DatePicker';
+import {DemoContainer} from '@mui/x-date-pickers/internals/demo';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
+import {AdapterDayjs} from '@mui/x-date-pickers/AdapterDayjs';
+import {DatePicker} from '@mui/x-date-pickers/DatePicker';
 import TextField from "@mui/material/TextField";
 import {useEffect, useState} from "react";
 
@@ -23,6 +23,8 @@ import {onAuthStateChanged} from "firebase/auth";
 import {uploadFile} from "../../BackEnd/Classes/GeneralFunctionsFireBase";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import theme from "../../Theme/Theme";
+import StyledLogo from "../../Components/Styled Components/StyledLogo";
 
 
 export default function SignupPage() {
@@ -53,15 +55,13 @@ export default function SignupPage() {
     const NeighborhoodLst = User.ListOfCirclesNeighborhoods;
     const HobbyLst = User.ListOfCirclesPersonalities;
 
-    useEffect(() =>
-    {
-        async function foo()
-        {
-            if (file !== null)
-            {
+    useEffect(() => {
+        async function foo() {
+            if (file !== null) {
                 await handleUploadPic();
             }
         }
+
         foo();
     }, [file]);
     const handleSubmit = async (e) => {
@@ -72,8 +72,7 @@ export default function SignupPage() {
         // console.log("after user")
         window.location.replace('/');
     };
-    const handleUploadPic = async () =>
-    {
+    const handleUploadPic = async () => {
         uploadFile(file).then((pathy) => {
             setPicturePath(pathy);
         }).catch((error) => {
@@ -81,141 +80,200 @@ export default function SignupPage() {
         });
     }
     return (
-        <Box marginTop="5rem !important">
-            <Typography variant="h1" sx={{color: 'primary.main', textAlign: "start", margin: '1rem'}}>
-                Sign Up
-            </Typography>
-            <Typography variant="h3" sx={{color: 'primary.main', textAlign: "start", margin: '1rem'}}>
-                Let’s get to know each other
-            </Typography>
-            <Typography variant="body1" sx={{textAlign: "start", margin: '1rem'}}>
-                We are CityCircle nice to meet you! We want your relocation process to be as comfortable as it gets.
-                So... we are going to ask some question! Feel free to answer (you can change your decisions later).
-            </Typography>
-            <Typography variant="body1" sx={{textAlign: "start", margin: '1rem'}}>
-                We want you to chose 3 CityCircles to be a part of, so we will understand a little more about what you
-                like. The rest will come naturally :)
-            </Typography>
-            <Typography variant="h3" sx={{color: 'primary.main', textAlign: "start", margin: '1rem'}}>
-                So who are you?
-            </Typography>
-            <Stack direction="column" alignItems="start" margin="1rem">
-                <Typography variant="h4">
-                    Your Name Is..
+        <Box paddingTop="1rem" paddingBottom="1rem">
+            <Stack direcction="column"
+                   justifyContent="flex-start"
+                   spacing={2}
+                   padding="1rem">
+                <Box sx={{
+                    backgroundColor: `${theme.palette.primary.main}`,
+                    color: "white",
+                    padding: "0.5rem",
+                    borderRadius: "50%",
+                    maxWidth: "fit-content",
+                    marginLeft: "auto",
+                    marginRight: "auto",
+                }}>
+                    <StyledLogo/>
+                </Box>
+                <Typography variant="h1" sx={{color: 'primary.main', textAlign: "center", margin: '1rem'}}>
+                    Sign Up
                 </Typography>
-                <StyledDialogTextFieldReview value={name} onChange={(event) => {
-                    setName(event.target.value)
-                }}/>
-            </Stack>
-            <Stack direction="column" alignItems="start" margin="1rem">
-                <Typography variant="h4">
-                    Your Birthday is on..
+                <Typography variant="h2" sx={{color: 'primary.main', textAlign: "center", margin: '1rem'}}>
+                    Let’s get to know each other a little bit better!
                 </Typography>
-                <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    <DemoContainer components={['DatePicker', 'DatePicker']}>
-                        <DatePicker
-                            label="birthday day"
-                            value={value}
-                            onChange={(newValue) => setValue(newValue)}
-                        />
-                    </DemoContainer>
-                </LocalizationProvider>
-
-            </Stack>
-            <Stack direction="column" margin="1rem" alignItems="start">
-                <Typography variant="h4" textAlign="start">You are a student in..</Typography>
-                <StyledAutoComplete
-                    disablePortal
-                    inputValue={chosenSchool}
-                    onInputChange={(event, newInputValue) => {
-                        setChosenSchool(newInputValue);
-                    }}
-                    id="combo-box-demo"
-                    options={SchoolsLst}
-                    sx={{width: 250}}
-                    renderInput={(params) => <TextField
-                        {...params}
-                        label="School"
-                    />}
-                />
-            </Stack>
-            <Stack direction="column" margin="1rem" alignItems="start">
-                <Typography variant="h4" textAlign="start">You live in..</Typography>
-                <StyledAutoComplete
-                    disablePortal
-                    inputValue={chosenNeighborhood}
-                    onInputChange={(event, newInputValue) => {
-                        setChosenNeighborhood(newInputValue);
-                    }}
-                    id="combo-box-demo"
-                    options={NeighborhoodLst}
-                    sx={{width: 250}}
-                    renderInput={(params) => <TextField
-                        {...params}
-                        label="Neighborhood"
-                    />}
-                />
-            </Stack>
-
-            <Stack direction="column" margin="1rem" alignItems="start" marginBottom={5}>
-                <Typography variant="h4" textAlign="start">Your hobby is.. (for now, you can change it later
-                    :))</Typography>
-                <StyledAutoComplete
-                    disablePortal
-                    inputValue={chosenHobby}
-                    onInputChange={(event, newInputValue) => {
-                        setChosenHobby(newInputValue);
-                    }}
-                    id="combo-box-demo"
-                    options={HobbyLst}
-                    sx={{width: 250}}
-                    renderInput={(params) => <TextField
-                        {...params}
-                        label="Hobby"
-                    />}
-                />
-            </Stack>
-
-            <BottomBoxWithLogo>
-                <Stack direction="row" spacing={2} justifyContent="center">
-                    <StyledLightCircleBox>
-                        <Typography variant="h5" color="black">
-                            {chosenSchool === "" ? 'School' : chosenSchool}
-                        </Typography>
-                    </StyledLightCircleBox>
-                    <StyledLightCircleBox>
-                        <Typography variant="h5" color="black">
-                            {chosenNeighborhood === "" ? 'Neighborhood' : chosenNeighborhood}
-                        </Typography>
-                    </StyledLightCircleBox>
-                    <StyledLightCircleBox>
-                        <Typography variant="h5" color="black">
-                            {chosenHobby === "" ? 'Hobby' : chosenHobby}
-                        </Typography>
-                    </StyledLightCircleBox>
+                <Box sx={{
+                    borderRadius: "15px",
+                    backgroundColor: `${theme.palette.primary.main}`,
+                    color: "white",
+                    padding: "0.5rem",
+                    margin: "0.5rem"
+                }}>
+                    <Typography variant="h4" sx={{textAlign: "start", margin: '1rem'}}>
+                        We are <strong>CityCircle</strong> nice to meet you! We want your relocation process to be as
+                        comfortable as it gets.
+                        So... we are going to ask some question! Feel free to answer (you can change your decisions
+                        later).
+                    </Typography>
+                    <Typography variant="h4" sx={{textAlign: "start", margin: '1rem'}}>
+                        We want you to chose 3 <strong>CityCircle</strong> to be a part of, so we will understand a
+                        little
+                        more about what you
+                        like. The rest will come naturally :)
+                    </Typography>
+                </Box>
+                <Typography variant="h2" sx={{color: 'primary.main', textAlign: "center", margin: '1rem'}}>
+                    So who are you?
+                </Typography>
+                <Stack direction="column" alignItems="start" spacing={1}>
+                    <Typography variant="h3">
+                        Your Name Is..
+                    </Typography>
+                    <StyledDialogTextFieldReview sx={{padding: "unset !important"}} value={name} onChange={(event) => {
+                        setName(event.target.value)
+                    }}/>
                 </Stack>
-            </BottomBoxWithLogo>
-            <input
-                type="file"
-                onChange={(e) => setFile(e.target.files[0])}/>
-            <button onClick={handleUploadPic}> Upload File</button>
-            {(picturePath === "") ? (<Avatar sx={{width: 100, height: 100}}/>) :
-                (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}
+                <Stack direction="column" alignItems="start" spacing={1}>
+                    <Typography variant="h3">
+                        Your Birthday is on..
+                    </Typography>
+                    <LocalizationProvider dateAdapter={AdapterDayjs}>
+                        <DemoContainer components={['DatePicker', 'DatePicker']}>
+                            <DatePicker
+                                label="birthday day"
+                                value={value}
+                                onChange={(newValue) => setValue(newValue)}
+                            />
+                        </DemoContainer>
+                    </LocalizationProvider>
 
-            <StyledButtonGray onClick={handleSubmit}>Finish!</StyledButtonGray>
+                </Stack>
+                <Stack direction="column" alignItems="start" spacing={1}>
+                    <Typography variant="h3" textAlign="start">You are a student in..</Typography>
+                    <StyledAutoComplete
+                        disablePortal
+                        inputValue={chosenSchool}
+                        onInputChange={(event, newInputValue) => {
+                            setChosenSchool(newInputValue);
+                        }}
+                        id="combo-box-demo"
+                        options={SchoolsLst}
+                        sx={{width: "80%", padding: "unset"}}
+                        renderInput={(params) => <TextField
+                            {...params}
+                            label="School"
+                        />}
+                    />
+                </Stack>
+                <Stack direction="column" margin="1rem" alignItems="start">
+                    <Typography variant="h3" textAlign="start">You live in..</Typography>
+                    <StyledAutoComplete
+                        disablePortal
+                        inputValue={chosenNeighborhood}
+                        onInputChange={(event, newInputValue) => {
+                            setChosenNeighborhood(newInputValue);
+                        }}
+                        id="combo-box-demo"
+                        options={NeighborhoodLst}
+                        sx={{width: "80%", padding: "unset"}}
+                        renderInput={(params) => <TextField
+                            {...params}
+                            label="Neighborhood"
+                        />}
+                    />
+                </Stack>
 
+                <Stack direction="column" margin="1rem" alignItems="start">
+                    <Typography variant="h3" textAlign="start">Your personality type is..</Typography>
+                    <StyledAutoComplete
+                        disablePortal
+                        inputValue={chosenHobby}
+                        onInputChange={(event, newInputValue) => {
+                            setChosenHobby(newInputValue);
+                        }}
+                        id="combo-box-demo"
+                        options={HobbyLst}
+                        sx={{width: "80%", padding: "unset"}}
+                        renderInput={(params) => <TextField
+                            {...params}
+                            label="Personality type"
+                        />}
+                    />
+                </Stack>
+            </Stack>
+            {/*<BottomBoxWithLogo>*/}
+            {/*</BottomBoxWithLogo>*/}
+            <Stack direction="column" spacing={2} justifyContent="flex-start"
+                   alignItems="center">
+                <Box sx={{
+                    borderRadius: "15px",
+                    backgroundColor: `${theme.palette.primary.main}`,
+                    color: "white",
+                    width: "100%",
+                    paddingTop: "0.5rem",
+                    paddingBottom: "0.5rem",
+                }}>
+                    <Stack direction="row" spacing={1} justifyContent="center">
+                        <StyledLightCircleBox>
+                            <Typography variant="h5" color="black">
+                                {chosenSchool === "" ? 'School' : chosenSchool}
+                            </Typography>
+                        </StyledLightCircleBox>
+                        <StyledLightCircleBox>
+                            <Typography variant="h5" color="black">
+                                {chosenNeighborhood === "" ? 'Hood' : chosenNeighborhood}
+                            </Typography>
+                        </StyledLightCircleBox>
+                        <StyledLightCircleBox>
+                            <Typography variant="h5" color="black">
+                                {chosenHobby === "" ? 'Person' : chosenHobby}
+                            </Typography>
+                        </StyledLightCircleBox>
+                    </Stack>
+                </Box>
+            </Stack>
+            <Stack direction="column" justifyContent="flex-start"
+                   alignItems="center"
+                   padding="1rem"
+                   spacing={1}>
 
+                <Typography variant="h3" textlign="left ">
+                    How do you look? upload profile photo!
+                </Typography>
+                <Stack direction="row" spacing={"1rem"} sx={{justifyContent: "start", alignItems: 'center'}}>
+                    <Button variant={"contained"} component={"label"} >Choose File
+                        <input
+                            type="file"
+                            hidden
+                            accept="image/*"
+                            onChange={(e) => setFile(e.target.files[0])}/>
+                    </Button>
+                    {(picturePath === "") ? (<Box/>) :
+                        (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}
+                </Stack>
+                {/*<input*/}
+                {/*    type="file"*/}
+                {/*    onChange={(e) => setFile(e.target.files[0])}/>*/}
+                {/*<button onClick={handleUploadPic}> Upload File</button>*/}
+                {/*{(picturePath === "") ? (<Avatar sx={{width: 100, height: 100}}/>) :*/}
+                {/*    (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}*/}
+            </Stack>
+            <Button onClick={handleSubmit} sx={{
+                borderRadius: "15px",
+                backgroundColor: `${theme.palette.primary.main}`,
+                color: "white",
+                width: "fit-content",
+                paddingTop: "0.5rem",
+                paddingBottom: "0.5rem",
+            }}>
+                < Typography variant="h3">
+                    Submit Information
+                </Typography>
+            </Button>
             {/*<Box sx={{position: 'relative'}}>*/}
             {/*    <br/>*/}
             {/*    <br/>*/}
             {/*</Box>*/}
-
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
         </Box>
     );
 }
