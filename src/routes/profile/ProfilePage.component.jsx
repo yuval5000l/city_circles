@@ -129,6 +129,7 @@ function showUserProfile(user, lstOfReviews) {
                                 {/*        )}*/}
 
                                 {/*    </Stack>)}*/}
+
                                 <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
                                     {footprints2.map(footprint =>
                                         <Stack direction="column" spacing={'0.5rem'} key={footprint.businessID}>
