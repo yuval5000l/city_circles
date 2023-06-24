@@ -22,36 +22,36 @@ import {useSnackbar} from 'notistack';
 import theme from "../../../Theme/Theme";
 
 
-function CustomizedSnackbars() {
-    const [open, setOpen] = React.useState(false);
-
-    const handleClick = () => {
-        setOpen(true);
-    };
-
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
-    };
-
-    return (
-        <Stack spacing={2} sx={{width: '100%'}}>
-            <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="error" sx={{width: '100%'}}>
-                    You can not add business that is already exist
-                </Alert>
-            </Snackbar>
-
-        </Stack>
-    );
-}
+// function CustomizedSnackbars() {
+//     const [open, setOpen] = React.useState(false);
+//
+//     const handleClick = () => {
+//         setOpen(true);
+//     };
+//
+//     const handleClose = (event, reason) => {
+//         if (reason === 'clickaway') {
+//             return;
+//         }
+//
+//         setOpen(false);
+//     };
+//
+//     return (
+//         <Stack spacing={2} sx={{width: '100%'}}>
+//             <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+//                 <Alert onClose={handleClose} severity="error" sx={{width: '100%'}}>
+//                     You can not add business that is already exist
+//                 </Alert>
+//             </Snackbar>
+//
+//         </Stack>
+//     );
+// }
 
 // const businessTypes = ['cosmetics', 'nails', 'barber', 'hair', 'sport', 'art', 'lifestyle', 'music']
 export default function FirstPageBusinessRegistration({onNext, data}) {
-    console.log(data);
+    // console.log(data);
     const [newBusinessName, setNewBusinessName] = useState((data === null) ? ("") : (data[0]));
     const [businessTypes, setBusinessTypes] = useState(() => (data === null) ? ([]) : (data[1]));
 
@@ -59,7 +59,7 @@ export default function FirstPageBusinessRegistration({onNext, data}) {
     const [ownerName, setOwnerName] = useState("");
     const [isBusinessAddedBefore, setIsBusinessAddedBefore] = useState(null)
     const [openAlert, setOpenAlert] = useState(false)
-    const {enqueueSnackbar} = useSnackbar();
+    // const {enqueueSnackbar} = useSnackbar();
 
     // Update Business Name State
     // const [businessName, setBusinessName] = useState(""); // TODO: in the future- need to make edit component
@@ -146,21 +146,6 @@ export default function FirstPageBusinessRegistration({onNext, data}) {
         );
     }
 
-        const onSubmitBusiness = async () => {
-            try {
-                await addDoc(businessesCollectionRef, {
-                    BusinessType: businessTypes,
-                    Name: newBusinessName,
-
-                    businessId: auth?.currentUser?.uid,
-                });
-                onNext([newBusinessName, businessTypes, newPreviewUrl, ownerName]);
-
-                // getBusinessesList();
-            } catch (err) {
-                console.log(err);
-            }
-        }
         const handleOnNext = () => {
             onNext([newBusinessName, businessTypes, newPreviewUrl, ownerName]);
         }
