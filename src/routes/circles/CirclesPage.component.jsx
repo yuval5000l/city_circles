@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import theme from "../../Theme/Theme";
 import Box from "@mui/material/Box";
 import StyledCirclesSearchItem from "../../Components/Styled Components/StyledCirclesSearchItem";
-import {Stack} from "@mui/material";
+import {ListItem, Stack} from "@mui/material";
 import StyledDropdownMenuSortBy from "../../Components/Styled Components/StyledDropdownMenuSortBy";
 import StyledDropdownMenuFilter from "../../Components/Styled Components/StyledDropdownMenuFilter";
 import {onAuthStateChanged} from "firebase/auth";
@@ -62,9 +62,9 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod})
         <>
             {(searchLayerFilter === []) ? (<></>) : (searchLayerFilter.map(filteredBusiness =>
             (
-                <li key={filteredBusiness.name}>
+                <ListItem sx={{padding:"unset!important"}} width="100%" key={filteredBusiness.name}>
                     <StyledBusinessFeedItem business={filteredBusiness}/>
-                </li>
+                </ListItem>
             )))}
         </>
     );
@@ -130,9 +130,10 @@ const CirclesPageComponent = () => {
             <>
                 <Box sx={{
                     backgroundColor: theme.palette.primary.main,
-                    borderBottom: `0.5rem solid ${theme.palette.secondary.main}`,
+                    borderBottom: `0.3rem solid ${theme.palette.secondary.main}`,
                     width: '100%',
                     display: 'inline-block',
+                    padding:"0.2rem",
                 }}>
                     <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
                         <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem">
@@ -154,11 +155,6 @@ const CirclesPageComponent = () => {
                                                                      userPhoto={lstBusiness[0].getReviews()[0].userPhoto}
                                                                      rating={lstBusiness[0].getReviews()[0].rating}/>)
                 :(<></>)}
-                {/*<StyledFootprintForUser/>*/}
-
-                {/*<StyledBusinessFeedItem/>*/}
-
-
             </>
         );
 

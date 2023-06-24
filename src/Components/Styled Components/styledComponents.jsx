@@ -6,7 +6,7 @@ import {
     BottomNavigation, BottomNavigationAction,
     Button,
     DialogContentText,
-    Input, Menu,
+    Input, ListItem, Menu,
     Rating,
     Typography
 } from "@mui/material";
@@ -52,8 +52,8 @@ export const StyledButtonGreen = styled(Button)(({theme}) => ({
 
 export const StyledAppBarTop = styled(AppBar)(({theme}) => ({
     backgroundColor: theme.palette.primary.main,
-    borderBottom: `0.65rem solid ${theme.palette.secondary.main}`,
     position: "fixed",
+    maxWidth:"100%",
     [theme.breakpoints.up('xs')]: {
         height: '6.5rem',
     }
@@ -308,6 +308,7 @@ export const StyledBottomNavigation = styled(BottomNavigation)(({theme}) => ({
     position:"fixed",
     bottom:"0",
     width:"100%",
+    zIndex:"2000",
     [theme.breakpoints.up('xs')]: {
         height: "4.5rem"
     },
@@ -345,10 +346,11 @@ export const StyledMenu = styled((props) => (
 
 export const StyledTypeBox = styled(Box)(({theme}) => ({
     backgroundColor: theme.palette.secondary.main,
+    border: `0.1rem solid ${theme.palette.info.main}`,
     width:"contain",
     color:"white",
     maxWidth:"fit-content",
-    ...theme.typography.p,
+    ...theme.typography.h6,
     borderRadius:"15px",
     padding:"3px",
     [theme.breakpoints.up('xs')]: {
@@ -404,6 +406,12 @@ export const StyledBadge = styled(Badge)(({theme}) => ({
 }));
 
 export const SmallAvatar = styled(Avatar)(({ theme }) => ({
+    width: 22,
+    height: 22,
+    border: `2px solid black`,
+}));
+
+export const StyledListItem = styled(ListItem)(({ theme }) => ({
     width: 22,
     height: 22,
     border: `2px solid black`,

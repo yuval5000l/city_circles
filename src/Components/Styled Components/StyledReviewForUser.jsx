@@ -25,9 +25,6 @@ export default function StyledReviewForUser({BusinessName, review, businessPhoto
                             22h
                         </Typography>
                         <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
-                            {/*<Typography>{business.getRating()}</Typography>*/}
-                            {/*<StyledRating value={business.getRating()} />*/}
-                            {/*<Typography>({business.rating[1]})</Typography>*/}
                             <Typography>{rating[0]}</Typography>
                             <StyledRating value={rating[0]}/>
                             <Typography>{rating[1]}</Typography>
