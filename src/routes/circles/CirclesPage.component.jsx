@@ -131,6 +131,8 @@ const CirclesPageComponent = () => {
                 <Box sx={{
                     backgroundColor: theme.palette.primary.main,
                     borderBottom: `0.5rem solid ${theme.palette.secondary.main}`,
+                    width: '100%',
+                    display: 'inline-block',
                 }}>
                     <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
                         <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem">

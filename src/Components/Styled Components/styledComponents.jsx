@@ -12,6 +12,7 @@ import {
 } from "@mui/material";
 import MenuIcon from "@mui/icons-material/Menu";
 import Box from "@mui/material/Box";
+import ArrowBackIosOutlinedIcon from '@mui/icons-material/ArrowBackIosOutlined';
 import Avatar from "@mui/material/Avatar";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import DialogTitle from "@mui/material/DialogTitle";
@@ -92,6 +93,13 @@ export const StyledHamburgerButton = styled(MenuIcon)(({theme}) => ({
     color: theme.palette.secondary.main,
     [theme.breakpoints.up('xs')]: {
         fontSize: "4.5rem"
+    }
+}));
+
+export const StyledBackButton = styled(ArrowBackIosOutlinedIcon)(({theme}) => ({
+    color: theme.palette.secondary.main,
+    [theme.breakpoints.up('xs')]: {
+        fontSize: "3.8rem"
     }
 }));
 
