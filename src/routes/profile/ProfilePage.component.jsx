@@ -169,7 +169,8 @@ function ProfilePageComponent() {
         if (check_null !== true) {
             onAuthStateChanged(auth, (user_) => {
                 if (user_) {
-                    if (user === null) {
+                    if (user === null)
+                    {
                         getUserById(from).then((user__) => {
                             setUser(user__);
 
@@ -177,21 +178,30 @@ function ProfilePageComponent() {
                             console.error(error);
                         });
                     }
-                    else
+                    else if(user.getUserId() !== auth?.currentUser?.uid)
                     {
-                        user.getMyReviews().then((reviews) => {
-                            setLstOfReviews(reviews);
+                        getUserById(from).then((user__) => {
+                            setUser(user__);
                         }).catch((error) => {
                             console.error(error);
                         });
+                    }
+                    else
+                    {
+                        if (user)
+                        {
+                            user.getMyReviews().then((reviews) => {
+                                setLstOfReviews(reviews);
+                            }).catch((error) => {
+                                console.error(error);
+                            });
+                        }
                     }
                 }
             });
         }
 
     }, [check_null, from, user]);
-
-    console.log(user?.getUserId() === auth?.currentUser?.uid);
 
     return (
         <div>

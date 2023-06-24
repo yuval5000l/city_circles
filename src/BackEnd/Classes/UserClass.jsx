@@ -118,7 +118,11 @@ export default class User {
         const user = await getUserById(id);
         return user?.friends;
     }
-
+    async changeCircle(index, value)
+    {
+        this.circles[index] = value;
+        await this.saveToFirebase();
+    }
     async getMyReviews() {
         let listOfReviews = [];
         for (const review of this.reviews) {

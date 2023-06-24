@@ -8,8 +8,10 @@ import theme from "../../Theme/Theme";
 import ListItem from '@mui/material/ListItem';
 import Stack from '@mui/material/Stack';
 import StyledFootprintForUser from "../../Components/Styled Components/StyledFootprintForUser";
-import {StyledLightCircleBox} from "../../Components/Styled Components/styledComponents";
 import StyledReviewForUser from "../../Components/Styled Components/StyledReviewForUser";
+import StyledDropdownCircleOptions from "../../Components/Styled Components/StyledDropdownCircleOptions";
+import User from "../../BackEnd/Classes/UserClass";
+import {StyledLightCircleBox} from "../../Components/Styled Components/styledComponents";
 
 
 function TabPanel({ children, value, index }) {
@@ -33,7 +35,7 @@ export default function StyledProfileTabs({ user }) {
     const Footprints = user.getUserFootprints().sort(sortByTime);
     const Reviews = user.getUserReviews().sort(sortByTime);
     const [value, setValue] = useState(0);
-
+    const CirclesList = [User.ListOfCirclesSchools, User.ListOfCirclesNeighborhoods, User.ListOfCirclesPersonalities];
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
@@ -56,13 +58,15 @@ export default function StyledProfileTabs({ user }) {
             <TabPanel value={value} index={0}>
                 {/* Render content for the "Circles" tab */}
                 <Stack direction="column" spacing={2} marginTop="0.5rem" display="flex">
-                    {user.getCircles().map((circle) => (
+                    {/*<StyledDropdownCircleOptions user={user} index={0} circlesList={User.ListOfCirclesSchools}/>*/}
+                    {user.getCircles().map((circle, index) => (
                         <Box key={circle} sx={{justifyContent:"center", display:"flex", marginTop:"2rem"}}>
-                            <StyledLightCircleBox>
-                                <Typography variant="h4" color="black">
-                                    {circle}
-                                </Typography>
-                            </StyledLightCircleBox>
+                            <StyledDropdownCircleOptions user={user} index={index} circlesList={CirclesList[index]}/>
+                            {/*<StyledLightCircleBox>*/}
+                            {/*    <Typography variant="h4" color="black">*/}
+                            {/*        {circle} {index}*/}
+                            {/*    </Typography>*/}
+                            {/*</StyledLightCircleBox>*/}
                         </Box>
                     ))}
                 </Stack>
