@@ -35,9 +35,6 @@ const StyledGrayButtonFullReview = ({content}) => {
                     border: `0.2rem solid ${theme.palette.secondary.main}`,
                     color:'white',
                 }}>
-                    <Typography variant = "h1">
-                        Review
-                    </Typography>
                     <Typography variant="h4">{content}
                     </Typography>
                 </DialogContent>

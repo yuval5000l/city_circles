@@ -47,16 +47,16 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
         closeSmallDialog();
     };
 
-    const IsBusinessSet = () => {
-        if (chosenBusiness !== "") {
-            setIsDisabled(false);
-            return false
-        }
-        if(chosenBusiness==="") {
-            setIsDisabled(true);
-            return true
-        }
-    }
+    // const IsBusinessSet = () => {
+    //     if (chosenBusiness !== "") {
+    //         setIsDisabled(false);
+    //         return false
+    //     }
+    //     if(chosenBusiness==="") {
+    //         setIsDisabled(true);
+    //         return true
+    //     }
+    // }
 
     // useEffect(() => {
     //     IsBusinessSet();
@@ -160,8 +160,8 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
                                             backgroundColor: `${theme.palette.primary.main}`,
                                             border: `0.2rem solid ${theme.palette.secondary.main}`
                                         }}>
-                                            <StyledDialogTitle>Your review was accepted</StyledDialogTitle>
-                                            <Typography variant="h4">
+                                            <StyledDialogTitle>Your <strong>footprint</strong> was accepted</StyledDialogTitle>
+                                            <Typography variant="h4" color="white">
                                                 You care!
                                             </Typography>
                                             {/* Add additional components for the second dialog */}

@@ -26,14 +26,14 @@ export default function StyledBusinessTabs({business}) {
     return (
         <div>
             <Tabs value={value} onChange={handleChange} aria-label="tabs" variant="fullWidth">
-                <Tab label="Footprints" id="tab-0"/>
-                <Tab label="Reviews" id="tab-1"/>
+                <Tab sx={{fontSize:"20px"}} label="Footprints" id="tab-0"/>
+                <Tab sx={{fontSize:"20px"}} label="Reviews" id="tab-1"/>
             </Tabs>
 
-            <TabPanel value={value} index={0}>
-                <List>
+            <TabPanel value={value} index={0} >
+                <List sx={{paddingTop:"unset", paddingBottom:"unset"}}>
                     {business.footprints.map((footprint) =>
-                        <ListItem key={footprint.userID}>
+                        <ListItem sx={{padding:"unset !important"}} key={footprint.userID}>
                             <StyledFootprintForUser
                                 businessPhoto={business.getProfilePic()}
                                 userPhoto={footprint.userPhoto}
@@ -47,8 +47,7 @@ export default function StyledBusinessTabs({business}) {
 
             <TabPanel value={value} index={1}>
                 <Typography variant="h6">Reviews List</Typography>
-                <List spacing={8}>
-
+                <List>
                     {business.reviews.map((review) =>
                         <ListItem key={review.userID}>
                             <StyledReviewForUser BusinessName={review.userName} reviewContent={review.content}

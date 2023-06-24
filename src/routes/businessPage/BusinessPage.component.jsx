@@ -9,7 +9,6 @@ import {StyledRating, StyledTypeBox} from "../../Components/Styled Components/st
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import StyledTimeTable from "./StyledTimeTable";
-import StyledSocialIcon from "./StyledSocialIcon";
 import StyledBusinessTabs from "./StyledBusinessTabs";
 import Link from '@mui/material/Link';
 
@@ -71,13 +70,13 @@ export function showBusiness(business) {
                             Contact: {
                             Object.entries(business.getContacts()).filter(contact => contact[1] !== "").map((filteredContact) =>
                                 <Box key={filteredContact[1] + "S"}>
-                                    <Link href={`http://${filteredContact[1]}`} target={"_blank"} rel="noopener">
+                                    <Link sx={{color:`${theme.palette.secondary.dark}`, backgroundColor:`${theme.palette.primary.light}`,borderRadius:"15px", paddingLeft:"0.2rem",paddingRight:"0.2rem",border:"0.1rem solid black" }} href={`http://${filteredContact[1]}`} target={"_blank"} rel="noopener">
                                         {filteredContact[0]}
                                     </Link>
                                 </Box>
                             )}
                         </Typography>
-                        <StyledSocialIcon/>
+                        {/*<StyledSocialIcon/>*/}
                     </Stack>
                 </Stack>
             </Box>

@@ -11,7 +11,6 @@ import StyledFootprintForUser from "../../Components/Styled Components/StyledFoo
 import StyledReviewForUser from "../../Components/Styled Components/StyledReviewForUser";
 import StyledDropdownCircleOptions from "../../Components/Styled Components/StyledDropdownCircleOptions";
 import User from "../../BackEnd/Classes/UserClass";
-import {StyledLightCircleBox} from "../../Components/Styled Components/styledComponents";
 
 
 function TabPanel({ children, value, index }) {
@@ -75,9 +74,9 @@ export default function StyledProfileTabs({ user }) {
             <TabPanel value={value} index={1}>
                 {/* Render content for the "Footprints" tab */}
                 <Stack direction="column" spacing={2} justifyContent="center" marginTop="0.5rem" display="flex">
-                <List >
+                <List sx={{paddingTop:"unset !important", paddingBottom:"unset"}}>
                     {Footprints.map((footprint) => (
-                        <ListItem key={footprint.businessID} sx={{justifyContent: "center"}}>
+                        <ListItem key={footprint.businessID} sx={{justifyContent: "center", padding:"0.3rem"}}>
                             <StyledFootprintForUser
                                 businessPhoto={user.getPic()}
                                 userPhoto={footprint.businessPhoto}
@@ -93,9 +92,9 @@ export default function StyledProfileTabs({ user }) {
             <TabPanel value={value} index={2}>
                 {/* Render content for the "Reviews" tab */}
                 <Stack direction="column" spacing={2} justifyContent="center" marginTop="0.5rem" display="flex">
-                <List>
+                <List sx={{paddingTop:"unset !important", paddingBottom:"unset"}}>
                     {Reviews.map((review) => (
-                        <ListItem key={review.businessID} sx={{justifyContent: "center"}}>
+                        <ListItem key={review.businessID} sx={{justifyContent: "center",padding:"unset"}}>
                             <StyledReviewForUser
                                 BusinessName={review.businessName}
                                 review={review.content}
