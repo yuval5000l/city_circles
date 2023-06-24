@@ -44,7 +44,7 @@ export default function StyledBusinessFeedItem({business}) {
                         <Typography variant="h3" textAlign="left">
                             {business.name}
                         </Typography>
-                        <Stack direction="row" spacing={0.5}>
+                        <Stack direction="row" spacing={0.5} display="flex" flexWrap="wrap">
                             {business.getBusinessType().map(b_type => <StyledTypeBox> {b_type} </StyledTypeBox>)}
                         </Stack>
                         <Stack direction="row" spacing={1}>
