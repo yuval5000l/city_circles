@@ -1,5 +1,5 @@
 import {db, timestamp} from "../config/firebase";
-import {collection, doc, setDoc, getDocs, getDoc, updateDoc, arrayUnion} from "firebase/firestore";
+import {collection, doc, setDoc, getDocs, getDoc, updateDoc} from "firebase/firestore";
 import User from "./UserClass"
 
 export default class Business {

@@ -1,11 +1,11 @@
 import {Stack, Typography,Box} from "@mui/material";
 import StyledAvatarWithBadge from "./StyledAvatarWithBadge";
-import {StyledInfoBox, StyledRating} from "./styledComponents";
+import {StyledRating} from "./styledComponents";
 import React from "react";
 import StyledGrayButtonFullReview from "./StyledGrayButtonFullReview";
 import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 
-export default function StyledReviewForUser({BusinessName, review, businessPhoto, userPhoto, rating}) {
+export default function StyledReviewForUser({BusinessName, review, businessPhoto, userPhoto, rating, timestamp}) {
     // const review = "erspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor"
     const cutText = (review ?? "").slice(0, 30) + (review?.length > 30 ? "..." : "");
     return (
@@ -22,14 +22,11 @@ export default function StyledReviewForUser({BusinessName, review, businessPhoto
                             "{cutText}"
                         </cite>
                         <Typography variant="h5" textAlign="left">
-                            22h
+                            {calculateTime(timestamp)}
                         </Typography>
                         <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
-                            {/*<Typography>{business.getRating()}</Typography>*/}
-                            {/*<StyledRating value={business.getRating()} />*/}
-                            {/*<Typography>({business.rating[1]})</Typography>*/}
                             <Typography>{rating[0]}</Typography>
-                            <StyledRating value={rating[0]}/>
+                            <StyledRating value={rating[0]} readOnly/>
                             <Typography>{rating[1]}</Typography>
                             <StyledGrayButtonFullReview content={review}/>
                         </Stack>

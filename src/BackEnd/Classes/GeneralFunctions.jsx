@@ -2,7 +2,7 @@ import React from "react";
 import {Box} from "@mui/material";
 export default function calculateTime(time)
 {
-    // console.log(time);
+    console.log(time);
     // console.log(typeof (time));
     const now = new Date();
     const timeDiff = now.getTime() - time.getTime();

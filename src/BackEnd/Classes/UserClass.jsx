@@ -14,10 +14,8 @@ export default class User {
         this.email_ = email;
         this.password_ = password;
         this.profile_pic = profile_pic;
-        // this.circles = [];
-        // this.b_day = "";
         this.userID_ = userID_;
-        this.reviews = review; // TODO: list of dictionaries that contains the fields - businessID, timestamp, reviewContent
+        this.reviews = review;
         this.footprints = footprint;
         this.circles = circles;
         this.friends = friends;
@@ -52,7 +50,6 @@ export default class User {
     getCircles() {
         return this.circles;
     }
-
     getFootprints() {
         return this.footprints;
     }
@@ -113,7 +110,7 @@ export default class User {
         return this.profile_pic;
     }
 
-    get_user_footprints() {
+    getUserFootprints() {
         return this.footprints;
     }
 

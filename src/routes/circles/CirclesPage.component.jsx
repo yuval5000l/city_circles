@@ -148,15 +148,8 @@ const CirclesPageComponent = () => {
                 </Box>
                 <BigFilter lstBusiness={lstBusiness} circles={circlesFilter}
                            searchRes={searchRes} businessType={filterTypeBusiness} sortMethod={sortMethod}/>
-                {(lstBusiness !== undefined && lstBusiness[0] !== undefined) ? (<StyledReviewForUser BusinessName={lstBusiness[0].getReviews()[0].userName}
-                                                                     review={lstBusiness[0].getReviews()[0].content}
-                                                                     businessPhoto={lstBusiness[0].getProfilePic()}
-                                                                     userPhoto={lstBusiness[0].getReviews()[0].userPhoto}
-                                                                     rating={lstBusiness[0].getReviews()[0].rating}/>)
-                :(<></>)}
-                {/*<StyledFootprintForUser/>*/}
 
-                {/*<StyledBusinessFeedItem/>*/}
+
 
 
             </>

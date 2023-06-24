@@ -6,13 +6,10 @@ import Box from '@mui/material/Box';
 import List from '@mui/material/List';
 import theme from "../../Theme/Theme";
 import ListItem from '@mui/material/ListItem';
-import Avatar from '@mui/material/Avatar';
 import Stack from '@mui/material/Stack';
-import StyledFriend from "../../Components/Styled Components/StyledFriend";
 import StyledFootprintForUser from "../../Components/Styled Components/StyledFootprintForUser";
 import {StyledLightCircleBox} from "../../Components/Styled Components/styledComponents";
 import StyledReviewForUser from "../../Components/Styled Components/StyledReviewForUser";
-import {Style} from "@mui/icons-material";
 
 
 function TabPanel({ children, value, index }) {
@@ -28,22 +25,14 @@ function TabPanel({ children, value, index }) {
 }
 
 export default function StyledProfileTabs({ user }) {
-    const Footprints = [
-        { BF: "", UF: user.getPic(), BN: "first business" },
-        { BF: "", UF: user.getPic(),BN: "second business" },
-        { BF: "", UF: user.getPic() ,BN: "third business" },
-    ];
-    const Reviews = [
-        { BN: "first business", rev: "mah", BP: "", UF: user.getPic, rate: "2" },
-        { BN: "second business", rev: "fire", BP: "", UF: user.getPic, rate: "5" },
-        { BN: "third business", rev: "its ok i guess", BP: "", UF: user.getPic, rate: "3" },
-    ];
+    const Footprints = user.getUserFootprints();
+    const Reviews = user.getUserReviews();
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-
+    console.log(Footprints);
     return (
         <Box sx={{ direction: "row", width: '100%', bgcolor: theme.palette.primary.main, justifyContent: "center",
             border: "none",}}>
@@ -80,12 +69,12 @@ export default function StyledProfileTabs({ user }) {
                 <Stack direction="column" spacing={2} justifyContent="center" marginTop="0.5rem" display="flex">
                 <List >
                     {Footprints.map((footprint) => (
-                        <ListItem key={footprint.id} sx={{justifyContent: "center"}}>
+                        <ListItem key={footprint.businessID} sx={{justifyContent: "center"}}>
                             <StyledFootprintForUser
-                                businessPhoto={footprint.BF}
-                                userPhoto={footprint.UF}
-                                // timestamp={footprint.timestamp.toDate()}
-                                BigName={footprint.BN}
+                                businessPhoto={user.getPic()}
+                                userPhoto={footprint.businessPhoto}
+                                timestamp={footprint.timestamp.toDate()}
+                                BigName={footprint.businessName}
                             />
                         </ListItem>
                     ))}
@@ -98,13 +87,14 @@ export default function StyledProfileTabs({ user }) {
                 <Stack direction="column" spacing={2} justifyContent="center" marginTop="0.5rem" display="flex">
                 <List>
                     {Reviews.map((review) => (
-                        <ListItem key={review.id} sx={{justifyContent: "center"}}>
+                        <ListItem key={review.businessID} sx={{justifyContent: "center"}}>
                             <StyledReviewForUser
-                                BusinessName={review.BN}
-                                review={review.rev}
-                                businessPhoto={review.BP}
-                                userPhoto={review.UF}
-                                rating={review.rate}
+                                BusinessName={review.businessName}
+                                review={review.content}
+                                businessPhoto={review.businessPhoto}
+                                userPhoto={user.getPic()}
+                                rating={review.rating}
+                                timestamp={review.timestamp.toDate()}
                             />
                         </ListItem>
                     ))}

@@ -2,39 +2,23 @@ import {useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
-import User, {getUserById} from "../../BackEnd/Classes/UserClass";
-import {Box, Button, Stack, Typography} from "@mui/material";
+import {getUserById} from "../../BackEnd/Classes/UserClass";
+import {Box, Stack, Typography} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import theme from "../../Theme/Theme";
 import {TopBoxWithProfileImg} from "../../Components/Styled Components/StyledBoxWithLogo";
 import {StyledLightCircleBox} from "../../Components/Styled Components/styledComponents";
 import * as React from "react";
 import {
-    SmallPurpleBox, StyledLightCircleBoxForProfile, GoToCard,
+    SmallPurpleBox, StyledLightCircleBoxForProfile,
     // FeedItem
 } from "../../Components/Styled Components/OuterProfileComponents";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import {ReactComponent as FootprintsIcon} from "../../Components/Styled Components/Icons/footprints-svgrepo-com.svg";
-// import StyledFeedItem from "../../Components/Styled Components/StyledFeedItem";
 import {StyledFeedItemProfile} from "../../Components/Styled Components/OuterProfileComponents";
-import FeedItemPage from "../../Components/Styled Components/FeedItemPage";
-import StyledHamburgerButtonWithCanvas from "../../Components/Styled Components/StyledHamburgerButtonWithCanvas";
 import StyledProfileTabs from "./StyledProfileTabs";
 
 function FeedItem(user, lstOfReviews) {
-    // const [lstOfReviews, setLstOfReviews] = useState([]);
-
-    // useEffect(() => {
-    //     onAuthStateChanged(auth, (user_) => {
-    //         if (user_) {
-    //             user.getMyReviews().then((reviews) => {
-    //                 setLstOfReviews(reviews);
-    //             }).catch((error) => {
-    //                 console.error(error);
-    //             });
-    //         }
-    //     });
-    // }, []);
     if (lstOfReviews === []) {
         return (<></>);
     }
@@ -54,19 +38,6 @@ function FeedItem(user, lstOfReviews) {
                                     review_address={review.rating}></StyledFeedItemProfile>
                 </Box>
             )}
-            {/*<StyledFeedItem*/}
-            {/*    user_id ={user.getUserId()}*/}
-            {/*    user_name={user.getUserName()} profile_photo_url={user.getPic()}*/}
-            {/*    circles={user.getCircles()}*/}
-            {/*    time={reviews[0]["timestamp"].toDate()}*/}
-            {/*    business_name={reviews[0]["businessID"]}*/}
-            {/*    // business_photo_url={review.business_photo_url}*/}
-            {/*    rating={reviews[0]["rating"]}*/}
-            {/*    // url_to_business={review.url_to_business}*/}
-            {/*    review={reviews[0]["content"]}*/}
-            {/*    // review_address={review.rating}*/}
-            {/*>*/}
-            {/*</StyledFeedItem>*/}
         </Box>)
 }
 
@@ -214,15 +185,7 @@ function showMyProfile(user) {
     </div>);
 }
 
-function showProfile(user) {
-    return (<div>
-        {(user === null) ? (<div> Loading... </div>) :
-            (<div>
-                Welcome to {user.getUserName()} profile!
-            </div>)
-        }
-    </div>)
-}
+
 
 function ProfilePageComponent() {
 
@@ -254,7 +217,7 @@ function ProfilePageComponent() {
             });
         }
 
-    }, [user]);
+    }, [check_null, from, user]);
     return (
         <div>
             {
