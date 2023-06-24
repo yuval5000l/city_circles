@@ -33,6 +33,7 @@ function App() {
                 <Route path="SearchPageComponent" element={<SearchPageComponent />} />
                 <Route path="signInPage" element={<SignInPage/>}/>
                 <Route path="SignUpPage" element={<SignUpPage/>}/>
+
                 {/*<Route path="BusinessPage" element={<BusinessPage/>}/>*/}
             </Routes>
             </ThemeProvider>

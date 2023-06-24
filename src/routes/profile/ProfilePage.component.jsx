@@ -18,7 +18,8 @@ import {ReactComponent as FootprintsIcon} from "../../Components/Styled Componen
 // import StyledFeedItem from "../../Components/Styled Components/StyledFeedItem";
 import {StyledFeedItemProfile} from "../../Components/Styled Components/OuterProfileComponents";
 import FeedItemPage from "../../Components/Styled Components/FeedItemPage";
-
+import StyledHamburgerButtonWithCanvas from "../../Components/Styled Components/StyledHamburgerButtonWithCanvas";
+import StyledProfileTabs from "./StyledProfileTabs";
 
 function FeedItem(user, lstOfReviews) {
     // const [lstOfReviews, setLstOfReviews] = useState([]);
@@ -177,38 +178,39 @@ function showMyProfile(user) {
         <Box
             sx={{
                 display: 'flex',
+                flexDirection: 'row',
                 justifyContent: 'center',
                 alignItems: 'center',
+                marginTop: '0px',
                 backgroundColor: theme.palette.primary.main,
             }}
         >
-            <Box
+                <Box
                 sx={{
                     display: 'flex',
                     flexDirection: 'column',
                     alignItems: 'center',
-                    padding: '16px',
-                    borderRadius: '8px',
+                    padding: '10px',
+                    borderRadius: '0px',
+                    marginTop: '0px',
                 }}
             >
                 <Avatar
                     src={user.getPic()}
-                    sx={{width: 100, height: 100}}
+                    sx={{width: 100, height: 100, marginTop: '0px'}}
                 />
-                <Box sx={{display: 'flex', gap: '8px', marginTop: '8px'}}>
-                    <Button variant="contained" color="secondary">
-                        Edit Profile
-                    </Button>
-                    <Button variant="contained" color="secondary">
-                        Add Friends
-                    </Button>
+                <Box sx={{display: 'flex', gap: '8px', marginTop: '14px'}}>
+                    <Typography variant="h2" >
+                        {/*current user name...*/}
+                        {user.getUserName()}
+                    </Typography>
+                    {/*<Button variant="contained" color="secondary">*/}
+                    {/*    Edit Profile*/}
+                    {/*</Button>*/}
                 </Box>
             </Box>
         </Box>
-        Ma profile mate {user.getUserName()}
-        <p>
-
-        </p>
+        <StyledProfileTabs user={user}/>
     </div>);
 }
 
