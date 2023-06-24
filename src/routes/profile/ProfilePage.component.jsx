@@ -208,7 +208,6 @@ function ProfilePageComponent() {
                                     (<div>{showMyProfile(user)}</div>) :
                                     (<div>{showUserProfile(user, lstOfReviews)}</div>)
                             }
-
                         </div>)
             }
         </div>

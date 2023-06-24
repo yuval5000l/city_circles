@@ -199,8 +199,6 @@ export default function ThirdPageBusinessRegistration({onNext}) {
             </Stack>
 
 
-
-
             {/*{(picturePath === "") ? (<Avatar sx={{width: 100, height: 100}}/>) :*/}
             {/*    (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}*/}
             <Button disabled={picturePath===""} onClick={handleOnNext}>
