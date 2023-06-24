@@ -58,7 +58,24 @@ export default function BusinessStepper() {
         }
     };
 
-    const handleBack = () => {
+    const handleBack = (data) => {
+        switch (activeStep) {
+            case 0:
+                setFirstPageData(data);
+                // console.log(data);
+                break;
+            case 1:
+                setSecondPageData(data);
+                // console.log(data);
+                break;
+            case 2:
+                setThirdPageData(data);
+                // console.log(data);
+                break;
+
+            default:
+                break;
+        }
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
 
     };
@@ -87,19 +104,19 @@ export default function BusinessStepper() {
     const steps = [
         {
             label: 'Basic Details',
-            content: <FirstPageBusinessRegistration onNext={handleNext}/>,
+            content: <FirstPageBusinessRegistration onNext={handleNext} data={firstPageData}/>,
         },
         {
             label: 'Socials',
-            content: <SecondPageBusinessRegistration onNext={handleNext} onBack={handleBack}/>,
+            content: <SecondPageBusinessRegistration onNext={handleNext} onBack={handleBack} data={secondPageData}/>,
         },
         {
             label: 'More Details',
-            content: <ThirdPageBusinessRegistration onNext={handleNext} onBack={handleBack}/>,
+            content: <ThirdPageBusinessRegistration onNext={handleNext} onBack={handleBack} data={thirdPageData}/>,
         },
         {
             label: 'Approving',
-            content: <FourthPageBusinessRegistration onBack={handleBack} data={[...firstPageData, ...secondPageData, ...thirdPageData]}/>,
+            content: <FourthPageBusinessRegistration onBack={handleBack}/>, // data={[...firstPageData, ...secondPageData, ...thirdPageData]}/>,
         },
     ];
 

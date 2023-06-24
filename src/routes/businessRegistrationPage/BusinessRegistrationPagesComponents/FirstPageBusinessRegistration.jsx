@@ -49,9 +49,10 @@ import { useSnackbar } from 'notistack';
 //     );
 // }
 // const businessTypes = ['cosmetics', 'nails', 'barber', 'hair', 'sport', 'art', 'lifestyle', 'music']
-export default function FirstPageBusinessRegistration({onNext}) {
-    const [newBusinessName, setNewBusinessName] = useState("");
-    const [businessTypes, setBusinessTypes] = useState(() => []);
+export default function FirstPageBusinessRegistration({onNext, data}) {
+    console.log(data);
+    const [newBusinessName, setNewBusinessName] = useState((data === null) ? ("") : (data[0]));
+    const [businessTypes, setBusinessTypes] = useState(() => (data === null) ? ([]) : (data[1]));
 
     const [newPreviewUrl, setNewPreviewUrl] = useState("");
     const [ownerName, setOwnerName] = useState("");
@@ -105,7 +106,6 @@ export default function FirstPageBusinessRegistration({onNext}) {
                         name="row-radio-buttons-group"
                         value={isBusinessAddedBefore}
                         onChange={handleChange}
-                        // onClick={handleOpenAlert}
                     >
                         <FormControlLabel value={true} control={<Radio/>} label="Yes"/>
                         <FormControlLabel value={false} control={<Radio/>} label="No"/>
@@ -126,9 +126,6 @@ export default function FirstPageBusinessRegistration({onNext}) {
             return (
                 <Box sx={{
                     maxWidth: 600,
-                    // bgcolor: "primary.light",
-                    // borderColor: "secondary.main",
-                    // border: 2,
                     borderRadius: 2
                 }}>
                     <ToggleButtonGroup
@@ -154,8 +151,6 @@ export default function FirstPageBusinessRegistration({onNext}) {
         }
 
         const onSubmitBusiness = async () => {
-            // let name = GetBusinessName(false);
-            // console.log(name);
             try {
                 await addDoc(businessesCollectionRef, {
                     BusinessType: businessTypes,
@@ -163,11 +158,6 @@ export default function FirstPageBusinessRegistration({onNext}) {
 
                     businessId: auth?.currentUser?.uid,
                 });
-                // let previewImg = document.getElementById("previewImg");
-                // previewImg.remove();
-                // console.log("Before find");
-                // findLatLong();
-                // console.log("After find");
                 onNext([newBusinessName, businessTypes, newPreviewUrl, ownerName]);
 
                 // getBusinessesList();

@@ -164,7 +164,6 @@ export default function SecondPageBusinessRegistration({onNext, onBack}) {
             </Button>
             <Button
                 color="inherit"
-                disabled={activeStep === 0}
                 onClick={handleOnBack}
                 sx={{mr: 1}}
             >
