@@ -49,47 +49,51 @@ export default function SecondPageBusinessRegistration({onNext}) {
     }
     return(
         <div>
-            <Typography variant="h4">Socials (if exists..)</Typography>
-            <Stack direction="row">
-                <InstagramIcon sx={{fontSize: 56, alignSelf: "center"}}/>
-                <TextField label={'@example'} fieldname={'@example'}
-                           onChange={(e) => {
-                               setInsta(e.target.value)
-                               IsSocialEmpty()
-                           }
-                }/>
-            </Stack>
-            <Stack direction="row">
-                <FacebookIcon sx={{fontSize: 56, alignSelf: "center"}}/>
-                <TextField label={'facebook page'} fieldname={'facebook page'}
-                           onChange={(e) => {
-                               setFace(e.target.value)
-                               IsSocialEmpty()
-                           }
-                }/>
-            </Stack>
-            <Stack direction="row">
-                <WhatsAppIcon sx={{fontSize: 56, alignSelf: "center"}}/>
-                <TextField label={'phone num (WhatsApp link)'} fieldname={'phone number to create WhatsApp link'}
-                           onChange={(e) => {
-                               setPhoneNum(e.target.value)
-                               crateWhatsappLink()
-                               IsSocialEmpty()
-                               console.log(whatsAppLink)
-                           }
-                }/>
-            </Stack>
-            <Stack direction="row">
-                <LanguageIcon sx={{fontSize: 56, alignSelf: "center"}}/>
-                <TextField label={'website URL'} fieldname={'website URL'}
-                           onChange={(e) => {
-                               setWeb(e.target.value)
-                               IsSocialEmpty()
-                           }
-                }/>
+            <Stack direction="column" justifyContent="flex-start" spacing={2} textAlign="left" padding="1rem">
+                <Typography variant="h2">Socials (if exists..)</Typography>
+                <Stack direction="row">
+                    <InstagramIcon sx={{fontSize: 56, alignSelf: "center"}}/>
+                    <TextField label={'@example'} fieldname={'@example'}
+                               onChange={(e) => {
+                                   setInsta(e.target.value)
+                                   IsSocialEmpty()
+                               }
+                               }/>
+                </Stack>
+                <Stack direction="row">
+                    <FacebookIcon sx={{fontSize: 56, alignSelf: "center"}}/>
+                    <TextField label={'facebook page'} fieldname={'facebook page'}
+                               onChange={(e) => {
+                                   setFace(e.target.value)
+                                   IsSocialEmpty()
+                               }
+                               }/>
+                </Stack>
+                <Stack direction="row">
+                    <WhatsAppIcon sx={{fontSize: 56, alignSelf: "center"}}/>
+                    <TextField label={'phone num (WhatsApp link)'} fieldname={'phone number to create WhatsApp link'}
+                               onChange={(e) => {
+                                   setPhoneNum(e.target.value)
+                                   crateWhatsappLink()
+                                   IsSocialEmpty()
+                                   console.log(whatsAppLink)
+                               }
+                               }/>
+                </Stack>
+                <Stack direction="row">
+                    <LanguageIcon sx={{fontSize: 56, alignSelf: "center"}}/>
+                    <TextField label={'website URL'} fieldname={'website URL'}
+                               onChange={(e) => {
+                                   setWeb(e.target.value)
+                                   IsSocialEmpty()
+                               }
+                               }/>
+                </Stack>
             </Stack>
             <Button disabled={socialEmpty} onClick={handleOnNext}>
-                {'Next'}
+                <Typography variant="h3">
+                    {'Next'}
+                </Typography>
             </Button>
         </div>
     )

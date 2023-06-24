@@ -110,8 +110,7 @@ export function TopBoxWithProfileImg({img_url}) {
     return (
         <SmallPurpleBox>
             <SmallLogoBoxBottom>
-                {(img_url==="") ? (<Avatar width="95%" height="95%"/>) : (<img src={img_url} alt="profile image" width="95%" height="95%"/>)}
-
+                {(img_url==="") ? (<Avatar sx={{width:"1000px"}} width="6rem" height="6rem"/>) : (<img src={img_url} alt="profile image" width="95%" height="95%"/>)}
             </SmallLogoBoxBottom>
         </SmallPurpleBox>
     );

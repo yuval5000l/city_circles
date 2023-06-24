@@ -21,6 +21,9 @@ import theme from "../../Theme/Theme";
 import {onAuthStateChanged, signOut} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import {getUserById} from "../../BackEnd/Classes/UserClass";
+import {
+    getPickersArrowSwitcherUtilityClass
+} from "@mui/x-date-pickers/internals/components/PickersArrowSwitcher/pickersArrowSwitcherClasses";
 // import BusinessRegistration1 from "../../routes/business_registratin_pages/BusinessRegistrationPage1";
 
 
@@ -28,9 +31,29 @@ const drawerWidth = '60%';
 
 function ResponsiveDrawer(props) {
     let [name, setName] = useState("static name");
+    let [userPic, setUserPic] = useState("")
+
     useEffect(() => {
         getName()
     }, []);
+
+    useEffect(() => {
+        getPic()
+    }, []);
+
+    const getPic = () => {
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                getUserById(auth?.currentUser?.uid).then((user) => {
+                    if (user !== null) {
+                        setUserPic(user.getPic());
+                    }
+                }).catch((error) => {
+                    console.error(error);
+                });
+            }
+        });
+    }
     const getName = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -90,7 +113,7 @@ function ResponsiveDrawer(props) {
                     alignItems="center"
                     spacing={2}
                 >
-                    <StyledAvatarUserFeed sx={{marginLeft: "auto", marginRight: "auto"}}/>
+                    <StyledAvatarUserFeed sx={{marginLeft: "auto", marginRight: "auto"}} src={userPic}/>
                     <Typography>Hi, {name}</Typography>
                 </Stack>
             </Toolbar>

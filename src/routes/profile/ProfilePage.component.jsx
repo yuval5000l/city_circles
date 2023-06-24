@@ -52,7 +52,7 @@ function showUserProfile(user, lstOfReviews) {
                         img_url={(user.getPic() === "") ? ("") : (user.getPic())}
                     />
                     <Stack direction="column" spacing={4} marginTop="4rem">
-                        <Typography variant="h2">
+                        <Typography variant="h4" color="white">
                             {/*current user name...*/}
                             {user.getUserName()}
                         </Typography>
@@ -102,8 +102,6 @@ function showUserProfile(user, lstOfReviews) {
                                     )}
 
                                 </Stack>
-
-
                             </Stack>
                         </SmallPurpleBox>
                         {FeedItem(user, lstOfReviews)}

@@ -27,6 +27,10 @@ let theme = createTheme({
             fontSize:'1.25rem',
             fontWeight:'400',
         },
+        h6:{
+            fontSize:'1rem',
+            fontWeight:'300',
+        },
         fontFamily:"Poppins",
         fontWeightLight: 400,
         fontWeightRegular: 600,

@@ -10,8 +10,7 @@ export default function StyledFriend({ user_id, user_name = 'name', profile_phot
     return (
         <Box sx={{ width: '100%', padding: '0.4rem', boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', borderBottom: '0.1rem solid #C3ED5B' }}>
             <Stack direction="row" spacing={1}>
-                <Box>
-                    <Stack direction="column" spacing={2}>
+                    <Stack direction="column" spacing={2} width="100%">
                         <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="flex-start">
                             <Typography variant="h3" textAlign="left">{user_name}</Typography>
                         </Stack>
@@ -19,7 +18,7 @@ export default function StyledFriend({ user_id, user_name = 'name', profile_phot
                             <StyledBusinessFeed /> {/* Add the StyledBusinessFeed component here */}
                             <Stack direction="column" spacing={1}>
                                 {circlesArray.map((circle, index) => (
-                                    <Typography variant="body1" key={index}>
+                                    <Typography variant="h4" key={index}>
                                         <Box component="span" sx={{ display: 'flex', alignItems: 'center' }}>
                                             <SupervisedUserCircleIcon sx={{ marginRight: '0.5rem',color: theme.palette.primary.main }} />
                                             {circle}
@@ -29,7 +28,6 @@ export default function StyledFriend({ user_id, user_name = 'name', profile_phot
                             </Stack>
                         </Stack>
                     </Stack>
-                </Box>
             </Stack>
         </Box>
     );

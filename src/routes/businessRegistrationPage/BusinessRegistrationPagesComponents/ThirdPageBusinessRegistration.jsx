@@ -113,90 +113,93 @@ export default function ThirdPageBusinessRegistration({onNext}) {
 
     return(
         <div>
-            <Typography variant="h3">Details</Typography>
-            <Stack direction="row">
-                <LocationOnIcon sx={{fontSize: 30, alignSelf: "center"}}/>
-                <Typography variant="h4">Location</Typography>
-            </Stack>
-            <TextField required={true} label={'City'} fieldname={'City'} onChange={(e)=> setCity(e.target.value)}/>
-            <TextField required={true} label={'Street'} fieldname={'Street'} onChange={(e)=> setStreet(e.target.value)}/>
-            <TextField required={true} label={'House Number'} fieldname={'House Number'} onChange={(e)=> setHouseNum(e.target.value)}/>
-
-            <Stack direction="row">
-                <AccessTimeIcon sx={{fontSize: 30, alignSelf: "center"}}/>
-                <Typography variant="h4">Open Hours</Typography>
-            </Stack>
-            {/*<BasicTextFields fieldName={'Sunday'}/>*/}
-            <LocalizationProvider dateAdapter={AdapterDayjs}>
-                {/*<MobileTimePicker>*/}
-                {/*    <MultiInputTimeRangeField*/}
-                {/*        slotProps={{*/}
-                {/*            textField: ({ position }) => ({*/}
-                {/*                label: position === 'start' ? 'From' : 'To',*/}
-                {/*            }),*/}
-                {/*        }}*/}
-                {/*    />*/}
-                {/*</MobileTimePicker>*/}
-                <SingleInputTimeRangeField
-                    label="Sunday"
-                    value={sunday}
-                    onChange={(newValue) => setSunday(newValue)}
-                    ampm={false}/>
-                <SingleInputTimeRangeField
-                    label="Monday"
-                    value={monday}
-                    onChange={(newValue) => setMonday(newValue)}
-                    ampm={false}
-                />
-                <SingleInputTimeRangeField
-                    label="Tuesday"
-                    value={tuesday}
-                    onChange={(newValue) => setTuesday(newValue)}
-                    ampm={false}
-                />
-                <SingleInputTimeRangeField
-                    label="Wednesday"
-                    value={wednesday}
-                    onChange={(newValue) => setWednesday(newValue)}
-                    ampm={false}
-                />
-                <SingleInputTimeRangeField
-                    label="Thursday"
-                    value={thursday}
-                    onChange={(newValue) => setThursday(newValue)}
-                    ampm={false}
-                />
-                <SingleInputTimeRangeField
-                    label="Friday"
-                    value={friday}
-                    onChange={(newValue) => setFriday(newValue)}
-                    ampm={false}
-                />
-                <SingleInputTimeRangeField
-                    label="Saturday"
-                    value={saturday}
-                    onChange={(newValue) => setSaturday(newValue)}
-                    ampm={false}
-                />
-            </LocalizationProvider>
-            <Typography variant="h4" textAlign="start">Picture</Typography>
-            {/*<input*/}
-            {/*    type="file"*/}
-            {/*    onChange={(e) => setFile(e.target.files[0])}/>*/}
-            <Stack direction="column" spacing={"1rem"} alignItems="flex-start">
-                <Stack direction="row" spacing={"1rem"} sx={{justifyContent: "start", alignItems: 'center'}}>
-                    <Button variant={"contained"} component={"label"} >Choose File
-                        <input
-                            type="file"
-                            hidden
-                            accept="image/*"
-                            onChange={(e) => setFile(e.target.files[0])}/>
-                    </Button>
-                    {(picturePath === "") ? (<Box/>) :
-                        (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}
+            <Stack direction="column" justifyContent="flex-start" spacing={2} textAlign="left" padding="1rem">
+                <Typography variant="h2">Details</Typography>
+                <Stack direction="row" spacing={1}   alignItems="center">
+                    <LocationOnIcon sx={{fontSize: 30, alignSelf: "center"}}/>
+                    <Typography variant="h3">Location</Typography>
                 </Stack>
+                <TextField required={true} label={'City'} fieldname={'City'} onChange={(e)=> setCity(e.target.value)}/>
+                <TextField required={true} label={'Street'} fieldname={'Street'} onChange={(e)=> setStreet(e.target.value)}/>
+                <TextField required={true} label={'House Number'} fieldname={'House Number'} onChange={(e)=> setHouseNum(e.target.value)}/>
 
+                <Stack direction="row" spacing={1}   alignItems="center">
+                    <AccessTimeIcon sx={{fontSize: 30, alignSelf: "center"}}/>
+                    <Typography variant="h3">Open Hours</Typography>
+                </Stack>
+                {/*<BasicTextFields fieldName={'Sunday'}/>*/}
+                <LocalizationProvider dateAdapter={AdapterDayjs}>
+                    {/*<MobileTimePicker>*/}
+                    {/*    <MultiInputTimeRangeField*/}
+                    {/*        slotProps={{*/}
+                    {/*            textField: ({ position }) => ({*/}
+                    {/*                label: position === 'start' ? 'From' : 'To',*/}
+                    {/*            }),*/}
+                    {/*        }}*/}
+                    {/*    />*/}
+                    {/*</MobileTimePicker>*/}
+                    <SingleInputTimeRangeField
+                        label="Sunday"
+                        value={sunday}
+                        onChange={(newValue) => setSunday(newValue)}
+                        ampm={false}/>
+                    <SingleInputTimeRangeField
+                        label="Monday"
+                        value={monday}
+                        onChange={(newValue) => setMonday(newValue)}
+                        ampm={false}
+                    />
+                    <SingleInputTimeRangeField
+                        label="Tuesday"
+                        value={tuesday}
+                        onChange={(newValue) => setTuesday(newValue)}
+                        ampm={false}
+                    />
+                    <SingleInputTimeRangeField
+                        label="Wednesday"
+                        value={wednesday}
+                        onChange={(newValue) => setWednesday(newValue)}
+                        ampm={false}
+                    />
+                    <SingleInputTimeRangeField
+                        label="Thursday"
+                        value={thursday}
+                        onChange={(newValue) => setThursday(newValue)}
+                        ampm={false}
+                    />
+                    <SingleInputTimeRangeField
+                        label="Friday"
+                        value={friday}
+                        onChange={(newValue) => setFriday(newValue)}
+                        ampm={false}
+                    />
+                    <SingleInputTimeRangeField
+                        label="Saturday"
+                        value={saturday}
+                        onChange={(newValue) => setSaturday(newValue)}
+                        ampm={false}
+                    />
+                </LocalizationProvider>
+                <Typography variant="h3" textAlign="start">Picture</Typography>
+                {/*<input*/}
+                {/*    type="file"*/}
+                {/*    onChange={(e) => setFile(e.target.files[0])}/>*/}
+                <Stack direction="column" spacing={"1rem"} alignItems="flex-start">
+                    <Stack direction="row" spacing={"1rem"} sx={{justifyContent: "start", alignItems: 'center'}}>
+                        <Button variant={"contained"} component={"label"} >Choose File
+                            <input
+                                type="file"
+                                hidden
+                                accept="image/*"
+                                onChange={(e) => setFile(e.target.files[0])}/>
+                        </Button>
+                        {(picturePath === "") ? (<Box/>) :
+                            (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}
+                    </Stack>
+
+                </Stack>
             </Stack>
+
 
 
 
@@ -204,7 +207,9 @@ export default function ThirdPageBusinessRegistration({onNext}) {
             {/*{(picturePath === "") ? (<Avatar sx={{width: 100, height: 100}}/>) :*/}
             {/*    (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}*/}
             <Button disabled={picturePath===""} onClick={handleOnNext}>
-                {'Next'}
+                <Typography variant="h3">
+                    {'Next'}
+                </Typography>
             </Button>
         </div>
     )
