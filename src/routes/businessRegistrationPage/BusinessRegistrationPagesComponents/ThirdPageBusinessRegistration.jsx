@@ -1,7 +1,7 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
 // import BasicTextFields from "./TextField.components";
-import {Stack} from "@mui/material";
+import {Box, Stack} from "@mui/material";
 // import Box from '@mui/material/Box';
 // import RowRadioButtonsGroup from "./FirstPageOfBusinessRegistration/RadioButton.component";
 // import BusinessTypesSelection from "../BusinessTypeSelect/BusinessTypeSelect.components";
@@ -25,6 +25,7 @@ import TextField from "@mui/material/TextField";
 import {MobileTimePicker, TimePicker} from "@mui/x-date-pickers";
 import {MultiInputTimeRangeField} from "@mui/x-date-pickers-pro";
 import {uploadFile} from "../../../BackEnd/Classes/GeneralFunctionsFireBase";
+import Avatar from "@mui/material/Avatar";
 
 function getHoursAndMinutes(day)
 {
@@ -38,7 +39,15 @@ export default function ThirdPageBusinessRegistration({onNext}) {
     const [picturePath, setPicturePath] = useState("");
     const [file, setFile] = useState(null);
 
+    const [city, setCity] = useState('');
+    const [street, setStreet] = useState('');
+    const [houseNum, setHouseNum] = useState('');
 
+    function CreateAddress(){
+        const FullAddress = street + " " + houseNum + ", " + city
+        setAddress(street + " " + houseNum + ", " + city);
+        return FullAddress
+    }
 
 
     useEffect(() =>
@@ -91,8 +100,10 @@ export default function ThirdPageBusinessRegistration({onNext}) {
         dayjs(),
     ]);
     const handleOnNext = () => {
+        const finalAddress = CreateAddress();
+        console.log("address is: " + address );
         console.log(typeof(sunday));
-        onNext([address, picturePath, {"Sunday": getHoursAndMinutes(sunday),
+        onNext([finalAddress, picturePath, {"Sunday": getHoursAndMinutes(sunday),
             "Monday": getHoursAndMinutes(monday), "Tuesday": getHoursAndMinutes(tuesday),
             "Wednesday": getHoursAndMinutes(wednesday), "Thursday": getHoursAndMinutes(thursday),
             "Friday": getHoursAndMinutes(friday),"Saturday": getHoursAndMinutes(saturday)}]);
@@ -102,27 +113,29 @@ export default function ThirdPageBusinessRegistration({onNext}) {
 
     return(
         <div>
-            <Typography variant="h4">Details</Typography>
+            <Typography variant="h3">Details</Typography>
             <Stack direction="row">
                 <LocationOnIcon sx={{fontSize: 30, alignSelf: "center"}}/>
-                <Typography variant="h5">Location</Typography>
+                <Typography variant="h4">Location</Typography>
             </Stack>
-            <TextField fieldname={'business location'} onChange={(e)=> setAddress(e.target.value)}/>
+            <TextField required={true} label={'City'} fieldname={'City'} onChange={(e)=> setCity(e.target.value)}/>
+            <TextField required={true} label={'Street'} fieldname={'Street'} onChange={(e)=> setStreet(e.target.value)}/>
+            <TextField required={true} label={'House Number'} fieldname={'House Number'} onChange={(e)=> setHouseNum(e.target.value)}/>
 
             <Stack direction="row">
                 <AccessTimeIcon sx={{fontSize: 30, alignSelf: "center"}}/>
-                <Typography variant="h5">Open Hours</Typography>
+                <Typography variant="h4">Open Hours</Typography>
             </Stack>
             {/*<BasicTextFields fieldName={'Sunday'}/>*/}
             <LocalizationProvider dateAdapter={AdapterDayjs}>
                 {/*<MobileTimePicker>*/}
-                    <MultiInputTimeRangeField
-                        slotProps={{
-                            textField: ({ position }) => ({
-                                label: position === 'start' ? 'From' : 'To',
-                            }),
-                        }}
-                    />
+                {/*    <MultiInputTimeRangeField*/}
+                {/*        slotProps={{*/}
+                {/*            textField: ({ position }) => ({*/}
+                {/*                label: position === 'start' ? 'From' : 'To',*/}
+                {/*            }),*/}
+                {/*        }}*/}
+                {/*    />*/}
                 {/*</MobileTimePicker>*/}
                 <SingleInputTimeRangeField
                     label="Sunday"
@@ -166,11 +179,32 @@ export default function ThirdPageBusinessRegistration({onNext}) {
                     ampm={false}
                 />
             </LocalizationProvider>
-            <Typography variant="h5" textAlign="start">Picture</Typography>
-            <input
-                type="file"
-                onChange={(e) => setFile(e.target.files[0])}/>
-            <Button onClick={handleOnNext}>
+            <Typography variant="h4" textAlign="start">Picture</Typography>
+            {/*<input*/}
+            {/*    type="file"*/}
+            {/*    onChange={(e) => setFile(e.target.files[0])}/>*/}
+            <Stack direction="column" spacing={"1rem"} alignItems="flex-start">
+                <Stack direction="row" spacing={"1rem"} sx={{justifyContent: "start", alignItems: 'center'}}>
+                    <Button variant={"contained"} component={"label"} >Choose File
+                        <input
+                            type="file"
+                            hidden
+                            accept="image/*"
+                            onChange={(e) => setFile(e.target.files[0])}/>
+                    </Button>
+                    {(picturePath === "") ? (<Box/>) :
+                        (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}
+                </Stack>
+
+                <Button disabled={picturePath===""} variant={'contained'} onClick={handleUploadPic}> Upload File</Button>
+            </Stack>
+
+
+
+
+            {/*{(picturePath === "") ? (<Avatar sx={{width: 100, height: 100}}/>) :*/}
+            {/*    (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}*/}
+            <Button disabled={picturePath===""} onClick={handleOnNext}>
                 {'Next'}
             </Button>
         </div>

@@ -122,11 +122,11 @@ export default function BusinessStepper() {
                 {steps.map((step, index) => {
                     const stepProps = {};
                     const labelProps = {};
-                    if (isStepOptional(index)) {
-                        labelProps.optional = (
-                            <Typography variant="caption">Optional</Typography>
-                        );
-                    }
+                    // if (isStepOptional(index)) {
+                    //     labelProps.optional = (
+                    //         <Typography variant="caption">Optional</Typography>
+                    //     );
+                    // }
                     if (isStepSkipped(index)) {
                         stepProps.completed = false;
                     }
