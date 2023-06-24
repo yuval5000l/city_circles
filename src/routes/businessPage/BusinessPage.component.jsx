@@ -83,37 +83,13 @@ export function showBusiness(business) {
             </Box>
             {/*Lower Part*/}
             <StyledBusinessTabs business ={business}/>
-            {/*<StyledBusinessTabs business ={business}/>*/}
-            {/*<ul>*/}
-            {/*    FootPrints:*/}
-            {/*    {business.footprints.map((footprint) =>*/}
-            {/*        <li key={footprint.id + 1}>*/}
-            {/*            footprint id: {footprint.userID}*/}
-            {/*            /!*footprint time: {footprint.timestamp}*!/*/}
-            {/*            footprint time: {calculateTime(footprint.timestamp.toDate())}*/}
-            {/*        </li>*/}
-            {/*    )}*/}
-            {/*</ul>*/}
-
-            {/*<ul>*/}
-            {/*    Reviews:*/}
-            {/*    {business.reviews.map((review) =>*/}
-            {/*        <li key={review.userID}>*/}
-            {/*            userID: {review.userID},*/}
-            {/*            content: {review.content},*/}
-            {/*            rating: {review.rating},*/}
-            {/*            footprint time: {calculateTime(review.timestamp.toDate())}*/}
-            {/*        </li>*/}
-            {/*    )}*/}
-
-            {/*</ul>*/}
         </Box>
     );
 }
 
 export default function BusinessPage() {
 
-    const location = useLocation()
+    const location = useLocation();
     const check_null = location.state === null;
     let {from} = (check_null === true) ? null : location.state;
     let [business, setBusiness] = useState("");
@@ -134,20 +110,6 @@ export default function BusinessPage() {
 
     return (
         <div>
-            {/*<Box*/}
-            {/*    sx={{*/}
-            {/*        backgroundColor: theme.palette.primary.main,*/}
-            {/*        position: "fixed",*/}
-            {/*        width: "100%",*/}
-            {/*        height: "5.5rem",*/}
-            {/*        zIndex:"999",*/}
-            {/*    }}>*/}
-            {/*    <Stack direction="row" justifyContent="space-between" spacing={2} alignItems="center"*/}
-            {/*           width="100%">*/}
-            {/*        <StyledHamburgerButtonWithCanvas/>*/}
-            {/*        <StyledLogo/>*/}
-            {/*    </Stack>*/}
-            {/*</Box>*/}
             {(business === "") ?
                 (<div> Can't find business! </div>) :
                 (<div> {showBusiness(business)} </div>)}

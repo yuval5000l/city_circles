@@ -1,7 +1,7 @@
 import {auth, db, timestamp} from "../config/firebase";
 import "firebase/auth";
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
-import {doc, getDoc, setDoc} from "firebase/firestore";
+import {collection, doc, getDoc, getDocs, setDoc} from "firebase/firestore";
 import {getBusinessByName} from "./BusinessClass";
 // import {auth} from "./config/firebase";
 
@@ -174,6 +174,21 @@ export default class User {
             url_to_business: business.id, review: review.content,
             review_address: review.content
         }
+    }
+    static async getAllUsers()
+    {
+        let lst = [];
+        const querySnapshot = await getDocs(collection(db, "Users"));
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            // console.log(doc.id, " => ", doc.data());
+            // console.log(new Business({name: doc.data().name, type:doc.data().type,
+            // address: doc.data().address, openingHours: doc.data().openingHours,
+            // contact: doc.data().contact, social: doc.data().social, }));
+            const options = doc.data();
+            lst.push(userConverter["fromFirestore"](doc, options));
+        });
+        return lst;
     }
 }
 
