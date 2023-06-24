@@ -196,7 +196,6 @@ export default function ThirdPageBusinessRegistration({onNext}) {
                         (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}
                 </Stack>
 
-                <Button disabled={picturePath===""} variant={'contained'} onClick={handleUploadPic}> Upload File</Button>
             </Stack>
 
 

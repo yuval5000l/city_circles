@@ -44,7 +44,8 @@ export default function SecondPageBusinessRegistration({onNext}) {
     }
 
     const handleOnNext = () => {
-        onNext([insta, face, phoneNum, web, whatsAppLink]);
+
+        onNext({Facebook: face, Instagram: insta, Phone: phoneNum, Website: web, Whatsapp: whatsAppLink});
     }
     return(
         <div>
