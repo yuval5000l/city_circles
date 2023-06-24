@@ -16,9 +16,9 @@ import {Box, Stack} from "@mui/material";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import dayjs from "dayjs";
-import { SingleInputTimeRangeField } from '@mui/x-date-pickers-pro/SingleInputTimeRangeField';
+import {SingleInputTimeRangeField} from '@mui/x-date-pickers-pro/SingleInputTimeRangeField';
 import {AdapterDayjs} from "@mui/x-date-pickers/AdapterDayjs";
-import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
+import {LocalizationProvider} from '@mui/x-date-pickers/LocalizationProvider';
 import Button from "@mui/material/Button";
 import {useEffect, useState} from "react";
 import TextField from "@mui/material/TextField";
@@ -27,14 +27,13 @@ import {MultiInputTimeRangeField} from "@mui/x-date-pickers-pro";
 import {uploadFile} from "../../../BackEnd/Classes/GeneralFunctionsFireBase";
 import Avatar from "@mui/material/Avatar";
 
-function getHoursAndMinutes(day)
-{
-    return "start "+day[0].format("HH")+","+day[0].format("MM")+ " end " + day[1].format("HH")+","+day[1].format("MM");
+function getHoursAndMinutes(day) {
+    return "start " + day[0].format("HH") + "," + day[0].format("MM") + " end " + day[1].format("HH") + "," + day[1].format("MM");
     // return {"Start":[day[0].format("HH"), day[0].format("MM")],
     //     "End":[day[1].format("HH"), day[1].format("MM"),]}
 }
 
-export default function ThirdPageBusinessRegistration({onNext}) {
+export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
     const [address, setAddress] = useState("");
     const [picturePath, setPicturePath] = useState("");
     const [file, setFile] = useState(null);
@@ -43,27 +42,24 @@ export default function ThirdPageBusinessRegistration({onNext}) {
     const [street, setStreet] = useState('');
     const [houseNum, setHouseNum] = useState('');
 
-    function CreateAddress(){
+    function CreateAddress() {
         const FullAddress = street + " " + houseNum + ", " + city
         setAddress(street + " " + houseNum + ", " + city);
         return FullAddress
     }
 
 
-    useEffect(() =>
-    {
-        async function foo()
-        {
-            if (file !== null)
-            {
+    useEffect(() => {
+        async function foo() {
+            if (file !== null) {
                 await handleUploadPic();
             }
         }
+
         foo();
     }, [file]);
 
-    const handleUploadPic = async () =>
-    {
+    const handleUploadPic = async () => {
         uploadFile(file).then((pathy) => {
             setPicturePath(pathy);
         }).catch((error) => {
@@ -101,29 +97,41 @@ export default function ThirdPageBusinessRegistration({onNext}) {
     ]);
     const handleOnNext = () => {
         const finalAddress = CreateAddress();
-        console.log("address is: " + address );
-        console.log(typeof(sunday));
-        onNext([finalAddress, picturePath, {"Sunday": getHoursAndMinutes(sunday),
+        // console.log("address is: " + address );
+        // console.log(typeof(sunday));
+        onNext([finalAddress, picturePath, {
+            "Sunday": getHoursAndMinutes(sunday),
             "Monday": getHoursAndMinutes(monday), "Tuesday": getHoursAndMinutes(tuesday),
             "Wednesday": getHoursAndMinutes(wednesday), "Thursday": getHoursAndMinutes(thursday),
-            "Friday": getHoursAndMinutes(friday),"Saturday": getHoursAndMinutes(saturday)}]);
+            "Friday": getHoursAndMinutes(friday), "Saturday": getHoursAndMinutes(saturday)
+        }]);
+    }
+    const handleOnBack = () => {
+        const finalAddress = CreateAddress();
+        onBack([finalAddress, picturePath, {
+            "Sunday": getHoursAndMinutes(sunday),
+            "Monday": getHoursAndMinutes(monday), "Tuesday": getHoursAndMinutes(tuesday),
+            "Wednesday": getHoursAndMinutes(wednesday), "Thursday": getHoursAndMinutes(thursday),
+            "Friday": getHoursAndMinutes(friday), "Saturday": getHoursAndMinutes(saturday)
+        }]);
     }
 
 
-
-    return(
+    return (
         <div>
             <Stack direction="column" justifyContent="flex-start" spacing={2} textAlign="left" padding="1rem">
                 <Typography variant="h2">Details</Typography>
-                <Stack direction="row" spacing={1}   alignItems="center">
+                <Stack direction="row" spacing={1} alignItems="center">
                     <LocationOnIcon sx={{fontSize: 30, alignSelf: "center"}}/>
                     <Typography variant="h3">Location</Typography>
                 </Stack>
-                <TextField required={true} label={'City'} fieldname={'City'} onChange={(e)=> setCity(e.target.value)}/>
-                <TextField required={true} label={'Street'} fieldname={'Street'} onChange={(e)=> setStreet(e.target.value)}/>
-                <TextField required={true} label={'House Number'} fieldname={'House Number'} onChange={(e)=> setHouseNum(e.target.value)}/>
+                <TextField required={true} label={'City'} fieldname={'City'} onChange={(e) => setCity(e.target.value)}/>
+                <TextField required={true} label={'Street'} fieldname={'Street'}
+                           onChange={(e) => setStreet(e.target.value)}/>
+                <TextField required={true} label={'House Number'} fieldname={'House Number'}
+                           onChange={(e) => setHouseNum(e.target.value)}/>
 
-                <Stack direction="row" spacing={1}   alignItems="center">
+                <Stack direction="row" spacing={1} alignItems="center">
                     <AccessTimeIcon sx={{fontSize: 30, alignSelf: "center"}}/>
                     <Typography variant="h3">Open Hours</Typography>
                 </Stack>
@@ -186,7 +194,7 @@ export default function ThirdPageBusinessRegistration({onNext}) {
                 {/*    onChange={(e) => setFile(e.target.files[0])}/>*/}
                 <Stack direction="column" spacing={"1rem"} alignItems="flex-start">
                     <Stack direction="row" spacing={"1rem"} sx={{justifyContent: "start", alignItems: 'center'}}>
-                        <Button variant={"contained"} component={"label"} >Choose File
+                        <Button variant={"contained"} component={"label"}>Choose File
                             <input
                                 type="file"
                                 hidden
@@ -201,14 +209,20 @@ export default function ThirdPageBusinessRegistration({onNext}) {
             </Stack>
 
 
-
-
-
             {/*{(picturePath === "") ? (<Avatar sx={{width: 100, height: 100}}/>) :*/}
             {/*    (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}*/}
-            <Button disabled={picturePath===""} onClick={handleOnNext}>
+            <Button disabled={picturePath === ""} onClick={handleOnNext}>
                 <Typography variant="h3">
                     {'Next'}
+                </Typography>
+            </Button>
+            <Button
+                color="inherit"
+                onClick={handleOnBack}
+                sx={{mr: 1}}
+            >
+                <Typography variant="h3">
+                    Back
                 </Typography>
             </Button>
         </div>

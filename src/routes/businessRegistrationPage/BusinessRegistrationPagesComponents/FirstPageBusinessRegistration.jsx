@@ -137,7 +137,7 @@ export default function FirstPageBusinessRegistration({onNext, data}) {
                             margin: "1rem",
                             borderRadius: "15px",
                             boxShadow: "1px 2px 4px #000000"
-                        }} key={{btype}}>
+                        }}>
                             {btype}
                         </ToggleButton>
                     )}
@@ -181,7 +181,7 @@ export default function FirstPageBusinessRegistration({onNext, data}) {
                     {BusinessTypesSelection(Business.ListOfTypes)}
                 </Box>
                 <Typography variant="h2">Business Name</Typography>
-                <TextField id="outlined-basic" label="Business Name" variant="outlined"
+                <TextField id="outlined-basic" label="Business Name" variant="outlined" value={newBusinessName}
                            onChange={(e) => setNewBusinessName(e.target.value)}/>
 
                 <Typography variant="h2">Owner Name</Typography>

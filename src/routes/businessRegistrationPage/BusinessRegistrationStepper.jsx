@@ -59,6 +59,7 @@ export default function BusinessStepper() {
     };
 
     const handleBack = (data) => {
+        // console.log(activeStep);
         switch (activeStep) {
             case 0:
                 setFirstPageData(data);

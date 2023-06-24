@@ -25,19 +25,19 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 
 
-export default function SecondPageBusinessRegistration({onNext, onBack}) {
+export default function SecondPageBusinessRegistration({onNext, onBack, data}) {
 
-    const [insta, setInsta] = useState("");
-    const [face, setFace] = useState("");
-    const [phoneNum, setPhoneNum] = useState("");
-    const [whatsAppLink, setWhatsAppLink] = useState("")
-    const [web, setWeb] = useState("");
+    const [insta, setInsta] = useState((data===null)? ("") : (data["Instagram"]));
+    const [face, setFace] = useState((data===null)? ("") : (data["Facebook"]));
+    const [phoneNum, setPhoneNum] = useState((data===null)? ("") : (data["Phone"]));
+    const [whatsAppLink, setWhatsAppLink] = useState((data===null)? ("") : (data["Whatsapp"]));
+    const [web, setWeb] = useState((data===null)? ("") : (data["Website"]));
     const [socialEmpty, setSocialEmpty] = useState(true)
     const [contryCode, setContryCode] = useState(null)
     const [companyCode, setCompanyCode] = useState(null)
-    const [value, setValue] = useState()
+    const [value, setValue] = useState();
     const [openAlert, setOpenAlert] = useState(false)
-
+    // console.log(data);
     function IsSocialEmpty() {
         if (insta !== "" || face !== "" || phoneNum !== "" || web !== "") {
             setSocialEmpty(false)
@@ -75,7 +75,7 @@ export default function SecondPageBusinessRegistration({onNext, onBack}) {
                 <Typography variant="h2">Socials (if exists..)</Typography>
                 <Stack direction="row">
                     <InstagramIcon sx={{fontSize: 56, alignSelf: "center"}}/>
-                    <TextField label={'@example'} fieldname={'@example'}
+                    <TextField label={'@example'} fieldname={'@example'} value={insta}
                                onChange={(e) => {
                                    setInsta(e.target.value)
                                    IsSocialEmpty()
@@ -84,7 +84,7 @@ export default function SecondPageBusinessRegistration({onNext, onBack}) {
                 </Stack>
                 <Stack direction="row">
                     <FacebookIcon sx={{fontSize: 56, alignSelf: "center"}}/>
-                    <TextField label={'facebook page'} fieldname={'facebook page'}
+                    <TextField label={'facebook page'} fieldname={'facebook page'} value={face}
                                onChange={(e) => {
                                    setFace(e.target.value)
                                    IsSocialEmpty()
@@ -103,7 +103,7 @@ export default function SecondPageBusinessRegistration({onNext, onBack}) {
                             value={contryCode}
                             onChange={(e) => {
                                 setContryCode(e.target.value)
-                                console.log(e.target.value)
+                                // console.log(e.target.value)
                             }}
                             autoWidth
                             label="contry code"
@@ -118,7 +118,7 @@ export default function SecondPageBusinessRegistration({onNext, onBack}) {
                             value={companyCode}
                             onChange={(e) => {
                                 setCompanyCode(e.target.value)
-                                console.log(e.target.value)
+                                // console.log(e.target.value)
                             }}
                             autoWidth
                             label="Company Code"
@@ -143,8 +143,8 @@ export default function SecondPageBusinessRegistration({onNext, onBack}) {
                                            IsSocialEmpty()
                                        }
 
-                                       console.log(contryCode + companyCode + e.target.value)
-                                       console.log(whatsAppLink)
+                                       // console.log(contryCode + companyCode + e.target.value)
+                                       // console.log(whatsAppLink)
                                    }
                                    }/>
                     </Stack>
@@ -152,7 +152,7 @@ export default function SecondPageBusinessRegistration({onNext, onBack}) {
                 </Stack>
                 <Stack direction="row">
                     <LanguageIcon sx={{fontSize: 56, alignSelf: "center"}}/>
-                    <TextField label={'website URL'} fieldname={'website URL'}
+                    <TextField label={'website URL'} fieldname={'website URL'} value={web}
                                onChange={(e) => {
                                    setWeb(e.target.value)
                                    IsSocialEmpty()
