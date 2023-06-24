@@ -24,15 +24,19 @@ function TabPanel({ children, value, index }) {
     );
 }
 
+function sortByTime(ReviewA, ReviewB)
+{
+    return ReviewA.timestamp - ReviewB.timestamp;
+}
+
 export default function StyledProfileTabs({ user }) {
-    const Footprints = user.getUserFootprints();
-    const Reviews = user.getUserReviews();
+    const Footprints = user.getUserFootprints().sort(sortByTime);
+    const Reviews = user.getUserReviews().sort(sortByTime);
     const [value, setValue] = useState(0);
 
     const handleChange = (event, newValue) => {
         setValue(newValue);
     };
-    console.log(Footprints);
     return (
         <Box sx={{ direction: "row", width: '100%', bgcolor: theme.palette.primary.main, justifyContent: "center",
             border: "none",}}>

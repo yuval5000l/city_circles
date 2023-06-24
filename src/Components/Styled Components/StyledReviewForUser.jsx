@@ -18,7 +18,7 @@ export default function StyledReviewForUser({BusinessName, review, businessPhoto
                         <Typography variant="h3" textAlign="left !important">
                             {BusinessName}
                         </Typography>
-                        <cite variant="p" textAlign="left !important">
+                        <cite >
                             "{cutText}"
                         </cite>
                         <Typography variant="h5" textAlign="left">
