@@ -60,22 +60,9 @@ export default function BusinessStepper() {
 
     const handleBack = () => {
         setActiveStep((prevActiveStep) => prevActiveStep - 1);
+
     };
 
-    // const handleSkip = () => {
-    //     if (!isStepOptional(activeStep)) {
-    //         // You probably want to guard against something like this,
-    //         // it should never occur unless someone's actively trying to break something.
-    //         throw new Error("You can't skip a step that isn't optional.");
-    //     }
-    //
-    //     setActiveStep((prevActiveStep) => prevActiveStep + 1);
-    //     setSkipped((prevSkipped) => {
-    //         const newSkipped = new Set(prevSkipped.values());
-    //         newSkipped.add(activeStep);
-    //         return newSkipped;
-    //     });
-    // };
 
     const handleReset = () => {
         setActiveStep(0);
@@ -112,7 +99,7 @@ export default function BusinessStepper() {
         },
         {
             label: 'Approving',
-            content: <FourthPageBusinessRegistration onNext={handleNext} onBack={handleBack}/>,
+            content: <FourthPageBusinessRegistration onBack={handleBack} data={[...firstPageData, ...secondPageData, ...thirdPageData]}/>,
         },
     ];
 
@@ -123,11 +110,6 @@ export default function BusinessStepper() {
                 {steps.map((step, index) => {
                     const stepProps = {};
                     const labelProps = {};
-                    // if (isStepOptional(index)) {
-                    //     labelProps.optional = (
-                    //         <Typography variant="caption">Optional</Typography>
-                    //     );
-                    // }
                     if (isStepSkipped(index)) {
                         stepProps.completed = false;
                     }
@@ -157,28 +139,21 @@ export default function BusinessStepper() {
                     <Typography sx={{mt: 2, mb: 1}}>Step {activeStep + 1}</Typography>
                     {steps[activeStep].content}
                     <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
-                        <Button
-                            color="inherit"
-                            disabled={activeStep === 0}
-                            onClick={handleBack}
-                            sx={{mr: 1}}
-                        >
-                            Back
-                        </Button>
+                        {/*<Button*/}
+                        {/*    color="inherit"*/}
+                        {/*    disabled={activeStep === 0}*/}
+                        {/*    onClick={handleBack}*/}
+                        {/*    sx={{mr: 1}}*/}
+                        {/*>*/}
+                        {/*    Back*/}
+                        {/*</Button>*/}
                         <Box sx={{flex: '1 1 auto'}}/>
-                        {/*{isStepOptional(activeStep) && (*/}
-                        {/*    <Button color="inherit" onClick={handleSkip} sx={{mr: 1}}>*/}
-                        {/*        Skip*/}
-                        {/*    </Button>*/}
-                        {/*)}*/}
+
 
                         {activeStep === steps.length - 1 ?
                             (<Button onClick={handleMakeBusiness}>
                                 Finish
                             </Button>) : (<div></div>)}
-                        {/*<Button onClick={handleNext}>*/}
-                        {/*    {activeStep === steps.length - 1 ? 'Finish' : 'Next'}*/}
-                        {/*</Button>*/}
                     </Box>
                 </React.Fragment>
             )}

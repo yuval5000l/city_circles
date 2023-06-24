@@ -27,7 +27,7 @@ import CloseIcon from "@mui/icons-material/Close";
 
 
 
-export default function SecondPageBusinessRegistration({onNext}) {
+export default function SecondPageBusinessRegistration({onNext, onBack}) {
 
     const [insta, setInsta] = useState("");
     const [face, setFace] = useState("");
@@ -67,6 +67,10 @@ export default function SecondPageBusinessRegistration({onNext}) {
     const handleOnNext = () => {
 
         onNext({Facebook: face, Instagram: insta, Phone: phoneNum, Website: web, Whatsapp: whatsAppLink});
+    }
+    const handleOnBack = () =>
+    {
+        onBack({Facebook: face, Instagram: insta, Phone: phoneNum, Website: web, Whatsapp: whatsAppLink});
     }
     return(
         <div>
@@ -157,6 +161,14 @@ export default function SecondPageBusinessRegistration({onNext}) {
             </Stack>
             <Button disabled={socialEmpty} onClick={handleOnNext}>
                 {'Next'}
+            </Button>
+            <Button
+                color="inherit"
+                disabled={activeStep === 0}
+                onClick={handleOnBack}
+                sx={{mr: 1}}
+            >
+                Back
             </Button>
         </div>
     )
