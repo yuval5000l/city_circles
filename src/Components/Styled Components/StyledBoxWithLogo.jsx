@@ -3,9 +3,11 @@
 import Box from "@mui/material/Box";
 import * as React from "react";
 import {styled} from "@mui/material/styles";
-import {AppBar} from "@mui/material";
+import {AppBar, Typography} from "@mui/material";
 import CityCircleLogo from "./Icons/logo-new.png";
 import Avatar from "@mui/material/Avatar";
+import theme from "../../Theme/Theme";
+import {StyledAvatarBusinessFeed, StyledAvatarFriendProfile} from "./styledComponents";
 
 
 const RotatePurpleBox = styled(AppBar)(({ theme })=> ({
@@ -31,11 +33,12 @@ const PurpleBox = styled(AppBar)(({ theme })=> ({
 const SmallPurpleBox = styled(Box)(({ theme })=> ({
     backgroundColor:theme.palette.primary.main,
     borderBottom:`0.65rem solid ${theme.palette.secondary.main}`,
+    boxShadow : "0px 4px 4px rgba(0, 0, 0, 0.25)",
     // position:"fixed",
     justifyContent: "center",
     position: 'relative',
     [theme.breakpoints.up('xs')]: {
-        height:'10rem',
+        height:'4rem',
     }
 }));
 
@@ -108,9 +111,10 @@ export function TopBoxWithLogo() {
 
 export function TopBoxWithProfileImg({img_url}) {
     return (
-        <SmallPurpleBox>
+        <SmallPurpleBox >
             <SmallLogoBoxBottom>
-                {(img_url==="") ? (<Avatar width="6rem" height="6rem"/>) : (<img src={img_url} alt="profile image" width="95%" height="95%"/>)}
+
+                {(img_url==="") ? (<Avatar width="6rem" height="6rem"/>) : (<StyledAvatarFriendProfile src={img_url} />)}
             </SmallLogoBoxBottom>
         </SmallPurpleBox>
     );

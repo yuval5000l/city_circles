@@ -178,6 +178,13 @@ export const StyledAvatarBusinessFeed = styled(Avatar)(({ theme })=> ({
         width:"7rem",
         height:"7rem"
     }}));
+export const StyledAvatarFriendProfile = styled(Avatar)(({ theme })=> ({
+    boxShadow : "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    border: `9px solid ${theme.palette.secondary.main}`,
+    [theme.breakpoints.up('xs')]:{
+        width:"7rem",
+        height:"7rem"
+    }}));
 
 export const StyledSmallCirclesButton = styled(SupervisedUserCircleIcon)(({theme}) => ({
     color: theme.palette.primary.main,

@@ -11,7 +11,6 @@ import StyledFootprintForUser from "../../Components/Styled Components/StyledFoo
 import StyledReviewForUser from "../../Components/Styled Components/StyledReviewForUser";
 import StyledDropdownCircleOptions from "../../Components/Styled Components/StyledDropdownCircleOptions";
 import User from "../../BackEnd/Classes/UserClass";
-import {StyledLightCircleBox} from "../../Components/Styled Components/styledComponents";
 
 
 function TabPanel({ children, value, index }) {
@@ -40,8 +39,10 @@ export default function StyledProfileTabs({ user }) {
         setValue(newValue);
     };
     return (
-        <Box sx={{ direction: "row", width: '100%', bgcolor: theme.palette.primary.main, justifyContent: "center",
-            border: "none",}}>
+        <Stack sx={{ direction: "row", width: '100%', bgcolor: theme.palette.primary.main, justifyContent: "center"
+            }}>
+            <Box sx={{ direction: "row", width: '100%', bgcolor: theme.palette.primary.main, justifyContent: "center",
+                borderBottom: `3px solid ${theme.palette.secondary.main}`}}>
             <Tabs
                 value={value}
                 onChange={handleChange}
@@ -49,27 +50,37 @@ export default function StyledProfileTabs({ user }) {
                 indicatorColor="secondary"
                 aria-label="secondary tabs example"
                 variant="fullWidth"
+                TabIndicatorProps={{
+                    style: {
+                        height: 4, // Adjust the height of the indicator
+                    },
+                }}
             >
-                <Tab label="Circles" id="tab-0" />
-                <Tab label="Footprints" id="tab-1" />
-                <Tab label="Reviews" id="tab-2" />
+                <Tab label="Circles" id="tab-0" sx={{
+                    fontSize: '1.2rem', // Adjust the font size
+                    fontWeight: 'bold', // Adjust the font weight
+                }}/>
+                <Tab label="Footprints" id="tab-1" sx={{
+                    fontSize: '1.2rem', // Adjust the font size
+                    fontWeight: 'bold', // Adjust the font weight
+                }} />
+                <Tab label="Reviews" id="tab-2" sx={{
+                    fontSize: '1.2rem', // Adjust the font size
+                    fontWeight: 'bold', // Adjust the font weight
+                }} />
             </Tabs>
-
+            </Box>
+            <Box sx={{ direction: "row", width: '100%', bgcolor: "white", justifyContent: "center",
+                }}>
             <TabPanel value={value} index={0}>
                 {/* Render content for the "Circles" tab */}
-                <Stack direction="column" spacing={2} marginTop="0.5rem" display="flex">
-                    {/*<StyledDropdownCircleOptions user={user} index={0} circlesList={User.ListOfCirclesSchools}/>*/}
+                    <List sx={{marginTop:"0.5rem"}} >
                     {user.getCircles().map((circle, index) => (
-                        <Box key={circle} sx={{justifyContent:"center", display:"flex", marginTop:"2rem"}}>
+                        <ListItem key={circle} sx={{justifyContent:"center", display:"flex", marginTop:"0.1rem",}}>
                             <StyledDropdownCircleOptions user={user} index={index} circlesList={CirclesList[index]}/>
-                            {/*<StyledLightCircleBox>*/}
-                            {/*    <Typography variant="h4" color="black">*/}
-                            {/*        {circle} {index}*/}
-                            {/*    </Typography>*/}
-                            {/*</StyledLightCircleBox>*/}
-                        </Box>
+                        </ListItem>
                     ))}
-                </Stack>
+                    </List>
             </TabPanel>
 
             <TabPanel value={value} index={1}>
@@ -109,7 +120,9 @@ export default function StyledProfileTabs({ user }) {
                 </List>
                 </Stack>
             </TabPanel>
-        </Box>
+            </Box>
+        </Stack>
+
     );
 }
 

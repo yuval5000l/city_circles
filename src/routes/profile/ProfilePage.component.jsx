@@ -7,7 +7,11 @@ import {Box, Button, Stack, Typography} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import theme from "../../Theme/Theme";
 import {TopBoxWithProfileImg} from "../../Components/Styled Components/StyledBoxWithLogo";
-import {StyledButtonGreen, StyledLightCircleBox} from "../../Components/Styled Components/styledComponents";
+import {
+    StyledAvatarFriendProfile,
+    StyledButtonGreen,
+    StyledLightCircleBox
+} from "../../Components/Styled Components/styledComponents";
 import * as React from "react";
 import {
     SmallPurpleBox, StyledLightCircleBoxForProfile,
@@ -44,24 +48,22 @@ function FeedItem(user, lstOfReviews) {
 function showUserProfile(user, lstOfReviews) {
     const footprints2 = (user !== null) ? (user.getFootprints()) : ([]); // [{businessID: "", businessName: "", businessPhoto: "", timestamp: timestamp},..]
     return (
-
-        <div>
+        <div >
             {(user === null) ? (<div> Loading... </div>) :
-                (<div>
+                (<div >
                     <TopBoxWithProfileImg
                         img_url={(user.getPic() === "") ? ("") : (user.getPic())}
                     />
-                    <Stack direction="column" spacing={4} marginTop="4rem">
-                        <Typography variant="h4" color="white">
-                            {/*current user name...*/}
-                            {user.getUserName()}
-                        </Typography>
-
+                    <Typography variant="h2" marginTop="4rem">
+                        {/*current user name...*/}
+                        {user.getUserName()}
+                    </Typography>
+                    <Stack direction="column" spacing={1.5} marginTop="1rem">
                         <SmallPurpleBox>
                             <Stack direction="column" spacing="auto" justifyContent="center" margin="auto">
                                 <SupervisedUserCircleIcon
                                     sx={{height: "2.5rem", width: "2.5rem", position: "start", fill: "white"}}/>
-                                <Stack>
+                                <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
                                     {user.getCircles().map(circle =>
                                         <Box key={circle}>
                                             <StyledLightCircleBox>
@@ -82,10 +84,10 @@ function showUserProfile(user, lstOfReviews) {
                                     margin: "auto",
                                     fill: "white",
                                 }}/>
-
-                                <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
+                                <div style={{ overflowX: 'auto' }}>
+                                <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto" >
                                     {footprints2.map(footprint =>
-                                        <Stack direction="column" spacing={'0.5rem'} key={footprint.businessID}>
+                                        <Stack direction="column" spacing={'0.5rem'} key={footprint.businessID} >
                                             {/*{console.log(footprint)}*/}
 
                                             {/*{console.log(footprint["businessID"])}*/}
@@ -102,6 +104,8 @@ function showUserProfile(user, lstOfReviews) {
                                     )}
 
                                 </Stack>
+                                </div>
+
                             </Stack>
                         </SmallPurpleBox>
                         {FeedItem(user, lstOfReviews)}
@@ -124,27 +128,17 @@ function showMyProfile(user) {
                     backgroundColor: theme.palette.primary.main,
                 }}
             >
-                <Box
-                    sx={{
-                        display: 'flex',
-                        flexDirection: 'column',
-                        alignItems: 'center',
-                    }}
-                >
-                    <Stack direction="column" spacing={2} justifyContent="flex-start"
-                           alignItems="center">
-                        <Avatar
-                            src={user.getPic()}
-                            sx={{width: "8rem", height: "8rem"}}
-                        />
-                        <Box>
-                            <Typography variant="h2" color="white">
-                                {/*current user name...*/}
-                                {user.getUserName()}
-                            </Typography>
-                        </Box>
+
+                    <Stack direction="column" spacing={1} justifyContent="flex-start"
+                           alignItems="center" sx={{marginBottom: "0.1rem"}} >
+                        <Typography variant="h2" color="white">
+                            {/*current user name...*/}
+                            {user.getUserName()}
+                        </Typography>
+                        {(user.getPic()==="") ? (<Avatar width="6rem" height="6rem"/>)
+                            : (<StyledAvatarFriendProfile src={user.getPic()} />)}
                     </Stack>
-                </Box>
+
             </Box>
             <StyledProfileTabs user={user}/>
         </>
