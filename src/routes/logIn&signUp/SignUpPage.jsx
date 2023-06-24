@@ -4,7 +4,7 @@ import {
     StyledDialogTextFieldReview,
     StyledAutoComplete,
     // StyledRotatePurpleBox,
-    StyledButtonGray
+    StyledButtonGray, StyledCircleBox, StyledPurpleBox
 } from "../../Components/Styled Components/styledComponents";
 import {Button, Stack, Typography} from "@mui/material";
 import {auth} from "../../BackEnd/config/firebase";
@@ -23,6 +23,8 @@ import {onAuthStateChanged} from "firebase/auth";
 import {uploadFile} from "../../BackEnd/Classes/GeneralFunctionsFireBase";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
+import theme from "../../Theme/Theme";
+import StyledLogo from "../../Components/Styled Components/StyledLogo";
 
 
 export default function SignupPage() {
@@ -81,21 +83,26 @@ export default function SignupPage() {
         });
     }
     return (
-        <Box marginTop="5rem !important">
+        <Stack direcction="column">
+            <Box>
+                <StyledLogo/>
+            </Box>
             <Typography variant="h1" sx={{color: 'primary.main', textAlign: "start", margin: '1rem'}}>
                 Sign Up
             </Typography>
             <Typography variant="h3" sx={{color: 'primary.main', textAlign: "start", margin: '1rem'}}>
-                Let’s get to know each other
+                Let’s get to know each other a little bit
             </Typography>
-            <Typography variant="body1" sx={{textAlign: "start", margin: '1rem'}}>
-                We are CityCircle nice to meet you! We want your relocation process to be as comfortable as it gets.
-                So... we are going to ask some question! Feel free to answer (you can change your decisions later).
-            </Typography>
-            <Typography variant="body1" sx={{textAlign: "start", margin: '1rem'}}>
-                We want you to chose 3 CityCircles to be a part of, so we will understand a little more about what you
-                like. The rest will come naturally :)
-            </Typography>
+            <Box sx={{borderRadius:"15px",backgroundColor:`${theme.palette.primary.main}`, color:"white", padding:"0.5rem", margin:"0.5rem"}}>
+                <Typography variant="h4" sx={{textAlign: "start", margin: '1rem'}}>
+                    We are <strong>CityCircle</strong> nice to meet you! We want your relocation process to be as comfortable as it gets.
+                    So... we are going to ask some question! Feel free to answer (you can change your decisions later).
+                </Typography>
+                <Typography variant="h4" sx={{textAlign: "start", margin: '1rem'}}>
+                    We want you to chose 3 CityCircles to be a part of, so we will understand a little more about what you
+                    like. The rest will come naturally :)
+                </Typography>
+            </Box>
             <Typography variant="h3" sx={{color: 'primary.main', textAlign: "start", margin: '1rem'}}>
                 So who are you?
             </Typography>
@@ -175,7 +182,6 @@ export default function SignupPage() {
                     />}
                 />
             </Stack>
-
             <BottomBoxWithLogo>
                 <Stack direction="row" spacing={2} justifyContent="center">
                     <StyledLightCircleBox>
@@ -203,19 +209,10 @@ export default function SignupPage() {
                 (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}
 
             <StyledButtonGray onClick={handleSubmit}>Finish!</StyledButtonGray>
-
-
             {/*<Box sx={{position: 'relative'}}>*/}
             {/*    <br/>*/}
             {/*    <br/>*/}
             {/*</Box>*/}
-
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-            <br/>
-        </Box>
+        </Stack>
     );
 }
