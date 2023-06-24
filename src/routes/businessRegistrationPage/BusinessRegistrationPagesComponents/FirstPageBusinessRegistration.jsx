@@ -18,36 +18,37 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-import { useSnackbar } from 'notistack';
+import {useSnackbar} from 'notistack';
+import theme from "../../../Theme/Theme";
 
 
+function CustomizedSnackbars() {
+    const [open, setOpen] = React.useState(false);
 
-// function CustomizedSnackbars() {
-//     const [open, setOpen] = React.useState(false);
-//
-//     const handleClick = () => {
-//         setOpen(true);
-//     };
-//
-//     const handleClose = (event, reason) => {
-//         if (reason === 'clickaway') {
-//             return;
-//         }
-//
-//         setOpen(false);
-//     };
-//
-//     return (
-//         <Stack spacing={2} sx={{ width: '100%' }}>
-//             <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
-//                 <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-//                     You can not add business that is already exist
-//                 </Alert>
-//             </Snackbar>
-//
-//         </Stack>
-//     );
-// }
+    const handleClick = () => {
+        setOpen(true);
+    };
+
+    const handleClose = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpen(false);
+    };
+
+    return (
+        <Stack spacing={2} sx={{width: '100%'}}>
+            <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+                <Alert onClose={handleClose} severity="error" sx={{width: '100%'}}>
+                    You can not add business that is already exist
+                </Alert>
+            </Snackbar>
+
+        </Stack>
+    );
+}
+
 // const businessTypes = ['cosmetics', 'nails', 'barber', 'hair', 'sport', 'art', 'lifestyle', 'music']
 export default function FirstPageBusinessRegistration({onNext, data}) {
     console.log(data);
@@ -58,7 +59,7 @@ export default function FirstPageBusinessRegistration({onNext, data}) {
     const [ownerName, setOwnerName] = useState("");
     const [isBusinessAddedBefore, setIsBusinessAddedBefore] = useState(null)
     const [openAlert, setOpenAlert] = useState(false)
-    const { enqueueSnackbar } = useSnackbar();
+    const {enqueueSnackbar} = useSnackbar();
 
     // Update Business Name State
     // const [businessName, setBusinessName] = useState(""); // TODO: in the future- need to make edit component
@@ -116,39 +117,34 @@ export default function FirstPageBusinessRegistration({onNext, data}) {
         }
 
 
-        function BusinessTypesSelection(businesses_types) {
+    function BusinessTypesSelection(businesses_types) {
+        const handleTypes = (event, newFormats) => {
+            setBusinessTypes(newFormats);
+            // console.log(businessTypes);
+        };
 
-            const handleTypes = (event, newFormats) => {
-                setBusinessTypes(newFormats);
-                // console.log(businessTypes);
-            };
-
-            return (
-                <Box sx={{
-                    maxWidth: 600,
-                    borderRadius: 2
-                }}>
-                    <ToggleButtonGroup
-                        value={businessTypes}
-                        onChange={handleTypes}
-                        aria-label="business types"
-                        style={{display: "flex", flexWrap: "wrap", margin: "1rem", justifyContent: "center"}}
-                    >
-                        {businesses_types.map(btype =>
-
-                            <ToggleButton value={btype} aria-label={btype} style={{
-                                margin: "1rem",
-                                width: 100,
-                                borderRadius: 6,
-                                boxShadow: "1px 2px 4px #000000"
-                            }} key={btype}>
-                                {btype}
-                            </ToggleButton>
-                        )}
-                    </ToggleButtonGroup>
-                </Box>
-            );
-        }
+        return (
+            <Box sx={{}}>
+                <ToggleButtonGroup
+                    value={businessTypes}
+                    onChange={handleTypes}
+                    aria-label="business types"
+                    style={{display: "flex", flexWrap: "wrap", margin: "1rem", justifyContent: "center"}}
+                >
+                    {businesses_types.map(btype =>
+                        <ToggleButton value={btype} aria-label={btype} style={{
+                            ...theme.typography.p,
+                            margin: "1rem",
+                            borderRadius: "15px",
+                            boxShadow: "1px 2px 4px #000000"
+                        }} key={{btype}}>
+                            {btype}
+                        </ToggleButton>
+                    )}
+                </ToggleButtonGroup>
+            </Box>
+        );
+    }
 
         const onSubmitBusiness = async () => {
             try {
@@ -176,49 +172,51 @@ export default function FirstPageBusinessRegistration({onNext, data}) {
         setOpenAlert(false);
     }
 
-        return (
-            <div>
-                <Box sx={{margin: "1rem"}}>
-                    <Typography variant="h4" textAlign="start">Category</Typography>
+    return (
+        <div>
+
+            <Stack direction="column" justifyContent="flex-start" spacing={2} textAlign="left" padding="1rem">
+                <Box>
+                    <Typography variant="h2" textAlign="start">Category</Typography>
                     {BusinessTypesSelection(Business.ListOfTypes)}
-
                 </Box>
-                <Stack direction="column" alignItems="start" margin="0.5rem">
-                    <Typography variant="h4">Business Name</Typography>
-                    <TextField id="outlined-basic" label="Business Name" variant="outlined"
-                               onChange={(e) => setNewBusinessName(e.target.value)}/>
+                <Typography variant="h2">Business Name</Typography>
+                <TextField id="outlined-basic" label="Business Name" variant="outlined"
+                           onChange={(e) => setNewBusinessName(e.target.value)}/>
 
-                    <Typography variant="h4">Owner Name</Typography>
-                    <TextField label="Oner Name" variant="outlined" onChange={(e) => setOwnerName(e.target.value)}/>
+                <Typography variant="h2">Owner Name</Typography>
+                <TextField label="Oner Name" variant="outlined" onChange={(e) => setOwnerName(e.target.value)}/>
 
-                    <Typography variant="h4">I’ve added businesses in the past</Typography>
-                    <RowRadioButtonsGroup/>
-                    <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleClose} sx={{position: "relative"}}>
+                <Typography variant="h2">I’ve added businesses in the past</Typography>
+                <RowRadioButtonsGroup/>
+                <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleClose} sx={{position: "relative"}}>
                     <Alert onClose={handleClose} severity="warning"
-                        action={
-                            <IconButton
-                                aria-label="close"
-                                color="inherit"
-                                size="small"
-                                onClick={() => {
-                                    setOpenAlert(false);
-                                }}
-                            >
-                                <CloseIcon fontSize="inherit" />
-                            </IconButton>
-                        }
-                        sx={{ mb: 2 }}
+                           action={
+                               <IconButton
+                                   aria-label="close"
+                                   color="inherit"
+                                   size="small"
+                                   onClick={() => {
+                                       setOpenAlert(false);
+                                   }}
+                               >
+                                   <CloseIcon fontSize="inherit"/>
+                               </IconButton>
+                           }
+                           sx={{mb: 2}}
                     >
                         You can not add business that is already exist
                     </Alert>
-                    </Snackbar>
-                    <Typography variant="h4">Business owner facebook profile link:</Typography>
-                    <TextField onChange={(e) => setNewPreviewUrl(e.target.value)}/>
-                </Stack>
-                {/*<Button onClick={onSubmitBusiness}> Sign In!</Button>*/}
-                <Button onClick={handleOnNext}>
+                </Snackbar>
+                <Typography variant="h2">Business owner facebook profile link:</Typography>
+                <TextField placeholder="www.facebook.com/#addname" onChange={(e) => setNewPreviewUrl(e.target.value)}/>
+            </Stack>
+            {/*<Button onClick={onSubmitBusiness}> Sign In!</Button>*/}
+            <Button onClick={handleOnNext}>
+                <Typography variant="h3">
                     {'Next'}
-                </Button>
-            </div>
-        )
-    }
+                </Typography>
+            </Button>
+        </div>
+    )
+}

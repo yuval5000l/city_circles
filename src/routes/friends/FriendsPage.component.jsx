@@ -51,12 +51,12 @@ const FriendsPageComponent = () => {
                 onChange={handleSearchChange}
                 fullWidth
             />
-            <Typography variant="h6" sx={{color: theme.palette.primary.main}}>
+            <Typography variant="h4" sx={{color: theme.palette.primary.main}}>
                 {filteredFriends.length} Friends
             </Typography>
-            <List>
+            <List width="100%">
                 {filteredFriends.map((friend) => (
-                    <ListItem key={friend.getUserId()}>
+                    <ListItem sx={{paddingLeft:"0px", paddingRight:"0px"}} width="100%" key={friend.getUserId()}>
                         <StyledFriend user_id={friend.getUserId()} user_name={friend.getUserName()}
                                       circles={friend.getCircles()}/>
                     </ListItem>

@@ -123,7 +123,7 @@ export default function BusinessStepper() {
 
     return (
         <Box sx={{width: '100%'}}>
-            <Stepper activeStep={activeStep}>
+            <Stepper activeStep={activeStep} sx={{padding:"1rem"}}>
                 {steps.map((step, index) => {
                     const stepProps = {};
                     const labelProps = {};
@@ -153,7 +153,7 @@ export default function BusinessStepper() {
                 </React.Fragment>
             ) : (
                 <React.Fragment>
-                    <Typography sx={{mt: 2, mb: 1}}>Step {activeStep + 1}</Typography>
+                    {/*<Typography sx={{mt: 2, mb: 1}}>Step {activeStep + 1}</Typography>*/}
                     {steps[activeStep].content}
                     <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
                         {/*<Button*/}

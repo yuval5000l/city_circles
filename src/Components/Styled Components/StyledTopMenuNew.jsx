@@ -23,7 +23,7 @@ function StyledTopMenuNew({setSearch, setValue}) {
     return (
         <StyledAppBarTop>
             <Stack direction="row" alignItems="center" spacing={1} justifyContent="space-evenly">
-                <Box sx={{display: "flex"}}>
+                <Box sx={{display: "flex", padding:"0.5rem"}}>
                     <StyledHamburgerButtonWithCanvas/>
                 </Box>
                 <Box sx={{display: "flex"}}>
@@ -43,7 +43,9 @@ function StyledTopMenuNew({setSearch, setValue}) {
                         // href={"/CirclesPageComponent"}
                     />
                 </Box>
-                <StyledLogo/>
+                <Box>
+                    <StyledLogo/>
+                </Box>
             </Stack>
         </StyledAppBarTop>
     );
