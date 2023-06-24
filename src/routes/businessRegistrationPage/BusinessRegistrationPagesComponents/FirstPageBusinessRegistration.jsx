@@ -22,32 +22,32 @@ import { useSnackbar } from 'notistack';
 
 
 
-function CustomizedSnackbars() {
-    const [open, setOpen] = React.useState(false);
-
-    const handleClick = () => {
-        setOpen(true);
-    };
-
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpen(false);
-    };
-
-    return (
-        <Stack spacing={2} sx={{ width: '100%' }}>
-            <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
-                <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
-                    You can not add business that is already exist
-                </Alert>
-            </Snackbar>
-
-        </Stack>
-    );
-}
+// function CustomizedSnackbars() {
+//     const [open, setOpen] = React.useState(false);
+//
+//     const handleClick = () => {
+//         setOpen(true);
+//     };
+//
+//     const handleClose = (event, reason) => {
+//         if (reason === 'clickaway') {
+//             return;
+//         }
+//
+//         setOpen(false);
+//     };
+//
+//     return (
+//         <Stack spacing={2} sx={{ width: '100%' }}>
+//             <Snackbar open={open} autoHideDuration={5000} onClose={handleClose}>
+//                 <Alert onClose={handleClose} severity="error" sx={{ width: '100%' }}>
+//                     You can not add business that is already exist
+//                 </Alert>
+//             </Snackbar>
+//
+//         </Stack>
+//     );
+// }
 // const businessTypes = ['cosmetics', 'nails', 'barber', 'hair', 'sport', 'art', 'lifestyle', 'music']
 export default function FirstPageBusinessRegistration({onNext}) {
     const [newBusinessName, setNewBusinessName] = useState("");
@@ -93,8 +93,7 @@ export default function FirstPageBusinessRegistration({onNext}) {
 
             const handleChange = (event) => {
                 setIsBusinessAddedBefore(event.target.value);
-                setOpenAlert(event.target.value)
-                console.log(0, isBusinessAddedBefore)
+                setOpenAlert(event.target.value === "true");
                 };
 
             return (
@@ -108,7 +107,7 @@ export default function FirstPageBusinessRegistration({onNext}) {
                         onChange={handleChange}
                         // onClick={handleOpenAlert}
                     >
-                        <FormControlLabel value={true} control={<Radio/>} label="Yes"></FormControlLabel>
+                        <FormControlLabel value={true} control={<Radio/>} label="Yes"/>
                         <FormControlLabel value={false} control={<Radio/>} label="No"/>
 
                     </RadioGroup>
@@ -145,7 +144,7 @@ export default function FirstPageBusinessRegistration({onNext}) {
                                 width: 100,
                                 borderRadius: 6,
                                 boxShadow: "1px 2px 4px #000000"
-                            }}>
+                            }} key={btype}>
                                 {btype}
                             </ToggleButton>
                         )}
