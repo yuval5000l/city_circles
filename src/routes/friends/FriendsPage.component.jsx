@@ -56,7 +56,7 @@ const FriendsPageComponent = () => {
             </Typography>
             <List>
                 {filteredFriends.map((friend) => (
-                    <ListItem key={friend.id}>
+                    <ListItem key={friend.getUserId()}>
                         <StyledFriend user_id={friend.getUserId()} user_name={friend.getUserName()}
                                       circles={friend.getCircles()}/>
                     </ListItem>

@@ -11,9 +11,7 @@ import StyledGrayButtonVisitBusiness from "./StyledGrayButtonVisitBusiness";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import {Link} from "react-router-dom";
-import StyledAvatarWithBadge from "./StyledAvatarWithBadge";
-import StyledReviewForUser from "./StyledReviewForUser";
-import StyledFootprintForUser from "./StyledFootprintForUser";
+
 
 function getUnion(array1, array2) {
     const difference = array1.filter(
@@ -53,9 +51,6 @@ export default function StyledBusinessFeedItem({business}) {
                             <Typography>{business.getRating().toFixed(2)}</Typography>
                             <StyledRating value={business.getRating()}/>
                             <Typography>({business.rating[1]})</Typography>
-                            {/*<Typography>4</Typography>*/}
-                            {/*<StyledRating value={4}/>*/}
-                            {/*<Typography>(15)</Typography>*/}
                         </Stack>
                         <Stack direction="row" spacing={1}>
                             <StyledInfoBox>
@@ -70,9 +65,7 @@ export default function StyledBusinessFeedItem({business}) {
                 </Stack>
                 <AvatarGroup max={7} spacing={0.5}>
                     {allUsers.map(review => <Avatar alt={review.userName} src={review.userPhoto}/>)}
-                    {/*{business.getReviews().map(review => <Avatar alt={review.userName} src={review.userPhoto}/>)}*/}
-                    {/*{business.getFootprints().map(footprint => <Avatar alt={footprint.userName}*/}
-                    {/*                                                   src={footprint.userPhoto}/>)}*/}
+
                 </AvatarGroup>
             </Stack>
         </Box>

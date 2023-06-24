@@ -5,17 +5,13 @@ import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import theme from "../../Theme/Theme";
 import {Box, Avatar, Grid, Stack, Typography} from "@mui/material";
-import StyledHamburgerButtonWithCanvas from "../../Components/Styled Components/StyledHamburgerButtonWithCanvas";
-import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
-import logoNew from "../../Components/Styled Components/Icons/logo-all-white.png";
-import StyledLogo from "../../Components/Styled Components/StyledLogo";
 import {StyledRating, StyledTypeBox} from "../../Components/Styled Components/styledComponents";
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import StyledTimeTable from "./StyledTimeTable";
 import StyledSocialIcon from "./StyledSocialIcon";
 import StyledBusinessTabs from "./StyledBusinessTabs";
-
+import Link from '@mui/material/Link';
 
 
 export function showBusiness(business) {
@@ -28,7 +24,7 @@ export function showBusiness(business) {
                 display: 'flex',
             }}>
                 <Stack direction="column"
-                       // sx={{marginTop: "5.5rem"}}
+                    // sx={{marginTop: "5.5rem"}}
                        width="100%" padding="1.5rem" color="white"
                        spacing={2}>
                     <Stack direction="row" spacing={1} justifyContent="space-between">
@@ -36,25 +32,26 @@ export function showBusiness(business) {
                             <Typography variant="h2">
                                 {business.name}
                             </Typography>
-                            <Grid direction="column"
+                            <Grid container direction="column"
                                   justifyContent="flex-start"
                                   alignItems="flex-start"
                                   spacing={3}>
-                                {business.type.map((category) => <StyledTypeBox marginTop="1rem"
-                                    key={category}>{category}</StyledTypeBox>)}
+                                {business.type.map((category) =>
+                                    <StyledTypeBox marginTop="1rem"
+                                                   key={category}>{category}</StyledTypeBox>)}
                             </Grid>
                             <Stack direction="row" spacing={1}>
                                 <Typography>{business.getRating().toFixed(2)}</Typography>
-                                <StyledRating value={business.getRating()} />
+                                <StyledRating value={business.getRating()}/>
                                 <Typography>({business.rating[1]})</Typography>
                             </Stack>
                         </Stack>
                         <Box>
                             {
                                 (business.profile_pic === "") ?
-                                    (<Avatar sx = {{width: "6.25rem", height:"6.25rem"}} alt={business.name}/>)
+                                    (<Avatar sx={{width: "6.25rem", height: "6.25rem"}} alt={business.name}/>)
                                     :
-                                    (<Avatar sx = {{width: "6.25rem", height:"6.25rem"}} alt={business.name}
+                                    (<Avatar sx={{width: "6.25rem", height: "6.25rem"}} alt={business.name}
                                              src={business.profilePic}/>)
                             }
                         </Box>
@@ -65,24 +62,27 @@ export function showBusiness(business) {
                             {business.address}
                         </Typography>
                     </Stack>
-                    <Stack direction="row" spacing={1} alignItems="flex-start" >
-                        <AccessTimeIcon />
+                    <Stack direction="row" spacing={1} alignItems="flex-start">
+                        <AccessTimeIcon/>
                         <StyledTimeTable business={business}/>
                     </Stack>
                     <Stack direction="row">
-                        <Typography variant = "h4">
+                        <Typography variant="h4">
                             Contact: {
-                            business.contact.filter(contact => contact !== "").map((filteredContact) =>
-                            <Box key={filteredContact + "S"}>{filteredContact}
-                            </Box>
-                        )}
+                            Object.entries(business.getContacts()).filter(contact => contact[1] !== "").map((filteredContact) =>
+                                <Box key={filteredContact[1] + "S"}>
+                                    <Link href={`http://${filteredContact[1]}`} target={"_blank"} rel="noopener">
+                                        {filteredContact[0]}
+                                    </Link>
+                                </Box>
+                            )}
                         </Typography>
                         <StyledSocialIcon/>
                     </Stack>
                 </Stack>
             </Box>
             {/*Lower Part*/}
-            <StyledBusinessTabs business ={business}/>
+            <StyledBusinessTabs business={business}/>
         </Box>
     );
 }
@@ -106,7 +106,7 @@ export default function BusinessPage() {
             });
         }
 
-    }, []);
+    }, [check_null, from]);
 
     return (
         <div>

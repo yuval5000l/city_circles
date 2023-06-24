@@ -173,7 +173,10 @@ export default class Business {
     getBusinessType() {
         return this.type;
     }
-
+    getContacts()
+    {
+        return this.contact;
+    }
     getCirclesCount()
     {
         let combined_dictionary = {};

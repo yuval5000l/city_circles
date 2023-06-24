@@ -190,6 +190,36 @@ export default class User {
         });
         return lst;
     }
+
+    static async getAllUsersReviewsExceptCurrentUser()
+    {
+        let lstUsers = [];
+        const querySnapshot = await getDocs(collection(db, "Users"));
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            // console.log(doc.id, " => ", doc.data());
+            // console.log(new Business({name: doc.data().name, type:doc.data().type,
+            // address: doc.data().address, openingHours: doc.data().openingHours,
+            // contact: doc.data().contact, social: doc.data().social, }));
+            const options = doc.data();
+            if (options.userID !== auth?.currentUser?.uid)
+            {
+                lstUsers.push(userConverter["fromFirestore"](doc, options));
+            }
+        });
+
+        let listOfReviews = [];
+        for (const user of lstUsers)
+        {
+            for (const review of user.getUserReviews())
+            {
+                const business = await getBusinessByName(review.businessID);
+                listOfReviews.push(User.feedItemConverter(user, review, business));
+            }
+        }
+
+        return listOfReviews;
+    }
 }
 
 User.ListOfCirclesNeighborhoods = ["Old City",
@@ -311,7 +341,7 @@ export const LogIn = async ({email}, {password}) => {
     console.log("this is password", password)
     try {
         await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
-            const user = userCredential.user;
+            // const user = userCredential.user;
             return true;
         })
     } catch (err) {
