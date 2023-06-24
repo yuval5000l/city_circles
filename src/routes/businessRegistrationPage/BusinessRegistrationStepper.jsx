@@ -10,6 +10,17 @@ import SecondPageBusinessRegistration from './BusinessRegistrationPagesComponent
 import ThirdPageBusinessRegistration from './BusinessRegistrationPagesComponents/ThirdPageBusinessRegistration';
 import FourthPageBusinessRegistration from './BusinessRegistrationPagesComponents/FourthPageBusinessRegistration';
 import Business from '../../BackEnd/Classes/BusinessClass';
+import {DialogActions, DialogContent, Stack} from "@mui/material";
+import theme from "../../Theme/Theme";
+import {
+    StyledAutoComplete,
+    StyledDialogFootprintIcon,
+    StyledDialogSecondTitle,
+    StyledDialogTitle
+} from "../../Components/Styled Components/styledComponents";
+import TextField from "@mui/material/TextField";
+import Dialog from "@mui/material/Dialog";
+import {useState} from "react";
 
 
 export default function BusinessStepper() {
@@ -19,8 +30,12 @@ export default function BusinessStepper() {
     const [secondPageData, setSecondPageData] = React.useState(null);
     const [thirdPageData, setThirdPageData] = React.useState(null);
     // const [fourthPageData, setFourthPageData] =  React.useState(null);
+    const [open, setOpen] = useState(false);
 
+    const handleClose = () => {
 
+        setOpen(false);
+    }
     const isStepOptional = (step) => {
         return step === 1;
     };
@@ -78,6 +93,7 @@ export default function BusinessStepper() {
             secondPageData,
         );
         // TODO verifying submit
+        setOpen(true);
 
         window.location.replace("/");
 
@@ -99,7 +115,13 @@ export default function BusinessStepper() {
         },
         {
             label: 'Approving',
-            content: <FourthPageBusinessRegistration onBack={handleBack} data={[...firstPageData, ...secondPageData, ...thirdPageData]}/>,
+            content: <FourthPageBusinessRegistration onBack={handleBack}
+                                                     // name={firstPageData[0]} type={firstPageData[1]}
+                                                     // sddress={thirdPageData[0]} photoUrl={thirdPageData[1]}
+                                                     // openHours={thirdPageData.slice(2)} contacts={secondPageData}
+
+                                 // data={[...firstPageData, ...secondPageData, ...thirdPageData]}
+            />,
         },
     ];
 
@@ -155,6 +177,22 @@ export default function BusinessStepper() {
                                 Finish
                             </Button>) : (<div></div>)}
                     </Box>
+                    <Dialog open={open} onClose={handleClose} closeAfterTransition={true}>
+                        <DialogContent sx={{
+                            backgroundColor: `${theme.palette.primary.main}`,
+                            border: `0.2rem solid ${theme.palette.secondary.main}`
+                        }}>
+                            <Stack direction="column" spacing={2}>
+                                <Stack direction="row"
+                                       justifyContent="center"
+                                       alignItems="center"
+                                       spacing={1}>
+                                    <Typography variant="h1" color="white">Your Data Is Uploaded</Typography>
+                                </Stack>
+
+                            </Stack>
+                        </DialogContent>
+                    </Dialog>
                 </React.Fragment>
             )}
         </Box>

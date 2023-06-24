@@ -19,8 +19,8 @@ function ControlledCheckbox() {
     );
 }
 
-export default function FourthPageBusinessRegistration({onBack, data}) {
-
+export default function FourthPageBusinessRegistration({onBack, name, type, sddress, photoUrl, openHours, contacts}) {
+    console.log(name, type, sddress, photoUrl, openHours, contacts)
     return(
         <div>
             <Typography variant="h4">
