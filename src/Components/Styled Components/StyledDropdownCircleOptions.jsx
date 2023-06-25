@@ -28,7 +28,7 @@ const StyledDropdownCircleOptions = ({user, index, circlesList}) => {
         return (
             <Box >
                 <StyledLightCircleBox onClick={handleClick}>
-                    <Typography variant="h4" color="black">
+                    <Typography variant="h4" color="black" textAlign="center">
                         {buttonText}
                     </Typography>
                 </StyledLightCircleBox>
