@@ -1,11 +1,8 @@
 import React from 'react';
 import { Stack, Typography, Box } from '@mui/material';
 import SupervisedUserCircleIcon from '@mui/icons-material/SupervisedUserCircle';
-import {StyledCirclesIcon} from "./styledComponents";
 import {StyledBusinessFeed} from "./styledComponents";
 import theme from "../../Theme/Theme";
-import Avatar from "@mui/material/Avatar";
-export default function StyledFriend({ user_id, user_name = 'name', profile_photo_url = '', circles = [] }) {
 import {Link} from "react-router-dom";
 import StyledGrayButtonVisitProfile from "./StyledGrayButtonVisitProfile";
 export default function StyledFriend({ user_id, user_name = 'name', profile_photo_url = '', circles = [], setValueFunc = null }) {
