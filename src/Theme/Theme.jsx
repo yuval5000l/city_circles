@@ -20,7 +20,7 @@ let theme = createTheme({
             fontWeight:'500',
         },
         h5:{
-            fontSize:'1',
+            fontSize:'1.25rem',
             fontWeight:'300',
         },
         p:{

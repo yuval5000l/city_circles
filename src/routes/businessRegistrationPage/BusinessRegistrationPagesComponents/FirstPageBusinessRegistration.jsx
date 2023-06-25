@@ -119,7 +119,9 @@ export default function FirstPageBusinessRegistration({onNext, data}) {
 
     function BusinessTypesSelection(businesses_types) {
         const handleTypes = (event, newFormats) => {
-            setBusinessTypes(newFormats);
+            if (newFormats.length <= 3){
+                setBusinessTypes(newFormats);
+            }
             // console.log(businessTypes);
         };
 
@@ -163,6 +165,7 @@ export default function FirstPageBusinessRegistration({onNext, data}) {
             <Stack direction="column" justifyContent="flex-start" spacing={2} textAlign="left" padding="1rem">
                 <Box>
                     <Typography variant="h2" textAlign="start">Category</Typography>
+                    <Typography variant="h5" textAlign="start">Choose your business type (max of 3 types)</Typography>
                     {BusinessTypesSelection(Business.ListOfTypes)}
                 </Box>
                 <Typography variant="h2">Business Name</Typography>
