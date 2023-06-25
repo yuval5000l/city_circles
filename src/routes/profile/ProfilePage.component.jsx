@@ -182,7 +182,7 @@ function ProfilePageComponent() {
     }, [check_null, from, user]);
 
     return (
-        <div>
+        <Box marginBottom="4.5rem">
             {
                 (check_null === true) ?
                     (<div>Profile!</div>)
@@ -196,7 +196,7 @@ function ProfilePageComponent() {
                             }
                         </div>)
             }
-        </div>
+        </Box>
     );
 
 }
