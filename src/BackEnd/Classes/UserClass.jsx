@@ -175,7 +175,7 @@ export default class User {
             business_name: business.name, business_photo_url: business.profilePic,
             rating: (business.rating[0] / business.rating[1]),
             url_to_business: business.id, review: review.content,
-            review_address: review.content
+            review_address: review.content, typeOfItem: "review"
         }
     }
     static feedItemFootprintConverter(user, review, business) {
@@ -183,7 +183,7 @@ export default class User {
             user_id: user.userID_, user_name: user.name_, profile_photo_url: user.profile_pic,
             circles: review.circles, time: review.timestamp.toDate(),
             business_name: business.name, business_photo_url: business.profilePic,
-            url_to_business: business.id
+            url_to_business: business.id, typeOfItem: "footprint"
         }
     }
     static async getAllUsers()
@@ -219,22 +219,22 @@ export default class User {
             }
         });
 
-        let listOfReviews = [];
+        let listOfReviewsAndFootprints = [];
         for (const user of lstUsers)
         {
             for (const review of user.getUserReviews())
             {
                 const business = await getBusinessByName(review.businessID);
-                listOfReviews.push(User.feedItemConverter(user, review, business));
+                listOfReviewsAndFootprints.push(User.feedItemConverter(user, review, business));
             }
-            // for (const review of user.getUserFootprints())
-            // {
-            //     const business = await getBusinessByName(review.businessID);
-            //     listOfReviews.push(User.feedItemFootprintConverter(user, review, business));
-            // }
+            for (const review of user.getUserFootprints())
+            {
+                const business = await getBusinessByName(review.businessID);
+                listOfReviewsAndFootprints.push(User.feedItemFootprintConverter(user, review, business));
+            }
         }
 
-        return listOfReviews;
+        return listOfReviewsAndFootprints;
     }
 }
 

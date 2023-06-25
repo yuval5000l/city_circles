@@ -14,32 +14,35 @@ import {Link} from "react-router-dom";
 import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 
 
-export default function StyledFeedItem({user_id, user_name="name", profile_photo_url="",
-                                       circles = [],
-                                           time= new timestamp(),
-                                       business_name="name", business_photo_url="",
-                                       rating=5, url_to_business="", review="",
-                                       review_address="", setValueFunc = null})
-{
-    const setValueToBusiness = () =>{
-        if (setValueFunc !== null)
-        {
+export default function StyledFeedItem({
+                                           user_id, user_name = "name", profile_photo_url = "",
+                                           circles = [],
+                                           time = timestamp.now(),
+                                           business_name = "name", business_photo_url = "",
+                                           rating = 5, url_to_business = "", review = "",
+                                           review_address = "", setValueFunc = null
+                                       }) {
+    const setValueToBusiness = () => {
+        if (setValueFunc !== null) {
             setValueFunc(1);
         }
     };
-    const setValueToProfile = () =>{
-        if (setValueFunc !== null)
-        {
+    const setValueToProfile = () => {
+        if (setValueFunc !== null) {
             setValueFunc(4);
         }
     };
     return (
         <Box>
-            <Stack direction="column" spacing={2} sx={{padding:"0.4rem", boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', borderBottom: '0.1rem solid #C3ED5B'}}>
+            <Stack direction="column" spacing={2} sx={{
+                padding: "0.4rem",
+                boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)',
+                borderBottom: '0.1rem solid #C3ED5B'
+            }}>
                 <Box>
                     <Stack direction="row" spacing={1}>
-                        <Link to="/ProfilePageComponent" state ={{from: user_id}} onClick={setValueToProfile}>
-                            {(profile_photo_url==="") ?
+                        <Link to="/ProfilePageComponent" state={{from: user_id}} onClick={setValueToProfile}>
+                            {(profile_photo_url === "") ?
                                 (<StyledAvatarUserFeed/>) :
                                 (<StyledAvatarUserFeed src={profile_photo_url}/>)
                             }
@@ -53,32 +56,33 @@ export default function StyledFeedItem({user_id, user_name="name", profile_photo
                             </Stack>
                         </Box>
                         <Box>
-                            <StyledSmallCircleButton userID={user_name} circles_={circles} />
+                            <StyledSmallCircleButton userID={user_name} circles_={circles}/>
                         </Box>
                     </Stack>
                 </Box>
                 <Box>
-                    <Stack direction = "column" spacing={2}>
-                        <Stack direction = "row" spacing={1} justifyContent="flex-start" alignItems="center">
+                    <Stack direction="column" spacing={2}>
+                        <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
                             <Typography variant="h3" textAlign="left">{business_name}</Typography>
                             <StyledRating value={rating}/>
                         </Stack>
-                        <Stack direction = "row" spacing={1} justifyContent="flex-start" alignItems="center">
-                            {(business_photo_url==="") ?
+                        <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
+                            {(business_photo_url === "") ?
                                 (<StyledBusinessFeed/>) :
                                 (<StyledBusinessFeed src={business_photo_url}/>)
                             }
 
-                            <Stack direction = "column" justifyContent="flex-start" spacing={1}>
+                            <Stack direction="column" justifyContent="flex-start" spacing={1}>
                                 <Box>
                                     <StyledTypographyReview>
                                         {review}
                                     </StyledTypographyReview>
                                 </Box>
                                 <Box>
-                                    <Stack direction = "row" spacing = {0.5}>
+                                    <Stack direction="row" spacing={0.5}>
                                         <StyledGrayButtonFullReview content={review}/>
-                                        <Link to="./BusinessPage" state={{ from: business_name}} onClick={setValueToBusiness}><StyledGrayButtonVisitBusiness/></Link>
+                                        <Link to="./BusinessPage" state={{from: business_name}}
+                                              onClick={setValueToBusiness}><StyledGrayButtonVisitBusiness/></Link>
                                     </Stack>
                                 </Box>
                             </Stack>

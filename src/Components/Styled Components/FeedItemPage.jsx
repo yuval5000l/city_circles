@@ -4,7 +4,7 @@ import {auth} from "../../BackEnd/config/firebase";
 import Box from "@mui/material/Box";
 import StyledFeedItem from "./StyledFeedItem";
 import {onAuthStateChanged} from "firebase/auth";
-
+import StyledFootprintHomepage from "./StyledFootprintHomepage";
 
 
 export default function FeedItemPage({setValue}) {
@@ -22,7 +22,6 @@ export default function FeedItemPage({setValue}) {
         onAuthStateChanged(auth, (user) => {
             if (user) {
                 User.getAllUsersReviewsFootprintsExceptCurrentUser().then((lst) => {
-                    // setListReviews(lst);
                     setListReviews(lst.sort(CompareUserTimeStamp));
                 }).catch((error) => {
                     console.error(error);
@@ -40,13 +39,19 @@ export default function FeedItemPage({setValue}) {
     return (<Box>
         {listReviews.map((review) =>
             <Box key={review.user_name+review.business_name+review.review}>
-                <StyledFeedItem user_id ={review.user_id}
+                {(review.typeOfItem === "review") ?
+                (<StyledFeedItem user_id ={review.user_id}
                                 user_name={review.user_name} profile_photo_url={review.profile_photo_url}
                                 circles={review.circles} time={review.time}
                                 business_name={review.business_name} business_photo_url={review.business_photo_url}
                                 rating={review.rating} url_to_business={review.url_to_business}
                                 review={review.review}
-                                review_address={review.rating} setValueFunc={setValue}></StyledFeedItem>
+                                review_address={review.rating} setValueFunc={setValue}/>)
+                :
+                (<StyledFootprintHomepage businessPhoto={review.business_photo_url} userPhoto={review.profile_photo_url}
+                                          timestamp={review.time}
+                                          BusinessName={review.business_name}
+                                          UserName={review.user_name}/>)}
             </Box>
         )}
     </Box>)

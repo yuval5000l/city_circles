@@ -1,4 +1,5 @@
 import {Stack, Typography} from "@mui/material";
+import {timestamp} from "../../BackEnd/config/firebase";
 import Box from "@mui/material/Box";
 import StyledAvatarWithBadge from "./StyledAvatarWithBadge";
 import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
@@ -9,10 +10,11 @@ import {ReactComponent as FootprintsIcon} from "./Icons/footprints-svgrepo-com.s
 export default function StyledFootprintHomepage({
                                                     businessPhoto,
                                                     userPhoto,
-                                                    timestamp = "time",
+                                                    timestamp = timestamp.now(),
                                                     BusinessName = "business name",
                                                     UserName = "user name"
                                                 }) {
+    console.log(businessPhoto, userPhoto,timestamp, BusinessName, UserName);
     return (
         <Box width="100%" maxWidth="-webkit-fill-available">
             <Stack width="100%" maxWidth="-webkit-fill-available" direction="row" justifyContent="flex-start"
