@@ -1,28 +1,15 @@
 import * as React from 'react';
-// import Box from '@mui/material/Box';
 import Typography from '@mui/material/Typography';
-// import BusinessTypesSelection from "../BusinessTypeSelect/BusinessTypeSelect.components";
-// import BasicTextFields from "./TextField.components";
-// import RowRadioButtonsGroup from "./RadioButton.component";
 import {MenuItem, Select, Stack} from "@mui/material";
 import {useState} from "react";
-// import {addDoc, collection, deleteDoc, doc, getDocs, updateDoc} from "firebase/firestore";
-// import {auth, db, storage} from "../../BackEnd/config/firebase";
-// import {ref, uploadBytes} from "firebase/storage";
-// import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
-// import ToggleButton from "@mui/material/ToggleButton";
 import TextField from "@mui/material/TextField";
 import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import LanguageIcon from '@mui/icons-material/Language';
 import Button from "@mui/material/Button";
-import PhoneInput from 'react-phone-input-2';
+// import PhoneInput from 'react-phone-input-2';
 import 'react-phone-input-2/lib/style.css'
-import Snackbar from "@mui/material/Snackbar";
-import Alert from "@mui/material/Alert";
-import IconButton from "@mui/material/IconButton";
-import CloseIcon from "@mui/icons-material/Close";
 
 
 export default function SecondPageBusinessRegistration({onNext, onBack, data}) {
@@ -32,11 +19,11 @@ export default function SecondPageBusinessRegistration({onNext, onBack, data}) {
     const [phoneNum, setPhoneNum] = useState((data===null)? ("") : (data["Phone"]));
     const [whatsAppLink, setWhatsAppLink] = useState((data===null)? ("") : (data["Whatsapp"]));
     const [web, setWeb] = useState((data===null)? ("") : (data["Website"]));
-    const [socialEmpty, setSocialEmpty] = useState(true)
-    const [contryCode, setContryCode] = useState(null)
-    const [companyCode, setCompanyCode] = useState(null)
-    const [value, setValue] = useState();
-    const [openAlert, setOpenAlert] = useState(false)
+    const [socialEmpty, setSocialEmpty] = useState(true);
+    const [contryCode, setContryCode] = useState(null);
+    const [companyCode, setCompanyCode] = useState(null);
+    // const [value, setValue] = useState();
+    // const [openAlert, setOpenAlert] = useState(false)
     // console.log(data);
     function IsSocialEmpty() {
         if (insta !== "" || face !== "" || phoneNum !== "" || web !== "") {
@@ -51,16 +38,16 @@ export default function SecondPageBusinessRegistration({onNext, onBack, data}) {
         // TODO: decide which link format is better
         // creating link to web:
         setWhatsAppLink("https://web.whatsapp.com/send?phone=" + num)
-        //     creting link to mobile:
+        //     creating link to mobile:
         //     setWhatsAppLink("https://https://wa.me/"+phoneNum)
     }
 
-    const handleClose = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-        setOpenAlert(false);
-    }
+    // const handleClose = (event, reason) => {
+    //     if (reason === 'clickaway') {
+    //         return;
+    //     }
+    //     setOpenAlert(false);
+    // }
 
     const handleOnNext = () => {
 
