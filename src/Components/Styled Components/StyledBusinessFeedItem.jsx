@@ -34,7 +34,7 @@ export default function StyledBusinessFeedItem({business}) {
     const allUsers = getUnion(business.getReviews(), business.getFootprints());
     // console.log(allUsers);
     return (
-        <Box sx={{padding: "0.4rem", boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', borderBottom: '0.1rem solid #C3ED5B'}}>
+        <Box sx={{padding: "0.4rem", boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', borderBottom: '0.1rem solid #C3ED5B',width:"100%"}}>
             <Stack direction="column" alignItems="flex-start" spacing={1}>
                 <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
                     <Link to={"../BusinessPage"} state={{from: business.getName()}}>

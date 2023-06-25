@@ -34,13 +34,11 @@ export default function StyledFeedItem({
     };
     return (
         <Box
-            width="100% !important"
         >
             <Stack direction="column" spacing={2} sx={{
                 padding: "0.4rem",
                 boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)',
                 borderBottom: '0.1rem solid #C3ED5B',
-                width: "100% !important",
             }}>
                 <Box>
                     <Stack direction="row" spacing={1}>
@@ -94,7 +92,6 @@ export default function StyledFeedItem({
                     </Stack>
                 </Box>
             </Stack>
-
         </Box>
     )
 }

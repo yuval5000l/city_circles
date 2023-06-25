@@ -38,7 +38,7 @@ export default function FeedItemPage({setValue}) {
     };
     return (<Box>
         {listReviews.map((review) =>
-            <Box key={review.user_name+review.business_name+review.review}>
+            <Box  key={review.user_name+review.business_name+review.review}>
                 {(review.typeOfItem === "review") ?
                 (<StyledFeedItem user_id ={review.user_id}
                                 user_name={review.user_name} profile_photo_url={review.profile_photo_url}
