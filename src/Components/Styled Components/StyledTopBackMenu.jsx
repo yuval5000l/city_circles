@@ -21,10 +21,10 @@ function StyledTopBackMenu({setSearch, setValue}) {
                 backgroundColor: theme.palette.primary.main,
             }}
         >
-            <Box sx={{display: 'inline-block', marginLeft: '6px',marginTop:'5px'}}>
-                <GoBackButton/>
-            </Box>
-            <Box sx={{display: 'inline-block', marginRight: '5px',}}>
+            {/*<Box sx={{display: 'inline-block', marginLeft: '6px',marginTop:'5px'}}>*/}
+            {/*    <GoBackButton/>*/}
+            {/*</Box>*/}
+            <Box sx={{display: "flex", padding:"0.5rem"}}>
                 <StyledHamburgerButtonWithCanvas/>
             </Box>
         </Box>

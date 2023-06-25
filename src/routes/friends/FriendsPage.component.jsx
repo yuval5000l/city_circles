@@ -58,7 +58,7 @@ const FriendsPageComponent = () => {
                 {filteredFriends.map((friend) => (
                     <ListItem sx={{paddingLeft:"0px", paddingRight:"0px"}} width="100%" key={friend.getUserId()}>
                         <StyledFriend user_id={friend.getUserId()} user_name={friend.getUserName()}
-                                      circles={friend.getCircles()}/>
+                                      profile_photo_url={friend} circles={friend.getCircles()}/>
                     </ListItem>
                 ))}
             </List>

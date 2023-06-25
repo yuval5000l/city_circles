@@ -26,7 +26,7 @@ const StyledDropdownCircleOptions = ({user, index, circlesList}) => {
         };
 
         return (
-            <Box>
+            <Box >
                 <StyledLightCircleBox onClick={handleClick}>
                     <Typography variant="h4" color="black">
                         {buttonText}
@@ -35,8 +35,22 @@ const StyledDropdownCircleOptions = ({user, index, circlesList}) => {
                 <StyledMenu
                     anchorEl={anchorEl}
                     open={Boolean(anchorEl)}
-                    onClose={handleClose}>
-                    <Grid container alignItems="center" justifyContent="center" width="100%">
+                    onClose={handleClose}
+                    anchorOrigin={{
+                        vertical: 'center',
+                        horizontal: 'center',
+                    }}
+                    transformOrigin={{
+                        vertical: 'center',
+                        horizontal: 'center',
+                    }}
+                    sx={{
+                        position: 'fixed',
+                        top: '-60px',
+                        right: '10px'
+                    }}
+                >
+                    <Grid container alignItems="center" justifyContent="center" width="100%" >
                         {circlesList.map((circle) => <MenuItem key={circle} onClick={() => handleOptionClick(circle)}>
                             <StyledButtonGreen>
                                 {circle}
