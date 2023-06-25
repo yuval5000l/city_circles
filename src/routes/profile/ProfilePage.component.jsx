@@ -86,9 +86,6 @@ function showUserProfile(user, lstOfReviews) {
                                     <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
                                         {(footprints2.length > 0) ? (footprints2.map(footprint =>
                                                 <Stack direction="column" spacing={'0.5rem'} key={footprint.businessID}>
-                                                    {/*{console.log(footprint)}*/}
-
-                                                    {/*{console.log(footprint["businessID"])}*/}
                                                     <StyledLightCircleBoxForProfile>
                                                         <Avatar sx={{width: '95%', height: '95%'}}
                                                             src={footprint.businessPhoto}
@@ -161,7 +158,6 @@ function ProfilePageComponent() {
                             setUser(user__);
                             user__.getMyReviews().then((reviews) => {
                                 setLstOfReviews(reviews);
-                                console.log(reviews);
                             }).catch((error) => {
                                 console.error(error);
                             });
@@ -173,7 +169,6 @@ function ProfilePageComponent() {
                             setUser(user__);
                             user__.getMyReviews().then((reviews) => {
                             setLstOfReviews(reviews);
-                            console.log(reviews);
                         }).catch((error) => {
                             console.error(error);
                         });
