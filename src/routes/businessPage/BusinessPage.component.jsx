@@ -26,14 +26,15 @@ export function showBusiness(business) {
                 backgroundColor: theme.palette.primary.dark,
                 borderBottom: `0.5rem solid ${theme.palette.secondary.main}`,
                 display: 'flex',
+                padding:"1rem",
             }}>
                 <Stack direction="column"
                     // sx={{marginTop: "5.5rem"}}
-                       width="100%" padding="1.5rem" color="white"
+                       width="100%" color="white"
                        spacing={2}>
                     <Stack direction="row" spacing={1} justifyContent="space-between">
                         <Stack direction="column" color="white" spacing={2} alignItems="flex-start" maxWidth="15rem">
-                            <Typography variant="h2">
+                            <Typography variant="h2" textAlign="left">
                                 {business.name}
                             </Typography>
                             <Grid container direction="column"

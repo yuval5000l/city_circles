@@ -56,8 +56,9 @@ function showUserProfile(user) {
                             margin: "auto",
                             fill: "white",
                         }}/>
+
                         <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
-                            {footprints.map(footprint =>
+                            {(footprints.length > 0) ? (footprints.map(footprint =>
                                 <Stack direction="column" spacing={'0.5rem'}>
                                     <StyledLightCircleBoxForProfile>
                                         <Avatar sx={{width: '95%', height: '95%'}}
@@ -65,10 +66,11 @@ function showUserProfile(user) {
                                         />
                                     </StyledLightCircleBoxForProfile>
                                     <Typography variant="h5" color="black">
+
                                         {footprint["businessID"]}
                                     </Typography>
                                 </Stack>
-                            )}
+                            )) : (<Typography variant="h3" color="white">No footprints yet..</Typography>)}
 
                         </Stack>
                     </Stack>

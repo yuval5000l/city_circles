@@ -48,14 +48,13 @@ function FeedItem(user, lstOfReviews) {
 function showUserProfile(user, lstOfReviews) {
     const footprints2 = (user !== null) ? (user.getFootprints()) : ([]); // [{businessID: "", businessName: "", businessPhoto: "", timestamp: timestamp},..]
     return (
-        <div >
+        <div>
             {(user === null) ? (<div> Loading... </div>) :
-                (<div >
+                (<div>
                     <TopBoxWithProfileImg
                         img_url={(user.getPic() === "") ? ("") : (user.getPic())}
                     />
                     <Typography variant="h2" marginTop="4rem">
-                        {/*current user name...*/}
                         {user.getUserName()}
                     </Typography>
                     <Stack direction="column" spacing={1.5} marginTop="1rem">
@@ -84,26 +83,24 @@ function showUserProfile(user, lstOfReviews) {
                                     margin: "auto",
                                     fill: "white",
                                 }}/>
-                                <div style={{ overflowX: 'auto' }}>
-                                <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto" >
-                                    {footprints2.map(footprint =>
-                                        <Stack direction="column" spacing={'0.5rem'} key={footprint.businessID} >
-                                            {/*{console.log(footprint)}*/}
+                                <div style={{overflowX: 'auto'}}>
+                                    <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
+                                        {(footprints2.length > 0) ? (footprints2.map(footprint =>
+                                                <Stack direction="column" spacing={'0.5rem'} key={footprint.businessID}>
+                                                    {/*{console.log(footprint)}*/}
 
-                                            {/*{console.log(footprint["businessID"])}*/}
-                                            <StyledLightCircleBoxForProfile>
-                                                <Avatar sx={{width: '95%', height: '95%'}}
-                                                    // src={}
-                                                />
-                                            </StyledLightCircleBoxForProfile>
+                                                    {/*{console.log(footprint["businessID"])}*/}
+                                                    <StyledLightCircleBoxForProfile>
+                                                        <Avatar sx={{width: '95%', height: '95%'}}
+                                                            src={footprint.businessPhoto}
+                                                        />
+                                                    </StyledLightCircleBoxForProfile>
 
-                                            <Typography variant="h5" color="black">
-                                                {footprint['businessName']}
-                                            </Typography>
-                                        </Stack>
-                                    )}
-
-                                </Stack>
+                                                    <Typography variant="h5" color="black">
+                                                        {footprint['businessName']}
+                                                    </Typography>
+                                                </Stack>)) : (<Typography variant="h3" color="white">No footprints yet..</Typography>)}
+                                    </Stack>
                                 </div>
 
                             </Stack>
@@ -129,15 +126,15 @@ function showMyProfile(user) {
                 }}
             >
 
-                    <Stack direction="column" spacing={1} justifyContent="flex-start"
-                           alignItems="center" sx={{marginBottom: "0.1rem"}} >
-                        <Typography variant="h2" color="white">
-                            {/*current user name...*/}
-                            {user.getUserName()}
-                        </Typography>
-                        {(user.getPic()==="") ? (<Avatar width="6rem" height="6rem"/>)
-                            : (<StyledAvatarFriendProfile src={user.getPic()} />)}
-                    </Stack>
+                <Stack direction="column" spacing={1} justifyContent="flex-start"
+                       alignItems="center" sx={{marginBottom: "0.1rem"}}>
+                    <Typography variant="h2" color="white">
+                        {/*current user name...*/}
+                        {user.getUserName()}
+                    </Typography>
+                    {(user.getPic() === "") ? (<Avatar width="6rem" height="6rem"/>)
+                        : (<StyledAvatarFriendProfile src={user.getPic()}/>)}
+                </Stack>
 
             </Box>
             <StyledProfileTabs user={user}/>

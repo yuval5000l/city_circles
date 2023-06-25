@@ -134,7 +134,7 @@ const CirclesPageComponent = () => {
                     borderBottom: `0.3rem solid ${theme.palette.secondary.main}`,
                     width: '100%',
                     display: 'inline-block',
-                    padding:"0.2rem",
+                    paddingBottom:"0.2rem",
                 }}>
                     <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
                         <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem">
