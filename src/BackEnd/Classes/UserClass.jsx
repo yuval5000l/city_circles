@@ -238,7 +238,8 @@ export default class User {
     }
 }
 
-User.ListOfCirclesNeighborhoods = ["Old City",
+User.ListOfCirclesNeighborhoods = ["Old City", "Nahlahot", "City Center",
+    "Ramot","Givat Mesua",
     "Rehavia",
     "Talbieh",
     "German Colony",

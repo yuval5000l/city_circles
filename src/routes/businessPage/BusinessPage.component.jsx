@@ -11,9 +11,14 @@ import AccessTimeIcon from '@mui/icons-material/AccessTime';
 import StyledTimeTable from "./StyledTimeTable";
 import StyledBusinessTabs from "./StyledBusinessTabs";
 import Link from '@mui/material/Link';
-
+import FacebookIcon from '@mui/icons-material/Facebook';
+import InstagramIcon from '@mui/icons-material/Instagram';
+import WhatsAppIcon from '@mui/icons-material/WhatsApp';
+import LanguageIcon from '@mui/icons-material/Language';
 
 export function showBusiness(business) {
+    console.log(business.getContacts());
+    const Icons = [<InstagramIcon/>, <FacebookIcon/>, <WhatsAppIcon/>, <LanguageIcon/>];
     return (
         <Box>
             {/*Top Rectangle*/}
@@ -67,14 +72,21 @@ export function showBusiness(business) {
                     </Stack>
                     <Stack direction="row">
                         <Typography variant="h4">
-                            Contact: {
-                            Object.entries(business.getContacts()).filter(contact => contact[1] !== "").map((filteredContact) =>
-                                <Box key={filteredContact[1] + "S"}>
-                                    <Link sx={{color:`${theme.palette.secondary.dark}`, backgroundColor:`${theme.palette.primary.light}`,borderRadius:"15px", paddingLeft:"0.2rem",paddingRight:"0.2rem",border:"0.1rem solid black" }} href={`http://${filteredContact[1]}`} target={"_blank"} rel="noopener">
-                                        {filteredContact[0]}
-                                    </Link>
-                                </Box>
-                            )}
+                            Contact: { //.filter(contact => contact[1] !== "")
+                            Object.entries(business.getContacts()).map((filteredContact, index) =>
+                                <Box key={filteredContact[0] + "S"}>
+                                        <Link sx={{
+                                            color: `${theme.palette.secondary.dark}`,
+                                            backgroundColor: `${theme.palette.primary.light}`,
+                                            borderRadius: "15px",
+                                            paddingLeft: "0.2rem",
+                                            paddingRight: "0.2rem",
+                                            border: "0.1rem solid black"
+                                        }} href={`http://${filteredContact[1]}`} target={"_blank"} rel="noopener">
+                                            {/*{filteredContact[0]}*/}
+                                            {Icons[index]}
+                                        </Link>
+                                    </Box>)}
                         </Typography>
                         {/*<StyledSocialIcon/>*/}
                     </Stack>

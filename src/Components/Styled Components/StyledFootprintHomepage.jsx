@@ -15,7 +15,6 @@ export default function StyledFootprintHomepage({
                                                     BusinessName = "business name",
                                                     UserName = "user name"
                                                 }) {
-    console.log(businessPhoto, userPhoto, timestamp, BusinessName, UserName);
     return (
         <Box width="100%" maxWidth="-webkit-fill-available">
             <Stack width="100%" maxWidth="-webkit-fill-available" direction="row" justifyContent="flex-start"
