@@ -6,14 +6,9 @@ import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import User from "../../BackEnd/Classes/UserClass";
 
-const FriendsPageComponent = () => {
+const FriendsPageComponent = ({setValue}) => {
 
     const [searchText, setSearchText] = useState('');
-    // const friends = [
-    //     { id: 1, name: 'Yuvie Laval', circles: ['Huji', 'Gavram','Matar'] },
-    //     { id: 2, name: 'Gold Guystien', circles: ['Huji','Gavram','Matar'] },
-    //     { id: 3, name: 'Pele Dila', circles: ['Huji','Harhats','Matar'] },
-    // ];
     let [friends, setFriends] = useState([]);
 
     useEffect(() => {
@@ -44,21 +39,24 @@ const FriendsPageComponent = () => {
     );
 
     return (
-        <Box sx={{width: '100%', bgcolor: 'background.paper', paddingTop: '0.37rem'}}>
+        <Box sx={{width: '100%', bgcolor: 'background.paper', paddingTop: '0.1rem',
+            paddingBottom: '0.4rem'}}>
             <TextField
                 label="Search Friends"
                 value={searchText}
                 onChange={handleSearchChange}
                 fullWidth
             />
-            <Typography variant="h4" sx={{color: theme.palette.primary.main}}>
+            <Typography variant="h4" sx={{color: theme.palette.primary.main, paddingBottom: "0.4rem",paddingTop: "0.4rem" }}>
                 {filteredFriends.length} Friends
             </Typography>
-            <List width="100%">
+            <List width="100%"  >
                 {filteredFriends.map((friend) => (
-                    <ListItem sx={{paddingLeft:"0px", paddingRight:"0px"}} width="100%" key={friend.getUserId()}>
+                    <ListItem
+                        sx={{paddingLeft:"0px", paddingRight:"0px", paddingTop: "0px",paddingBottom: "0px",}}
+                        width="100%" key={friend.getUserId()}>
                         <StyledFriend user_id={friend.getUserId()} user_name={friend.getUserName()}
-                                      profile_photo_url={friend} circles={friend.getCircles()}/>
+                                      profile_photo_url={friend.getPic()} circles={friend.getCircles()} setValueFunc={setValue}/>
                     </ListItem>
                 ))}
             </List>
