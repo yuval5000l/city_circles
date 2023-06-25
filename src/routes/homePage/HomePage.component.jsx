@@ -1,4 +1,3 @@
-import {Component} from "react";
 import FeedItemPage from "../../Components/Styled Components/FeedItemPage";
 import {useOutletContext} from "react-router-dom";
 

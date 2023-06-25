@@ -76,7 +76,7 @@ export default function StyledProfileTabs({ user }) {
                 {/* Render content for the "Circles" tab */}
                     <List sx={{marginTop:"0.5rem"}} >
                     {user.getCircles().map((circle, index) => (
-                        <ListItem key={circle} sx={{justifyContent:"center", display:"flex", marginTop:"0.1rem",}}>
+                        <ListItem key={circle} sx={{justifyContent:"center", display:"flex", marginTop:"0.1rem", }}>
                             <StyledDropdownCircleOptions user={user} index={index} circlesList={CirclesList[index]}/>
                         </ListItem>
                     ))}

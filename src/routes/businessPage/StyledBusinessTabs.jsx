@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {Tabs, Tab, Typography, Box, ListItem, List} from '@mui/material';
-import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
+import {Tabs, Tab, Box, ListItem, List} from '@mui/material';
+// import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 import StyledFootprintForUser from "../../Components/Styled Components/StyledFootprintForUser";
 import StyledReviewForUser from "../../Components/Styled Components/StyledReviewForUser";
 
@@ -46,10 +46,9 @@ export default function StyledBusinessTabs({business}) {
             </TabPanel>
 
             <TabPanel value={value} index={1}>
-                <Typography variant="h6">Reviews List</Typography>
-                <List>
+                <List sx={{paddingTop:"unset !important", paddingBottom:"unset"}}>
                     {business.reviews.map((review) =>
-                        <ListItem key={review.userID}>
+                        <ListItem sx={{padding:"unset !important"}} key={review.userID}>
                             <StyledReviewForUser BusinessName={review.userName} reviewContent={review.content}
                                                  businessPhoto={review.userPhoto} userPhoto={business.getProfilePic()}
                                                  rating={review.rating} timestamp={review.timestamp.toDate()} />
