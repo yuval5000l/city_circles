@@ -160,6 +160,7 @@ export const StyledSmallLogoBox = styled(Box)(({theme}) => ({
 
 export const StyledAvatarUserFeed = styled(Avatar)(({theme}) => ({
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    border: `0.1rem solid ${theme.palette.secondary.main}`,
     [theme.breakpoints.up('xs')]: {
         width: "3.5rem",
         height: "3.5rem"
@@ -316,7 +317,7 @@ export const StyledBottomNavigationAction = styled(BottomNavigationAction)(({the
 export const StyledBottomNavigation = styled(BottomNavigation)(({theme}) => ({
     position: "fixed",
     bottom: "0",
-    borderTop: "1px solid black",
+    borderTop: "1px solid #BFBFBF",
     width: "100%",
     zIndex: "2000",
     [theme.breakpoints.up('xs')]: {

@@ -14,6 +14,7 @@ import {Link} from "react-router-dom";
 import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 
 
+
 export default function StyledFeedItem({
                                            user_id, user_name = "name", profile_photo_url = "",
                                            circles = [],
@@ -38,7 +39,7 @@ export default function StyledFeedItem({
             <Stack direction="column" spacing={2} sx={{
                 padding: "0.4rem",
                 boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)',
-                borderBottom: '0.1rem solid #C3ED5B',
+                borderTop: '0.1rem solid #C3ED5B',
             }}>
                 <Box>
                     <Stack direction="row" spacing={1}>

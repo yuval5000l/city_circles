@@ -6,18 +6,34 @@ import {StyledBusinessFeed} from "./styledComponents";
 import theme from "../../Theme/Theme";
 import Avatar from "@mui/material/Avatar";
 export default function StyledFriend({ user_id, user_name = 'name', profile_photo_url = '', circles = [] }) {
+import {Link} from "react-router-dom";
+import StyledGrayButtonVisitProfile from "./StyledGrayButtonVisitProfile";
+export default function StyledFriend({ user_id, user_name = 'name', profile_photo_url = '', circles = [], setValueFunc = null }) {
+    const setValueToProfile = () => {
+        if (setValueFunc !== null) {
+            setValueFunc(4);
+        }
+    };
     const circlesArray = Array.isArray(circles) ? circles : [circles];
-
     return (
-        <Box sx={{ width: '100%', padding: '0.4rem', boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', borderBottom: '0.1rem solid #C3ED5B' }}>
-            <Stack direction="row" spacing={1}>
-                    <Stack direction="column" spacing={2} width="100%">
-                        <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="flex-start">
+        <Box sx={{ width: '100%', padding: '0.4rem', boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)',
+            borderTop: '0.1rem solid #C3ED5B' }}>
+            <Stack direction="row"  alignItems="flex-end">
+                    <Stack direction="column" spacing={2} width="100%" sx={{ flex: 1 }} >
+                        <Stack direction="row" spacing={1} justifyContent="space-between" alignItems="flex-start">
                             <Typography variant="h3" textAlign="left">{user_name}</Typography>
+                            {/*<Link to="/ProfilePageComponent" state={{from: user_id}}*/}
+                            {/*      onClick={setValueToProfile}>*/}
+                            {/*    <StyledGrayButtonVisitProfile/>*/}
+                            {/*</Link>*/}
                         </Stack>
                         <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="flex-start">
-                            <StyledBusinessFeed /> {/* Add the StyledBusinessFeed component here */}
-                            <Stack direction="column" spacing={1}>
+                            {(profile_photo_url==="") ?
+                                (<StyledBusinessFeed sx={{border: `0.1rem solid ${theme.palette.secondary.main}`}}/>) :
+                                (<StyledBusinessFeed src={profile_photo_url}
+                                                     sx={{border: `0.1rem solid ${theme.palette.secondary.main}`}}/>)
+                            }
+                            <Stack direction="column" spacing={1} >
                                 {circlesArray.map((circle, index) => (
                                     <Typography variant="h4" key={index}>
                                         <Box component="span" sx={{ display: 'flex', alignItems: 'center' }}>
@@ -29,6 +45,12 @@ export default function StyledFriend({ user_id, user_name = 'name', profile_phot
                             </Stack>
                         </Stack>
                     </Stack>
+                <Stack>
+                <Link to="/ProfilePageComponent" state={{from: user_id} }
+                      onClick={setValueToProfile}>
+                    <StyledGrayButtonVisitProfile/>
+                </Link>
+                </Stack>
             </Stack>
         </Box>
     );
