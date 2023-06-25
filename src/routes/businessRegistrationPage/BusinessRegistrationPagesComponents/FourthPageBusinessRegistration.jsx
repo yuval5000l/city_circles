@@ -20,11 +20,12 @@ function ControlledCheckbox() {
     );
 }
 
-export default function FourthPageBusinessRegistration({onBack, name, type, sddress, photoUrl, openHours, contacts}) {
+export default function FourthPageBusinessRegistration({onBack, data}) {
     const handleOnBack = () => {
         onBack([]);
     }
-    console.log(name, type, sddress, photoUrl, openHours, contacts);
+    console.log(data);
+    // console.log(name, type, sddress, photoUrl, openHours, contacts);
     return(
         <div>
             <Stack direction="column" justifyContent="flex-start" spacing={2} textAlign="center" padding="1rem">

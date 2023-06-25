@@ -18,6 +18,7 @@ import {useState} from "react";
 
 
 export default function BusinessStepper() {
+    const [allData, setAllData] = React.useState([]);
     const [activeStep, setActiveStep] = React.useState(0);
     const [skipped, setSkipped] = React.useState(new Set());
     const [firstPageData, setFirstPageData] = React.useState(null);
@@ -48,17 +49,24 @@ export default function BusinessStepper() {
 
         setActiveStep((prevActiveStep) => prevActiveStep + 1);
         setSkipped(newSkipped);
+        let tmp = allData;
         switch (activeStep) {
             case 0:
                 setFirstPageData(data);
+                (allData.length >= 1) ? (tmp[0] = data) : (tmp.push(data));
+                setAllData(tmp);
                 // console.log(data);
                 break;
             case 1:
                 setSecondPageData(data);
+                (allData.length >= 2) ? (tmp[1] = data) : (tmp.push(data));
+                setAllData(tmp);
                 // console.log(data);
                 break;
             case 2:
                 setThirdPageData(data);
+                (allData.length >= 3) ? (tmp[2] = data) : (tmp.push(data));
+                setAllData(tmp);
                 // console.log(data);
                 break;
 
@@ -69,17 +77,24 @@ export default function BusinessStepper() {
 
     const handleBack = (data) => {
         // console.log(activeStep);
+        let tmp = allData;
         switch (activeStep) {
             case 0:
                 setFirstPageData(data);
+                (allData.length >= 1) ? (tmp[0] = data) : (tmp.push(data));
+                setAllData(tmp);
                 // console.log(data);
                 break;
             case 1:
                 setSecondPageData(data);
+                (allData.length >= 2) ? (tmp[1] = data) : (tmp.push(data));
+                setAllData(tmp);
                 // console.log(data);
                 break;
             case 2:
                 setThirdPageData(data);
+                (allData.length >= 3) ? (tmp[2] = data) : (tmp.push(data));
+                setAllData(tmp);
                 // console.log(data);
                 break;
 
@@ -127,7 +142,7 @@ export default function BusinessStepper() {
         },
         {
             label: 'Approving',
-            content: <FourthPageBusinessRegistration onBack={handleBack}/>, // data={[...firstPageData, ...secondPageData, ...thirdPageData]}/>,
+            content: <FourthPageBusinessRegistration onBack={handleBack} data={allData}/>,
         },
     ];
 
