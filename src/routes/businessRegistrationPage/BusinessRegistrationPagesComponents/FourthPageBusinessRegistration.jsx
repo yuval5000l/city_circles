@@ -19,11 +19,10 @@ function ControlledCheckbox() {
         <Checkbox
             checked={checked}
             onChange={handleChange}
-            inputProps={{ 'aria-label': 'controlled' }}
+            inputProps={{'aria-label': 'controlled'}}
         />
     );
 }
-
 
 
 export default function FourthPageBusinessRegistration({onBack, data}) {
@@ -40,81 +39,94 @@ export default function FourthPageBusinessRegistration({onBack, data}) {
 
     const address = data3[0];
     const imgUrl = data3[1];
+
     // const openHours = data3[2];
 
-    function StyledSummaryBusiness(){
+    function StyledSummaryBusiness() {
         return (
-            <Stack direction="column" spacing={2} alignItems="flex-start" justifyContent="space-between">
+            <Stack sx={{
+                backgroundColor: `${theme.palette.primary.main}`,
+                color: "white",
+                padding: "0.5rem",
+                borderRadius: "15px",
+                width: "-webkit-fill-available",
+                marginLeft: "auto",
+                marginRight: "auto",
+            }}
+                   direction="column" spacing={2} alignItems="center" justifyContent="center">
                 <Typography variant="h2">
                     SUMMARY
                 </Typography>
 
                 <Typography variant="h3">
-                    Business Name:
+                    Business Name
                 </Typography>
-                <Typography variant="h4">
+                <Typography variant="h4" color="black">
                     {businessName}
                 </Typography>
 
                 <Typography variant="h3">
-                    Owner Name:
+                    Owner Name
                 </Typography>
-                <Typography variant="h4">
+                <Typography variant="h4" color="black">
                     {ownerName}
                 </Typography>
 
                 <Typography variant="h3">
-                    Business Types:
+                    Business Types
                 </Typography>
 
-                <Grid container direction="column"
-                      justifyContent="flex-start"
-                      alignItems="flex-start"
-                      spacing={3}>
+                <Stack direction="column"
+                       justifyContent="center"
+                       alignItems="center"
+                       spacing={2}>
                     {businessTypes.map((category) =>
                         <StyledTypeBox
                             key={category}>{category}</StyledTypeBox>)}
-                </Grid>
+                </Stack>
 
                 <Typography variant="h3">
-                    Address:
+                    Address
                 </Typography>
-                <Typography variant="h4" sx={{textAlign: "left"}}>
+                <Typography variant="h4" color="black" sx={{textAlign: "left"}}>
                     {address}
                 </Typography>
 
                 <Typography variant="h3">
                     Contact:
                 </Typography>
-                <Typography variant="h4">
-                    <Grid container direction="column"
-                          justifyContent="flex-start"
-                          alignItems="flex-start"
-                          spacing={3}>
-                         {
+                <Stack direction="column"
+                       justifyContent="center"
+                       alignItems="center"
+                       spacing={2}>
+                    {
                         Object.entries(data2).filter(contact => contact[1] !== "").map((filteredContact) =>
                             <Box key={filteredContact[1] + "S"}>
-                                <Link sx={{color:`${theme.palette.secondary.dark}`, backgroundColor:`${theme.palette.primary.light}`,borderRadius:"15px", paddingLeft:"0.2rem",paddingRight:"0.2rem",border:"0.1rem solid black" }} href={`http://${filteredContact[1]}`} target={"_blank"} rel="noopener">
+                                <Link sx={{
+                                    color: `black`,
+                                    paddingLeft: "0.2rem",
+                                    paddingRight: "0.2rem",
+                                    fontSize: "1.25rem",
+                                    textDecoration: "underline",
+                                    fontWeight: "450",
+                                }} href={`http://${filteredContact[1]}`} target={"_blank"} rel="noopener">
                                     {filteredContact[0]}
                                 </Link>
                             </Box>
                         )}
-                        {/*{contacts.map(([index, category]) =>*/}
-                        {/*    <StyledTypeBox*/}
-                        {/*        key={index}>{category}</StyledTypeBox>)}*/}
-                    </Grid>
-                </Typography>
-
-                <Typography variant="h3">
-                    TimeTable:
-                </Typography>
-                <Stack direction="row" spacing={1} alignItems="flex-start">
-                    <AccessTimeIcon/>
-                    {/*<StyledTimeTable business={business}/>*/}
+                    {/*{contacts.map(([index, category]) =>*/}
+                    {/*    <StyledTypeBox*/}
+                    {/*        key={index}>{category}</StyledTypeBox>)}*/}
                 </Stack>
 
+                {/*<Typography variant="h3">*/}
+                {/*    TimeTable:*/}
+                {/*</Typography>*/}
+                {/*<Stack direction="row" spacing={1} alignItems="flex-start">*/}
+                {/*    <AccessTimeIcon/>*/}
+                {/*    /!*<StyledTimeTable business={business}/>*!/*/}
+                {/*</Stack>*/}
             </Stack>
-
         );
     }
 
@@ -123,18 +135,18 @@ export default function FourthPageBusinessRegistration({onBack, data}) {
     }
     console.log(data);
     // console.log(name, type, sddress, photoUrl, openHours, contacts);
-    return(
+    return (
         <div>
-            <Stack direction="column" justifyContent="flex-start" spacing={2} textAlign="center" padding="1rem">
-                <Typography variant="h3">Preview of your business page:</Typography>
-                {/*<StyledSummaryBusiness/>*/}
+            <Stack direction="column" justifyContent="center" alignItem="center" spacing={2} textAlign="center"
+                   padding="1rem">
                 {StyledSummaryBusiness()}
                 <Typography variant="h3">
                     Before approving, please make sure that you only upload your business once.
                 </Typography>
                 <Stack direction="row">
                     {ControlledCheckbox()}
-                    <Typography variant="h4">I approve that all the data is true and I am the business owner</Typography>
+                    <Typography variant="h4">I approve that all the data is true and I am the business
+                        owner</Typography>
                 </Stack>
             </Stack>
             <Button

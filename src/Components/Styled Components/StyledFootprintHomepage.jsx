@@ -42,6 +42,7 @@ export default function StyledFootprintHomepage({
                         {calculateTime(timestamp)}
                     </Typography>
                 </Stack>
+
                 <Box sx={{
                     backgroundColor: `${theme.palette.primary.main}`,
                     color: "white",

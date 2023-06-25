@@ -194,8 +194,8 @@ export default function BusinessStepper() {
 
 
                         {activeStep === steps.length - 1 ?
-                            (<Button onClick={handleMakeBusiness}>
-                                <Typography variant="h3">
+                            (<Button onClick={handleMakeBusiness} >
+                                <Typography variant="h2">
                                     Finish
                                 </Typography>
                             </Button>) : (<div></div>)}

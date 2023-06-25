@@ -25,8 +25,8 @@ export default function StyledReviewForUser({BusinessName, reviewContent, busine
                             {calculateTime(timestamp)}
                         </Typography>
                         <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
-                            <Typography>{rating[0]}</Typography>
-                            <StyledRating value={rating[0]} readOnly/>
+                            <Typography>{rating}</Typography>
+                            <StyledRating value={rating} readOnly/>
                             <Typography>{rating[1]}</Typography>
                             <StyledGrayButtonFullReview content={reviewContent}/>
                         </Stack>

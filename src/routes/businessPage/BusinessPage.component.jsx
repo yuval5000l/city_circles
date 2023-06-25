@@ -71,24 +71,31 @@ export function showBusiness(business) {
                         <StyledTimeTable business={business}/>
                     </Stack>
                     <Stack direction="row">
-                        <Typography variant="h4">
-                            Contact: { //.filter(contact => contact[1] !== "")
-                            Object.entries(business.getContacts()).map((filteredContact, index) =>
-                                <Box key={filteredContact[0] + "S"}>
+
+                        <Stack direction="row" justifyConent="center" spacing={1} alignItems="center">
+                            <Typography variant="h4">
+                                Contact:
+                            </Typography>
+                            { //.filter(contact => contact[1] !== "")
+                                Object.entries(business.getContacts()).map((filteredContact, index) =>
+                                    <Box width="fit-content" key={filteredContact[0] + "S"}>
                                         <Link sx={{
-                                            color: `${theme.palette.secondary.dark}`,
+                                            color: "black",
                                             backgroundColor: `${theme.palette.primary.light}`,
-                                            borderRadius: "15px",
-                                            paddingLeft: "0.2rem",
-                                            paddingRight: "0.2rem",
-                                            border: "0.1rem solid black"
+                                            borderRadius: "50%",
+                                            border: "0.1rem solid black",
+                                            display: "inline-flex",
+                                            margin: "auto",
+                                            padding: "0.8rem",
+                                            width: "fit-content",
+                                            boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
                                         }} href={`http://${filteredContact[1]}`} target={"_blank"} rel="noopener">
                                             {/*{filteredContact[0]}*/}
                                             {Icons[index]}
                                         </Link>
-                                    </Box>)}
-                        </Typography>
-                        {/*<StyledSocialIcon/>*/}
+                                    </Box>
+                                )}
+                        </Stack>
                     </Stack>
                 </Stack>
             </Box>
