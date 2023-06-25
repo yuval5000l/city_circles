@@ -147,18 +147,22 @@ export default function SecondPageBusinessRegistration({onNext, onBack, data}) {
                                }/>
                 </Stack>
             </Stack>
-            <Button disabled={socialEmpty} onClick={handleOnNext}>
-                <Typography variant="h3">
-                    {'Next'}
-                </Typography>
-            </Button>
             <Button
                 color="inherit"
                 onClick={handleOnBack}
                 sx={{mr: 1}}
             >
-                Back
+                <Typography variant="h3">
+                    Back
+                </Typography>
+
             </Button>
+            <Button disabled={socialEmpty} onClick={handleOnNext}>
+                <Typography variant="h3">
+                    {'Next'}
+                </Typography>
+            </Button>
+
         </div>
     )
 }

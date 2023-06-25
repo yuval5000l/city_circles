@@ -195,7 +195,9 @@ export default function BusinessStepper() {
 
                         {activeStep === steps.length - 1 ?
                             (<Button onClick={handleMakeBusiness}>
-                                Finish
+                                <Typography variant="h3">
+                                    Finish
+                                </Typography>
                             </Button>) : (<div></div>)}
                     </Box>
                     <Dialog open={open} onClose={handleClose} closeAfterTransition={true}>
@@ -208,7 +210,8 @@ export default function BusinessStepper() {
                                        justifyContent="center"
                                        alignItems="center"
                                        spacing={1}>
-                                    <Typography variant="h1" color="white">Your Data Is Uploaded</Typography>
+                                    <Typography variant="h2" color="white">The business has been sent for review
+                                    </Typography>
                                 </Stack>
 
                             </Stack>

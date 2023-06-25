@@ -221,11 +221,6 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
 
             {/*{(picturePath === "") ? (<Avatar sx={{width: 100, height: 100}}/>) :*/}
             {/*    (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}*/}
-            <Button disabled={picturePath === ""} onClick={handleOnNext}>
-                <Typography variant="h3">
-                    {'Next'}
-                </Typography>
-            </Button>
             <Button
                 color="inherit"
                 onClick={handleOnBack}
@@ -235,6 +230,12 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
                     Back
                 </Typography>
             </Button>
+            <Button disabled={picturePath === ""} onClick={handleOnNext}>
+                <Typography variant="h3">
+                    {'Next'}
+                </Typography>
+            </Button>
+
         </div>
     )
 }
