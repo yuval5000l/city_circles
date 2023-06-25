@@ -98,7 +98,6 @@ function showUserProfile(user, lstOfReviews) {
                                                 </Stack>)) : (<Typography variant="h3" color="white">No footprints yet..</Typography>)}
                                     </Stack>
                                 </div>
-
                             </Stack>
                         </SmallPurpleBox>
                         {FeedItem(user, lstOfReviews)}
