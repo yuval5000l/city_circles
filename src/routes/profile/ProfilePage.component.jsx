@@ -3,13 +3,12 @@ import {useEffect, useState} from "react";
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import {getUserById} from "../../BackEnd/Classes/UserClass";
-import {Box, Button, Stack, Typography} from "@mui/material";
+import {Box, Stack, Typography} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import theme from "../../Theme/Theme";
 import {TopBoxWithProfileImg} from "../../Components/Styled Components/StyledBoxWithLogo";
 import {
     StyledAvatarFriendProfile,
-    StyledButtonGreen,
     StyledLightCircleBox
 } from "../../Components/Styled Components/styledComponents";
 import * as React from "react";
@@ -152,6 +151,7 @@ function ProfilePageComponent() {
     let {from} = (check_null === true) ? null : location.state;
     let [user, setUser] = useState(null);
     const [lstOfReviews, setLstOfReviews] = useState([]);
+
     useEffect(() => {
         if (check_null !== true) {
             onAuthStateChanged(auth, (user_) => {
@@ -159,24 +159,27 @@ function ProfilePageComponent() {
                     if (user === null) {
                         getUserById(from).then((user__) => {
                             setUser(user__);
-
+                            user__.getMyReviews().then((reviews) => {
+                                setLstOfReviews(reviews);
+                                console.log(reviews);
+                            }).catch((error) => {
+                                console.error(error);
+                            });
                         }).catch((error) => {
                             console.error(error);
                         });
                     } else if (user.getUserId() !== auth?.currentUser?.uid) {
                         getUserById(from).then((user__) => {
                             setUser(user__);
+                            user__.getMyReviews().then((reviews) => {
+                            setLstOfReviews(reviews);
+                            console.log(reviews);
                         }).catch((error) => {
                             console.error(error);
                         });
-                    } else {
-                        if (user) {
-                            user.getMyReviews().then((reviews) => {
-                                setLstOfReviews(reviews);
-                            }).catch((error) => {
-                                console.error(error);
-                            });
-                        }
+                        }).catch((error) => {
+                            console.error(error);
+                        });
                     }
                 }
             });

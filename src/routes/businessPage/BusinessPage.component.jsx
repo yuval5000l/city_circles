@@ -17,8 +17,20 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import LanguageIcon from '@mui/icons-material/Language';
 
 export function showBusiness(business) {
-    console.log(business.getContacts());
-    const Icons = [<InstagramIcon/>, <FacebookIcon/>, <WhatsAppIcon/>, <LanguageIcon/>];
+    let Contacts = {};
+    const Icons =
+        {
+            "Whatsapp": <WhatsAppIcon/>,
+            "Facebook": <FacebookIcon/>,
+            "Website": <LanguageIcon/>,
+            "Instagram": <InstagramIcon/>
+        };
+    for (const [key, value] of Object.entries(business.getContacts())) {
+        if (value !== "" && key !== "Phone") {
+            Contacts[key] = value;
+        }
+    }
+
     return (
         <Box>
             {/*Top Rectangle*/}
@@ -26,7 +38,7 @@ export function showBusiness(business) {
                 backgroundColor: theme.palette.primary.dark,
                 borderBottom: `0.5rem solid ${theme.palette.secondary.main}`,
                 display: 'flex',
-                padding:"1rem",
+                padding: "1rem",
             }}>
                 <Stack direction="column"
                     // sx={{marginTop: "5.5rem"}}
@@ -78,7 +90,7 @@ export function showBusiness(business) {
                                 Contact:
                             </Typography>
                             { //.filter(contact => contact[1] !== "")
-                                Object.entries(business.getContacts()).map((filteredContact, index) =>
+                                Object.entries(Contacts).map((filteredContact) =>
                                     <Box width="fit-content" key={filteredContact[0] + "S"}>
                                         <Link sx={{
                                             color: "black",
@@ -90,9 +102,9 @@ export function showBusiness(business) {
                                             padding: "0.8rem",
                                             width: "fit-content",
                                             boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
-                                        }} href={`http://${filteredContact[1]}`} target={"_blank"} rel="noopener">
+                                        }} href={`${filteredContact[1]}`} target={"_blank"} rel="noopener">
                                             {/*{filteredContact[0]}*/}
-                                            {Icons[index]}
+                                            {Icons[filteredContact[0]]}
                                         </Link>
                                     </Box>
                                 )}
