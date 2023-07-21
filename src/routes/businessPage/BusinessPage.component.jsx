@@ -89,7 +89,7 @@ export function showBusiness(business) {
                             <Typography variant="h4">
                                 Contact:
                             </Typography>
-                            { //.filter(contact => contact[1] !== "")
+                            {
                                 Object.entries(Contacts).map((filteredContact) =>
                                     <Box width="fit-content" key={filteredContact[0] + "S"}>
                                         <Link sx={{
@@ -103,7 +103,6 @@ export function showBusiness(business) {
                                             width: "fit-content",
                                             boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
                                         }} href={`${filteredContact[1]}`} target={"_blank"} rel="noopener">
-                                            {/*{filteredContact[0]}*/}
                                             {Icons[filteredContact[0]]}
                                         </Link>
                                     </Box>

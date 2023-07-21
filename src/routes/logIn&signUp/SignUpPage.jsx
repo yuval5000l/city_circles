@@ -165,38 +165,38 @@ export default function SignupPage() {
                     />
                 </Stack>
 
-                <Stack direction="column" margin="1rem" alignItems="start" spacing={1}>
-                    <Typography variant="h3" textAlign="start">Your personality type is..</Typography>
-                    <Typography variant = "h4">A combination of:</Typography>
-                    <List sx={{textAlign:"left"}}>
-                        <ListItem sx={{textAlign:"left"}}>
-                            <Typography variant = "h4"><strong>E</strong>xtrovert | <strong>I</strong>ntrovert</Typography>
-                        </ListItem>
-                        <ListItem sx={{textAlign:"left"}}>
-                            <Typography variant = "h4"><strong>S</strong>ensing | I<strong>N</strong>tuition</Typography>
-                        </ListItem>
-                        <ListItem>
-                            <Typography variant = "h4"><strong>T</strong>hinking | <strong>F</strong>eeling</Typography>
-                        </ListItem>
-                        <ListItem>
-                            <Typography variant = "h4"><strong>J</strong>udging | <strong>P</strong>erceiving</Typography>
-                        </ListItem>
-                    </List>
-                    <StyledAutoComplete
-                        disablePortal
-                        inputValue={chosenHobby}
-                        onInputChange={(event, newInputValue) => {
-                            setChosenHobby(newInputValue);
-                        }}
-                        id="combo-box-demo"
-                        options={HobbyLst}
-                        sx={{width: "80%", padding: "unset"}}
-                        renderInput={(params) => <TextField
-                            {...params}
-                            label="Personality type"
-                        />}
-                    />
-                </Stack>
+                {/*<Stack direction="column" margin="1rem" alignItems="start" spacing={1}>*/}
+                {/*    <Typography variant="h3" textAlign="start">Your personality type is..</Typography>*/}
+                {/*    <Typography variant = "h4">A combination of:</Typography>*/}
+                {/*    <List sx={{textAlign:"left"}}>*/}
+                {/*        <ListItem sx={{textAlign:"left"}}>*/}
+                {/*            <Typography variant = "h4"><strong>E</strong>xtrovert | <strong>I</strong>ntrovert</Typography>*/}
+                {/*        </ListItem>*/}
+                {/*        <ListItem sx={{textAlign:"left"}}>*/}
+                {/*            <Typography variant = "h4"><strong>S</strong>ensing | I<strong>N</strong>tuition</Typography>*/}
+                {/*        </ListItem>*/}
+                {/*        <ListItem>*/}
+                {/*            <Typography variant = "h4"><strong>T</strong>hinking | <strong>F</strong>eeling</Typography>*/}
+                {/*        </ListItem>*/}
+                {/*        <ListItem>*/}
+                {/*            <Typography variant = "h4"><strong>J</strong>udging | <strong>P</strong>erceiving</Typography>*/}
+                {/*        </ListItem>*/}
+                {/*    </List>*/}
+                {/*    <StyledAutoComplete*/}
+                {/*        disablePortal*/}
+                {/*        inputValue={chosenHobby}*/}
+                {/*        onInputChange={(event, newInputValue) => {*/}
+                {/*            setChosenHobby(newInputValue);*/}
+                {/*        }}*/}
+                {/*        id="combo-box-demo"*/}
+                {/*        options={HobbyLst}*/}
+                {/*        sx={{width: "80%", padding: "unset"}}*/}
+                {/*        renderInput={(params) => <TextField*/}
+                {/*            {...params}*/}
+                {/*            label="Personality type"*/}
+                {/*        />}*/}
+                {/*    />*/}
+                {/*</Stack>*/}
             </Stack>
             {/*<BottomBoxWithLogo>*/}
             {/*</BottomBoxWithLogo>*/}
@@ -221,11 +221,11 @@ export default function SignupPage() {
                                 {chosenNeighborhood === "" ? 'Hood' : chosenNeighborhood}
                             </Typography>
                         </StyledLightCircleBox>
-                        <StyledLightCircleBox>
-                            <Typography variant="h5" color="black">
-                                {chosenHobby === "" ? 'Person' : chosenHobby}
-                            </Typography>
-                        </StyledLightCircleBox>
+                        {/*<StyledLightCircleBox>*/}
+                        {/*    <Typography variant="h5" color="black">*/}
+                        {/*        {chosenHobby === "" ? 'Person' : chosenHobby}*/}
+                        {/*    </Typography>*/}
+                        {/*</StyledLightCircleBox>*/}
                     </Stack>
                 </Box>
             </Stack>

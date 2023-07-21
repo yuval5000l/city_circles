@@ -117,7 +117,7 @@ const CirclesPageComponent = () => {
             let tempList2 = circleButtons;
             tempList2[num] = !tempList2[num];
             setCircleButtons(tempList2);
-            for (let i = 0; i < 3; i++)
+            for (let i = 0; i < user.getCircles().length; i++)
             {
                 if (circleButtons[i]){ tempList.push(user.getCircles()[i]);}
             }
@@ -138,9 +138,13 @@ const CirclesPageComponent = () => {
                 }}>
                     <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
                         <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem">
-                            <StyledCirclesSearchItem name={(user === null) ? ("Circle1") : (user.getCircles()[0])} checkFunction={CircleClicked(0)}/>
-                            <StyledCirclesSearchItem name={(user === null) ? ("Circle2") : (user.getCircles()[1])} checkFunction={CircleClicked(1)}/>
-                            <StyledCirclesSearchItem name={(user === null) ? ("Circle3") : (user.getCircles()[2])} checkFunction={CircleClicked(2)}/>
+                            {(user !==null) ? (<>{
+                                user.getCircles().map((circle, index) =>
+                                <StyledCirclesSearchItem name={user.getCircles()[index]} checkFunction={CircleClicked(index)}/>
+                            )}</>) : (<></>)}
+                            {/*<StyledCirclesSearchItem name={(user === null) ? ("Circle1") : (user.getCircles()[0])} checkFunction={CircleClicked(0)}/>*/}
+                            {/*<StyledCirclesSearchItem name={(user === null) ? ("Circle2") : (user.getCircles()[1])} checkFunction={CircleClicked(1)}/>*/}
+                            {/*<StyledCirclesSearchItem name={(user === null) ? ("Circle3") : (user.getCircles()[2])} checkFunction={CircleClicked(2)}/>*/}
                         </Stack>
                         <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem" >
                             <StyledDropdownMenuSortBy setSortMethod={setSortMethod}/>

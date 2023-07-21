@@ -7,7 +7,7 @@ import {Link} from "react-router-dom";
 import StyledGrayButtonVisitProfile from "./StyledGrayButtonVisitProfile";
 export default function StyledFriend({ user_id, user_name = 'name', profile_photo_url = '', circles = [], setValueFunc = null }) {
     const setValueToProfile = () => {
-        if (setValueFunc !== null) {
+        if ((setValueFunc !== null) && (setValueFunc!== undefined)){
             setValueFunc(4);
         }
     };
@@ -19,10 +19,6 @@ export default function StyledFriend({ user_id, user_name = 'name', profile_phot
                     <Stack direction="column" spacing={2} width="100%" sx={{ flex: 1 }} >
                         <Stack direction="row" spacing={1} justifyContent="space-between" alignItems="flex-start">
                             <Typography variant="h3" textAlign="left">{user_name}</Typography>
-                            {/*<Link to="/ProfilePageComponent" state={{from: user_id}}*/}
-                            {/*      onClick={setValueToProfile}>*/}
-                            {/*    <StyledGrayButtonVisitProfile/>*/}
-                            {/*</Link>*/}
                         </Stack>
                         <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="flex-start">
                             {(profile_photo_url==="") ?
