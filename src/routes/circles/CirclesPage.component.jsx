@@ -29,7 +29,7 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod})
     {
         if (sortMethod === "Distance")
         {
-            return b.getSumFootprintsAndReviews(circles) - a.getSumFootprintsAndReviews(circles);;
+            return b.getRatingCircles(circles) - a.getRatingCircles(circles);
         }
         else if (sortMethod === "Footprints")
         {

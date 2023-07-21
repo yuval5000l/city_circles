@@ -207,7 +207,25 @@ export default class Business {
         ListOfCirclesToInclude.forEach(circle => SumFootprintsAndReviews += this.circlesFootprints[circle] + this.circlesReviews[circle]);
         return SumFootprintsAndReviews;
     }
+    getRatingCircles(ListOfCirclesToInclude)
+    {
+        let sumOfReviews = 0;
+        if (ListOfCirclesToInclude.length === 0)
+        {
+            return this.rating;
+        }
+        let count = 1;
+        for (const review of this.reviews) {
+            if (review.userCircles.filter(item=> ListOfCirclesToInclude.includes(item)).length > 0)
+            {
+                sumOfReviews += review.rating
+                count++;
+            }
+        }
+        console.log(sumOfReviews);
 
+        return sumOfReviews / count;
+    }
     async setOpeningHours(openingHoursArray, ref) {
         this.openingHours = openingHoursArray;
         await updateDoc(ref,
