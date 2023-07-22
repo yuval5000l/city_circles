@@ -158,7 +158,7 @@ export default class Business {
             return [0, 0];
         }
         // eslint-disable-next-line no-unreachable
-        return [0, 0];
+        return [0, 0]
     };
 
     getName(){ return this.name;}
@@ -238,7 +238,21 @@ export default class Business {
         await setDoc(ref, this);
     }
 
-
+    static async getAllBusinessByName()
+    {
+        let dictionary = {};
+        const querySnapshot = await getDocs(collection(db, "Business"));
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            // console.log(doc.id, " => ", doc.data());
+            // console.log(new Business({name: doc.data().name, type:doc.data().type,
+            // address: doc.data().address, openingHours: doc.data().openingHours,
+            // contact: doc.data().contact, social: doc.data().social, }));
+            const options = doc.data();
+            dictionary[options.name] = businessConverter["fromFirestore"](doc, options);
+        });
+        return dictionary;
+    }
 }
 
 Business.ListOfTypes = ["Creative Services" , "Food & Drinks", "Music", "Outdoors" ,
@@ -319,8 +333,7 @@ export async function getBusinessByName(name) {
     const docSnap = await getDoc(ref);
     if (docSnap.exists()) {
         // Convert to Business object
-        const business = docSnap.data();
-        return business;
+        return docSnap.data();
     } else {
         console.log("No such document!");
         return null;

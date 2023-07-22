@@ -15,9 +15,6 @@ export default function FeedItemPage({setValue}) {
 
 
     const [listReviews, setListReviews] = useState([]);
-    // Review:
-    // user_name, profile_pic, circles, time, business_name, business_photo_url
-    // rating, url_to_business, review,
     const getFriendsReviewsHelper = () => {
         onAuthStateChanged(auth, (user) => {
             if (user) {
@@ -26,13 +23,6 @@ export default function FeedItemPage({setValue}) {
                 }).catch((error) => {
                     console.error(error);
                 });
-
-                // User.getFriendsReviews(auth?.currentUser?.uid).then((lst) => {
-                //     // setListReviews(lst);
-                //     setListReviews(lst.sort(CompareUserTimeStamp));
-                // }).catch((error) => {
-                //     console.error(error);
-                // });
             }
         });
     };

@@ -2,7 +2,7 @@ import {auth, db, timestamp} from "../config/firebase";
 import "firebase/auth";
 import {createUserWithEmailAndPassword, signInWithEmailAndPassword} from "firebase/auth";
 import {collection, doc, getDoc, getDocs, setDoc} from "firebase/firestore";
-import {getBusinessByName} from "./BusinessClass";
+import Business, {getBusinessByName} from "./BusinessClass";
 // import {auth} from "./config/firebase";
 
 export default class User {
@@ -204,35 +204,29 @@ export default class User {
         });
         return lst;
     }
-
     static async getAllUsersReviewsFootprintsExceptCurrentUser()
     {
-        let lstUsers = [];
-        const querySnapshot = await getDocs(collection(db, "Users"));
-        querySnapshot.forEach((doc) => {
-            // doc.data() is never undefined for query doc snapshots
-            // console.log(doc.id, " => ", doc.data());
-            // console.log(new Business({name: doc.data().name, type:doc.data().type,
-            // address: doc.data().address, openingHours: doc.data().openingHours,
-            // contact: doc.data().contact, social: doc.data().social, }));
-            const options = doc.data();
-            if (options.userID !== auth?.currentUser?.uid)
-            {
-                lstUsers.push(userConverter["fromFirestore"](doc, options));
-            }
-        });
-
+        let lstUsers = await User.getAllUsers();
+        // const querySnapshot = await getDocs(collection(db, "Users"));
+        // querySnapshot.forEach((doc) => {
+        //     const options = doc.data();
+        //     if (options.userID !== auth?.currentUser?.uid)
+        //     {
+        //         lstUsers.push(userConverter["fromFirestore"](doc, options));
+        //     }
+        // });
+        let dicBusiness = await Business.getAllBusinessByName();
         let listOfReviewsAndFootprints = [];
         for (const user of lstUsers)
         {
             for (const review of user.getUserReviews())
             {
-                const business = await getBusinessByName(review.businessID);
+                const business = dicBusiness[review.businessID];
                 listOfReviewsAndFootprints.push(User.feedItemConverter(user, review, business));
             }
             for (const review of user.getUserFootprints())
             {
-                const business = await getBusinessByName(review.businessID);
+                const business = dicBusiness[review.businessID];
                 listOfReviewsAndFootprints.push(User.feedItemFootprintConverter(user, review, business));
             }
         }
@@ -360,7 +354,8 @@ export const LogIn = async ({email}, {password}) => {
     console.log("this is email", email)
     console.log("this is password", password)
     try {
-        await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+        // await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
+            await signInWithEmailAndPassword(auth, email, password).then(() => {
             // const user = userCredential.user;
             return true;
         })
