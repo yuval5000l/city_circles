@@ -13,7 +13,6 @@ import React from "react";
 import {Link} from "react-router-dom";
 import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
-import Theme from "../../Theme/Theme";
 
 export default function StyledFeedItem({
                                            user_id, user_name = "name", profile_photo_url = "",
