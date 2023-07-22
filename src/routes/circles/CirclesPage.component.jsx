@@ -12,8 +12,6 @@ import {getUserById} from "../../BackEnd/Classes/UserClass";
 import {useOutletContext} from "react-router-dom";
 import Business from "../../BackEnd/Classes/BusinessClass";
 import StyledBusinessFeedItem from "../../Components/Styled Components/StyledBusinessFeedItem";
-import StyledFootprintForUser from "../../Components/Styled Components/StyledFootprintForUser";
-import StyledReviewForUser from "../../Components/Styled Components/StyledReviewForUser";
 
 
 

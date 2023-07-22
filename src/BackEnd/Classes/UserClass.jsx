@@ -111,7 +111,10 @@ export default class User {
     getPic() {
         return this.profile_pic;
     }
-
+    setPic(pic)
+    {
+        this.profile_pic = pic;
+    }
     getUserFootprints() {
         return this.footprints;
     }

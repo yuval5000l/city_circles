@@ -222,8 +222,6 @@ export default class Business {
                 count++;
             }
         }
-        console.log(sumOfReviews);
-
         return sumOfReviews / count;
     }
     async setOpeningHours(openingHoursArray, ref) {

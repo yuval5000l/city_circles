@@ -3,7 +3,7 @@ import {useEffect, useState} from "react";
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import {getUserById} from "../../BackEnd/Classes/UserClass";
-import {Box, Stack, Typography} from "@mui/material";
+import {Box, Button, Stack, Typography} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import theme from "../../Theme/Theme";
 import {TopBoxWithProfileImg} from "../../Components/Styled Components/StyledBoxWithLogo";
@@ -20,6 +20,7 @@ import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import {ReactComponent as FootprintsIcon} from "../../Components/Styled Components/Icons/footprints-svgrepo-com.svg";
 import {StyledFeedItemProfile} from "../../Components/Styled Components/OuterProfileComponents";
 import StyledProfileTabs from "./StyledProfileTabs";
+import {uploadFile} from "../../BackEnd/Classes/GeneralFunctionsFireBase";
 
 function FeedItem(user, lstOfReviews) {
     if (lstOfReviews === []) {
@@ -108,7 +109,7 @@ function showUserProfile(user, lstOfReviews) {
 }
 
 
-function showMyProfile(user) {
+function ShowMyProfile(user, file, setFile) {
     return (
         <>
             <Box
@@ -124,11 +125,18 @@ function showMyProfile(user) {
                 <Stack direction="column" spacing={1} justifyContent="flex-start"
                        alignItems="center" sx={{marginBottom: "0.1rem"}}>
                     <Typography variant="h2" color="white">
-                        {/*current user name...*/}
                         {user.getUserName()}
                     </Typography>
                     {(user.getPic() === "") ? (<Avatar width="6rem" height="6rem"/>)
-                        : (<StyledAvatarFriendProfile src={user.getPic()}/>)}
+                        : (<Button variant={"contained"} component={"label"} >
+                            <input
+                                type="file"
+                                hidden
+                                accept="image/*"
+                                onChange={(e) => setFile(e.target.files[0])}/>
+                            <StyledAvatarFriendProfile src={user.getPic()}>
+                        </StyledAvatarFriendProfile>
+                        </Button>)}
                 </Stack>
 
             </Box>
@@ -141,12 +149,35 @@ function showMyProfile(user) {
 
 function ProfilePageComponent() {
 
-
+    const [picturePath, setPicturePath] = useState("");
+    const [file, setFile] = useState(null);
     const location = useLocation()
     const check_null = location.state === null;
     let {from} = (check_null === true) ? null : location.state;
     let [user, setUser] = useState(null);
     const [lstOfReviews, setLstOfReviews] = useState([]);
+
+
+    const handleUploadPic = async () => {
+        uploadFile(file).then((pathy) => {
+            setPicturePath(pathy);
+            user.setPic(pathy);
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
+
+    useEffect(() => {
+        async function foo() {
+            if (file !== null) {
+                await handleUploadPic();
+                await user.saveToFirebase();
+            }
+        }
+
+        foo();
+    }, [file]);
+
 
     useEffect(() => {
         if (check_null !== true) {
@@ -155,7 +186,7 @@ function ProfilePageComponent() {
                     if (user === null) {
                         getUserById(from).then((user__) => {
                             setUser(user__);
-                            user__.getMyReviews().then((reviews) => {
+                            user__.getMyReviews()?.then((reviews) => {
                                 setLstOfReviews(reviews);
                             }).catch((error) => {
                                 console.error(error);
@@ -191,7 +222,7 @@ function ProfilePageComponent() {
                         <div>
                             {
                                 (user && (user?.getUserId() === auth?.currentUser?.uid)) ?
-                                    (<div>{showMyProfile(user)}</div>) :
+                                    (<div>{ShowMyProfile(user, file, setFile)}</div>) :
                                     (<div>{showUserProfile(user, lstOfReviews)}</div>)
                             }
                         </div>)
