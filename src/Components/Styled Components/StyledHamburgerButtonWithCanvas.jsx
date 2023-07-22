@@ -12,18 +12,11 @@ import {
 import LogoutIcon from '@mui/icons-material/Logout';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import {Link} from "react-router-dom";
-import GroupIcon from "@mui/icons-material/Group";
-import HistoryIcon from '@mui/icons-material/History';
-import WorkIcon from '@mui/icons-material/Work';
-import SettingsIcon from '@mui/icons-material/Settings';
 import {StyledAvatarUserFeed, StyledHamburgerButton} from "./styledComponents";
 import theme from "../../Theme/Theme";
 import {onAuthStateChanged, signOut} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import {getUserById} from "../../BackEnd/Classes/UserClass";
-import {
-    getPickersArrowSwitcherUtilityClass
-} from "@mui/x-date-pickers/internals/components/PickersArrowSwitcher/pickersArrowSwitcherClasses";
 // import BusinessRegistration1 from "../../routes/business_registratin_pages/BusinessRegistrationPage1";
 
 
@@ -91,10 +84,10 @@ function ResponsiveDrawer(props) {
 
     const drawer_content = [
         {text: 'Add a new business', path: "/BusinessRegistrationStepperComponent", icon: <AddBoxOutlinedIcon/>},
-        {text: 'Import Contacts', path: "/", icon: <GroupIcon/>},
-        {text: 'History', path: "/", icon: <HistoryIcon/>},
-        {text: 'All Businesses', path: "/", icon: <WorkIcon/>},
-        {text: 'Settings', path: "/", icon: <SettingsIcon/>}
+        // {text: 'Import Contacts', path: "/", icon: <GroupIcon/>},
+        // {text: 'History', path: "/", icon: <HistoryIcon/>},
+        // {text: 'All Businesses', path: "/", icon: <WorkIcon/>},
+        // {text: 'Settings', path: "/", icon: <SettingsIcon/>}
 
     ];
 
