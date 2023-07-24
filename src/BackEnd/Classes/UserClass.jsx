@@ -204,17 +204,20 @@ export default class User {
         });
         return lst;
     }
+
+
     static async getAllUsersReviewsFootprintsExceptCurrentUser()
     {
-        let lstUsers = await User.getAllUsers();
-        // const querySnapshot = await getDocs(collection(db, "Users"));
-        // querySnapshot.forEach((doc) => {
-        //     const options = doc.data();
-        //     if (options.userID !== auth?.currentUser?.uid)
-        //     {
-        //         lstUsers.push(userConverter["fromFirestore"](doc, options));
-        //     }
-        // });
+        let oldLstUsers = await User.getAllUsers();
+        let currentUser = oldLstUsers.find(item => item.getUserId() === auth?.currentUser?.uid);
+        let lstUsers = oldLstUsers.filter(user => {
+            if (user.getUserId() === currentUser.getUserId())
+            {
+                return false;
+            }
+            return user.getCircles().filter(circle => currentUser.getCircles().includes(circle)).length !== 0;
+
+        })
         let dicBusiness = await Business.getAllBusinessByName();
         let listOfReviewsAndFootprints = [];
         for (const user of lstUsers)
