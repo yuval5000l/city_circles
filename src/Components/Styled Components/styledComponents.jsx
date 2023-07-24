@@ -51,6 +51,7 @@ export const StyledButtonGreen = styled(Button)(({theme}) => ({
 
 export const StyledAppBarTop = styled(AppBar)(({theme}) => ({
     backgroundColor: theme.palette.primary.main,
+    borderBottom:"0.1rem solid #C3ED5B",
     position: "fixed",
     maxWidth: "100%",
     // [theme.breakpoints.up('xs')]: {
