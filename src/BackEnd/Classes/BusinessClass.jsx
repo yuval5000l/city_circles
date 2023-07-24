@@ -163,7 +163,7 @@ export default class Business {
 
     getName(){ return this.name;}
     getRating() {
-        return (this.rating !== 0) ? this.rating[0] / this.rating[1] : this.rating[1];
+        return (this.rating[0] !== 0) ? this.rating[0] / this.rating[1] : this.rating[1];
     }
 
     getProfilePic() {

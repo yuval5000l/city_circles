@@ -11,6 +11,7 @@ import StyledFootprintForUser from "../../Components/Styled Components/StyledFoo
 import StyledReviewForUser from "../../Components/Styled Components/StyledReviewForUser";
 import StyledDropdownCircleOptions from "../../Components/Styled Components/StyledDropdownCircleOptions";
 import User from "../../BackEnd/Classes/UserClass";
+import StyledGif from "../../Components/Styled Components/StyledGif";
 
 
 function TabPanel({ children, value, index }) {
@@ -87,7 +88,8 @@ export default function StyledProfileTabs({ user }) {
                 {/* Render content for the "Footprints" tab */}
                 <Stack direction="column" spacing={2} justifyContent="center" marginTop="0.5rem" display="flex">
                 <List sx={{paddingTop:"unset !important", paddingBottom:"unset"}}>
-                    {Footprints.map((footprint) => (
+                    {(Footprints.length !== 0) ?
+                        (Footprints.map((footprint) => (
                         <ListItem key={footprint.businessID} sx={{justifyContent: "center", padding:"0.3rem"}}>
                             <StyledFootprintForUser
                                 businessPhoto={user.getPic()}
@@ -96,7 +98,13 @@ export default function StyledProfileTabs({ user }) {
                                 BigName={footprint.businessName}
                             />
                         </ListItem>
-                    ))}
+                    )))
+                        :
+                        (<Stack direction="column">
+                            <Typography variant="h3">There are no footprints yet</Typography>
+                            <StyledGif/>
+                        </Stack>)
+                    }
                 </List>
                 </Stack>
             </TabPanel>
@@ -105,7 +113,8 @@ export default function StyledProfileTabs({ user }) {
                 {/* Render content for the "Reviews" tab */}
                 <Stack direction="column" spacing={2} justifyContent="center" marginTop="0.5rem" display="flex">
                 <List sx={{paddingTop:"unset !important", paddingBottom:"unset"}}>
-                    {Reviews.map((review) => (
+                    {(Reviews.length !== 0) ?
+                        (Reviews.map((review) => (
                         <ListItem key={review.businessID} sx={{justifyContent: "center",padding:"unset"}}>
                             <StyledReviewForUser
                                 BusinessName={review.businessName}
@@ -116,7 +125,13 @@ export default function StyledProfileTabs({ user }) {
                                 timestamp={review.timestamp.toDate()}
                             />
                         </ListItem>
-                    ))}
+                    )))
+                        :
+                        (<Stack direction="column">
+                            <Typography variant="h3">There are no reviews yet</Typography>
+                            <StyledGif/>
+                        </Stack>)
+                    }
                 </List>
                 </Stack>
             </TabPanel>

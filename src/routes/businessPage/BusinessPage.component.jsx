@@ -68,7 +68,10 @@ export function showBusiness(business) {
                                                    key={category}>{category}</StyledTypeBox>)}
                             </Grid>
                             <Stack direction="row" spacing={1}>
-                                <Typography>{business.getRating().toFixed(2)}</Typography>
+                                <Typography>
+                                    {(business.getRating() !== 0) ?
+                                    (business.getRating().toFixed(2)) : (business.getRating())}
+                                </Typography>
                                 <StyledRating value={business.getRating()}/>
                                 <Typography>({business.rating[1]})</Typography>
                             </Stack>
