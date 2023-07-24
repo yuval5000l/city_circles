@@ -47,7 +47,7 @@ const NavigationComponent = () => {
             ) : (
                 <>
                     <StyledTopMenuNew setSearch={setSearchRes} setValue={setButtomBarValue}/>
-                    <Box sx={{width:"100%", marginTop: "6.5rem", marginBottom: "4.5rem"}}>
+                    <Box sx={{width:"100%", marginTop: "4rem", marginBottom: "4.5rem"}}>
                         <Outlet context={[searchRes, setSearchRes, setButtomBarValue]}/>
                     </Box>
                 </>

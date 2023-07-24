@@ -41,31 +41,29 @@ export default function StyledBusinessFeedItem({business}) {
                         <StyledAvatarBusinessFeed src={business.getProfilePic()}/>
                     </Link>
                     <Stack direction="column" spacing={0.5} justifyContent="flex-start">
-                        <Typography variant="h3" textAlign="left">
+                        <Typography variant="h4" textAlign="left" fontWeight="500">
                             {business.name}
                         </Typography>
-                        <Stack direction="row" display="flex" flexWrap="wrap">
-                            {business.getBusinessType().map(b_type => <StyledTypeBox> {b_type} </StyledTypeBox>)}
-                        </Stack>
+                        {/*<Stack direction="row" display="flex" flexWrap="wrap">*/}
+                        {/*    {business.getBusinessType().map(b_type => <StyledTypeBox> {b_type} </StyledTypeBox>)}*/}
+                        {/*</Stack>*/}
                         <Stack direction="row" spacing={1}>
                             <Typography>{"0" | business.getRating().toFixed(2)}</Typography>
                             <StyledRating value={business.getRating()}/>
                             <Typography>({business.rating[1]})</Typography>
                         </Stack>
                         <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center" >
-                            <StyledInfoBox>
-                                #km
-                            </StyledInfoBox>
+                            {/*<StyledInfoBox>*/}
+                            {/*    #km*/}
+                            {/*</StyledInfoBox>*/}
                             <Link to={"../BusinessPage"} state={{from: business.getName()}}>
-                                <StyledGrayButtonVisitBusiness>
-                                </StyledGrayButtonVisitBusiness>
+                                <StyledGrayButtonVisitBusiness />
                             </Link>
                         </Stack>
                     </Stack>
                 </Stack>
-                <AvatarGroup max={7} spacing={0.5}>
-                    {allUsers.map(review => <Avatar border="0.2rem solid gray" alt={review.userName} src={review.userPhoto} sx={{boxShadow : "0px 4px 4px rgba(0, 0, 0, 0.25)",}}/>)}
-
+                <AvatarGroup max={4} spacing={0.5}>
+                    {allUsers.map(review => <Avatar border="0.2rem solid gray" alt={review.userName} src={review.userPhoto} sx={{boxShadow : "0px 4px 4px rgba(0, 0, 0, 0.25)",width:"2rem",height:"2rem"}}/>)}
                 </AvatarGroup>
             </Stack>
         </Box>

@@ -22,7 +22,7 @@ import TextField from "@mui/material/TextField";
 export const StyledButtonGray = styled(Button)(({theme}) => ({
     backgroundColor: theme.palette.info.light,
     color: "black",
-    maxWidth: "fit-content",
+    minWidth: "fit-content",
     padding: '0.3rem',
     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
     borderRadius: '15px',
@@ -53,9 +53,12 @@ export const StyledAppBarTop = styled(AppBar)(({theme}) => ({
     backgroundColor: theme.palette.primary.main,
     position: "fixed",
     maxWidth: "100%",
-    [theme.breakpoints.up('xs')]: {
-        height: '6.5rem',
-    }
+//     [theme.breakpoints.up('xs')]: {
+//         height: '4rem',
+//     },
+//     [theme.breakpoints.up('md')]: {
+//     height: '6.5rem',
+// }
 }));
 
 export const StyledPurpleBox = styled(AppBar)(({theme}) => ({
@@ -84,14 +87,14 @@ export const StyledSearchBar = styled(Input)(({theme}) => ({
     borderRadius: "10px",
     padding: "0.3rem",
     [theme.breakpoints.up('xs')]: {
-        height: '3rem',
+        height: '2rem',
     }
 }));
 
 export const StyledHamburgerButton = styled(MenuIcon)(({theme}) => ({
     color: theme.palette.secondary.main,
     [theme.breakpoints.up('xs')]: {
-        fontSize: "4.5rem"
+        fontSize: "3.5rem"
     }
 }));
 
@@ -176,8 +179,8 @@ export const StyledAvatarUserFeed = styled(Avatar)(({theme}) => ({
 export const StyledAvatarBusinessFeed = styled(Avatar)(({theme}) => ({
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     [theme.breakpoints.up('xs')]: {
-        width: "7rem",
-        height: "7rem"
+        width: "5rem",
+        height: "5rem"
     }
 }));
 export const StyledAvatarFriendProfile = styled(Avatar)(({ theme })=> ({

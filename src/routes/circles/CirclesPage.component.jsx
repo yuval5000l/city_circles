@@ -132,10 +132,10 @@ const CirclesPageComponent = () => {
                     borderBottom: `0.3rem solid ${theme.palette.secondary.main}`,
                     width: '100%',
                     display: 'inline-block',
-                    paddingBottom:"0.2rem",
+                    paddingBottom:"0.4rem",
                 }}>
                     <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
-                        <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem">
+                        <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" paddingTop="0.65rem">
                             {(user !==null) ? (<>{
                                 user.getCircles().map((circle, index) =>
                                 <StyledCirclesSearchItem name={user.getCircles()[index]} checkFunction={CircleClicked(index)}/>

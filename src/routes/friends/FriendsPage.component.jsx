@@ -5,7 +5,7 @@ import theme from "../../Theme/Theme";
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import User from "../../BackEnd/Classes/UserClass";
-
+import StyledGif from "../../Components/Styled Components/StyledGif";
 const FriendsPageComponent = ({setValue}) => {
 
     const [searchText, setSearchText] = useState('');
@@ -50,6 +50,7 @@ const FriendsPageComponent = ({setValue}) => {
             <Typography variant="h4" sx={{color: theme.palette.primary.main, paddingBottom: "0.4rem",paddingTop: "0.4rem" }}>
                 {filteredFriends.length} Friends
             </Typography>
+            {/*<StyledGif/>*/}
             <List width="100%"  >
                 {filteredFriends.map((friend) => (
                     <ListItem

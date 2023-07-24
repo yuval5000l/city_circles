@@ -23,7 +23,7 @@ function StyledTopMenuNew({setSearch, setValue}) {
     return (
         <StyledAppBarTop>
             <Stack direction="row" alignItems="center" spacing={1} justifyContent="space-evenly">
-                <Box sx={{display: "flex", padding:"0.5rem"}}>
+                <Box sx={{display: "flex"}}>
                     <StyledHamburgerButtonWithCanvas/>
                 </Box>
                 <Box sx={{display: "flex"}}>
