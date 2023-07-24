@@ -12,6 +12,7 @@ import {getUserById} from "../../BackEnd/Classes/UserClass";
 import {useOutletContext} from "react-router-dom";
 import Business from "../../BackEnd/Classes/BusinessClass";
 import StyledBusinessFeedItem from "../../Components/Styled Components/StyledBusinessFeedItem";
+import StyledGif from "../../Components/Styled Components/StyledGif";
 
 
 function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}) {
@@ -55,7 +56,8 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}) 
         <>
             {(searchLayerFilter === []) ? (<></>) : (searchLayerFilter.map((filteredBusiness, index) =>
                 (
-                    <ListItem sx={{padding: "unset!important"}} width="100%" key={filteredBusiness.name+index.toString()}>
+                    <ListItem sx={{padding: "unset!important"}} width="100%"
+                              key={filteredBusiness.name + index.toString()}>
                         <StyledBusinessFeedItem business={filteredBusiness}/>
                     </ListItem>
                 )))}
@@ -121,42 +123,47 @@ const CirclesPageComponent = () => {
 
     // console.log(lstBusiness[0].getReviews()[0].rating);
     // const position = [31.777587, 35.215094]; //[this.state.location.lat, this.state.location.lng];
-    return (
-        <>
-            <Box sx={{
-                backgroundColor: theme.palette.primary.main,
-                borderBottom: `0.3rem solid ${theme.palette.secondary.main}`,
-                width: '100%',
-                display: 'inline-block',
-                paddingBottom: "0.4rem",
-            }}>
-                <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
-                    <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" paddingTop="0.65rem">
-                        {(user !== null) ? (<>{
-                            user.getCircles().map((circle, index) =>
-                                // <ListItem sx={{padding: "unset!important"}} width="100%" key={user.getCircles()[index]+index.toString()}
-                                    <div key={user.getCircles()[index]+index.toString()}>
-                                    <StyledCirclesSearchItem name={user.getCircles()[index]}
-                                                             checkFunction={CircleClicked(index)}/>
-                                    </div>
-                                //</ListItem>
-                            )}</>) : (<></>)}
-                        {/*<StyledCirclesSearchItem name={(user === null) ? ("Circle1") : (user.getCircles()[0])} checkFunction={CircleClicked(0)}/>*/}
-                        {/*<StyledCirclesSearchItem name={(user === null) ? ("Circle2") : (user.getCircles()[1])} checkFunction={CircleClicked(1)}/>*/}
-                        {/*<StyledCirclesSearchItem name={(user === null) ? ("Circle3") : (user.getCircles()[2])} checkFunction={CircleClicked(2)}/>*/}
-                    </Stack>
-                    <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem">
-                        <StyledDropdownMenuSortBy setSortMethod={setSortMethod}/>
-                        <StyledDropdownMenuFilter setFilterMethod={setFilterTypeBusiness}/>
-                    </Stack>
-                </Stack>
-            </Box>
-            <BigFilter lstBusiness={lstBusiness} circles={circlesFilter}
-                       searchRes={searchRes} businessType={filterTypeBusiness} sortMethod={sortMethod}/>
+    return (<>
+        {(lstBusiness === [] || user === null)
+            ?
+            (<StyledGif></StyledGif>)
+            :
+            (<>
+                    <Box sx={{
+                        backgroundColor: theme.palette.primary.main,
+                        borderBottom: `0.3rem solid ${theme.palette.secondary.main}`,
+                        width: '100%',
+                        display: 'inline-block',
+                        paddingBottom: "0.4rem",
+                    }}>
+                        <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
+                            <Stack direction="row" spacing={2} alignItems="center" justifyContent="center"
+                                   paddingTop="0.65rem">
+                                {(user !== null) ? (<>{
+                                    user.getCircles().map((circle, index) =>
+                                            // <ListItem sx={{padding: "unset!important"}} width="100%" key={user.getCircles()[index]+index.toString()}
+                                            <div key={user.getCircles()[index] + index.toString()}>
+                                                <StyledCirclesSearchItem name={user.getCircles()[index]}
+                                                                         checkFunction={CircleClicked(index)}/>
+                                            </div>
+                                        //</ListItem>
+                                    )}</>) : (<></>)}
+                            </Stack>
+                            <Stack direction="row" spacing={2} alignItems="center" justifyContent="center"
+                                   padding="0.4rem">
+                                <StyledDropdownMenuSortBy setSortMethod={setSortMethod}/>
+                                <StyledDropdownMenuFilter setFilterMethod={setFilterTypeBusiness}/>
+                            </Stack>
+                        </Stack>
+                    </Box>
+                    <BigFilter lstBusiness={lstBusiness} circles={circlesFilter}
+                               searchRes={searchRes} businessType={filterTypeBusiness} sortMethod={sortMethod}/>
 
 
-        </>
-    );
+                </>
+            )
+}
+    </>);
 
 }
 
