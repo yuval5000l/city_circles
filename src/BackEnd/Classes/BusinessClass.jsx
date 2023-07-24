@@ -118,7 +118,6 @@ export default class Business {
 
         };
         circles.forEach(circle => this.circlesReviews[circle] += 1);
-        console.log(this);
 
         this.reviews.push(review);
         this.rating[0] += rating;
@@ -281,7 +280,6 @@ Business.ListOfTypes = ["Creative Services" , "Food & Drinks", "Music", "Outdoor
 
 const businessConverter = {
     toFirestore(business) {
-        console.log(business);
         return {
             name: business.name,
             type: business.type,
