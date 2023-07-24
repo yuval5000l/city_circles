@@ -12,7 +12,7 @@ import {
 import LogoutIcon from '@mui/icons-material/Logout';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import {Link} from "react-router-dom";
-import {StyledAvatarUserFeed, StyledHamburgerButton} from "./styledComponents";
+import {StyledAvatarUserCanvas, StyledAvatarUserFeed, StyledHamburgerButton} from "./styledComponents";
 import theme from "../../Theme/Theme";
 import {onAuthStateChanged, signOut} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
@@ -95,7 +95,7 @@ function ResponsiveDrawer(props) {
         <Box sx={{
             backgroundColor: theme.palette.primary.light,
             color: "black",
-            borderRight: `0.7rem solid ${theme.palette.secondary.main}`,
+            borderRight: `0.3rem solid ${theme.palette.secondary.main}`,
             height: "100%"
         }}>
             <Toolbar sx={{backgroundColor: theme.palette.primary.main, color: "white"}}>
@@ -106,7 +106,7 @@ function ResponsiveDrawer(props) {
                     alignItems="center"
                     spacing={2}
                 >
-                    <StyledAvatarUserFeed sx={{marginLeft: "auto", marginRight: "auto"}} src={userPic}/>
+                    <StyledAvatarUserCanvas sx={{marginLeft: "auto", marginRight: "auto"}} src={userPic}/>
                     <Typography>Hi, {name}</Typography>
                 </Stack>
             </Toolbar>
@@ -125,6 +125,14 @@ function ResponsiveDrawer(props) {
                 ))}
                 <ListItem disablePadding>
                     <ListItemButton onClick={logout}>
+                        <ListItemIcon>
+                            <LogoutIcon/>
+                        </ListItemIcon>
+                        <ListItemText primary='Log-Out'/>
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton component={Link} >
                         <ListItemIcon>
                             <LogoutIcon/>
                         </ListItemIcon>

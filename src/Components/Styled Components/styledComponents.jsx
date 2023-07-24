@@ -53,9 +53,9 @@ export const StyledAppBarTop = styled(AppBar)(({theme}) => ({
     backgroundColor: theme.palette.primary.main,
     position: "fixed",
     maxWidth: "100%",
-//     [theme.breakpoints.up('xs')]: {
-//         height: '4rem',
-//     },
+    // [theme.breakpoints.up('xs')]: {
+    //     height: '4rem',
+    // },
 //     [theme.breakpoints.up('md')]: {
 //     height: '6.5rem',
 // }
@@ -161,18 +161,20 @@ export const StyledSmallLogoBox = styled(Box)(({theme}) => ({
     }
 }));
 
+export const StyledAvatarUserCanvas = styled(Avatar)(({theme}) => ({
+    boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+    border: `0.1rem solid ${theme.palette.secondary.main}`,
+    [theme.breakpoints.up('xs')]: {
+        width: "10rem",
+        height: "10rem"
+    }
+}));
 export const StyledAvatarUserFeed = styled(Avatar)(({theme}) => ({
     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
     border: `0.1rem solid ${theme.palette.secondary.main}`,
     [theme.breakpoints.up('xs')]: {
         width: "3.5rem",
         height: "3.5rem"
-// export const StyledAvatarUserFeed = styled(Avatar)(({theme}) => ({
-//     boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
-//     [theme.breakpoints.up('xs')]: {
-//         width: "2.5rem",
-//         height: "2.5rem"
-//     }
     }
 }));
 

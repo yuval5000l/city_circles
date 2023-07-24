@@ -9,8 +9,8 @@ function StyledTopMenuNew({setSearch, setValue}) {
 
     const SendToSearch = () => {
         let currentURL = window.location.href;
-        if (currentURL !== "http://localhost:3000/CirclesPageComponent") {
-            window.location.href = "http://localhost:3000/CirclesPageComponent";
+        if (currentURL !== "http://localhost:3000/") {
+            window.location.href = "http://localhost:3000/";
             setValue(1);
 
         }

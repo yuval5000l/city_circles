@@ -4,6 +4,7 @@ import HomeIcon from "@mui/icons-material/Home";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import GroupIcon from '@mui/icons-material/Group';
 import PersonIcon from '@mui/icons-material/Person';
+import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import StyledBottomNavigationPlus from "./StyledBottomNavigationPlus";
 import {useState} from "react";
 import {auth} from "../../BackEnd/config/firebase";
@@ -23,17 +24,7 @@ export default function StyledBottomNavigationBar({value1, setValue1}) {
                 setValue1(newValue);
             }}
         >
-            <StyledBottomNavigationAction component={Link} to="/" label="Home" icon={<HomeIcon
-                sx={{
-                    fontSize: {
-                        xs: "3rem",
-                        sm: "5rem"
-                    }
-                }}
-                selected={location.pathname === '/'}
-            />}
-            />
-            <StyledBottomNavigationAction component={Link} to="/CirclesPageComponent" label="circles"
+            <StyledBottomNavigationAction component={Link} to="/" label="circles"
                                           icon={<SupervisedUserCircleIcon
                                               sx={{
                                                   fontSize: {
@@ -42,20 +33,33 @@ export default function StyledBottomNavigationBar({value1, setValue1}) {
                                                   }
                                               }}
                                           />}
-                                          selected={location.pathname === '/CirclesPageComponent'}
+                                          selected={location.pathname === '/'}
 
             />
             <StyledBottomNavigationPlus/>
-            <StyledBottomNavigationAction component={Link} to="/FriendsPageComponent" label="friends" icon={<GroupIcon
+            <StyledBottomNavigationAction component={Link} to="/FeedPageComponent" label="feed" icon={<DynamicFeedIcon
                 sx={{
                     fontSize: {
                         xs: "3rem",
                         sm: "5rem"
                     }
                 }}
-                selected={location.pathname === '/FriendsPageComponent'}
+                selected={location.pathname === '/FeedPageComponent'}
             />}
             />
+
+
+            {/*<StyledBottomNavigationAction component={Link} to="/FriendsPageComponent" label="friends" icon={<GroupIcon*/}
+            {/*    sx={{*/}
+            {/*        fontSize: {*/}
+            {/*            xs: "3rem",*/}
+            {/*            sm: "5rem"*/}
+            {/*        }*/}
+            {/*    }}*/}
+            {/*    selected={location.pathname === '/FriendsPageComponent'}*/}
+            {/*/>}*/}
+            {/*/>*/}
+
             <StyledBottomNavigationAction component={Link} to="/ProfilePageComponent"
                                           state={{from: auth?.currentUser?.uid}}
                                           label="profile" icon={<PersonIcon

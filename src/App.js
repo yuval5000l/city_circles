@@ -20,7 +20,8 @@ function App() {
             <ThemeProvider theme={Theme}>
             <Routes>
                 <Route path="/" element={<NavigationComponent />}>
-                    <Route index element={<HomePageComponent />} />
+                    <Route index element={<CirclesPageComponent/>}/>
+                    <Route path="FeedPageComponent" element={<HomePageComponent />} />
                     <Route path="NotificationsComponent" element={<NotificationsComponent/>}/>
                     <Route path="CirclesPageComponent" element={<CirclesPageComponent/>}/>
                     <Route path="FriendsPageComponent" element={<FriendsPageComponent/>}/>
