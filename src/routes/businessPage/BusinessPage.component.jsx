@@ -82,7 +82,7 @@ export function showBusiness(business) {
                                 (business.profile_pic === "") ?
                                     (<Avatar sx={{width: "6.25rem", height: "6.25rem"}} alt={business.name}/>)
                                     :
-                                    (<Avatar sx={{width: "6.25rem", height: "6.25rem"}} alt={business.name}
+                                    (<Avatar sx={{width: "6.25rem", height: "6.25rem", margin: 1}} alt={business.name}
                                              src={business.profilePic}/>)
                             }
                         </Box>
