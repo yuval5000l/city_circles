@@ -5,7 +5,7 @@ import theme from "../../Theme/Theme";
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import User from "../../BackEnd/Classes/UserClass";
-import StyledGif from "../../Components/Styled Components/StyledGif";
+// import StyledGif from "../../Components/Styled Components/StyledGif";
 const FriendsPageComponent = ({setValue}) => {
 
     const [searchText, setSearchText] = useState('');
