@@ -36,7 +36,7 @@ export default function StyledBottomNavigationBar({value1, setValue1}) {
                                           selected={location.pathname === '/'}
 
             />
-            <StyledBottomNavigationPlus/>
+            <StyledBottomNavigationPlus />
             <StyledBottomNavigationAction component={Link} to="/FeedPageComponent" label="feed" icon={<DynamicFeedIcon
                 sx={{
                     fontSize: {
@@ -60,19 +60,6 @@ export default function StyledBottomNavigationBar({value1, setValue1}) {
             {/*/>}*/}
             {/*/>*/}
 
-            <StyledBottomNavigationAction component={Link} to="/ProfilePageComponent"
-                                          state={{from: auth?.currentUser?.uid}}
-                                          label="profile" icon={<PersonIcon
-                sx={{
-                    fontSize: {
-                        xs: "3rem",
-                        sm: "5rem"
-                    }
-                }}
-                selected={location.pathname === '/ProfilePageComponent'}
-
-            />}
-            />
         </StyledBottomNavigation>
     );
 }

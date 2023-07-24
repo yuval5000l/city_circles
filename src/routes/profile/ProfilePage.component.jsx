@@ -123,7 +123,7 @@ function ShowMyProfile(user, file, setFile) {
             >
 
                 <Stack direction="column" spacing={1} justifyContent="flex-start"
-                       alignItems="center" sx={{marginBottom: "0.1rem"}}>
+                       alignItems="center" >
                     <Typography variant="h2" color="white">
                         {user.getUserName()}
                     </Typography>

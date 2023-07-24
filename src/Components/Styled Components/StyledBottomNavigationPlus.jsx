@@ -1,6 +1,6 @@
 import {useState} from "react";
 import Dialog from "@mui/material/Dialog";
-import {DialogContent, Stack} from "@mui/material";
+import {DialogContent, Stack, Typography} from "@mui/material";
 import StyledCircleReview from "./StyledCircleReview";
 import StyledCircleFootprint from "./StyledCircleFootprints";
 import theme from "../../Theme/Theme";
@@ -17,19 +17,23 @@ export default function StyledBottomNavigationPlus() {
     };
     return (
         <>
-
-            <AddCircleOutlineRoundedIcon label = "add"
-                sx={{
-                    color:theme.palette.secondary.main,
-                    // border:`0.3rem solid ${theme.palette.secondary.main}`,
-                    borderRadius:"50%",
-                    fontSize: {
-                        xs: "3rem",
-                        sm: "5rem"
-                    }
-                }}
-                onClick={handleClick}
-            />
+            <Stack  direction="column"
+                    justifyContent="center"
+                    alignItems="center">
+                <AddCircleOutlineRoundedIcon label = "add"
+                                             sx={{
+                                                 color:theme.palette.secondary.main,
+                                                 // border:`0.3rem solid ${theme.palette.secondary.main}`,
+                                                 borderRadius:"50%",
+                                                 fontSize: {
+                                                     xs: "3rem",
+                                                     sm: "5rem"
+                                                 }
+                                             }}
+                                             onClick={handleClick}
+                />
+                <Typography variant="h6"> add review</Typography>
+            </Stack>
             <Dialog open={openDialog} onClose={handleCloseSmallDialog}>
                 <DialogContent sx={{
                     backgroundColor: `${theme.palette.primary.main}`,

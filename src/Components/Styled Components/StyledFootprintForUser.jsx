@@ -13,7 +13,7 @@ export default function StyledFootprintForUser({businessPhoto, userPhoto,timesta
                 <Box>
                     <StyledAvatarWithBadge bigPhoto={userPhoto} smallPhoto={businessPhoto}/>
                 </Box>
-                <Stack direction="column" justifyContent="flex-start" width="70%"  alignItems="flex-start" >
+                <Stack color="white" direction="column" justifyContent="flex-start" width="70%"  alignItems="flex-start" >
                     <Typography variant="h3" textAlign="left">
                         {BigName}
                     </Typography>

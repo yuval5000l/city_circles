@@ -107,6 +107,7 @@ export const StyledBackButton = styled(ArrowBackIosOutlinedIcon)(({theme}) => ({
 
 export const StyledCircleBox = styled(Box)(({theme}) => ({
     borderRadius: "50%",
+    padding:"0.3rem",
     boxShadow: 'rgb(38, 57, 77) 0px 20px 30px -10px',
     border: `0.65rem solid ${theme.palette.secondary.main}`,
     backgroundColor: theme.palette.primary.main,

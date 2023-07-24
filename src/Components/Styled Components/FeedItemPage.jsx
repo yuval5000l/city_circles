@@ -41,6 +41,7 @@ export default function FeedItemPage({setValue}) {
                 (<StyledFootprintHomepage businessPhoto={review.business_photo_url} userPhoto={review.profile_photo_url}
                                           timestamp={review.time}
                                           BusinessName={review.business_name}
+                                          circles={review.circles}
                                           UserName={review.user_name}/>)}
             </Box>
         )}
