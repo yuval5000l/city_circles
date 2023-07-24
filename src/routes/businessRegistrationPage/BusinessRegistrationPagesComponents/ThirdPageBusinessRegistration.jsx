@@ -1,6 +1,6 @@
 import * as React from 'react';
 import Typography from '@mui/material/Typography';
-import {Box, Stack} from "@mui/material";
+import {Box, Divider, Stack} from "@mui/material";
 import {translateOpeningHoursToArrays} from "../../../BackEnd/Classes/BusinessClass";
 import LocationOnIcon from '@mui/icons-material/LocationOn';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -23,7 +23,7 @@ function getHoursAndMinutes(day) {
 export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
 
     const [address, setAddress] = useState("");
-    const [picturePath, setPicturePath] = useState((data!== null && data[0] !== "") ? (data[0]) :(""));
+    const [picturePath, setPicturePath] = useState((data !== null && data[0] !== "") ? (data[0]) : (""));
     const [file, setFile] = useState(null);
 
     const [city, setCity] = useState('');
@@ -67,7 +67,10 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
             console.error(error);
         });
     }
-
+    const [allWeek, setAllWeek] = React.useState(() => [
+        dayjs(),
+        dayjs(),
+    ]);
     const [sunday, setSunday] = React.useState(() => [
         dayjs(),
         dayjs(),
@@ -96,8 +99,14 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
         dayjs(),
         dayjs(),
     ]);
-
-
+    const changeAll =(newValue) =>{
+        setSunday(newValue)
+        setMonday(newValue)
+        setTuesday(newValue)
+        setWednesday(newValue)
+        setThursday(newValue)
+        setFriday(newValue)
+    }
     const handleOnNext = () => {
         const finalAddress = CreateAddress();
         // console.log("address is: " + address );
@@ -147,15 +156,18 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
                 </Stack>
                 {/*<BasicTextFields fieldName={'Sunday'}/>*/}
                 <LocalizationProvider dateAdapter={AdapterDayjs}>
-                    {/*<MobileTimePicker>*/}
-                    {/*    <MultiInputTimeRangeField*/}
-                    {/*        slotProps={{*/}
-                    {/*            textField: ({ position }) => ({*/}
-                    {/*                label: position === 'start' ? 'From' : 'To',*/}
-                    {/*            }),*/}
-                    {/*        }}*/}
-                    {/*    />*/}
-                    {/*</MobileTimePicker>*/}
+                    <Typography>Set all but Saturday</Typography>
+
+                    <SingleInputTimeRangeField
+                        label="Set all week"
+                        value={allWeek}
+                        onChange={(newValue) => {
+                            changeAll(newValue);
+                        }}
+                        ampm={false}/>
+
+                    <Divider/>
+                    <Typography>Set each day</Typography>
                     <SingleInputTimeRangeField
                         label="Sunday"
                         value={sunday}
@@ -191,6 +203,8 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
                         onChange={(newValue) => setFriday(newValue)}
                         ampm={false}
                     />
+                    <Divider/>
+                    <Typography>Saturday</Typography>
                     <SingleInputTimeRangeField
                         label="Saturday"
                         value={saturday}
@@ -212,7 +226,7 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
                                 onChange={(e) => setFile(e.target.files[0])}/>
                         </Button>
                         {(picturePath === "") ? (<Box/>) :
-                            (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}
+                            (<Avatar src={picturePath} sx={{width: 200, height: 200}}/>)}
                     </Stack>
 
                 </Stack>

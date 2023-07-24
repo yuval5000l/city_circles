@@ -44,16 +44,19 @@ export default function StyledBusinessFeedItem({business}) {
                         <StyledAvatarBusinessFeed src={business.getProfilePic()}/>
                     </Link>
                     <Stack direction="column" spacing={0.5} justifyContent="flex-start">
-                        <Typography variant="h4" textAlign="left" fontWeight="500">
-                            {business.name}
-                        </Typography>
+                        <Stack direction="row">
+                            <Typography variant="h4" textAlign="left" fontWeight="500">
+                                {business.name}
+                            </Typography>
+                        </Stack>
+
                         {/*<Stack direction="row" display="flex" flexWrap="wrap">*/}
                         {/*    {business.getBusinessType().map(b_type => <StyledTypeBox> {b_type} </StyledTypeBox>)}*/}
                         {/*</Stack>*/}
-                        <Stack direction="row" spacing={1}>
-                            <Typography>{"0" | business.getRating().toFixed(2)}</Typography>
+                        <Stack direction="row" spacing={0.3} justifyContet="center" alignItems="center">
+                            <Typography variant="h5" fontWeight="700">{"0" | business.getRating().toFixed(2)}</Typography>
                             <StyledRating value={business.getRating()}/>
-                            <Typography>({business.rating[1]})</Typography>
+                            <Typography variant="h6">({business.rating[1]})</Typography>
                         </Stack>
                         <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
                             {/*<StyledInfoBox>*/}

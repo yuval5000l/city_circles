@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import Tabs from '@mui/material/Tabs';
 import Tab from '@mui/material/Tab';
 import Typography from '@mui/material/Typography';
@@ -14,11 +14,11 @@ import User from "../../BackEnd/Classes/UserClass";
 import StyledGif from "../../Components/Styled Components/StyledGif";
 
 
-function TabPanel({ children, value, index }) {
+function TabPanel({children, value, index}) {
     return (
         <Typography component="div" role="tabpanel" hidden={value !== index} id={`tabpanel-${index}`}>
             {value === index && (
-                <Box p={0} sx={{border:"none", width: '100%',bgcolor: "white", justifyContent: "center"}}>
+                <Box p={0} sx={{border: "none", width: '100%', bgcolor: "white", justifyContent: "center"}}>
                     {children}
                 </Box>
             )}
@@ -26,12 +26,11 @@ function TabPanel({ children, value, index }) {
     );
 }
 
-function sortByTime(ReviewA, ReviewB)
-{
+function sortByTime(ReviewA, ReviewB) {
     return ReviewA.timestamp - ReviewB.timestamp;
 }
 
-export default function StyledProfileTabs({ user }) {
+export default function StyledProfileTabs({user}) {
     const Footprints = user.getUserFootprints().sort(sortByTime);
     const Reviews = user.getUserReviews().sort(sortByTime);
     const [value, setValue] = useState(0);
@@ -40,53 +39,56 @@ export default function StyledProfileTabs({ user }) {
         setValue(newValue);
     };
     return (
-        <Stack sx={{ direction: "row", width: '100%', bgcolor: theme.palette.primary.main, justifyContent: "center"
-            }}>
-            <Box sx={{ direction: "row", width: '100%', bgcolor: theme.palette.primary.main, justifyContent: "center",
-                borderBottom: `3px solid ${theme.palette.secondary.main}`}}>
-            <Tabs
-                value={value}
-                onChange={handleChange}
-                textColor="secondary"
-                indicatorColor="secondary"
-                aria-label="secondary tabs example"
-                variant="fullWidth"
-                TabIndicatorProps={{
-                    style: {
-                        height: 4, // Adjust the height of the indicator
-                    },
-                }}
-            >
-                <Tab label="Circles" id="tab-0" sx={{
-                    fontSize: '1.2rem', // Adjust the font size
-                    fontWeight: 'bold', // Adjust the font weight
-                }}/>
-                <Tab label="Footprints" id="tab-1" sx={{
-                    fontSize: '1.2rem', // Adjust the font size
-                    fontWeight: 'bold', // Adjust the font weight
-                }} />
-                <Tab label="Reviews" id="tab-2" sx={{
-                    fontSize: '1.2rem', // Adjust the font size
-                    fontWeight: 'bold', // Adjust the font weight
-                }} />
-            </Tabs>
+        <Stack sx={{
+            direction: "row", width: '100%', bgcolor: theme.palette.primary.main, justifyContent: "center"
+        }}>
+            <Box sx={{direction: "row", width: '100%', bgcolor: theme.palette.primary.main, justifyContent: "center",}}>
+                <Tabs
+                    value={value}
+                    onChange={handleChange}
+                    textColor="secondary"
+                    indicatorColor="secondary"
+                    aria-label="secondary tabs example"
+                    variant="fullWidth"
+                    TabIndicatorProps={{
+                        style: {
+                            height: 4, // Adjust the height of the indicator
+                        },
+                    }}
+                >
+                    <Tab label="Circles" id="tab-0" sx={{
+                        fontSize: '1.2rem', // Adjust the font size
+                        fontWeight: 'bold', // Adjust the font weight
+                    }}/>
+                    <Tab label="Footprints" id="tab-1" sx={{
+                        fontSize: '1.2rem', // Adjust the font size
+                        fontWeight: 'bold', // Adjust the font weight
+                    }}/>
+                    <Tab label="Reviews" id="tab-2" sx={{
+                        fontSize: '1.2rem', // Adjust the font size
+                        fontWeight: 'bold', // Adjust the font weight
+                    }}/>
+                </Tabs>
             </Box>
-            <Box sx={{ direction: "row", width: '100%', bgcolor: "white", justifyContent: "center",
-                }}>
-            <TabPanel value={value} index={0}>
-                {/* Render content for the "Circles" tab */}
-                    <List sx={{marginTop:"0.5rem"}} >
-                    {user.getCircles().map((circle, index) => (
-                        <ListItem key={circle} sx={{justifyContent:"center", display:"flex", marginTop:"0.1rem", }}>
-                            <StyledDropdownCircleOptions user={user} index={index} circlesList={CirclesList[index]}/>
-                        </ListItem>
-                    ))}
+            <Box sx={{
+                direction: "row", width: '100%', bgcolor: "white", justifyContent: "center",
+            }}>
+                <TabPanel value={value} index={0}>
+                    {/* Render content for the "Circles" tab */}
+                    <List sx={{marginTop: "0.5rem"}}>
+                        {user.getCircles().map((circle, index) => (
+                            <ListItem key={circle}
+                                      sx={{justifyContent: "center", display: "flex", marginTop: "0.1rem",}}>
+                                <StyledDropdownCircleOptions user={user} index={index}
+                                                             circlesList={CirclesList[index]}/>
+                            </ListItem>
+                        ))}
                     </List>
-            </TabPanel>
+                </TabPanel>
 
             <TabPanel value={value} index={1}>
                 {/* Render content for the "Footprints" tab */}
-                <Stack direction="column" spacing={2} justifyContent="center" marginTop="0.5rem" display="flex">
+                <Stack direction="column" spacing={2} justifyContent="center" display="flex">
                 <List sx={{paddingTop:"unset !important", paddingBottom:"unset"}}>
                     {(Footprints.length !== 0) ?
                         (Footprints.map((footprint) => (
@@ -111,7 +113,7 @@ export default function StyledProfileTabs({ user }) {
 
             <TabPanel value={value} index={2}>
                 {/* Render content for the "Reviews" tab */}
-                <Stack direction="column" spacing={2} justifyContent="center" marginTop="0.5rem" display="flex">
+                <Stack direction="column" spacing={2} justifyContent="center" display="flex">
                 <List sx={{paddingTop:"unset !important", paddingBottom:"unset"}}>
                     {(Reviews.length !== 0) ?
                         (Reviews.map((review) => (

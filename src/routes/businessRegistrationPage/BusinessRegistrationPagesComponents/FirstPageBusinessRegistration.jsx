@@ -175,8 +175,6 @@ export default function FirstPageBusinessRegistration({onNext, data}) {
                 <Typography variant="h2">Owner Name</Typography>
                 <TextField label="Oner Name" variant="outlined" onChange={(e) => setOwnerName(e.target.value)}/>
 
-                <Typography variant="h2">I’ve added businesses in the past</Typography>
-                <RowRadioButtonsGroup/>
                 <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleClose} sx={{position: "relative"}}>
                     <Alert onClose={handleClose} severity="warning"
                            action={

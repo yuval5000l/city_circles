@@ -179,22 +179,11 @@ export default function BusinessStepper() {
                 </React.Fragment>
             ) : (
                 <React.Fragment>
-                    {/*<Typography sx={{mt: 2, mb: 1}}>Step {activeStep + 1}</Typography>*/}
                     {steps[activeStep].content}
-                    <Box sx={{display: 'flex', flexDirection: 'row', pt: 2}}>
-                        {/*<Button*/}
-                        {/*    color="inherit"*/}
-                        {/*    disabled={activeStep === 0}*/}
-                        {/*    onClick={handleBack}*/}
-                        {/*    sx={{mr: 1}}*/}
-                        {/*>*/}
-                        {/*    Back*/}
-                        {/*</Button>*/}
-                        <Box sx={{flex: '1 1 auto'}}/>
-
-
+                    <Box sx={{display: 'flex', flexDirection: 'row', pt: 2, justifyContent:"center"}}>
+                        {/*<Box  sx={{flex: '1 1 auto'}}/>*/}
                         {activeStep === steps.length - 1 ?
-                            (<Button onClick={handleMakeBusiness} >
+                            (<Button onClick={handleMakeBusiness}>
                                 <Typography variant="h2">
                                     Finish
                                 </Typography>

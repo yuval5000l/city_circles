@@ -38,9 +38,8 @@ export default function StyledSmallCircleButton({userID, circles_ = []}) {
 
 
     return (
-        <Box>
+        <>
             <StyledSmallCirclesButton onClick={handleClickOpen}/>
-
             <Dialog open={open} onClose={handleClose}>
                 <DialogContent sx={{
                     backgroundColor: `${theme.palette.primary.main}`,
@@ -65,12 +64,7 @@ export default function StyledSmallCircleButton({userID, circles_ = []}) {
                         }
                     </Stack>
                 </DialogContent>
-
             </Dialog>
-
-
-        </Box>
+        </>
     )
-
-
 }

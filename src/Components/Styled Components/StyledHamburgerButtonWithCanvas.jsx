@@ -12,11 +12,17 @@ import {
 import LogoutIcon from '@mui/icons-material/Logout';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import {Link} from "react-router-dom";
-import {StyledAvatarUserCanvas, StyledAvatarUserFeed, StyledHamburgerButton} from "./styledComponents";
+import {
+    StyledAvatarUserCanvas,
+    StyledAvatarUserFeed,
+    StyledBottomNavigationAction,
+    StyledHamburgerButton
+} from "./styledComponents";
 import theme from "../../Theme/Theme";
 import {onAuthStateChanged, signOut} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import {getUserById} from "../../BackEnd/Classes/UserClass";
+import PersonIcon from "@mui/icons-material/Person";
 // import BusinessRegistration1 from "../../routes/business_registratin_pages/BusinessRegistrationPage1";
 
 
@@ -83,7 +89,12 @@ function ResponsiveDrawer(props) {
     // }
 
     const drawer_content = [
-        {text: 'Add a new business', path: "/BusinessRegistrationStepperComponent", icon: <AddBoxOutlinedIcon/>},
+        {
+            text: 'Add a new business',
+            path: "/BusinessRegistrationStepperComponent",
+            icon: <AddBoxOutlinedIcon sx={{fontSize:"2.5rem"}}/>
+        },
+        // {text: 'My Profile', path: "/ProfilePageComponent", icon: <PersonIcon/>, state="from: auth?.currentUser?.uid" }
         // {text: 'Import Contacts', path: "/", icon: <GroupIcon/>},
         // {text: 'History', path: "/", icon: <HistoryIcon/>},
         // {text: 'All Businesses', path: "/", icon: <WorkIcon/>},
@@ -107,38 +118,40 @@ function ResponsiveDrawer(props) {
                     spacing={2}
                 >
                     <StyledAvatarUserCanvas sx={{marginLeft: "auto", marginRight: "auto"}} src={userPic}/>
-                    <Typography>Hi, {name}</Typography>
+                    <Typography variant="h3">{name}</Typography>
                 </Stack>
             </Toolbar>
             <Divider/>
-            <List>
+            <List   justifyContent="flex-start">
+                <ListItem disablePadding>
+                    <ListItemButton component={Link} to="/ProfilePageComponent" state={{from: auth?.currentUser?.uid}}
+                                    onClick={handleDrawerToggle}>
+                        <ListItemIcon>
+                            <PersonIcon sx={{fontSize:"2.5rem"}}/>
+                        </ListItemIcon>
+                        <ListItemText primary="My Profile"/>
+                    </ListItemButton>
+                </ListItem>
                 {drawer_content.map((key, index) => (
-                    // <ListItem key={key.text} disablePaddi   ng>
                     <ListItem key={key.text} disablePadding>
-                        <ListItemButton component={Link} to={key.path} onClick={handleDrawerToggle}>
-                            <ListItemIcon>
+                        <ListItemButton component={Link} to={key.path} state={key.state} onClick={handleDrawerToggle}>
+                            <ListItemIcon >
                                 {key.icon}
                             </ListItemIcon>
                             <ListItemText primary={key.text}/>
                         </ListItemButton>
                     </ListItem>
                 ))}
+
                 <ListItem disablePadding>
                     <ListItemButton onClick={logout}>
                         <ListItemIcon>
-                            <LogoutIcon/>
+                            <LogoutIcon sx={{fontSize:"2.5rem"}}/>
                         </ListItemIcon>
                         <ListItemText primary='Log-Out'/>
                     </ListItemButton>
                 </ListItem>
-                <ListItem disablePadding>
-                    <ListItemButton component={Link} >
-                        <ListItemIcon>
-                            <LogoutIcon/>
-                        </ListItemIcon>
-                        <ListItemText primary='Log-Out'/>
-                    </ListItemButton>
-                </ListItem>
+
             </List>
         </Box>
     );
