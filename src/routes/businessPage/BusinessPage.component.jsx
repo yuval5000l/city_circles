@@ -15,6 +15,7 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import LanguageIcon from '@mui/icons-material/Language';
+import StyledGif from "../../Components/Styled Components/StyledGif";
 
 export function showBusiness(business) {
     let Contacts = {};
@@ -139,9 +140,9 @@ export default function BusinessPage() {
     }, [check_null, from]);
 
     return (
-        <div>
+        <>
             {(business === "") ?
-                (<div> Can't find business! </div>) :
-                (<div> {showBusiness(business)} </div>)}
-        </div>);
+                (<StyledGif></StyledGif>) :
+                (<> {showBusiness(business)} </>)}
+        </>);
 }
