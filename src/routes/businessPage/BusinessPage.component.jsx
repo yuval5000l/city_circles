@@ -15,6 +15,8 @@ import FacebookIcon from '@mui/icons-material/Facebook';
 import InstagramIcon from '@mui/icons-material/Instagram';
 import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import LanguageIcon from '@mui/icons-material/Language';
+import {isMobile} from 'react-device-detect';
+
 
 export function showBusiness(business) {
     let Contacts = {};
@@ -26,8 +28,16 @@ export function showBusiness(business) {
             "Instagram": <InstagramIcon/>
         };
     for (const [key, value] of Object.entries(business.getContacts())) {
-        if (value !== "" && key !== "Phone") {
-            Contacts[key] = value;
+        if (value !== "" && key !== "Whatsapp") {
+            if (key === "Phone") {
+                if(isMobile) {
+                    Contacts['Whatsapp'] = "https://https://wa.me/" + value;
+                }
+                Contacts['Whatsapp'] = "https://web.whatsapp.com/send?phone=" + value;
+            }
+            if (value !== "" && key !== "Phone"){
+                Contacts[key] = value;
+            }
         }
     }
 
