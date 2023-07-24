@@ -1,5 +1,4 @@
-import { useHistory } from 'react-router-dom';
-import {StyledBackButton, StyledHamburgerButton} from "./styledComponents";
+import {StyledBackButton} from "./styledComponents";
 
 import React from 'react';
 import {IconButton} from "@mui/material";

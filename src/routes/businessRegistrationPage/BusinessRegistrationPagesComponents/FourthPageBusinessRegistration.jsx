@@ -1,10 +1,8 @@
 import * as React from 'react';
 import Checkbox from '@mui/material/Checkbox';
 import Button from "@mui/material/Button";
-import {Box, Grid, Stack, Typography} from "@mui/material";
+import {Box, Stack, Typography} from "@mui/material";
 import {StyledTypeBox} from "../../../Components/Styled Components/styledComponents";
-import AccessTimeIcon from "@mui/icons-material/AccessTime";
-// import StyledTimeTable from "../../businessPage/StyledTimeTable";
 import Link from "@mui/material/Link";
 import theme from "../../../Theme/Theme";
 
@@ -38,7 +36,7 @@ export default function FourthPageBusinessRegistration({onBack, data}) {
     // const contacts = []
 
     const address = data3[0];
-    const imgUrl = data3[1];
+    // const imgUrl = data3[1];
 
     // const openHours = data3[2];
 

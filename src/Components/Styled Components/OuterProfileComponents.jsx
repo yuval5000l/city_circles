@@ -1,5 +1,4 @@
 import {styled} from "@mui/material/styles";
-import {AppBar, Card, CardActionArea, CardContent, CardMedia, Container, Divider} from "@mui/material";
 import Box from "@mui/material/Box";
 import * as React from 'react';
 import Paper from '@mui/material/Paper';
@@ -8,10 +7,7 @@ import Typography from '@mui/material/Typography';
 import {Link} from "react-router-dom";
 import Avatar from "@mui/material/Avatar";
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import {useEffect, useState} from "react";
-// import {Stack, Typography, Box} from "@mui/material";
 import {
-    StyledAvatarUserFeed,
     StyledBusinessFeed,
     StyledRating,
     StyledTypographyReview
@@ -19,17 +15,9 @@ import {
 import StyledGrayButtonFullReview from "./StyledGrayButtonFullReview";
 import StyledGrayButtonVisitBusiness from "./StyledGrayButtonVisitBusiness";
 import {timestamp} from "../../BackEnd/config/firebase"
-import StyledSmallCircleButton from "./StyledSmallCirclesButton";
-import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
-import User from "../../BackEnd/Classes/UserClass";
-import {auth} from "../../BackEnd/config/firebase";
-import StyledFeedItem from "./StyledFeedItem";
-import {onAuthStateChanged} from "firebase/auth";
 
 export const SmallPurpleBox = styled(Box)(({ theme })=> ({
     backgroundColor:theme.palette.primary.main,
-    // borderBottom:`0.65rem solid ${theme.palette.secondary.main}`,
-    // position:"fixed",
     position: 'relative',
     borderRadius: 20,
     width: "100%",
@@ -40,8 +28,6 @@ export const SmallPurpleBox = styled(Box)(({ theme })=> ({
 
 export const MediumPurpleBox = styled(Box)(({ theme })=> ({
     backgroundColor:theme.palette.primary.main,
-    // borderBottom:`0.65rem solid ${theme.palette.secondary.main}`,
-    // position:"fixed",
     position: 'relative',
     borderRadius: 20,
     width: "100%",
@@ -52,7 +38,6 @@ export const MediumPurpleBox = styled(Box)(({ theme })=> ({
 
 export const StyledLightCircleBoxForProfile = styled(Box)(({theme}) => ({
     borderRadius: "50%",
-    // boxShadow: 'rgb(38, 57, 77) 0px 20px 30px -10px',
     border: `0.2rem solid ${theme.palette.secondary.main}`,
     backgroundColor: theme.palette.primary.light,
     display: 'flex',
@@ -99,8 +84,6 @@ function BoxWithLock(){
                 sx={{
                     position: "absolute",
                     top : '-1rem',
-                    // margin: "auto",
-                    // display: 'block',
                     textAlign: "center",
                     justifyContent: 'center',
                     alignItems:  'center',
@@ -111,7 +94,7 @@ function BoxWithLock(){
     )
 }
 
-export function GoToCard(Gotoss) {
+export function GoToCard() {
     const Gotos = [{businessID: 'business1'}, {businessID: 'business2'}, {businessID: 'business3'}];
     return (
         <MediumPurpleBox>

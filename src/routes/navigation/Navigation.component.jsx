@@ -5,10 +5,6 @@ import Box from "@mui/material/Box";
 import {auth} from "../../BackEnd/config/firebase"
 import {onAuthStateChanged} from "firebase/auth";
 import {useEffect, useState} from "react";
-import theme from "../../Theme/Theme";
-import StyledHamburgerButtonWithCanvas from "../../Components/Styled Components/StyledHamburgerButtonWithCanvas";
-import {Stack} from "@mui/material";
-import {StyledAppBarTop} from "../../Components/Styled Components/styledComponents";
 import StyledTopBackMenu from "../../Components/Styled Components/StyledTopBackMenu";
 
 const NavigationComponent = () => {
@@ -25,7 +21,7 @@ const NavigationComponent = () => {
         check_sign_in();
         setButtomBarValue(pageDictionary[location.pathname]);
 
-    }, []);
+    },[]);
     // console.log(buttomBarValue);
 
     const check_sign_in = () => {

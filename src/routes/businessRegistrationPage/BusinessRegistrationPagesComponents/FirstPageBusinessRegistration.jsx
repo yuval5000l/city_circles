@@ -5,9 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {Stack} from "@mui/material";
 import {useState} from "react";
-import {collection} from "firebase/firestore";
 import Business from "../../../BackEnd/Classes/BusinessClass";
-import {db} from "../../../BackEnd/config/firebase";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
 import TextField from "@mui/material/TextField";
@@ -18,7 +16,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-// import {useSnackbar} from 'notistack';
 import theme from "../../../Theme/Theme";
 
 

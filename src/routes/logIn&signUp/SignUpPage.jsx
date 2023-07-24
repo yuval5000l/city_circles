@@ -4,7 +4,7 @@ import {
     StyledDialogTextFieldReview,
     StyledAutoComplete,
 } from "../../Components/Styled Components/styledComponents";
-import {Button, List, ListItem, Stack, Typography} from "@mui/material";
+import {Button, Stack, Typography} from "@mui/material";
 import {auth} from "../../BackEnd/config/firebase";
 import * as React from 'react';
 // import dayjs from 'dayjs';
@@ -50,7 +50,7 @@ export default function SignupPage() {
     // TODO: in the future- create a data base of circles and connect it to firebase/firestore
     const SchoolsLst = User.ListOfCirclesSchools;
     const NeighborhoodLst = User.ListOfCirclesNeighborhoods;
-    const HobbyLst = User.ListOfCirclesPersonalities;
+    // const HobbyLst = User.ListOfCirclesPersonalities;
 
     useEffect(() => {
         async function foo() {
@@ -60,7 +60,7 @@ export default function SignupPage() {
         }
 
         foo();
-    }, [file]);
+    }, [file, handleUploadPic]);
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(auth?.currentUser?.uid);

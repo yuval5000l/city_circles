@@ -14,8 +14,6 @@ import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
 import {Link} from "react-router-dom";
 import {
     StyledAvatarUserCanvas,
-    StyledAvatarUserFeed,
-    StyledBottomNavigationAction,
     StyledHamburgerButton
 } from "./styledComponents";
 import theme from "../../Theme/Theme";
