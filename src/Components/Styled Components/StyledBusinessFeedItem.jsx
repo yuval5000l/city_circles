@@ -1,10 +1,7 @@
 import {AvatarGroup, Stack, Typography} from "@mui/material";
 import {
     StyledAvatarBusinessFeed,
-    StyledGreenBorderBox,
-    StyledInfoBox,
     StyledRating,
-    StyledTypeBox
 } from "./styledComponents";
 import React from "react";
 import StyledGrayButtonVisitBusiness from "./StyledGrayButtonVisitBusiness";
@@ -15,12 +12,12 @@ import {Link} from "react-router-dom";
 
 function getUnion(array1, array2) {
     const difference = array1.filter(
-        review =>
-        {
+        review => {
             let check = true;
-            array2.forEach(footprint=>{ if (footprint.userName === review.userName)
+            array2.forEach(footprint => {
+                if (footprint.userName === review.userName)
 
-                check = false;
+                    check = false;
             });
             return check;
 
@@ -29,12 +26,18 @@ function getUnion(array1, array2) {
 
     return [...difference, ...array2];
 }
+
 export default function StyledBusinessFeedItem({business}) {
 
     const allUsers = getUnion(business.getReviews(), business.getFootprints());
     // console.log(allUsers);
     return (
-        <Box sx={{padding: "0.4rem", boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', borderBottom: '0.1rem solid #C3ED5B',width:"100%"}}>
+        <Box sx={{
+            padding: "0.4rem",
+            boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)',
+            borderBottom: '0.1rem solid #C3ED5B',
+            width: "100%"
+        }}>
             <Stack direction="column" alignItems="flex-start" spacing={1}>
                 <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
                     <Link to={"../BusinessPage"} state={{from: business.getName()}}>
@@ -52,18 +55,27 @@ export default function StyledBusinessFeedItem({business}) {
                             <StyledRating value={business.getRating()}/>
                             <Typography>({business.rating[1]})</Typography>
                         </Stack>
-                        <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center" >
+                        <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
                             {/*<StyledInfoBox>*/}
                             {/*    #km*/}
                             {/*</StyledInfoBox>*/}
                             <Link to={"../BusinessPage"} state={{from: business.getName()}}>
-                                <StyledGrayButtonVisitBusiness />
+                                <StyledGrayButtonVisitBusiness/>
                             </Link>
                         </Stack>
                     </Stack>
                 </Stack>
                 <AvatarGroup max={4} spacing={0.5}>
-                    {allUsers.map(review => <Avatar border="0.2rem solid gray" alt={review.userName} src={review.userPhoto} sx={{boxShadow : "0px 4px 4px rgba(0, 0, 0, 0.25)",width:"2rem",height:"2rem"}}/>)}
+
+                    {allUsers.map(review =>
+                        <Box key={review.userPhoto}>
+                            <Avatar border="0.2rem solid gray" alt={review.userName}
+                                    src={review.userPhoto} sx={{
+                                boxShadow: "0px 4px 4px rgba(0, 0, 0, 0.25)",
+                                width: "2rem",
+                                height: "2rem"
+                            }}/> </Box>)}
+
                 </AvatarGroup>
             </Stack>
         </Box>

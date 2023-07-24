@@ -14,30 +14,25 @@ import Business from "../../BackEnd/Classes/BusinessClass";
 import StyledBusinessFeedItem from "../../Components/Styled Components/StyledBusinessFeedItem";
 
 
-
-function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod})
-{
+function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}) {
     // console.log("List Business ", lstBusiness);
     // console.log("Circles ", circles);
     // console.log("search Result ",searchRes);
     // console.log("business Type ",businessType);
     // console.log("Sort Method ", sortMethod);
 
-    function sortBy(a, b)
-    {
-        if (sortMethod === "Distance")
-        {
+    function sortBy(a, b) {
+        if (sortMethod === "Distance") {
             return b.getRatingCircles(circles) - a.getRatingCircles(circles);
-        }
-        else if (sortMethod === "Footprints")
-        {
-            return b.getSumFootprintsAndReviews(circles) - a.getSumFootprintsAndReviews(circles);
+        } else if (sortMethod === "Footprints") {
+            // Don't count the same user twice, Count how many people rated this business
+
+            return b.getAllUsersThatUsedService(circles) - a.getAllUsersThatUsedService(circles);
         }
         return 0;
     }
 
-    function checkCircles(business)
-    {
+    function checkCircles(business) {
 
         // return business.getCirclesCount()[circles[0]] > 0;
         return (circles.length === 0) || circles.every(circle => business.getCirclesCount()[circle] > 0); // Checks if there is at least 1 circle relevant
@@ -46,9 +41,8 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod})
     // Check if this business has any reviews in the relevant circle(s)
     const firstLayerFilter = lstBusiness.filter(checkCircles);
 
-    let secondLayerFilter = firstLayerFilter.filter(business =>
-    {
-        return (businessType === "")|| (business.getBusinessType().includes(businessType));
+    let secondLayerFilter = firstLayerFilter.filter(business => {
+        return (businessType === "") || (business.getBusinessType().includes(businessType));
     });
     // console.log("second Layer Sort", secondLayerFilter);
 
@@ -59,12 +53,12 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod})
     // console.log("search Layer Filter", searchLayerFilter);
     return (
         <>
-            {(searchLayerFilter === []) ? (<></>) : (searchLayerFilter.map(filteredBusiness =>
-            (
-                <ListItem sx={{padding:"unset!important"}} width="100%" key={filteredBusiness.name}>
-                    <StyledBusinessFeedItem business={filteredBusiness}/>
-                </ListItem>
-            )))}
+            {(searchLayerFilter === []) ? (<></>) : (searchLayerFilter.map((filteredBusiness, index) =>
+                (
+                    <ListItem sx={{padding: "unset!important"}} width="100%" key={filteredBusiness.name+index.toString()}>
+                        <StyledBusinessFeedItem business={filteredBusiness}/>
+                    </ListItem>
+                )))}
         </>
     );
 }
@@ -79,7 +73,7 @@ const CirclesPageComponent = () => {
     const [circleButtons, setCircleButtons] = useState([false, false, false]);
     const [circlesFilter, setCirclesFilter] = useState([]); // Filters by circles, first filter
     // const [labelFilter, setLabelFilter] = useState([]); // Filter by labels, second filter (empty list if null)
-    const [sortMethod, setSortMethod]  = useState(""); // Sort by Footprints or Distance (empty string if null)
+    const [sortMethod, setSortMethod] = useState(""); // Sort by Footprints or Distance (empty string if null)
     const [filterTypeBusiness, setFilterTypeBusiness] = useState(""); // Filters by the type of business (empty string if null)
     // console.log(filterTypeBusiness);
 
@@ -88,7 +82,7 @@ const CirclesPageComponent = () => {
         getBusinesses();
     }, []);
 
-    const getBusinesses = ()=> {
+    const getBusinesses = () => {
         Business.getAllBusinesses().then((lst) => {
             setLstBusiness(lst);
             // console.log(lstBusiness);
@@ -108,56 +102,61 @@ const CirclesPageComponent = () => {
         });
     };
 
-    function CircleClicked(num)
-    {   function inner()
-        {
+    function CircleClicked(num) {
+        function inner() {
             let tempList = [];
             let tempList2 = circleButtons;
             tempList2[num] = !tempList2[num];
             setCircleButtons(tempList2);
-            for (let i = 0; i < user.getCircles().length; i++)
-            {
-                if (circleButtons[i]){ tempList.push(user.getCircles()[i]);}
+            for (let i = 0; i < user.getCircles().length; i++) {
+                if (circleButtons[i]) {
+                    tempList.push(user.getCircles()[i]);
+                }
             }
             setCirclesFilter(tempList);
         }
+
         return inner;
     }
+
     // console.log(lstBusiness[0].getReviews()[0].rating);
-        // const position = [31.777587, 35.215094]; //[this.state.location.lat, this.state.location.lng];
-        return (
-            <>
-                <Box sx={{
-                    backgroundColor: theme.palette.primary.main,
-                    borderBottom: `0.3rem solid ${theme.palette.secondary.main}`,
-                    width: '100%',
-                    display: 'inline-block',
-                    paddingBottom:"0.4rem",
-                }}>
-                    <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
-                        <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" paddingTop="0.65rem">
-                            {(user !==null) ? (<>{
-                                user.getCircles().map((circle, index) =>
-                                <StyledCirclesSearchItem name={user.getCircles()[index]} checkFunction={CircleClicked(index)}/>
+    // const position = [31.777587, 35.215094]; //[this.state.location.lat, this.state.location.lng];
+    return (
+        <>
+            <Box sx={{
+                backgroundColor: theme.palette.primary.main,
+                borderBottom: `0.3rem solid ${theme.palette.secondary.main}`,
+                width: '100%',
+                display: 'inline-block',
+                paddingBottom: "0.4rem",
+            }}>
+                <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
+                    <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" paddingTop="0.65rem">
+                        {(user !== null) ? (<>{
+                            user.getCircles().map((circle, index) =>
+                                // <ListItem sx={{padding: "unset!important"}} width="100%" key={user.getCircles()[index]+index.toString()}
+                                    <div key={user.getCircles()[index]+index.toString()}>
+                                    <StyledCirclesSearchItem name={user.getCircles()[index]}
+                                                             checkFunction={CircleClicked(index)}/>
+                                    </div>
+                                //</ListItem>
                             )}</>) : (<></>)}
-                            {/*<StyledCirclesSearchItem name={(user === null) ? ("Circle1") : (user.getCircles()[0])} checkFunction={CircleClicked(0)}/>*/}
-                            {/*<StyledCirclesSearchItem name={(user === null) ? ("Circle2") : (user.getCircles()[1])} checkFunction={CircleClicked(1)}/>*/}
-                            {/*<StyledCirclesSearchItem name={(user === null) ? ("Circle3") : (user.getCircles()[2])} checkFunction={CircleClicked(2)}/>*/}
-                        </Stack>
-                        <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem" >
-                            <StyledDropdownMenuSortBy setSortMethod={setSortMethod}/>
-                            <StyledDropdownMenuFilter setFilterMethod={setFilterTypeBusiness}/>
-                        </Stack>
+                        {/*<StyledCirclesSearchItem name={(user === null) ? ("Circle1") : (user.getCircles()[0])} checkFunction={CircleClicked(0)}/>*/}
+                        {/*<StyledCirclesSearchItem name={(user === null) ? ("Circle2") : (user.getCircles()[1])} checkFunction={CircleClicked(1)}/>*/}
+                        {/*<StyledCirclesSearchItem name={(user === null) ? ("Circle3") : (user.getCircles()[2])} checkFunction={CircleClicked(2)}/>*/}
                     </Stack>
-                </Box>
-                <BigFilter lstBusiness={lstBusiness} circles={circlesFilter}
-                           searchRes={searchRes} businessType={filterTypeBusiness} sortMethod={sortMethod}/>
+                    <Stack direction="row" spacing={2} alignItems="center" justifyContent="center" padding="0.4rem">
+                        <StyledDropdownMenuSortBy setSortMethod={setSortMethod}/>
+                        <StyledDropdownMenuFilter setFilterMethod={setFilterTypeBusiness}/>
+                    </Stack>
+                </Stack>
+            </Box>
+            <BigFilter lstBusiness={lstBusiness} circles={circlesFilter}
+                       searchRes={searchRes} businessType={filterTypeBusiness} sortMethod={sortMethod}/>
 
 
-
-
-            </>
-        );
+        </>
+    );
 
 }
 

@@ -194,6 +194,27 @@ export default class Business {
     {
         return this.footprints;
     }
+
+    getAllUsersThatUsedService(ListOfCirclesToInclude)
+    {
+        let setUsers = new Set();
+        for (const footprint of this.footprints) {
+            if (ListOfCirclesToInclude.length === 0 ||
+                footprint.userCircles.filter(value => ListOfCirclesToInclude.includes(value)).length > 1)
+            {
+                setUsers.add(footprint.userID);
+            }
+        }
+        for (const review of this.reviews) {
+            if (ListOfCirclesToInclude.length === 0 ||
+                review.userCircles.filter(value => ListOfCirclesToInclude.includes(value)).length > 1)
+            {
+                setUsers.add(review.userID);
+            }
+        }
+        return setUsers.size;
+    }
+
     getSumFootprintsAndReviews(ListOfCirclesToInclude)
     {
         let SumFootprintsAndReviews = 0;
