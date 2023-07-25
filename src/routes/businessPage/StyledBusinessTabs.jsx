@@ -56,7 +56,7 @@ export default function StyledBusinessTabs({business}) {
                     {(business.reviews.length !== 0) ?
                         (business.reviews.map((review) =>
                             <ListItem sx={{padding: "unset !important"}} key={review.userID}>
-                                <StyledReviewForUser BusinessName={review.userName} reviewContent={review.content}
+                                <StyledReviewForUser userName={review.userName} BusinessName={review.userName} reviewContent={review.content}
                                                      businessPhoto={review.userPhoto}
                                                      userPhoto={business.getProfilePic()}
                                                      rating={review.rating} timestamp={review.timestamp.toDate()}/>
