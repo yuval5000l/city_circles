@@ -57,8 +57,8 @@ const StyledDropdownMenuSortBy = ({setSortMethod}) => {
                 }}
             >
                 <Stack direction="row">
-                    <MenuItem onClick={() => handleOptionClick('Footprints')}>
-                        <StyledCirclesSearchItem name="Footprints" oonClick={() => handleOptionClick('Footprints')}/>
+                    <MenuItem onClick={() => handleOptionClick('People')}>
+                        <StyledCirclesSearchItem name="People" oonClick={() => handleOptionClick('People')}/>
                     </MenuItem>
                     <MenuItem onClick={() => handleOptionClick('Rating')}>
                         <StyledCirclesSearchItem name="Rating" onClick={() => handleOptionClick('Rating')}/>

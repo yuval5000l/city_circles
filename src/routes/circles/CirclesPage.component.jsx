@@ -25,7 +25,7 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}) 
     function sortBy(a, b) {
         if (sortMethod === "Rating") {
             return b.getRatingCircles(circles) - a.getRatingCircles(circles);
-        } else if (sortMethod === "Footprints") {
+        } else if (sortMethod === "People") {
             // Don't count the same user twice, Count how many people rated this business
 
             return b.getAllUsersThatUsedService(circles) - a.getAllUsersThatUsedService(circles);
@@ -75,7 +75,7 @@ const CirclesPageComponent = () => {
     const [circleButtons, setCircleButtons] = useState([false, false, false]);
     const [circlesFilter, setCirclesFilter] = useState([]); // Filters by circles, first filter
     // const [labelFilter, setLabelFilter] = useState([]); // Filter by labels, second filter (empty list if null)
-    const [sortMethod, setSortMethod] = useState(""); // Sort by Footprints or Rating (empty string if null)
+    const [sortMethod, setSortMethod] = useState(""); // Sort by People or Rating (empty string if null)
     const [filterTypeBusiness, setFilterTypeBusiness] = useState(""); // Filters by the type of business (empty string if null)
     // console.log(filterTypeBusiness);
 
