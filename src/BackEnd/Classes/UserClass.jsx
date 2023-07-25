@@ -102,9 +102,15 @@ export default class User {
         await this.saveToFirebase();
     }
 
-    async saveToFirebase() {
+    async saveToFirebase(setUpload = null) {
         const ref = doc(db, "Users", this.userID_).withConverter(userConverter);
-        await setDoc(ref, this); //.then(()=>{ console.log("Uploaded!");});
+        if (setUpload !== null)
+        {
+            setDoc(ref, this).then(() =>{setUpload(false)}); // Setting upload to false on success);
+        }
+        else{
+            await setDoc(ref, this); //.then(() =>{setUpload(false); // Setting upload to false on success); });
+        }
     }
 
     getPic() {

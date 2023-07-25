@@ -161,6 +161,10 @@ function ProfilePageComponent() {
     let [user, setUser] = useState(null);
     const [lstOfReviews, setLstOfReviews] = useState([]);
     const [upload, setUpload] = useState(false);
+    // console.log("Before");
+    // if (user){
+    //     console.log(picturePath);
+    // }
 
     const handleUploadPic = async () => {
         uploadFile(file).then((pathy) => {
@@ -174,10 +178,10 @@ function ProfilePageComponent() {
     useEffect(() => {
         async function foo() {
             if (file !== null && upload === false) {
-                // setUpload(true);
+                setUpload(true);
                 await handleUploadPic();
-                await user.saveToFirebase(); //.then(setUpload(false));
-
+                await user.saveToFirebase(setUpload); //.then(setUpload(false));
+                // await user.saveToFirebase(setUpload);
             }
         }
 
@@ -195,6 +199,7 @@ function ProfilePageComponent() {
                             setUser(user__);
                             user__.getMyReviews()?.then((reviews) => {
                                 setLstOfReviews(reviews);
+                            setPicturePath(user__.getPic());
                             }).catch((error) => {
                                 console.error(error);
                             });
