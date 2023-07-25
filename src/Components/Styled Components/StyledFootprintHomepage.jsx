@@ -14,41 +14,45 @@ export default function StyledFootprintHomepage({
                                                     timestamp = null,
                                                     BusinessName = "business name",
                                                     UserName = "user name"
-                                                })
-{
+                                                }) {
 
     return (
-        <Box width="100%" maxWidth="-webkit-fill-available" backgroundColor="#775CDF">
-            <Stack dirction="column">
-                <Stack padding = "1rem" width="100%" maxWidth="-webkit-fill-available" direction="row" justifyContent="space-between"
-                       spacing={2} padding="0.5rem" sx={{
+        <>
+
+
+            <Box width="100%" maxWidth="-webkit-fill-available" backgroundColor="#775CDF">
+
+                <Stack padding="1rem" width="100%" maxWidth="-webkit-fill-available" direction="row"
+                       justifyContent="space-between"
+                       spacing={2} sx={{
                     flexWrap: "wrap",
-                    borderBottom:"0.5rem solid white"
+                    borderBottom: `0.2rem solid #E9E8E8`
                 }}>
                     <Box sx={{display: 'flex', alignItems: 'center', justifyContent: "space-between"}}>
                         <Box sx={{marginRight: '1rem'}}>
                             <StyledAvatarWithBadge bigPhoto={businessPhoto} smallPhoto={userPhoto}/>
                         </Box>
                         <Stack direction="column" justifyContent="center" alignItems="flex-start" color="white">
-                            <Stack direction="row" spacing={1}   alignItems="center">
+                            <Stack direction="row" spacing={1} alignItems="center">
                                 <Typography variant="h3"> {UserName} </Typography>
                                 <Box backgroundColor="white" borderRadius="50%" height="1.25rem">
                                     <StyledSmallCircleButton userID={UserName} circles_={circles}/>
                                 </Box>
+
                             </Stack>
-                        <Stack direction="column" justifyContent="flex-start"
-                               alignItems="flex-start" minWidth='fit-content'
-                        >
-                            <Typography variant="h5" textAlign="left" color="white">
-                                visited
-                            </Typography>
-                            <Typography variant="h3" textAlign="left" color="white">
-                                {BusinessName}
-                            </Typography>
-                            <Typography variant="h6" textAlign="left" color="white">
-                                {calculateTime(timestamp)} ago
-                            </Typography>
-                        </Stack>
+
+                            <Stack direction="column" justifyContent="flex-start"
+                                   alignItems="flex-start" minWidth='fit-content'>
+                                <Typography variant="h5" textAlign="left" color="white">
+                                    visited
+                                </Typography>
+                                <Typography variant="h3" textAlign="left" color="white">
+                                    {BusinessName}
+                                </Typography>
+                                <Typography variant="h6" textAlign="left" color="white">
+                                    {calculateTime(timestamp)} ago
+                                </Typography>
+                            </Stack>
                         </Stack>
                     </Box>
                     <Box sx={{
@@ -62,7 +66,7 @@ export default function StyledFootprintHomepage({
                                         sx={{color: "black"}}/>
                     </Box>
                 </Stack>
-            </Stack>
-        </Box>
+            </Box>
+        </>
     );
 }
