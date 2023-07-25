@@ -17,13 +17,38 @@ const NavigationComponent = () => {
     const [searchRes, setSearchRes] = useState("");
     const [buttomBarValue, setButtomBarValue] = useState(0); // For BottomBarChosenThingy
     const [isVirtualKeyboardOpen, setVirtualKeyboardOpen] = useState(false);
+    // const [mobileOS, setMobileOS] = useState("");
+    // function getMobileOperatingSystem() {
+    //     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+    //
+    //     // Windows Phone must come first because its UA also contains "Android"
+    //     if (/windows phone/i.test(userAgent)) {
+    //         setMobileOS("winphone");
+    //         return "winphone";
+    //     }
+    //
+    //     if (/android/i.test(userAgent)) {
+    //         setMobileOS("android");
+    //         return "android";
+    //     }
+    //
+    //     // iOS detection from: http://stackoverflow.com/a/9039885/177710
+    //     if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+    //         setMobileOS("ios");
+    //         return "ios";
+    //     }
+    //     setMobileOS("");
+    //     return "";
+    // }
+
+
 
     useEffect(() => {
         const handleFocus = () => setVirtualKeyboardOpen(true);
         const handleBlur = () => setVirtualKeyboardOpen(false);
 
-        const inputElement = document.getElementById('your-input-element-id'); // Replace with the ID of your input element
-
+        const inputElement = document.getElementById('search-bar-main'); // Replace with the ID of your input element
+        console.log(inputElement);
         if (inputElement) {
             inputElement.addEventListener('focus', handleFocus);
             inputElement.addEventListener('blur', handleBlur);
@@ -40,6 +65,7 @@ const NavigationComponent = () => {
     useEffect(() => {
         check_sign_in();
         setButtomBarValue(pageDictionary[location.pathname]);
+        // getMobileOperatingSystem();
 
     }, [pageDictionary, location.pathname]);
     // console.log(buttomBarValue);

@@ -9,7 +9,6 @@ function StyledTopMenuNew({setSearch, setValue}) {
 
     const SendToSearch = () => {
         let currentURL = window.location.href.substring(window.location.origin.length);
-        console.log(currentURL);
         if (currentURL !== "/") {
             window.location.replace("/");
             setValue(1);
@@ -30,6 +29,7 @@ function StyledTopMenuNew({setSearch, setValue}) {
                 <Box sx={{display: "flex"}}>
                     <StyledSearchBar
                         // disabled
+                        id={"search-bar-main"}
                         autoFocus={true}
                         type='search'
                         placeholder='search business..'
