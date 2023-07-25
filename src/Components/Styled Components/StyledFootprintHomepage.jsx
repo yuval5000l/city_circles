@@ -16,11 +16,11 @@ export default function StyledFootprintHomepage({
                                                     UserName = "user name"
                                                 })
 {
-
+    console.log(circles);
     return (
         <Box width="100%" maxWidth="-webkit-fill-available" backgroundColor="#775CDF">
             <Stack dirction="column">
-                <Stack padding = "1rem" width="100%" maxWidth="-webkit-fill-available" direction="row" justifyContent="space-between"
+                <Stack width="100%" maxWidth="-webkit-fill-available" direction="row" justifyContent="space-between"
                        spacing={2} padding="0.5rem" sx={{
                     flexWrap: "wrap",
                     borderBottom:"0.5rem solid white"
