@@ -19,19 +19,18 @@ export default function StyledFeedItem({
                                            circles = [],
                                            time = timestamp.now(),
                                            business_name = "name", business_photo_url = "",
-                                           rating = 5, url_to_business = "", review = "",
-                                           review_address = "", setValueFunc = null
-                                       }) {
-    const setValueToBusiness = () => {
-        if (setValueFunc !== null) {
-            setValueFunc(1);
-        }
-    };
-    const setValueToProfile = () => {
-        if (setValueFunc !== null) {
-            setValueFunc(4);
-        }
-    };
+                                           rating = 5, review = "",
+                                           }) {
+    // const setValueToBusiness = () => {
+    //     if (setValueFunc !== null) {
+    //         setValueFunc(0);
+    //     }
+    // };
+    // const setValueToProfile = () => {
+    //     if (setValueFunc !== null) {
+    //         setValueFunc(0);
+    //     }
+    // };
     return (
         <Box
         >
@@ -43,7 +42,7 @@ export default function StyledFeedItem({
                 <Box>
                     <Stack direction="row" justifyContent="space-between">
                         <Stack direction="row" spacing={1}>
-                            <Link to="/ProfilePageComponent" state={{from: user_id}} onClick={setValueToProfile}>
+                            <Link to="/ProfilePageComponent" state={{from: user_id}}>
                                 {(profile_photo_url === "") ?
                                     (<StyledAvatarUserFeed/>) :
                                     (<StyledAvatarUserFeed src={profile_photo_url}/>)
@@ -93,8 +92,9 @@ export default function StyledFeedItem({
                                 <Box>
                                     <Stack direction="row" spacing={0.5}>
                                         <StyledGrayButtonFullReview content={review}/>
-                                        <Link to="../BusinessPage" state={{from: business_name}}
-                                              onClick={setValueToBusiness}><StyledGrayButtonVisitBusiness/></Link>
+                                        <Link to="../BusinessPage" state={{from: business_name}}>
+                                            <StyledGrayButtonVisitBusiness/>
+                                        </Link>
                                     </Stack>
                                 </Box>
                             </Stack>

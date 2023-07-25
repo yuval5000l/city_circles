@@ -119,18 +119,11 @@ export function showBusiness(business) {
                                     <Box width="fit-content" key={filteredContact[0] + "S"}>
                                         <Link sx={{
                                             color: "white",
-
-                                            // color: `${theme.palette.primary.main}`,
-                                            // backgroundColor: `${theme.palette.primary.light}`,
                                             borderRadius: "50%",
-
-                                            // border: "0.1rem solid black",
-                                            // border: "0.2rem solid white",
                                             display: "inline-flex",
                                             margin: "auto",
                                             padding: "0.4rem",
                                             width: "fit-content",
-                                            // boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
                                         }} href={`${filteredContact[1]}`} target={"_blank"} rel="noopener">
                                             {Icons[filteredContact[0]]}
                                         </Link>
