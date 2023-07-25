@@ -1,9 +1,5 @@
-import {useLocation} from "react-router-dom";
-import {useEffect, useState} from "react";
-import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
-import {getUserById} from "../../BackEnd/Classes/UserClass";
-import {Box, Button, Stack, Typography} from "@mui/material";
+import {Stack, Typography} from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 import {TopBoxWithProfileImg} from "../../Components/Styled Components/StyledBoxWithLogo";
 import {StyledLightCircleBox} from "../../Components/Styled Components/styledComponents";
@@ -15,7 +11,6 @@ import {
 } from "../../Components/Styled Components/OuterProfileComponents";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import {ReactComponent as FootprintsIcon} from "../../Components/Styled Components/Icons/footprints-svgrepo-com.svg";
-import StyledFeedItem from "../../Components/Styled Components/StyledFeedItem";
 
 function showUserProfile(user) {
     // const userID = user.getUserId()

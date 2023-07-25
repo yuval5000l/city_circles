@@ -1,5 +1,4 @@
 import {Stack, Typography} from "@mui/material";
-import {timestamp} from "../../BackEnd/config/firebase";
 import Box from "@mui/material/Box";
 import StyledAvatarWithBadge from "./StyledAvatarWithBadge";
 import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
@@ -12,10 +11,12 @@ export default function StyledFootprintHomepage({
                                                     businessPhoto,
                                                     userPhoto,
                                                     circles,
-                                                    timestamp = timestamp.now(),
+                                                    timestamp = null,
                                                     BusinessName = "business name",
                                                     UserName = "user name"
-                                                }) {
+                                                })
+{
+
     return (
         <Box width="100%" maxWidth="-webkit-fill-available" backgroundColor="#775CDF">
             <Stack dirction="column">

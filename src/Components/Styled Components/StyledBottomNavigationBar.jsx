@@ -1,13 +1,8 @@
 import {StyledBottomNavigation, StyledBottomNavigationAction} from "./styledComponents";
 import {Link, useLocation} from "react-router-dom";
-import HomeIcon from "@mui/icons-material/Home";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
-import GroupIcon from '@mui/icons-material/Group';
-import PersonIcon from '@mui/icons-material/Person';
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import StyledBottomNavigationPlus from "./StyledBottomNavigationPlus";
-import {useState} from "react";
-import {auth} from "../../BackEnd/config/firebase";
 
 export default function StyledBottomNavigationBar({value1, setValue1}) {
     const location = useLocation();
@@ -15,7 +10,7 @@ export default function StyledBottomNavigationBar({value1, setValue1}) {
     // console.log(setValue1);
     // console.log(location.pathname);
     // console.log(location.pathname === '/CirclesPageComponent');
-    const [value, setValue] = useState(0);
+    // const [value, setValue] = useState(0);
     return (
         <StyledBottomNavigation
             showLabels

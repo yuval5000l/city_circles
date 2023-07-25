@@ -363,14 +363,17 @@ export const StyledMenu = styled((props) => (
 }));
 
 export const StyledTypeBox = styled(Box)(({theme}) => ({
-    backgroundColor: theme.palette.secondary.main,
-    border: `0.1rem solid ${theme.palette.info.main}`,
+    // backgroundColor: theme.palette.primary.light,
+    border: `0.2rem solid ${theme.palette.secondary.main}`,
     width: "contain",
-    color: "black",
+    color: "white",
     maxWidth: "fit-content",
     ...theme.typography.h6,
+    // fontWeight: 'medium',
+    fontWeight: '500',
+    // fontWeight: '600',
     borderRadius: "15px",
-    padding: "3px",
+    padding: "0.4rem",
     [theme.breakpoints.up('xs')]: {}
 }));
 
@@ -420,13 +423,13 @@ export const StyledBadge = styled(Badge)(({theme}) => ({
     },
 }));
 
-export const SmallAvatar = styled(Avatar)(({}) => ({
+export const SmallAvatar = styled(Avatar)(({theme}) => ({
     width: 22,
     height: 22,
     border: `2px solid black`,
 }));
 
-export const StyledListItem = styled(ListItem)(({}) => ({
+export const StyledListItem = styled(ListItem)(({theme}) => ({
     width: 22,
     height: 22,
     border: `2px solid black`,

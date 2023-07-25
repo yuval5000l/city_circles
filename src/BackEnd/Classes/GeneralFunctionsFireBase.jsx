@@ -1,5 +1,4 @@
 import {storage} from "../config/firebase";
-import {useState} from "react";
 import {ref, uploadBytes, getDownloadURL} from "firebase/storage";
 // import {ref, getDownloadURL} from "firebase/storage";
 
@@ -30,8 +29,8 @@ export const uploadFile = async (file) => {
     }).catch((e) => console.log('getting downloadURL of image error => ', e));
     return urlAddress;
 }
-export default function UploadPic(file)
-{
-    return "";
-
-}
+// export default function UploadPic(file)
+// {
+//     return "";
+//
+// }

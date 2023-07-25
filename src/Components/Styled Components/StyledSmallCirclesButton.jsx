@@ -5,23 +5,22 @@ import {
 import Dialog from "@mui/material/Dialog";
 import {useEffect, useState} from "react";
 import {getUserCircles} from "../../BackEnd/Classes/UserClass";
-import Box from "@mui/material/Box";
 import {DialogContent, Stack} from "@mui/material";
 import theme from "../../Theme/Theme";
 
 export default function StyledSmallCircleButton({userID, circles_ = []}) {
     const [open, setOpen] = useState(false);
 
+
+
+    const [circles, setCircles] = useState(circles_);
     useEffect(() => {
         if (circles !== []) {
             setCircles(circles_);
         } else {
             getUserCirclesHelper(userID)
         }
-    }, [])
-
-    const [circles, setCircles] = useState(circles_);
-
+    },[circles, userID])
     const getUserCirclesHelper = (id) => {
         getUserCircles(id).then((lst) => {
             setCircles(lst);
