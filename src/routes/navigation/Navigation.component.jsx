@@ -9,9 +9,10 @@ import StyledTopBackMenu from "../../Components/Styled Components/StyledTopBackM
 
 const NavigationComponent = () => {
     const location = useLocation();
-    const pageDictionary = {
+    let pageDictionary;
+    pageDictionary = {
         '/': 0, '/CirclesPageComponent': 1,
-        '/FriendsPageComponent': 3, "/ProfilePageComponent": 4
+        '/FeedPageComponent': 2
     };
     const [searchRes, setSearchRes] = useState("");
     const [buttomBarValue, setButtomBarValue] = useState(0); // For BottomBarChosenThingy
@@ -21,7 +22,7 @@ const NavigationComponent = () => {
         check_sign_in();
         setButtomBarValue(pageDictionary[location.pathname]);
 
-    },[]);
+    },[pageDictionary, location.pathname]);
     // console.log(buttomBarValue);
 
     const check_sign_in = () => {
