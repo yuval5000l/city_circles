@@ -13,6 +13,7 @@ import React from "react";
 import {Link} from "react-router-dom";
 import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 import RateReviewOutlinedIcon from "@mui/icons-material/RateReviewOutlined";
+import theme from "../../Theme/Theme";
 
 export default function StyledFeedItem({
                                            user_id, user_name = "name", profile_photo_url = "",
@@ -36,9 +37,8 @@ export default function StyledFeedItem({
         <Box
         >
             <Stack direction="column" spacing={2} sx={{
-                padding: "0.4rem",
-                boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)',
-                borderTop: '0.1rem solid #C3ED5B',
+                padding: "1rem",
+                borderBottom:`0.5rem solid ${theme.palette.primary.main}`
             }}>
                 <Box>
                     <Stack direction="row" justifyContent="space-between">

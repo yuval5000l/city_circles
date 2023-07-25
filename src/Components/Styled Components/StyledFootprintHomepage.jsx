@@ -20,11 +20,10 @@ export default function StyledFootprintHomepage({
     return (
         <Box width="100%" maxWidth="-webkit-fill-available" backgroundColor="#775CDF">
             <Stack dirction="column">
-                <Stack width="100%" maxWidth="-webkit-fill-available" direction="row" justifyContent="space-between"
+                <Stack padding = "1rem" width="100%" maxWidth="-webkit-fill-available" direction="row" justifyContent="space-between"
                        spacing={2} padding="0.5rem" sx={{
-                    boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)',
-                    borderTop: '0.1rem solid #C3ED5B',
                     flexWrap: "wrap",
+                    borderBottom:"0.5rem solid white"
                 }}>
                     <Box sx={{display: 'flex', alignItems: 'center', justifyContent: "space-between"}}>
                         <Box sx={{marginRight: '1rem'}}>
@@ -32,7 +31,7 @@ export default function StyledFootprintHomepage({
                         </Box>
                         <Stack direction="column" justifyContent="center" alignItems="flex-start" color="white">
                             <Stack direction="row" spacing={1}   alignItems="center">
-                                <Typography variant="h4"> {UserName} </Typography>
+                                <Typography variant="h3"> {UserName} </Typography>
                                 <Box backgroundColor="white" borderRadius="50%" height="1.25rem">
                                     <StyledSmallCircleButton userID={UserName} circles_={circles}/>
                                 </Box>
@@ -43,7 +42,7 @@ export default function StyledFootprintHomepage({
                             <Typography variant="h5" textAlign="left" color="white">
                                 visited
                             </Typography>
-                            <Typography variant="h4" textAlign="left" color="white">
+                            <Typography variant="h3" textAlign="left" color="white">
                                 {BusinessName}
                             </Typography>
                             <Typography variant="h6" textAlign="left" color="white">
