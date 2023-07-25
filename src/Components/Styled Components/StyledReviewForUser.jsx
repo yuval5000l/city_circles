@@ -4,13 +4,14 @@ import {StyledRating} from "./styledComponents";
 import React from "react";
 import StyledGrayButtonFullReview from "./StyledGrayButtonFullReview";
 import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
+import theme from "../../Theme/Theme";
 
 export default function StyledReviewForUser({BusinessName, reviewContent, businessPhoto, userPhoto, rating, timestamp}) {
     // const review = "erspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor"
     const cutText = (reviewContent ?? "").slice(0, 30) + (reviewContent?.length > 30 ? "..." : "");
     return (
         <Box width="100%">
-                <Stack direction="row" justifyContent="flex-start" spacing={2} padding="0.5rem" sx={{padding:"0.4rem", boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', borderBottom: '0.1rem solid #C3ED5B'}}>
+                <Stack direction="row" justifyContent="flex-start" spacing={2} padding="0.5rem" sx={{padding:"0.4rem", boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)', border: `0.3rem solid ${theme.palette.primary.main}`,}}>
                     <Box>
                         <StyledAvatarWithBadge bigPhoto={businessPhoto} smallPhoto={userPhoto}/>
                     </Box>
