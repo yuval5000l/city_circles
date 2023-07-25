@@ -66,7 +66,7 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}) 
 }
 
 const CirclesPageComponent = () => {
-    const [searchRes, setSearchRes, setButtomBarValue] = useOutletContext();
+    const [searchRes] = useOutletContext(); // [searchRes, setSearchRes, setButtomBarValue]
 
     const [user, setUser] = useState(null);
 
@@ -124,11 +124,11 @@ const CirclesPageComponent = () => {
     // console.log(lstBusiness[0].getReviews()[0].rating);
     // const position = [31.777587, 35.215094]; //[this.state.location.lat, this.state.location.lng];
     return (<>
-        {(lstBusiness === [] || user === null)
+        {lstBusiness === [] || user === null
             ?
-            (<StyledGif></StyledGif>)
+            <StyledGif></StyledGif>
             :
-            (<>
+            <>
                     <Box sx={{
                         backgroundColor: theme.palette.primary.main,
                         borderBottom: `0.3rem solid ${theme.palette.secondary.main}`,
@@ -139,15 +139,14 @@ const CirclesPageComponent = () => {
                         <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
                             <Stack direction="row" spacing={2} alignItems="center" justifyContent="center"
                                    paddingTop="0.65rem">
-                                {(user !== null) ? (<>{
-                                    user.getCircles().map((circle, index) =>
+                                {user.getCircles().map((circle, index) =>
                                             // <ListItem sx={{padding: "unset!important"}} width="100%" key={user.getCircles()[index]+index.toString()}
                                             <div key={user.getCircles()[index] + index.toString()}>
                                                 <StyledCirclesSearchItem name={user.getCircles()[index]}
                                                                          checkFunction={CircleClicked(index)}/>
                                             </div>
                                         //</ListItem>
-                                    )}</>) : (<></>)}
+                                    )}
                             </Stack>
                             <Stack direction="row" spacing={2} alignItems="center" justifyContent="center"
                                    padding="0.4rem">
@@ -161,7 +160,6 @@ const CirclesPageComponent = () => {
 
 
                 </>
-            )
 }
     </>);
 

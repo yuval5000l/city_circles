@@ -3,11 +3,10 @@
 import Box from "@mui/material/Box";
 import * as React from "react";
 import {styled} from "@mui/material/styles";
-import {AppBar, Typography} from "@mui/material";
+import {AppBar} from "@mui/material";
 import CityCircleLogo from "./Icons/logo-new.png";
 import Avatar from "@mui/material/Avatar";
-import theme from "../../Theme/Theme";
-import {StyledAvatarBusinessFeed, StyledAvatarFriendProfile} from "./styledComponents";
+import {StyledAvatarFriendProfile} from "./styledComponents";
 
 
 const RotatePurpleBox = styled(AppBar)(({ theme })=> ({

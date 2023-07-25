@@ -1,4 +1,3 @@
-import {ListItem, ListItemText, Stack} from "@mui/material";
 import {StyledTypeBox} from "../../Components/Styled Components/styledComponents";
 
 export default function StyledSocialIcon(business){

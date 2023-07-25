@@ -4,7 +4,7 @@ import React from "react";
 import AccessTimeIcon from "@mui/icons-material/AccessTime";
 import StyledTimeTable from "../../routes/businessPage/StyledTimeTable";
 
-export default function StyledSummaryBusiness(){
+export default function StyledSummaryBusiness(business, businessName, ownerName){
     return (
         <Stack direction="column" spacing={2} alignItems="flex-start" justifyContent="space-between">
             <Typography variant="h2">

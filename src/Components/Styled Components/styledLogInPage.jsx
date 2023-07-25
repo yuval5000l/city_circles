@@ -1,7 +1,6 @@
 import {StyledLogoLogIn} from "./styledCityCircleLogoLogIn";
 import {StyledButtonGray} from "./styledComponents";
-import Box from "@mui/material/Box";
-import {StyledPurpleBox, StyledDialogTextFieldReview} from "./styledComponents";
+import {StyledPurpleBox} from "./styledComponents";
 import {Stack, Typography} from "@mui/material";
 import PersonRoundedIcon from '@mui/icons-material/PersonRounded';
 import TextField from "@mui/material/TextField";
@@ -12,28 +11,27 @@ import User from "../Classes/UserClass";
 import {signOut} from "firebase/auth";
 import {auth} from "../config/firebase";
 import {LogIn} from "../Components/Auth/auth";
-import SignupPage from "../routes/SignUpPage";
 
 
 export default function UserRegistrationForm () {
-    const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const handleSignUp = (e) => {
         e.preventDefault();
-        const user = new User(name, email, password);
+        const user = new User("", email, password);
+        // noinspection JSIgnoredPromiseFromCall
         user.signIn();
         window.location.replace('/SignupPage');
     };
-    const logout = async() =>{
-        try
-        {
-            await signOut(auth);
-        } catch (err) {
-            console.error(err);
-        }
-    }
+    // const logout = async() =>{
+    //     try
+    //     {
+    //         await signOut(auth);
+    //     } catch (err) {
+    //         console.error(err);
+    //     }
+    // }
 
     return(
         <>

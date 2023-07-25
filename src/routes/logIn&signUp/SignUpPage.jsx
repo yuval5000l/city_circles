@@ -4,7 +4,7 @@ import {
     StyledDialogTextFieldReview,
     StyledAutoComplete,
 } from "../../Components/Styled Components/styledComponents";
-import {Button, List, ListItem, Stack, Typography} from "@mui/material";
+import {Button, Stack, Typography} from "@mui/material";
 import {auth} from "../../BackEnd/config/firebase";
 import * as React from 'react';
 // import dayjs from 'dayjs';
@@ -43,14 +43,14 @@ export default function SignupPage() {
     const [name, setName] = useState("")
     const [chosenSchool, setChosenSchool] = useState("");
     const [chosenNeighborhood, setChosenNeighborhood] = useState("");
-    const [chosenHobby, setChosenHobby] = useState("");
+    // const [chosenHobby, setChosenHobby] = useState("");
     const [picturePath, setPicturePath] = useState("");
     const [file, setFile] = useState(null);
 
     // TODO: in the future- create a data base of circles and connect it to firebase/firestore
     const SchoolsLst = User.ListOfCirclesSchools;
     const NeighborhoodLst = User.ListOfCirclesNeighborhoods;
-    const HobbyLst = User.ListOfCirclesPersonalities;
+    // const HobbyLst = User.ListOfCirclesPersonalities;
 
     useEffect(() => {
         async function foo() {
@@ -59,13 +59,14 @@ export default function SignupPage() {
             }
         }
 
+        // noinspection JSIgnoredPromiseFromCall
         foo();
     }, [file]);
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(auth?.currentUser?.uid);
         const user = await getUserById(auth?.currentUser?.uid);
-        await user.AddUserMoreInfo(name, chosenSchool, chosenNeighborhood, chosenHobby, picturePath);
+        await user.AddUserMoreInfo(name, chosenSchool, chosenNeighborhood, picturePath);
         // console.log("after user")
         window.location.replace('/');
     };
@@ -248,12 +249,6 @@ export default function SignupPage() {
                     {(picturePath === "") ? (<Box/>) :
                         (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}
                 </Stack>
-                {/*<input*/}
-                {/*    type="file"*/}
-                {/*    onChange={(e) => setFile(e.target.files[0])}/>*/}
-                {/*<button onClick={handleUploadPic}> Upload File</button>*/}
-                {/*{(picturePath === "") ? (<Avatar sx={{width: 100, height: 100}}/>) :*/}
-                {/*    (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}*/}
             </Stack>
             <Button onClick={handleSubmit} sx={{
                 borderRadius: "15px",

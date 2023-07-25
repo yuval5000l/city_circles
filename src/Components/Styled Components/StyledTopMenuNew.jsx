@@ -16,9 +16,9 @@ function StyledTopMenuNew({setSearch, setValue}) {
         }
 
     }
-    const goHome = () =>{
-        window.location.href = "/";
-    }
+    // const goHome = () =>{
+    //     window.location.href = "/";
+    // }
 
     return (
         <StyledAppBarTop>
@@ -30,17 +30,12 @@ function StyledTopMenuNew({setSearch, setValue}) {
                     <StyledSearchBar
                         // disabled
                         autoFocus={true}
-                        // className="search-box search-bar-business"
                         type='search'
-                        // onChangeHandler={onSearchChange}
-                        // value={searchContent}
                         placeholder='search business..'
                         onClick={SendToSearch}
                         onChange={(e) => {
                             setSearch(e.target.value)
                         }}
-                        // onChange={onSearchChange}
-                        // href={"/CirclesPageComponent"}
                     />
                 </Box>
                 <Box>

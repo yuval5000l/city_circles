@@ -111,7 +111,7 @@ export function showBusiness(business) {
                     </Stack>
                     <Stack direction="row">
 
-                        <Stack direction="row" justifyConent="center" spacing={1} alignItems="center">
+                        <Stack direction="row" justifyContent="center" spacing={1} alignItems="center">
                             <Typography variant="h4">
                                 Contact:
                             </Typography>

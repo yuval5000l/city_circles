@@ -1,5 +1,4 @@
-import Avatar from "@mui/material/Avatar";
-import {SmallAvatar, StyledAvatarUserFeed, StyledBadge} from "./styledComponents";
+import {SmallAvatar, StyledAvatarUserFeed} from "./styledComponents";
 import {Badge} from "@mui/material";
 
 export default function StyledAvatarWithBadge({bigPhoto, smallPhoto}) {

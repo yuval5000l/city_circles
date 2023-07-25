@@ -31,9 +31,9 @@ export default function BusinessStepper() {
 
         setOpen(false);
     }
-    const isStepOptional = (step) => {
-        return step === 1;
-    };
+    // const isStepOptional = (step) => {
+    //     return step === 1;
+    // };
 
     const isStepSkipped = (step) => {
         return skipped.has(step);

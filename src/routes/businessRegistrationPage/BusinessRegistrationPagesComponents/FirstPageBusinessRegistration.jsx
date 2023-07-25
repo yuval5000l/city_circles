@@ -5,9 +5,7 @@ import IconButton from '@mui/material/IconButton';
 import CloseIcon from '@mui/icons-material/Close';
 import {Stack} from "@mui/material";
 import {useState} from "react";
-import {collection} from "firebase/firestore";
 import Business from "../../../BackEnd/Classes/BusinessClass";
-import {db} from "../../../BackEnd/config/firebase";
 import ToggleButtonGroup from "@mui/material/ToggleButtonGroup";
 import ToggleButton from "@mui/material/ToggleButton";
 import TextField from "@mui/material/TextField";
@@ -18,7 +16,6 @@ import FormControlLabel from "@mui/material/FormControlLabel";
 import Radio from "@mui/material/Radio";
 import Snackbar from '@mui/material/Snackbar';
 import Alert from '@mui/material/Alert';
-// import {useSnackbar} from 'notistack';
 import theme from "../../../Theme/Theme";
 
 
@@ -91,30 +88,30 @@ export default function FirstPageBusinessRegistration({onNext, data}) {
     //     getBusinessesList();
     // }, []);
 
-    function RowRadioButtonsGroup() {
-
-            const handleChange = (event) => {
-                setIsBusinessAddedBefore(event.target.value);
-                setOpenAlert(event.target.value === "true");
-                };
-
-            return (
-                <FormControl>
-                    {/*<FormLabel id="demo-row-radio-buttons-group-label">Select:</FormLabel>*/}
-                    <RadioGroup
-                        row
-                        aria-labelledby="demo-row-radio-buttons-group-label"
-                        name="row-radio-buttons-group"
-                        value={isBusinessAddedBefore}
-                        onChange={handleChange}
-                    >
-                        <FormControlLabel value={true} control={<Radio/>} label="Yes"/>
-                        <FormControlLabel value={false} control={<Radio/>} label="No"/>
-
-                    </RadioGroup>
-                </FormControl>
-            );
-        }
+    // function RowRadioButtonsGroup() {
+    //
+    //         const handleChange = (event) => {
+    //             setIsBusinessAddedBefore(event.target.value);
+    //             setOpenAlert(event.target.value === "true");
+    //             };
+    //
+    //         return (
+    //             <FormControl>
+    //                 {/*<FormLabel id="demo-row-radio-buttons-group-label">Select:</FormLabel>*/}
+    //                 <RadioGroup
+    //                     row
+    //                     aria-labelledby="demo-row-radio-buttons-group-label"
+    //                     name="row-radio-buttons-group"
+    //                     value={isBusinessAddedBefore}
+    //                     onChange={handleChange}
+    //                 >
+    //                     <FormControlLabel value={true} control={<Radio/>} label="Yes"/>
+    //                     <FormControlLabel value={false} control={<Radio/>} label="No"/>
+    //
+    //                 </RadioGroup>
+    //             </FormControl>
+    //         );
+    //     }
 
 
     function BusinessTypesSelection(businesses_types) {
