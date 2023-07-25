@@ -108,11 +108,14 @@ export default function UserRegistrationForm () {
                         />
                     </Stack>
                 </Stack>
-                <Stack direction="row" justifyContent="center" spacing={3} marginTop={5}>
+                <Stack direction="column" justifyContent="center" alignItems="center" spacing={2} marginTop={5}>
+                    <StyledButtonGray onClick={handleLogIn}  sx={{width:"60%"}}>Log In</StyledButtonGray>
+                    <Typography variant="h5">
+                        Not Registered? you can register here
+                    </Typography>
                     <StyledButtonGray onClick={handleSignUp} >
                         Register
                     </StyledButtonGray>
-                    <StyledButtonGray onClick={handleLogIn}>Log In</StyledButtonGray>
                 </Stack>
             </Box>
         </>
