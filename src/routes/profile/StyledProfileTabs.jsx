@@ -118,6 +118,7 @@ export default function StyledProfileTabs({user}) {
                         (Reviews.map((review) => (
                         <ListItem key={review.businessID} sx={{justifyContent: "center",padding:"unset"}}>
                             <StyledReviewForUser
+                                userName={user.getUserName()}
                                 BusinessName={review.businessName}
                                 review={review.content}
                                 businessPhoto={review.businessPhoto}

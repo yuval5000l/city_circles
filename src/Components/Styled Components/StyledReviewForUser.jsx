@@ -6,6 +6,7 @@ import StyledGrayButtonFullReview from "./StyledGrayButtonFullReview";
 import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 
 export default function StyledReviewForUser({
+                                                userName,
                                                 BusinessName,
                                                 reviewContent,
                                                 businessPhoto,
@@ -16,10 +17,10 @@ export default function StyledReviewForUser({
     // const review = "erspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor"
     const cutText = (reviewContent ?? "").slice(0, 30) + (reviewContent?.length > 30 ? "..." : "");
     return (
-        <Box width="100%" >
+        <Box width="100%">
             <Stack direction="row" justifyContent="flex-start" spacing={2} padding="0.5rem" sx={{
                 padding: "1rem",
-                borderTop:"0.2rem solid #E9E8E8"
+                borderTop: "0.2rem solid #E9E8E8"
             }}>
                 <Box>
                     <StyledAvatarWithBadge bigPhoto={businessPhoto} smallPhoto={userPhoto}/>
@@ -38,7 +39,7 @@ export default function StyledReviewForUser({
                         <Typography>{rating}</Typography>
                         <StyledRating value={rating} readOnly/>
                         <Typography>{rating[1]}</Typography>
-                        <StyledGrayButtonFullReview content={reviewContent}/>
+                        <StyledGrayButtonFullReview content={reviewContent} userName={userName}/>
                     </Stack>
                 </Stack>
             </Stack>
