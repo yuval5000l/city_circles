@@ -17,7 +17,9 @@ const StyledGrayButtonVisitBusiness = () => {
                 boxShadow: clicked ? 'inset 0 0 10px rgba(0, 0, 0, 0.5)' : '0 2px 5px rgba(0, 0, 0, 0.3)',
             }}
         >
-            visit business
+            {/*<Typography variant="h6" sx={{textDecoration:"none",}}>*/}
+                visit business
+            {/*</Typography>*/}
         </StyledButtonGray>
     );
 };

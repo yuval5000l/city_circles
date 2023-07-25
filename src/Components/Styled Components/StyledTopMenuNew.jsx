@@ -30,7 +30,7 @@ function StyledTopMenuNew({setSearch, setValue}) {
                     <StyledSearchBar
                         // disabled
                         id={"search-bar-main"}
-                        autoFocus={true}
+                        autoFocus={false}
                         type='search'
                         placeholder='search business..'
                         onClick={SendToSearch}

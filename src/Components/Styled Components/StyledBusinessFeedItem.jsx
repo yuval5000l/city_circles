@@ -40,7 +40,7 @@ export default function StyledBusinessFeedItem({business}) {
         }}>
             <Stack direction="column" alignItems="flex-start" spacing={1}>
                 <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
-                    <Link to={"../BusinessPage"} state={{from: business.getName()}}>
+                    <Link to={"../BusinessPage"} state={{from: business.getName()}} style={{textDecoration: 'none'}}>
                         <StyledAvatarBusinessFeed src={business.getProfilePic()}/>
                     </Link>
                     <Stack direction="column" spacing={0.5} justifyContent="flex-start">
@@ -63,7 +63,7 @@ export default function StyledBusinessFeedItem({business}) {
                             {/*<StyledInfoBox>*/}
                             {/*    #km*/}
                             {/*</StyledInfoBox>*/}
-                            <Link to={"../BusinessPage"} state={{from: business.getName()}}>
+                            <Link to={"../BusinessPage"} state={{from: business.getName()}} style={{textDecoration: 'none'}}>
                                 <StyledGrayButtonVisitBusiness/>
                             </Link>
                         </Stack>

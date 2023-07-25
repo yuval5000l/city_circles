@@ -91,7 +91,7 @@ export default function StyledFeedItem({
                                 <Box>
                                     <Stack direction="row" spacing={0.5}>
                                         <StyledGrayButtonFullReview content={review}/>
-                                        <Link to="../BusinessPage" state={{from: business_name}}>
+                                        <Link to="../BusinessPage" state={{from: business_name}} style={{textDecoration: 'none'}}>
                                             <StyledGrayButtonVisitBusiness/>
                                         </Link>
                                     </Stack>
