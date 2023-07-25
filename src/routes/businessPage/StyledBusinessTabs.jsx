@@ -3,7 +3,7 @@ import {Tabs, Tab, Box, ListItem, List, Stack} from '@mui/material';
 // import calculateTime from "../../BackEnd/Classes/GeneralFunctions";
 import StyledFootprintForUser from "../../Components/Styled Components/StyledFootprintForUser";
 import StyledReviewForUser from "../../Components/Styled Components/StyledReviewForUser";
-import StyledGif from "../../Components/Styled Components/StyledGif";
+import StyledGifNothingHere from "../../Components/Styled Components/StyledGifNothingHere";
 import Typography from "@mui/material/Typography";
 
 function TabPanel({children, value, index}) {
@@ -47,7 +47,7 @@ export default function StyledBusinessTabs({business}) {
                         :
                         (<Stack direction="column">
                             <Typography variant="h3">There are no footprints yet</Typography>
-                                <StyledGif/>
+                                <StyledGifNothingHere/>
                         </Stack>)
                     }
                 </List>
@@ -69,8 +69,7 @@ export default function StyledBusinessTabs({business}) {
                     ))
                         :
                         (<Stack direction="column">
-                            <Typography variant="h3">There are no reviews yet</Typography>
-                            <StyledGif/>
+                            <StyledGifNothingHere/>
                         </Stack>)
                     }
                 </List>

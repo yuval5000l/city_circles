@@ -11,7 +11,7 @@ import StyledFootprintForUser from "../../Components/Styled Components/StyledFoo
 import StyledReviewForUser from "../../Components/Styled Components/StyledReviewForUser";
 import StyledDropdownCircleOptions from "../../Components/Styled Components/StyledDropdownCircleOptions";
 import User from "../../BackEnd/Classes/UserClass";
-import StyledGif from "../../Components/Styled Components/StyledGif";
+import StyledGifNothingHere from "../../Components/Styled Components/StyledGifNothingHere";
 
 
 function TabPanel({children, value, index}) {
@@ -103,8 +103,7 @@ export default function StyledProfileTabs({user}) {
                     )))
                         :
                         (<Stack direction="column">
-                            <Typography variant="h3">There are no footprints yet</Typography>
-                            <StyledGif/>
+                            <StyledGifNothingHere/>
                         </Stack>)
                     }
                 </List>
@@ -131,7 +130,7 @@ export default function StyledProfileTabs({user}) {
                         :
                         (<Stack direction="column">
                             <Typography variant="h3">There are no reviews yet</Typography>
-                            <StyledGif/>
+                            <StyledGifNothingHere/>
                         </Stack>)
                     }
                 </List>

@@ -21,7 +21,7 @@ import {ReactComponent as FootprintsIcon} from "../../Components/Styled Componen
 import {StyledFeedItemProfile} from "../../Components/Styled Components/OuterProfileComponents";
 import StyledProfileTabs from "./StyledProfileTabs";
 import {uploadFile} from "../../BackEnd/Classes/GeneralFunctionsFireBase";
-import StyledGif from "../../Components/Styled Components/StyledGif";
+import StyledGifLoading from "../../Components/Styled Components/StyledGifLoading";
 
 function FeedItem(user, lstOfReviews) {
     if (lstOfReviews === []) {
@@ -50,7 +50,7 @@ function showUserProfile(user, lstOfReviews) {
     const footprints2 = (user !== null) ? (user.getFootprints()) : ([]); // [{businessID: "", businessName: "", businessPhoto: "", timestamp: timestamp},..]
     return (
         <div>
-            {(user === null) ? (<StyledGif/>) :
+            {(user === null) ? (<StyledGifLoading/>) :
                 (<div>
                     <TopBoxWithProfileImg
                         img_url={(user.getPic() === "") ? ("") : (user.getPic())}

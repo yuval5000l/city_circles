@@ -5,7 +5,7 @@ import Box from "@mui/material/Box";
 import StyledFeedItem from "./StyledFeedItem";
 import {onAuthStateChanged} from "firebase/auth";
 import StyledFootprintHomepage from "./StyledFootprintHomepage";
-import StyledGif from "./StyledGif";
+import StyledGifLoading from "./StyledGifLoading";
 
 
 export default function FeedItemPage({setValue}) {
@@ -47,7 +47,7 @@ export default function FeedItemPage({setValue}) {
         {/*    </Box>*/}
         {/*)}*/}
         {(listReviews.length === 0) ?
-            (<StyledGif/>) :
+            (<StyledGifLoading/>) :
             (<>
                 {listReviews.map((review) =>
                     <Box key={review.user_name + review.business_name + review.review}>

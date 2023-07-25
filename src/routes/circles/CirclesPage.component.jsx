@@ -12,7 +12,7 @@ import {getUserById} from "../../BackEnd/Classes/UserClass";
 import {useOutletContext} from "react-router-dom";
 import Business from "../../BackEnd/Classes/BusinessClass";
 import StyledBusinessFeedItem from "../../Components/Styled Components/StyledBusinessFeedItem";
-import StyledGif from "../../Components/Styled Components/StyledGif";
+import StyledGifLoading from "../../Components/Styled Components/StyledGifLoading";
 
 
 function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}) {
@@ -126,7 +126,7 @@ const CirclesPageComponent = () => {
     return (<>
         {(lstBusiness === [] || user === null)
             ?
-            (<StyledGif></StyledGif>)
+            (<StyledGifLoading/>)
             :
             (<>
                     <Box sx={{

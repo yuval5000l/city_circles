@@ -17,8 +17,7 @@ import WhatsAppIcon from '@mui/icons-material/WhatsApp';
 import LanguageIcon from '@mui/icons-material/Language';
 import {isMobile} from 'react-device-detect';
 
-import StyledGif from "../../Components/Styled Components/StyledGif";
-
+import StyledGifLoading from "../../Components/Styled Components/StyledGifLoading";
 export function showBusiness(business) {
     let Contacts = {};
     const Icons =
@@ -155,7 +154,7 @@ export default function BusinessPage() {
     return (
         <>
             {(business === "") ?
-                (<StyledGif></StyledGif>) :
+                (<StyledGifLoading/>) :
                 (<> {showBusiness(business)} </>)}
         </>);
 }
