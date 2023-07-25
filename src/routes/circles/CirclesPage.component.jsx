@@ -23,7 +23,7 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}) 
     // console.log("Sort Method ", sortMethod);
 
     function sortBy(a, b) {
-        if (sortMethod === "Distance") {
+        if (sortMethod === "Rating") {
             return b.getRatingCircles(circles) - a.getRatingCircles(circles);
         } else if (sortMethod === "Footprints") {
             // Don't count the same user twice, Count how many people rated this business
@@ -66,7 +66,7 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}) 
 }
 
 const CirclesPageComponent = () => {
-    const [searchRes, setSearchRes, setButtomBarValue] = useOutletContext();
+    const [searchRes] = useOutletContext();
 
     const [user, setUser] = useState(null);
 
@@ -75,7 +75,7 @@ const CirclesPageComponent = () => {
     const [circleButtons, setCircleButtons] = useState([false, false, false]);
     const [circlesFilter, setCirclesFilter] = useState([]); // Filters by circles, first filter
     // const [labelFilter, setLabelFilter] = useState([]); // Filter by labels, second filter (empty list if null)
-    const [sortMethod, setSortMethod] = useState(""); // Sort by Footprints or Distance (empty string if null)
+    const [sortMethod, setSortMethod] = useState(""); // Sort by Footprints or Rating (empty string if null)
     const [filterTypeBusiness, setFilterTypeBusiness] = useState(""); // Filters by the type of business (empty string if null)
     // console.log(filterTypeBusiness);
 
@@ -139,15 +139,17 @@ const CirclesPageComponent = () => {
                         <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
                             <Stack direction="row" spacing={2} alignItems="center" justifyContent="center"
                                    paddingTop="0.65rem">
-                                {(user !== null) ? (<>{
-                                    user.getCircles().map((circle, index) =>
+                                <>
+                                    {
+                                        user.getCircles().map((circle, index) =>
                                             // <ListItem sx={{padding: "unset!important"}} width="100%" key={user.getCircles()[index]+index.toString()}
                                             <div key={user.getCircles()[index] + index.toString()}>
                                                 <StyledCirclesSearchItem name={user.getCircles()[index]}
                                                                          checkFunction={CircleClicked(index)}/>
                                             </div>
                                         //</ListItem>
-                                    )}</>) : (<></>)}
+                                        )}
+                                </>
                             </Stack>
                             <Stack direction="row" spacing={2} alignItems="center" justifyContent="center"
                                    padding="0.4rem">
@@ -162,7 +164,7 @@ const CirclesPageComponent = () => {
 
                 </>
             )
-}
+        }
     </>);
 
 }
