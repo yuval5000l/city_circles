@@ -18,7 +18,7 @@ function showTime(arr_time) {
     //         <strong>{arr_time[0]}:</strong> {times[2]}: {times[3]}, {times[0]}: {times[1]}
     //     </li>
     // );
-    return {day: arr_time[0], hours: times[2]+": "+times[3]+", "+times[0]+": "+times[1]};
+    return {day: arr_time[0], hours: times[2]+":"+times[3]+" - "+times[0]+":"+times[1]};
 }
 const StyledTimeTable = ({business}) => {
     // console.log(business);
@@ -48,7 +48,7 @@ const StyledTimeTable = ({business}) => {
         <Box>
             <Box display="flex" alignItems="center">
                 <Typography variant="h4">Opening Hours</Typography>
-                <IconButton onClick={handleToggle} color="white">
+                <IconButton onClick={handleToggle} sx={{color: "white"}}>
                     <ExpandMoreIcon  style={{ transform: isOpen ? 'rotate(180deg)' : 'rotate(0deg)' }} />
                 </IconButton>
             </Box>

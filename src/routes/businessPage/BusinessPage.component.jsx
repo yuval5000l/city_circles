@@ -4,7 +4,7 @@ import {getBusinessByName} from "../../BackEnd/Classes/BusinessClass";
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import theme from "../../Theme/Theme";
-import {Box, Avatar, Grid, Stack, Typography} from "@mui/material";
+import {Box, Avatar, Stack, Typography} from "@mui/material";
 import {StyledRating, StyledTypeBox} from "../../Components/Styled Components/styledComponents";
 import FmdGoodIcon from '@mui/icons-material/FmdGood';
 import AccessTimeIcon from '@mui/icons-material/AccessTime';
@@ -23,10 +23,10 @@ export function showBusiness(business) {
     let Contacts = {};
     const Icons =
         {
-            "Whatsapp": <WhatsAppIcon/>,
-            "Facebook": <FacebookIcon/>,
-            "Website": <LanguageIcon/>,
-            "Instagram": <InstagramIcon/>
+            "Whatsapp": <WhatsAppIcon sx={{fontSize: "2rem"}}/>,
+            "Facebook": <FacebookIcon sx={{fontSize: "2rem"}}/>,
+            "Website": <LanguageIcon sx={{fontSize: "2rem"}}/>,
+            "Instagram": <InstagramIcon sx={{fontSize: "2rem"}}/>
         };
     for (const [key, value] of Object.entries(business.getContacts())) {
         if (value !== "" && key !== "Whatsapp") {
@@ -60,14 +60,26 @@ export function showBusiness(business) {
                             <Typography variant="h2" textAlign="left">
                                 {business.name}
                             </Typography>
-                            <Grid container direction="column"
-                                  justifyContent="flex-start"
-                                  alignItems="flex-start"
-                                  spacing={3}>
+                            <Stack direction="row" sx={{display: "flex", flexWrap: "wrap", margin: "auto", justifyContent: "space-between"}}
+                                  // justifyContent="flex-start"
+                                  // alignItems="flex-start"
+
+                                 >
                                 {business.type.map((category) =>
-                                    <StyledTypeBox marginTop="1rem"
+                                    <StyledTypeBox
+                                        marginTop="0.5rem"
                                                    key={category}>{category}</StyledTypeBox>)}
-                            </Grid>
+                            </Stack>
+                            {/*<Container container direction="column"*/}
+                            {/*           justifyContent="flex-start"*/}
+                            {/*           alignItems="flex-start"*/}
+                            {/*           display={"flex"}*/}
+                            {/*           flexWrap={"wrap"}*/}
+                            {/*           spacing={3}>*/}
+                            {/*    {business.type.map((category) =>*/}
+                            {/*        <StyledTypeBox marginTop="1rem"*/}
+                            {/*                       key={category}>{category}</StyledTypeBox>)}*/}
+                            {/*</Container>*/}
                             <Stack direction="row" spacing={1}>
                                 <Typography>
                                     {(business.getRating() !== 0) ?
@@ -82,7 +94,7 @@ export function showBusiness(business) {
                                 (business.profile_pic === "") ?
                                     (<Avatar sx={{width: "6.25rem", height: "6.25rem"}} alt={business.name}/>)
                                     :
-                                    (<Avatar sx={{width: "6.25rem", height: "6.25rem", margin: 1}} alt={business.name}
+                                    (<Avatar variant={"circular"} sx={{width: "6.25rem", height: "6.25rem", margin: "auto" }} alt={business.name}
                                              src={business.profilePic}/>)
                             }
                         </Box>
@@ -93,7 +105,7 @@ export function showBusiness(business) {
                             {business.address}
                         </Typography>
                     </Stack>
-                    <Stack direction="row" spacing={1} alignItems="flex-start">
+                    <Stack direction="row" spacing={1} alignItems="center">
                         <AccessTimeIcon/>
                         <StyledTimeTable business={business}/>
                     </Stack>
@@ -107,15 +119,19 @@ export function showBusiness(business) {
                                 Object.entries(Contacts).map((filteredContact) =>
                                     <Box width="fit-content" key={filteredContact[0] + "S"}>
                                         <Link sx={{
-                                            color: "black",
-                                            backgroundColor: `${theme.palette.primary.light}`,
+                                            color: "white",
+
+                                            // color: `${theme.palette.primary.main}`,
+                                            // backgroundColor: `${theme.palette.primary.light}`,
                                             borderRadius: "50%",
-                                            border: "0.1rem solid black",
+
+                                            // border: "0.1rem solid black",
+                                            // border: "0.2rem solid white",
                                             display: "inline-flex",
                                             margin: "auto",
-                                            padding: "0.8rem",
+                                            padding: "0.4rem",
                                             width: "fit-content",
-                                            boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
+                                            // boxShadow: "rgba(0, 0, 0, 0.16) 0px 10px 36px 0px, rgba(0, 0, 0, 0.06) 0px 0px 0px 1px",
                                         }} href={`${filteredContact[1]}`} target={"_blank"} rel="noopener">
                                             {Icons[filteredContact[0]]}
                                         </Link>
