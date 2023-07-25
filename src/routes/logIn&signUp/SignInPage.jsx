@@ -73,7 +73,7 @@ export default function UserRegistrationForm () {
                         <TextField
                             type={"email"}
                             sx={{width:' 50%', alignSelf: "center"}}
-                            id="input-with-icon-textfield"
+                            id="input-with-icon-textfield-email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             InputProps={{
@@ -91,9 +91,10 @@ export default function UserRegistrationForm () {
                             Password
                         </Typography>
                         <TextField
+                            key={"PassWord1"}
                             type={"password"}
                             sx={{width:' 50%', alignSelf: "center"}}
-                            id="input-with-icon-textfield"
+                            id="input-with-icon-textfield-password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             InputProps={{

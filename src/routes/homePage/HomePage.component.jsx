@@ -3,7 +3,7 @@ import {useOutletContext} from "react-router-dom";
 
 
 const HomePageComponent = () => {
-    const [searchRes, setSearchRes, setButtomBarValue] = useOutletContext();
+    const [setButtomBarValue] = useOutletContext(); // [searchRes, setSearchRes, setButtomBarValue]
 
 
     return (

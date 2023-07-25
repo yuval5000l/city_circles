@@ -120,7 +120,7 @@ function ResponsiveDrawer(props) {
                 </Stack>
             </Toolbar>
             <Divider/>
-            <List   justifyContent="flex-start">
+            <List>
                 <ListItem disablePadding>
                     <ListItemButton component={Link} to="/ProfilePageComponent" state={{from: auth?.currentUser?.uid}}
                                     onClick={handleDrawerToggle}>

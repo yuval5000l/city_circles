@@ -86,7 +86,7 @@ export default class User {
         await this.saveToFirebase();
     }
 
-    async AddUserMoreInfo(name, school, neighborhood, hobby, pic) {
+    async AddUserMoreInfo(name, school, neighborhood, pic) {
 
         // const circlesLst = {
         //     school: school,
@@ -95,7 +95,6 @@ export default class User {
         // };
         this.circles.push(school);
         this.circles.push(neighborhood);
-        this.circles.push(hobby);
         this.name_ = name;
         this.profile_pic = pic;
         // this.birthday = birthday;
@@ -105,7 +104,7 @@ export default class User {
 
     async saveToFirebase() {
         const ref = doc(db, "Users", this.userID_).withConverter(userConverter);
-        await setDoc(ref, this);
+        await setDoc(ref, this); //.then(()=>{ console.log("Uploaded!");});
     }
 
     getPic() {

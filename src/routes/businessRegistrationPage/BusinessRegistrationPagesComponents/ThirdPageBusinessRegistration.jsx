@@ -45,6 +45,7 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
             }
         }
 
+        // noinspection JSIgnoredPromiseFromCall
         foo();
         if (data !== null) {
             console.log(data);

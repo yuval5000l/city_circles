@@ -157,6 +157,7 @@ export default class Business {
             return [0, 0];
         }
         // eslint-disable-next-line no-unreachable
+        // noinspection UnreachableCodeJS
         return [0, 0]
     };
 

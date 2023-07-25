@@ -43,7 +43,7 @@ export default function SignupPage() {
     const [name, setName] = useState("")
     const [chosenSchool, setChosenSchool] = useState("");
     const [chosenNeighborhood, setChosenNeighborhood] = useState("");
-    const [chosenHobby, setChosenHobby] = useState("");
+    // const [chosenHobby, setChosenHobby] = useState("");
     const [picturePath, setPicturePath] = useState("");
     const [file, setFile] = useState(null);
 
@@ -59,13 +59,14 @@ export default function SignupPage() {
             }
         }
 
+        // noinspection JSIgnoredPromiseFromCall
         foo();
-    }, [file, handleUploadPic]);
+    }, [file]);
     const handleSubmit = async (e) => {
         e.preventDefault();
         console.log(auth?.currentUser?.uid);
         const user = await getUserById(auth?.currentUser?.uid);
-        await user.AddUserMoreInfo(name, chosenSchool, chosenNeighborhood, chosenHobby, picturePath);
+        await user.AddUserMoreInfo(name, chosenSchool, chosenNeighborhood, picturePath);
         // console.log("after user")
         window.location.replace('/');
     };
@@ -248,12 +249,6 @@ export default function SignupPage() {
                     {(picturePath === "") ? (<Box/>) :
                         (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}
                 </Stack>
-                {/*<input*/}
-                {/*    type="file"*/}
-                {/*    onChange={(e) => setFile(e.target.files[0])}/>*/}
-                {/*<button onClick={handleUploadPic}> Upload File</button>*/}
-                {/*{(picturePath === "") ? (<Avatar sx={{width: 100, height: 100}}/>) :*/}
-                {/*    (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}*/}
             </Stack>
             <Button onClick={handleSubmit} sx={{
                 borderRadius: "15px",

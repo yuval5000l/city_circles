@@ -20,7 +20,7 @@ const StyledDropdownMenuFilter = ({setFilterMethod}) => {
         };
 
         const clearFilter = () => {
-            setIsClicked((false));
+            setIsClicked(false);
             setButtonText("Filter By..")
             setAnchorEl(null)
             setFilterMethod("");
@@ -28,14 +28,14 @@ const StyledDropdownMenuFilter = ({setFilterMethod}) => {
         const handleClose = () => {
             setAnchorEl(null);
             if (buttonText === "Filter By..") {
-                setIsClicked((false));
+                setIsClicked(false);
             }
         };
 
         const handleOptionClick = (option) => {
             setButtonText(option)
             setAnchorEl(null);
-            setIsClicked((true));
+            setIsClicked(true);
             setFilterMethod(option);
 
         };

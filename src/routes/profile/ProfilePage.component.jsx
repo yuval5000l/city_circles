@@ -1,3 +1,5 @@
+// noinspection JSIgnoredPromiseFromCall
+
 import {useLocation} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {onAuthStateChanged} from "firebase/auth";
@@ -110,38 +112,39 @@ function showUserProfile(user, lstOfReviews) {
 }
 
 
-function ShowMyProfile(user, file, setFile) {
+function ShowMyProfile(user, file, setFile, upload) {
     return (
         <>
-            <Box
-                sx={{
-                    display: 'flex',
-                    flexDirection: 'row',
-                    justifyContent: 'center',
-                    alignItems: 'center',
-                    backgroundColor: theme.palette.primary.main,
-                }}
-            >
+            {(upload === false) ? (<><Box
+                    sx={{
+                        display: 'flex',
+                        flexDirection: 'row',
+                        justifyContent: 'center',
+                        alignItems: 'center',
+                        backgroundColor: theme.palette.primary.main,
+                    }}
+                >
 
-                <Stack direction="column" spacing={1} justifyContent="flex-start"
-                       alignItems="center" >
-                    <Typography variant="h2" color="white">
-                        {user.getUserName()}
-                    </Typography>
-                    {(user.getPic() === "") ? (<Avatar width="6rem" height="6rem"/>)
-                        : (<Button variant={"contained"} component={"label"} >
-                            <input
-                                type="file"
-                                hidden
-                                accept="image/*"
-                                onChange={(e) => setFile(e.target.files[0])}/>
-                            <StyledAvatarFriendProfile src={user.getPic()}>
-                        </StyledAvatarFriendProfile>
-                        </Button>)}
-                </Stack>
+                    <Stack direction="column" spacing={1} justifyContent="flex-start"
+                           alignItems="center" >
+                        <Typography variant="h2" color="white">
+                            {user.getUserName()}
+                        </Typography>
+                        {(user.getPic() === "") ? (<Avatar width="6rem" height="6rem"/>)
+                            : (<Button variant={"contained"} component={"label"} >
+                                <input
+                                    type="file"
+                                    hidden
+                                    accept="image/*"
+                                    onChange={(e) => setFile(e.target.files[0])}/>
+                                <StyledAvatarFriendProfile src={user.getPic()}>
+                                </StyledAvatarFriendProfile>
+                            </Button>)}
+                    </Stack>
 
-            </Box>
-            <StyledProfileTabs user={user}/>
+                </Box>
+                <StyledProfileTabs user={user}/></>) : (<>No!</>)}
+
         </>
     )
         ;
@@ -157,7 +160,7 @@ function ProfilePageComponent() {
     let {from} = (check_null === true) ? null : location.state;
     let [user, setUser] = useState(null);
     const [lstOfReviews, setLstOfReviews] = useState([]);
-
+    const [upload, setUpload] = useState(false);
 
     const handleUploadPic = async () => {
         uploadFile(file).then((pathy) => {
@@ -170,12 +173,15 @@ function ProfilePageComponent() {
 
     useEffect(() => {
         async function foo() {
-            if (file !== null) {
+            if (file !== null && upload === false) {
+                // setUpload(true);
                 await handleUploadPic();
-                await user.saveToFirebase();
+                await user.saveToFirebase(); //.then(setUpload(false));
+
             }
         }
 
+        // noinspection JSIgnoredPromiseFromCall
         foo();
     }, [file]);
 
@@ -223,7 +229,7 @@ function ProfilePageComponent() {
                         <div>
                             {
                                 (user && (user?.getUserId() === auth?.currentUser?.uid)) ?
-                                    (<div>{ShowMyProfile(user, file, setFile)}</div>) :
+                                    (<div>{ShowMyProfile(user, file, setFile, upload)}</div>) :
                                     (<div>{showUserProfile(user, lstOfReviews)}</div>)
                             }
                         </div>)

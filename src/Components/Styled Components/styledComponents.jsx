@@ -420,13 +420,13 @@ export const StyledBadge = styled(Badge)(({theme}) => ({
     },
 }));
 
-export const SmallAvatar = styled(Avatar)(({}) => ({
+export const SmallAvatar = styled(Avatar)(({theme}) => ({
     width: 22,
     height: 22,
     border: `2px solid black`,
 }));
 
-export const StyledListItem = styled(ListItem)(({}) => ({
+export const StyledListItem = styled(ListItem)(({theme}) => ({
     width: 22,
     height: 22,
     border: `2px solid black`,

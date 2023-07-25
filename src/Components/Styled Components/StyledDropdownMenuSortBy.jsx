@@ -7,7 +7,7 @@ import StyledCirclesSearchItem from "./StyledSortByButton";
 
 const StyledDropdownMenuSortBy = ({setSortMethod}) => {
     const [anchorEl, setAnchorEl] = useState(null);
-    const [selectedOption, setSelectedOption] = useState('');
+    // const [selectedOption, setSelectedOption] = useState('');
     const [isClicked, setIsClicked] = useState(false);
     const [buttonText, setButtonText] = useState('Sort By..');
 
@@ -17,7 +17,7 @@ const StyledDropdownMenuSortBy = ({setSortMethod}) => {
         boxShadow: isClicked ? "inset 0px 15px 4px rgba(0, 0, 0, 0.25)" : "0px 4px 4px rgba(0, 0, 0, 0.25)",
     };
     const clearFilter =() =>{
-        setIsClicked((false));
+        setIsClicked(false);
         setButtonText("Sort By..")
         setAnchorEl(null)
         setSortMethod("");
@@ -34,8 +34,8 @@ const StyledDropdownMenuSortBy = ({setSortMethod}) => {
 
     const handleOptionClick = (option) => {
         setButtonText(option)
-        setIsClicked((true));
-        setSelectedOption(option);
+        setIsClicked(true);
+        // setSelectedOption(option);
         setAnchorEl(null);
         setSortMethod(option);
     };

@@ -88,30 +88,30 @@ export default function FirstPageBusinessRegistration({onNext, data}) {
     //     getBusinessesList();
     // }, []);
 
-    function RowRadioButtonsGroup() {
-
-            const handleChange = (event) => {
-                setIsBusinessAddedBefore(event.target.value);
-                setOpenAlert(event.target.value === "true");
-                };
-
-            return (
-                <FormControl>
-                    {/*<FormLabel id="demo-row-radio-buttons-group-label">Select:</FormLabel>*/}
-                    <RadioGroup
-                        row
-                        aria-labelledby="demo-row-radio-buttons-group-label"
-                        name="row-radio-buttons-group"
-                        value={isBusinessAddedBefore}
-                        onChange={handleChange}
-                    >
-                        <FormControlLabel value={true} control={<Radio/>} label="Yes"/>
-                        <FormControlLabel value={false} control={<Radio/>} label="No"/>
-
-                    </RadioGroup>
-                </FormControl>
-            );
-        }
+    // function RowRadioButtonsGroup() {
+    //
+    //         const handleChange = (event) => {
+    //             setIsBusinessAddedBefore(event.target.value);
+    //             setOpenAlert(event.target.value === "true");
+    //             };
+    //
+    //         return (
+    //             <FormControl>
+    //                 {/*<FormLabel id="demo-row-radio-buttons-group-label">Select:</FormLabel>*/}
+    //                 <RadioGroup
+    //                     row
+    //                     aria-labelledby="demo-row-radio-buttons-group-label"
+    //                     name="row-radio-buttons-group"
+    //                     value={isBusinessAddedBefore}
+    //                     onChange={handleChange}
+    //                 >
+    //                     <FormControlLabel value={true} control={<Radio/>} label="Yes"/>
+    //                     <FormControlLabel value={false} control={<Radio/>} label="No"/>
+    //
+    //                 </RadioGroup>
+    //             </FormControl>
+    //         );
+    //     }
 
 
     function BusinessTypesSelection(businesses_types) {
