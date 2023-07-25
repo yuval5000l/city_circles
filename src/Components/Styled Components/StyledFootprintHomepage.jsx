@@ -57,10 +57,10 @@ export default function StyledFootprintHomepage({
                     </Box>
                     <Box sx={{
                         backgroundColor: `${theme.palette.primary.main}`,
-                        padding: "0.3rem",
                         borderRadius: "50%",
                         maxWidth: "fit-content",
                         height: "fit-content",
+                        margin: "0px !important"
                     }}>
                         <FootprintsIcon width="2.5rem" height="2rem" float="right" right="0px !important"
                                         sx={{color: "black"}}/>
