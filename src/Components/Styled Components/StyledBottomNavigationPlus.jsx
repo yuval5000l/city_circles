@@ -32,7 +32,7 @@ export default function StyledBottomNavigationPlus() {
                                              }}
                                              onClick={handleClick}
                 />
-                <Typography variant="h6"> add review</Typography>
+                <Typography fontSize="1rem" sx={{color:`${theme.palette.secondary.main}`}}> add review</Typography>
             </Stack>
             <Dialog open={openDialog} onClose={handleCloseSmallDialog}>
                 <DialogContent sx={{

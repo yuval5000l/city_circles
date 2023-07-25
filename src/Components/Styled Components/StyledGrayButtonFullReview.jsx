@@ -4,7 +4,7 @@ import theme from "../../Theme/Theme";
 import {DialogContent, Typography} from "@mui/material";
 import Dialog from "@mui/material/Dialog";
 
-const StyledGrayButtonFullReview = ({content}) => {
+const StyledGrayButtonFullReview = ({content,userName}) => {
     const [clicked, setClicked] = useState(false);
     const [openDialog, setOpenDialog] = useState(false);
 
@@ -35,8 +35,11 @@ const StyledGrayButtonFullReview = ({content}) => {
                     border: `0.2rem solid ${theme.palette.secondary.main}`,
                     color:'white',
                 }}>
-                    <Typography variant="h4">{content}
+                    <Typography variant="h3" marginBottom="1rem" sx={{textAlign:"left"}}>
+                        {userName}:
                     </Typography>
+                    <cite sx={{fontSize:"1.25rem", textAlign:"left"}}>{content}
+                    </cite>
                 </DialogContent>
             </Dialog>
         </>

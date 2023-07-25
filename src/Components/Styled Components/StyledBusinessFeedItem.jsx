@@ -33,10 +33,10 @@ export default function StyledBusinessFeedItem({business}) {
     // console.log(allUsers);
     return (
         <Box sx={{
-            padding: "0.4rem",
-            boxShadow: '0 2px 5px rgba(0, 0, 0, 0.3)',
-            borderBottom: '0.1rem solid #C3ED5B',
-            width: "100%"
+            padding: "1rem",
+            borderTop: "0.2rem solid #E9E8E8",
+            width: "100%",
+
         }}>
             <Stack direction="column" alignItems="flex-start" spacing={1}>
                 <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
@@ -54,7 +54,8 @@ export default function StyledBusinessFeedItem({business}) {
                         {/*    {business.getBusinessType().map(b_type => <StyledTypeBox> {b_type} </StyledTypeBox>)}*/}
                         {/*</Stack>*/}
                         <Stack direction="row" spacing={0.3} justifyContent="center" alignItems="center">
-                            <Typography variant="h5" fontWeight="700">{"0" | business.getRating().toFixed(2)}</Typography>
+                            <Typography variant="h5"
+                                        fontWeight="700">{"0" | business.getRating().toFixed(2)}</Typography>
                             <StyledRating value={business.getRating()}/>
                             <Typography variant="h6">({business.rating[1]})</Typography>
                         </Stack>
