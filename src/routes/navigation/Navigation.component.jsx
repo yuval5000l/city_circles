@@ -22,7 +22,7 @@ const NavigationComponent = () => {
         check_sign_in();
         setButtomBarValue(pageDictionary[location.pathname]);
 
-    },[pageDictionary, location.pathname]);
+    }, [pageDictionary, location.pathname]);
     // console.log(buttomBarValue);
 
     const check_sign_in = () => {
@@ -39,12 +39,14 @@ const NavigationComponent = () => {
             {window.location.pathname === "/ProfilePageComponent" ? (
                 <>
                     <StyledTopBackMenu/>
-                    <Outlet context={[searchRes, setSearchRes, setButtomBarValue]}/>
+                    <Box sx={{width: "100%", marginTop: "4.6rem", marginBottom: "4.5rem"}}>
+                        <Outlet context={[searchRes, setSearchRes, setButtomBarValue]}/>
+                    </Box>
                 </>
             ) : (
                 <>
                     <StyledTopMenuNew setSearch={setSearchRes} setValue={setButtomBarValue}/>
-                    <Box sx={{width:"100%", marginTop: "4.6rem", marginBottom: "4.5rem"}}>
+                    <Box sx={{width: "100%", marginTop: "4.6rem", marginBottom: "4.5rem"}}>
                         <Outlet context={[searchRes, setSearchRes, setButtomBarValue]}/>
                     </Box>
                 </>
@@ -54,4 +56,4 @@ const NavigationComponent = () => {
     )
 };
 
-    export default NavigationComponent;
+export default NavigationComponent;

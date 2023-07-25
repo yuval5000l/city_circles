@@ -105,7 +105,14 @@ export function showBusiness(business) {
                         </Typography>
                     </Stack>
                     <Stack direction="row" spacing={1} alignItems="center">
-                        <AccessTimeIcon/>
+                        <Box sx={{ display: 'flex',
+                            flexWrap: 'wrap',
+                            alignContent: 'stretch',
+                            height: "100%",
+                                // alignItems: "center",
+                            borderRadius: 1, paddingTop: "1rem"}}>
+                            <AccessTimeIcon/>
+                        </Box>
                         <StyledTimeTable business={business}/>
                     </Stack>
                     <Stack direction="row">

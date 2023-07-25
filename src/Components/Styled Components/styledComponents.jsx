@@ -87,6 +87,7 @@ export const StyledSearchBar = styled(Input)(({theme}) => ({
     marginRight: "auto",
     borderRadius: "10px",
     padding: "0.3rem",
+    disableUnderline: true,
     [theme.breakpoints.up('xs')]: {
         height: '2rem',
     }
