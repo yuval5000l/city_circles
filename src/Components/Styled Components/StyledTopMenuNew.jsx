@@ -8,9 +8,10 @@ import StyledLogo from "./StyledLogo";
 function StyledTopMenuNew({setSearch, setValue}) {
 
     const SendToSearch = () => {
-        let currentURL = window.location.href;
-        if (currentURL !== "http://localhost:3000/") {
-            window.location.href = "http://localhost:3000/";
+        let currentURL = window.location.href.substring(window.location.origin.length);
+        console.log(currentURL);
+        if (currentURL !== "/") {
+            window.location.replace("/");
             setValue(1);
 
         }

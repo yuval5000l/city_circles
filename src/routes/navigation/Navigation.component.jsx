@@ -16,7 +16,26 @@ const NavigationComponent = () => {
     };
     const [searchRes, setSearchRes] = useState("");
     const [buttomBarValue, setButtomBarValue] = useState(0); // For BottomBarChosenThingy
+    const [isVirtualKeyboardOpen, setVirtualKeyboardOpen] = useState(false);
 
+    useEffect(() => {
+        const handleFocus = () => setVirtualKeyboardOpen(true);
+        const handleBlur = () => setVirtualKeyboardOpen(false);
+
+        const inputElement = document.getElementById('your-input-element-id'); // Replace with the ID of your input element
+
+        if (inputElement) {
+            inputElement.addEventListener('focus', handleFocus);
+            inputElement.addEventListener('blur', handleBlur);
+        }
+
+        return () => {
+            if (inputElement) {
+                inputElement.removeEventListener('focus', handleFocus);
+                inputElement.removeEventListener('blur', handleBlur);
+            }
+        };
+    }, []);
 
     useEffect(() => {
         check_sign_in();
@@ -35,6 +54,7 @@ const NavigationComponent = () => {
 
     return (
         <>
+
             {/* todo: make this a styled component */}
             {window.location.pathname === "/ProfilePageComponent" ? (
                 <>
@@ -49,7 +69,7 @@ const NavigationComponent = () => {
                     </Box>
                 </>
             )}
-            <StyledBottomNavigationBar value1={buttomBarValue} setValue1={setButtomBarValue}/>
+            {(isVirtualKeyboardOpen) ? (<>YOOOOOO</>) : (<StyledBottomNavigationBar value1={buttomBarValue} setValue1={setButtomBarValue}/>)}
         </>
     )
 };
