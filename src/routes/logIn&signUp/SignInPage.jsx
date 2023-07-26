@@ -20,9 +20,9 @@ export default function UserRegistrationForm() {
         e.preventDefault();
 
         SignIn({email}, {password})
-            .then(() => console.log("Works"))
+            .then(() => window.location.replace('/SignUpPage'))
             .catch((e) => {
-                    console.log(e);
+                    // console.log(e);
                     switch (e) {
                         case 'auth/email-already-in-use':
                             setErrorMessage('This email is already in use by another account.');
@@ -59,7 +59,7 @@ export default function UserRegistrationForm() {
         LogIn({email}, {password})
             .then(() => window.location.replace('/'))
             .catch((e) => {
-                    console.log(e);
+                    // console.log(e);
                     switch (e) {
                         case 'auth/invalid-email':
                             setErrorMessage('The email address is not valid.');

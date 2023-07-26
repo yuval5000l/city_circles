@@ -97,7 +97,7 @@ const NavigationComponent = () => {
                     </Box>
                 </>
             )}
-            {(isVirtualKeyboardOpen) ? (<>YOOOOOO</>) : (<StyledBottomNavigationBar value1={buttomBarValue} setValue1={setButtomBarValue}/>)}
+            {(isVirtualKeyboardOpen) ? (<></>) : (<StyledBottomNavigationBar value1={buttomBarValue} setValue1={setButtomBarValue}/>)}
         </>
     )
 };
