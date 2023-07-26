@@ -48,7 +48,7 @@ const NavigationComponent = () => {
         const handleBlur = () => setVirtualKeyboardOpen(false);
 
         const inputElement = document.getElementById('search-bar-main'); // Replace with the ID of your input element
-        console.log(inputElement);
+        // console.log(inputElement);
         if (inputElement) {
             inputElement.addEventListener('focus', handleFocus);
             inputElement.addEventListener('blur', handleBlur);
@@ -72,7 +72,7 @@ const NavigationComponent = () => {
 
     const check_sign_in = () => {
         onAuthStateChanged(auth, (user) => {
-            if (!user) {
+            if (!user || window.location.pathname === "/SignUpPage") {
                 window.location.replace("/signInPage");
             }
         });

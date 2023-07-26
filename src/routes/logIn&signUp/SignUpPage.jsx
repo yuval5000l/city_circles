@@ -17,7 +17,7 @@ import {useEffect, useState} from "react";
 
 // import {BottomBoxWithLogo} from "../../Components/Styled Components/StyledBoxWithLogo";
 import User, {getUserById} from "../../BackEnd/Classes/UserClass";
-import {onAuthStateChanged} from "firebase/auth";
+// import {onAuthStateChanged} from "firebase/auth";
 import {uploadFile} from "../../BackEnd/Classes/GeneralFunctionsFireBase";
 import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
@@ -27,18 +27,18 @@ import StyledLogo from "../../Components/Styled Components/StyledLogo";
 
 export default function SignupPage() {
 
-    useEffect(() => {
-        check_sign_in();
-    }, []);
-
-
-    const check_sign_in = () => {
-        onAuthStateChanged(auth, (user) => {
-            if (!user) {
-                window.location.replace("/signInPage");
-            }
-        });
-    };
+    // useEffect(() => {
+    //     check_sign_in();
+    // }, []);
+    //
+    //
+    // const check_sign_in = () => {
+    //     onAuthStateChanged(auth, (user) => {
+    //         if (!user) {
+    //             window.location.replace("/signInPage");
+    //         }
+    //     });
+    // };
     // const userID = auth?.currentUser?.uid;
     const [name, setName] = useState("")
     const [chosenSchool, setChosenSchool] = useState("");

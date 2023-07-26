@@ -326,8 +326,9 @@ export const SignIn = async ({email}, {password}) => {
 
         });
     } catch (err) {
-        console.error(err);
-        return false;
+        throw err.code;
+        // console.error(err);
+        // return false;
     }
     return true;
 
@@ -359,8 +360,8 @@ const userConverter = {
 };
 
 export const LogIn = async ({email}, {password}) => {
-    console.log("this is email", email)
-    console.log("this is password", password)
+    // console.log("this is email", email)
+    // console.log("this is password", password)
     try {
         // await signInWithEmailAndPassword(auth, email, password).then((userCredential) => {
             await signInWithEmailAndPassword(auth, email, password).then(() => {
@@ -368,8 +369,8 @@ export const LogIn = async ({email}, {password}) => {
             return true;
         })
     } catch (err) {
-        console.error(err);
-        return false;
+        throw err.code;
+        // return false;
     }
     return true;
 };

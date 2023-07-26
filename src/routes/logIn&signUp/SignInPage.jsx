@@ -11,39 +11,82 @@ import {LogIn} from "../../BackEnd/Classes/UserClass";
 import {TopBoxWithLogo} from "../../Components/Styled Components/StyledBoxWithLogo";
 
 
-export default function UserRegistrationForm () {
+export default function UserRegistrationForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState('');
 
     const handleSignUp = async (e) => {
         e.preventDefault();
 
-        let check_sign_up = await SignIn({email}, {password});
+        SignIn({email}, {password})
+            .then(() => console.log("Works"))
+            .catch((e) => {
+                    console.log(e);
+                    switch (e) {
+                        case 'auth/email-already-in-use':
+                            setErrorMessage('This email is already in use by another account.');
+                            break;
+                        case 'auth/invalid-email':
+                            setErrorMessage('The email address is not valid.');
+                            break;
+                        case 'auth/weak-password':
+                            setErrorMessage('The password is too weak.');
+                            break;
+                        case 'auth/missing-password':
+                            setErrorMessage('Please enter a password');
+                            break;
+                        default:
+                            setErrorMessage('An error occurred while creating the user.');
+                    }
+                }
+            );
 
-        if (check_sign_up)
-        {
-            await window.location.replace('/SignUpPage');
-        }
-        else
-        {
-            console.log("ERROR");
-        }
+
+        // if (check_sign_up)
+        // {
+        //     await window.location.replace('/SignUpPage');
+        // }
+        // else
+        // {
+        //     console.log("ERROR");
+        // }
     };
 
-    const handleLogIn = async(e) =>
-    {
+    const handleLogIn = async (e) => {
         e.preventDefault();
 
-        let check_log_in = await LogIn({email}, {password});
+        LogIn({email}, {password})
+            .then(() => window.location.replace('/'))
+            .catch((e) => {
+                    console.log(e);
+                    switch (e) {
+                        case 'auth/invalid-email':
+                            setErrorMessage('The email address is not valid.');
+                            break;
+                        case 'auth/user-disabled':
+                            setErrorMessage('The user account has been disabled.');
+                            break;
+                        case 'auth/user-not-found':
+                            setErrorMessage('There is no user corresponding to the given email.');
+                            break;
+                        case 'auth/wrong-password':
+                            setErrorMessage('The password is incorrect.');
+                            break;
+                        case 'auth/missing-password':
+                            setErrorMessage('Please enter a password');
+                            break;
+                        default:
+                            setErrorMessage('An error occurred while signing in.');
+                    }
+                }
+            );
 
-        if (check_log_in)
-        {
-            await window.location.replace('/');
-        }
-        else
-        {
-            console.log("ERROR");
-        }
+        // if (check_log_in) {
+        //     await window.location.replace('/');
+        // } else {
+        //     console.log("ERROR");
+        // }
 
     }
     // const logout = async() =>{
@@ -55,14 +98,14 @@ export default function UserRegistrationForm () {
     //     }
     // }
 
-    return(
+    return (
         <>
             <TopBoxWithLogo/>
             {/*<StyledPurpleBox sx={{alignItems: "center", position: 'relative'}}>*/}
             {/*    <StyledLogoLogIn sx={{alignSelf: "center"}}/>*/}
             {/*</StyledPurpleBox>*/}
             <Box sx={{justifySelf: "center"}} marginTop="5rem">
-                <Typography variant="h1" marginTop={4   }>
+                <Typography variant="h1" marginTop={4}>
                     Sign In
                 </Typography>
                 <Stack direction="column" spacing={5} marginBottom={4} marginTop={4}>
@@ -72,7 +115,7 @@ export default function UserRegistrationForm () {
                         </Typography>
                         <TextField
                             type={"email"}
-                            sx={{width:' 50%', alignSelf: "center"}}
+                            sx={{width: ' 50%', alignSelf: "center"}}
                             id="input-with-icon-textfield-email"
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
@@ -93,14 +136,14 @@ export default function UserRegistrationForm () {
                         <TextField
                             key={"PassWord1"}
                             type={"password"}
-                            sx={{width:' 50%', alignSelf: "center"}}
+                            sx={{width: ' 50%', alignSelf: "center"}}
                             id="input-with-icon-textfield-password"
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             InputProps={{
                                 startAdornment: (
                                     <InputAdornment position="start">
-                                        <HttpsOutlinedIcon fontSize="large" />
+                                        <HttpsOutlinedIcon fontSize="large"/>
                                     </InputAdornment>
                                 ),
                             }}
@@ -109,12 +152,13 @@ export default function UserRegistrationForm () {
                     </Stack>
                 </Stack>
                 <Stack direction="row" justifyContent="center" spacing={3} marginTop={5}>
-                    <StyledButtonGray onClick={handleSignUp} >
+                    <StyledButtonGray onClick={handleSignUp}>
                         Register
                     </StyledButtonGray>
                     <StyledButtonGray onClick={handleLogIn}>Log In</StyledButtonGray>
                 </Stack>
             </Box>
+            {errorMessage && <div className="error">{errorMessage}</div>}
         </>
     )
 
