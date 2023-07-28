@@ -15,6 +15,7 @@ import BusinessRegistrationStepper from "./routes/businessRegistrationPage/Busin
 import BusinessPage from "./routes/businessPage/BusinessPage.component";
 import OuterPerspectiveUserProfileComponent from "./routes/profileOuterPerspective/profileOuterPerspective";
 import {useEffect} from "react";
+import CreateUser from "./routes/logIn&signUp/CreateUser";
 
 const ScrollToTop = () => {
     const {pathname} = useLocation();
@@ -47,6 +48,7 @@ function App() {
                     <Route path="SearchPageComponent" element={<SearchPageComponent/>}/>
                     <Route path="signInPage" element={<SignInPage/>}/>
                     <Route path="SignUpPage" element={<SignUpPage/>}/>
+                    <Route path="SignUpPageHelper" element={<CreateUser/>}/>
 
                     {/*<Route path="BusinessPage" element={<BusinessPage/>}/>*/}
                 </Routes>

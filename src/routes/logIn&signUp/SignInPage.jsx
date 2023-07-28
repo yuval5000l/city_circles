@@ -6,9 +6,9 @@ import TextField from "@mui/material/TextField";
 import InputAdornment from '@mui/material/InputAdornment';
 import HttpsOutlinedIcon from '@mui/icons-material/HttpsOutlined';
 import React, {useState} from "react";
-import {SignIn} from "../../BackEnd/Classes/UserClass";
 import {LogIn} from "../../BackEnd/Classes/UserClass";
 import {TopBoxWithLogo} from "../../Components/Styled Components/StyledBoxWithLogo";
+import {Link} from "react-router-dom";
 
 
 export default function UserRegistrationForm() {
@@ -16,42 +16,42 @@ export default function UserRegistrationForm() {
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState('');
 
-    const handleSignUp = async (e) => {
-        e.preventDefault();
-
-        SignIn({email}, {password})
-            .then(() => window.location.replace('/SignUpPage'))
-            .catch((e) => {
-                    // console.log(e);
-                    switch (e) {
-                        case 'auth/email-already-in-use':
-                            setErrorMessage('This email is already in use by another account.');
-                            break;
-                        case 'auth/invalid-email':
-                            setErrorMessage('The email address is not valid.');
-                            break;
-                        case 'auth/weak-password':
-                            setErrorMessage('The password is too weak.');
-                            break;
-                        case 'auth/missing-password':
-                            setErrorMessage('Please enter a password');
-                            break;
-                        default:
-                            setErrorMessage('An error occurred while creating the user.');
-                    }
-                }
-            );
-
-
-        // if (check_sign_up)
-        // {
-        //     await window.location.replace('/SignUpPage');
-        // }
-        // else
-        // {
-        //     console.log("ERROR");
-        // }
-    };
+    // const handleSignUp = async (e) => {
+    //     e.preventDefault();
+    //
+    //     SignIn({email}, {password})
+    //         .then(() => window.location.replace('/SignUpPage'))
+    //         .catch((e) => {
+    //                 // console.log(e);
+    //                 switch (e) {
+    //                     case 'auth/email-already-in-use':
+    //                         setErrorMessage('This email is already in use by another account.');
+    //                         break;
+    //                     case 'auth/invalid-email':
+    //                         setErrorMessage('The email address is not valid.');
+    //                         break;
+    //                     case 'auth/weak-password':
+    //                         setErrorMessage('The password is too weak.');
+    //                         break;
+    //                     case 'auth/missing-password':
+    //                         setErrorMessage('Please enter a password');
+    //                         break;
+    //                     default:
+    //                         setErrorMessage('An error occurred while creating the user.');
+    //                 }
+    //             }
+    //         );
+    //
+    //
+    //     // if (check_sign_up)
+    //     // {
+    //     //     await window.location.replace('/SignUpPage');
+    //     // }
+    //     // else
+    //     // {
+    //     //     console.log("ERROR");
+    //     // }
+    // };
 
     const handleLogIn = async (e) => {
         e.preventDefault();
@@ -156,9 +156,12 @@ export default function UserRegistrationForm() {
                     <Typography variant="h5">
                         Not Registered? you can register here
                     </Typography>
-                    <StyledButtonGray onClick={handleSignUp} >
+                    <Link to={"../SignUpPageHelper"}><StyledButtonGray>
                         Register
-                    </StyledButtonGray>
+                    </StyledButtonGray></Link>
+                    {/*<StyledButtonGray onClick={handleSignUp} >*/}
+                    {/*    Register*/}
+                    {/*</StyledButtonGray>*/}
                 </Stack>
             </Box>
             {errorMessage && <div className="error">{errorMessage}</div>}
