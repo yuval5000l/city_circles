@@ -9,12 +9,18 @@ import React, {useState} from "react";
 import {LogIn} from "../../BackEnd/Classes/UserClass";
 import {TopBoxWithLogo} from "../../Components/Styled Components/StyledBoxWithLogo";
 import {Link} from "react-router-dom";
+import Alert from "@mui/material/Alert";
+import IconButton from "@mui/material/IconButton";
+import CloseIcon from "@mui/icons-material/Close";
+import Snackbar from "@mui/material/Snackbar";
 
 
 export default function UserRegistrationForm() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState('');
+    const [openAlert, setOpenAlert] = useState(false)
+
 
     // const handleSignUp = async (e) => {
     //     e.preventDefault();
@@ -63,24 +69,31 @@ export default function UserRegistrationForm() {
                     switch (e) {
                         case 'auth/invalid-email':
                             setErrorMessage('The email address is not valid.');
+                            setOpenAlert(true);
                             break;
                         case 'auth/user-disabled':
                             setErrorMessage('The user account has been disabled.');
+                            setOpenAlert(true);
                             break;
                         case 'auth/user-not-found':
                             setErrorMessage('There is no user corresponding to the given email.');
+                            setOpenAlert(true);
                             break;
                         case 'auth/wrong-password':
                             setErrorMessage('The password is incorrect.');
+                            setOpenAlert(true);
                             break;
                         case 'auth/missing-password':
                             setErrorMessage('Please enter a password');
+                            setOpenAlert(true);
                             break;
                         default:
                             setErrorMessage('An error occurred while signing in.');
+                            setOpenAlert(true);
                     }
                 }
             );
+
 
         // if (check_log_in) {
         //     await window.location.replace('/');
@@ -97,6 +110,14 @@ export default function UserRegistrationForm() {
     //         console.error(err);
     //     }
     // }
+
+    const handleCloseAlert = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+        setOpenAlert(false);
+    }
+
 
     return (
         <>
@@ -151,7 +172,29 @@ export default function UserRegistrationForm() {
                         />
                     </Stack>
                 </Stack>
-                <Stack direction="column" justifyContent="center" alignItems="center" spacing={2} marginTop={5}>
+                <Stack direction="column" justifyContent="center" alignItems="center" spacing={2} marginY={5}>
+                    {errorMessage &&
+                        // <div className="error">{errorMessage}</div>
+                        <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert} sx={{position: "relative", display: "flex", width: '95%', justifyContent: "center"}}>
+                            <Alert onClose={handleCloseAlert} severity="warning"
+                                   action={
+                                       <IconButton
+                                           aria-label="close"
+                                           color="inherit"
+                                           size="small"
+                                           onClick={() => {
+                                               setOpenAlert(false);
+                                           }}
+                                       >
+                                           <CloseIcon fontSize="inherit" />
+                                       </IconButton>
+                                   }
+                                   sx={{ mb: 1 }}
+                            >
+                                {errorMessage}
+                            </Alert>
+                        </Snackbar>
+                    }
                     <StyledButtonGray onClick={handleLogIn}  sx={{width:"60%"}}>Log In</StyledButtonGray>
                     <Typography variant="h5">
                         Not Registered? you can register here
@@ -164,7 +207,7 @@ export default function UserRegistrationForm() {
                     {/*</StyledButtonGray>*/}
                 </Stack>
             </Box>
-            {errorMessage && <div className="error">{errorMessage}</div>}
+
         </>
     )
 
