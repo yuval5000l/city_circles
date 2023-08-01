@@ -49,7 +49,6 @@ function App() {
                     <Route path="signInPage" element={<SignInPage/>}/>
                     <Route path="SignUpPage" element={<SignUpPage/>}/>
                     <Route path="SignUpPageHelper" element={<CreateUser/>}/>
-                    <Route path="onBoarding" element={<onBoarding/>}/>
 
                     {/*<Route path="BusinessPage" element={<BusinessPage/>}/>*/}
                 </Routes>
