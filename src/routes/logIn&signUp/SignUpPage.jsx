@@ -23,6 +23,7 @@ import Avatar from "@mui/material/Avatar";
 import Box from "@mui/material/Box";
 import theme from "../../Theme/Theme";
 import StyledLogo from "../../Components/Styled Components/StyledLogo";
+import {useNavigate} from "react-router-dom";
 
 
 export default function SignupPage() {
@@ -51,6 +52,7 @@ export default function SignupPage() {
     const SchoolsLst = User.ListOfCirclesSchools;
     const NeighborhoodLst = User.ListOfCirclesNeighborhoods;
     // const HobbyLst = User.ListOfCirclesPersonalities;
+    let navigate = useNavigate();
 
     useEffect(() => {
         async function foo() {
@@ -68,7 +70,7 @@ export default function SignupPage() {
         const user = await getUserById(auth?.currentUser?.uid);
         await user.AddUserMoreInfo(name, chosenSchool, chosenNeighborhood, picturePath);
         // console.log("after user")
-        window.location.replace('/');
+        navigate("/", { data: true });
     };
     const handleUploadPic = async () => {
         uploadFile(file).then((pathy) => {
@@ -239,7 +241,7 @@ export default function SignupPage() {
                     How do you look? upload profile photo!
                 </Typography>
                 <Stack direction="row" spacing={"1rem"} sx={{justifyContent: "start", alignItems: 'center'}}>
-                    <Button variant={"contained"} component={"label"} >Choose File
+                    <Button variant={"contained"} component={"label"}>Choose File
                         <input
                             type="file"
                             hidden
@@ -258,9 +260,9 @@ export default function SignupPage() {
                 paddingTop: "0.5rem",
                 paddingBottom: "0.5rem",
             }}>
-                < Typography variant="h3">
-                    Submit Information
-                </Typography>
+                    < Typography variant="h3">
+                        Submit Information
+                    </Typography>
             </Button>
             {/*<Box sx={{position: 'relative'}}>*/}
             {/*    <br/>*/}

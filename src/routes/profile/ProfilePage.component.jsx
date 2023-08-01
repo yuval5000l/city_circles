@@ -161,11 +161,6 @@ function ProfilePageComponent() {
     let [user, setUser] = useState(null);
     const [lstOfReviews, setLstOfReviews] = useState([]);
     const [upload, setUpload] = useState(false);
-    // console.log("Before");
-    // if (user){
-    //     console.log(picturePath);
-    // }
-
     const handleUploadPic = async () => {
         uploadFile(file).then((pathy) => {
             setPicturePath(pathy);
@@ -184,7 +179,6 @@ function ProfilePageComponent() {
                 // await user.saveToFirebase(setUpload);
             }
         }
-
         // noinspection JSIgnoredPromiseFromCall
         foo();
     }, [file]);

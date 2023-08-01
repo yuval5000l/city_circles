@@ -59,7 +59,7 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
                 lstSetDays[i]([temp_start, temp_end]);
             }
         }
-    }, [file, data, handleUploadPic]);
+    }, [file, data]);
 
     const handleUploadPic = async () => {
         uploadFile(file).then((pathy) => {

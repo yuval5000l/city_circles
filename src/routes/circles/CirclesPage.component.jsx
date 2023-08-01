@@ -9,10 +9,86 @@ import StyledDropdownMenuFilter from "../../Components/Styled Components/StyledD
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import {getUserById} from "../../BackEnd/Classes/UserClass";
-import {useOutletContext} from "react-router-dom";
+import {useLocation, useNavigate, useOutletContext} from "react-router-dom";
 import Business from "../../BackEnd/Classes/BusinessClass";
 import StyledBusinessFeedItem from "../../Components/Styled Components/StyledBusinessFeedItem";
 import StyledGifLoading from "../../Components/Styled Components/StyledGifLoading";
+import Joyride, {STATUS} from 'react-joyride';
+
+
+function Tutorial2() {
+    const [steps, setSteps] = useState([
+        {
+            target: '.step-1',
+            content: 'This the circles filter!',
+        },
+        {
+            target: '.step-2',
+            content: 'Here you can choose to filter the business by your social circles!',
+
+        },
+        {
+            target: '.step-3',
+            content: 'you can sort them..',
+            placement: 'top',
+
+        },
+        {
+            target: '.step-4',
+            content: 'Aaand filter them as you want',
+            placement: 'top',
+
+        },
+    ]);
+    let navigate = useNavigate();
+
+    const [runTutorial, setRunTutorial] = useState(false);
+
+    const handleJoyrideCallback = (data) => {
+        const { status } = data;
+        if (status === STATUS.FINISHED) {
+            setRunTutorial(false);
+            navigate("/", {data: false});
+
+        }
+    };
+    useEffect(() => {
+            setRunTutorial(true);
+    }, []);
+    return (<>
+        <Joyride
+            steps={steps}
+            run={runTutorial}
+            continuous={true}
+            callback={handleJoyrideCallback}
+            showProgress
+            showButton
+            // scrollToFirstStep={false}   // Automatically scroll to the first step when the tutorial starts
+            // scrollToSteps={false}       // Automatically scroll to the target element of each step
+            locale={{
+                back: 'Back',
+                next: 'Next',
+                last: 'Finish',
+            }}
+            showSkipButton
+            styles={{
+                options: {
+                    arrowColor: '#fff',
+                    primaryColor: '#3f51b5',
+                    textColor: '#333',
+                    overlayColor: 'rgba(0, 0, 0, 0.5)',
+                    spotlightShadow: '0 0 15px rgba(0, 0, 0, 0.5)',
+                    // padding: 10,
+
+                    // margin: 20,
+                },tooltipContainer: {
+                    padding: '1px', // Customize the padding inside the messages (steps)
+                },
+
+            }}
+        />
+    </>);
+}
 
 
 function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}) {
@@ -78,7 +154,7 @@ const CirclesPageComponent = () => {
     const [sortMethod, setSortMethod] = useState(""); // Sort by People or Rating (empty string if null)
     const [filterTypeBusiness, setFilterTypeBusiness] = useState(""); // Filters by the type of business (empty string if null)
     // console.log(filterTypeBusiness);
-
+    const location = useLocation()
     useEffect(() => {
         getUser();
         getBusinesses();
@@ -124,43 +200,45 @@ const CirclesPageComponent = () => {
     // console.log(lstBusiness[0].getReviews()[0].rating);
     // const position = [31.777587, 35.215094]; //[this.state.location.lat, this.state.location.lng];
     return (<>
+        {location.state && <Tutorial2/>}
         {(lstBusiness === [] || user === null)
             ?
             (<StyledGifLoading/>)
             :
             (<>
-                    <Box sx={{
+                    <Box className="step-1" sx={{
                         backgroundColor: theme.palette.primary.main,
                         borderBottom: `0.3rem solid ${theme.palette.secondary.main}`,
                         width: '100%',
                         display: 'inline-block',
                         paddingBottom: "0.4rem",
                     }}>
+
                         <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
-                            <Stack direction="row" spacing={2} alignItems="center" justifyContent="center"
+                            <Stack className="step-2"  direction="row" spacing={2} alignItems="center" justifyContent="center"
                                    paddingTop="0.65rem">
                                 <>
                                     {
                                         user.getCircles().map((circle, index) =>
-                                            // <ListItem sx={{padding: "unset!important"}} width="100%" key={user.getCircles()[index]+index.toString()}
-                                            <div key={user.getCircles()[index] + index.toString()}>
-                                                <StyledCirclesSearchItem name={user.getCircles()[index]}
-                                                                         checkFunction={CircleClicked(index)}/>
-                                            </div>
-                                        //</ListItem>
+                                                // <ListItem sx={{padding: "unset!important"}} width="100%" key={user.getCircles()[index]+index.toString()}
+                                                <div key={user.getCircles()[index] + index.toString()}>
+                                                    <StyledCirclesSearchItem name={user.getCircles()[index]}
+                                                                                  checkFunction={CircleClicked(index)}/>
+
+                                                </div>
+                                            //</ListItem>
                                         )}
                                 </>
                             </Stack>
                             <Stack direction="row" spacing={2} alignItems="center" justifyContent="center"
                                    padding="0.4rem">
-                                <StyledDropdownMenuSortBy setSortMethod={setSortMethod}/>
-                                <StyledDropdownMenuFilter setFilterMethod={setFilterTypeBusiness}/>
+                                <div className="step-3"><StyledDropdownMenuSortBy className="step-3" setSortMethod={setSortMethod}/></div>
+                                <div className="step-4"><StyledDropdownMenuFilter className="step-4" setFilterMethod={setFilterTypeBusiness}/></div>
                             </Stack>
                         </Stack>
                     </Box>
                     <BigFilter lstBusiness={lstBusiness} circles={circlesFilter}
                                searchRes={searchRes} businessType={filterTypeBusiness} sortMethod={sortMethod}/>
-
 
                 </>
             )

@@ -16,43 +16,6 @@ export default function UserRegistrationForm() {
     const [password, setPassword] = useState("");
     const [errorMessage, setErrorMessage] = useState('');
 
-    // const handleSignUp = async (e) => {
-    //     e.preventDefault();
-    //
-    //     SignIn({email}, {password})
-    //         .then(() => window.location.replace('/SignUpPage'))
-    //         .catch((e) => {
-    //                 // console.log(e);
-    //                 switch (e) {
-    //                     case 'auth/email-already-in-use':
-    //                         setErrorMessage('This email is already in use by another account.');
-    //                         break;
-    //                     case 'auth/invalid-email':
-    //                         setErrorMessage('The email address is not valid.');
-    //                         break;
-    //                     case 'auth/weak-password':
-    //                         setErrorMessage('The password is too weak.');
-    //                         break;
-    //                     case 'auth/missing-password':
-    //                         setErrorMessage('Please enter a password');
-    //                         break;
-    //                     default:
-    //                         setErrorMessage('An error occurred while creating the user.');
-    //                 }
-    //             }
-    //         );
-    //
-    //
-    //     // if (check_sign_up)
-    //     // {
-    //     //     await window.location.replace('/SignUpPage');
-    //     // }
-    //     // else
-    //     // {
-    //     //     console.log("ERROR");
-    //     // }
-    // };
-
     const handleLogIn = async (e) => {
         e.preventDefault();
 
@@ -152,19 +115,21 @@ export default function UserRegistrationForm() {
                     </Stack>
                 </Stack>
                 <Stack direction="column" justifyContent="center" alignItems="center" spacing={2} marginTop={5}>
-                    <StyledButtonGray onClick={handleLogIn}  sx={{width:"60%"}}>Log In</StyledButtonGray>
+                    <StyledButtonGray onClick={handleLogIn} sx={{width: "60%"}}>Log In</StyledButtonGray>
                     <Typography variant="h5">
                         Not Registered? you can register here
                     </Typography>
-                    <Link to={"../SignUpPageHelper"}><StyledButtonGray>
+                    <Link to={"../SignUpPageHelper"}><
+                        StyledButtonGray>
                         Register
-                    </StyledButtonGray></Link>
+                    </StyledButtonGray>
+                    </Link>
                     {/*<StyledButtonGray onClick={handleSignUp} >*/}
                     {/*    Register*/}
                     {/*</StyledButtonGray>*/}
                 </Stack>
             </Box>
-            {errorMessage && <div className="error">{errorMessage}</div>}
+            {errorMessage && <>abc {errorMessage}</>}
         </>
     )
 

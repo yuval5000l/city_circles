@@ -1,7 +1,7 @@
 import './App.css';
 import {Route, Routes, useLocation} from "react-router-dom";
 import NavigationComponent from "./routes/navigation/Navigation.component";
-import HomePageComponent from "./routes/homePage/HomePage.component";
+import FeedPageComponent from "./routes/feedPage/FeedPage.component";
 import NotificationsComponent from "./routes/notifications/Notifications.component";
 import SearchPageComponent from "./routes/search_page/SearchPage.component";
 import Theme from "./Theme/Theme";
@@ -34,7 +34,7 @@ function App() {
                 <Routes>
                     <Route path="/" element={<NavigationComponent/>}>
                         <Route index element={<CirclesPageComponent/>}/>
-                        <Route path="FeedPageComponent" element={<HomePageComponent/>}/>
+                        <Route path="FeedPageComponent" element={<FeedPageComponent/>}/>
                         <Route path="NotificationsComponent" element={<NotificationsComponent/>}/>
                         <Route path="CirclesPageComponent" element={<CirclesPageComponent/>}/>
                         <Route path="FriendsPageComponent" element={<FriendsPageComponent/>}/>
@@ -49,6 +49,7 @@ function App() {
                     <Route path="signInPage" element={<SignInPage/>}/>
                     <Route path="SignUpPage" element={<SignUpPage/>}/>
                     <Route path="SignUpPageHelper" element={<CreateUser/>}/>
+                    <Route path="onBoarding" element={<onBoarding/>}/>
 
                     {/*<Route path="BusinessPage" element={<BusinessPage/>}/>*/}
                 </Routes>
