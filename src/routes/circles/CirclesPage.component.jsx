@@ -35,8 +35,14 @@ function Tutorial2() {
         },
         {
             target: '.step-4',
-            content: 'Aaand filter them as you want',
+            content: 'And filter them as you want',
             placement: 'top',
+
+        },
+        {
+            target: '.step-5',
+            content: 'Add reviews or footprints',
+            placement: 'bottom',
 
         },
     ]);
@@ -127,6 +133,7 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}) 
     // console.log("third Layer Sort", thirdLayerSort);
 
     let searchLayerFilter = thirdLayerSort.filter(business => (business.name.toLowerCase()).includes(searchRes.toLowerCase()));
+    // console.log("search Layer Filter", searchLayerFilter);
     return (
         <>
             {(searchLayerFilter.length === 0) ? (<StyledGifNothingHere/>) : (searchLayerFilter.map((filteredBusiness, index) =>

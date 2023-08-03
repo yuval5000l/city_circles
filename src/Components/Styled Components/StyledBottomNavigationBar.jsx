@@ -32,7 +32,7 @@ export default function StyledBottomNavigationBar({value1, setValue1}) {
                                           selected={location.pathname === '/'}
 
             />
-            <StyledBottomNavigationPlus />
+            <div className="step-5"><StyledBottomNavigationPlus /></div>
             <StyledBottomNavigationAction component={Link} to="/FeedPageComponent" label="feed" icon={<DynamicFeedIcon
                 sx={{
                     fontSize: {

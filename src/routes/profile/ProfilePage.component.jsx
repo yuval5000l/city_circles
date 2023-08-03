@@ -10,7 +10,6 @@ import Avatar from "@mui/material/Avatar";
 import theme from "../../Theme/Theme";
 import {TopBoxWithProfileImg} from "../../Components/Styled Components/StyledBoxWithLogo";
 import {
-    StyledAvatarFriendProfile,
     StyledLightCircleBox
 } from "../../Components/Styled Components/styledComponents";
 import * as React from "react";
@@ -24,6 +23,9 @@ import {StyledFeedItemProfile} from "../../Components/Styled Components/OuterPro
 import StyledProfileTabs from "./StyledProfileTabs";
 import {uploadFile} from "../../BackEnd/Classes/GeneralFunctionsFireBase";
 import StyledGifLoading from "../../Components/Styled Components/StyledGifLoading";
+import StyledProfileAvatarWithBadge from "../../Components/Styled Components/StyledProfileWIthBadge";
+// import EditIcon from '@mui/icons-material/Edit';
+import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import FileReaderComponent from "../../BackEnd/utils/FileReaderComponent";
 import DeleteAllButton from "../../BackEnd/utils/DeleteAllButtom";
 
@@ -139,8 +141,11 @@ function ShowMyProfile(user, file, setFile, upload) {
                                     hidden
                                     accept="image/*"
                                     onChange={(e) => setFile(e.target.files[0])}/>
-                                <StyledAvatarFriendProfile src={user.getPic()}>
-                                </StyledAvatarFriendProfile>
+                                {/*<StyledAvatarFriendProfile src={user.getPic()}>*/}
+                                {/*</StyledAvatarFriendProfile>*/}
+                                <StyledProfileAvatarWithBadge
+                                                              bigPhoto={user.getPic()}
+                                                              smallPhoto={<PhotoCameraIcon width="1rem" height="1rem" sx={{backgroundColor: "#c3ed5b", color: "white", borderRadius: "50%", padding: "0.3rem", fontSize: "2rem", border: '0.2rem !important', borderColor: 'white'}}/>}/>
                             </Button>)}
                     </Stack>
 
