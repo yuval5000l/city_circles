@@ -31,9 +31,16 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
     const [houseNum, setHouseNum] = useState('');
 
     function CreateAddress() {
-        const FullAddress = street + " " + houseNum + ", " + city
-        setAddress(street + " " + houseNum + ", " + city);
-        return FullAddress
+        if (street !== '') {
+            const FullAddress = street + " " + houseNum + ", " + city
+            setAddress(street + " " + houseNum + ", " + city);
+            return FullAddress
+        } else {
+            const FullAddress = city
+            setAddress(city);
+            return FullAddress
+        }
+
     }
 
     const [openingHoursArray, setOpeningHoursArray] = useState({});
@@ -146,7 +153,7 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
                     <Typography variant="h3">Location</Typography>
                 </Stack>
                 <TextField required={true} label={'City'} fieldname={'City'} onChange={(e) => setCity(e.target.value)}/>
-                <TextField required={true} label={'Street'} fieldname={'Street'}
+                <TextField required={true} label={'Street or Neighborhood'} fieldname={'Street'}
                            onChange={(e) => setStreet(e.target.value)}/>
                 <TextField required={true} label={'House Number'} fieldname={'House Number'}
                            onChange={(e) => setHouseNum(e.target.value)}/>
