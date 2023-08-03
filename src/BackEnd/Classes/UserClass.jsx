@@ -241,6 +241,37 @@ export default class User {
 
         return listOfReviewsAndFootprints;
     }
+
+    static async getAllUsersReviewsFootprintsIncludeCurrentUser()
+    {
+        let oldLstUsers = await User.getAllUsers();
+        let currentUser = oldLstUsers.find(item => item.getUserId() === auth?.currentUser?.uid);
+        let lstUsers = oldLstUsers.filter(user => {
+            // if (user.getUserId() === currentUser.getUserId())
+            // {
+            //     return false;
+            // }
+            return user.getCircles().filter(circle => currentUser.getCircles().includes(circle)).length !== 0;
+
+        })
+        let dicBusiness = await Business.getAllBusinessByName();
+        let listOfReviewsAndFootprints = [];
+        for (const user of lstUsers)
+        {
+            for (const review of user.getUserReviews())
+            {
+                const business = dicBusiness[review.businessID];
+                listOfReviewsAndFootprints.push(User.feedItemConverter(user, review, business));
+            }
+            for (const review of user.getUserFootprints())
+            {
+                const business = dicBusiness[review.businessID];
+                listOfReviewsAndFootprints.push(User.feedItemFootprintConverter(user, review, business));
+            }
+        }
+
+        return listOfReviewsAndFootprints;
+    }
 }
 
 User.ListOfCirclesNeighborhoods = ["Old City", "Nahlahot", "City Center",

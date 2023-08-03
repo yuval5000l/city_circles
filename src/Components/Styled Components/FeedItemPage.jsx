@@ -18,8 +18,16 @@ export default function FeedItemPage() {
     const [listReviews, setListReviews] = useState([]);
     const getFriendsReviewsHelper = () => {
         onAuthStateChanged(auth, (user) => {
+            // if (user) {
+            //     User.getAllUsersReviewsFootprintsExceptCurrentUser().then((lst) => {
+            //         setListReviews(lst.sort(CompareUserTimeStamp));
+            //     }).catch((error) => {
+            //         console.error(error);
+            //     });
+            // }
+
             if (user) {
-                User.getAllUsersReviewsFootprintsExceptCurrentUser().then((lst) => {
+                User.getAllUsersReviewsFootprintsIncludeCurrentUser().then((lst) => {
                     setListReviews(lst.sort(CompareUserTimeStamp));
                 }).catch((error) => {
                     console.error(error);
