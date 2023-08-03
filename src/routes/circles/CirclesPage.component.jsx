@@ -239,7 +239,6 @@ const CirclesPageComponent = () => {
                     </Box>
                     <BigFilter lstBusiness={lstBusiness} circles={circlesFilter}
                                searchRes={searchRes} businessType={filterTypeBusiness} sortMethod={sortMethod}/>
-
                 </>
             )
         }

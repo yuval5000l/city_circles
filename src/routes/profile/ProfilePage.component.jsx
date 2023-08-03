@@ -24,6 +24,8 @@ import {StyledFeedItemProfile} from "../../Components/Styled Components/OuterPro
 import StyledProfileTabs from "./StyledProfileTabs";
 import {uploadFile} from "../../BackEnd/Classes/GeneralFunctionsFireBase";
 import StyledGifLoading from "../../Components/Styled Components/StyledGifLoading";
+import FileReaderComponent from "../../BackEnd/utils/FileReaderComponent";
+import DeleteAllButton from "../../BackEnd/utils/DeleteAllButtom";
 
 function FeedItem(user, lstOfReviews) {
     if (lstOfReviews === []) {
@@ -233,6 +235,9 @@ function ProfilePageComponent() {
                             }
                         </div>)
             }
+            {/*yo*/}
+            {/*<FileReaderComponent></FileReaderComponent>*/}
+            {/*<DeleteAllButton name={"Test"}></DeleteAllButton>*/}
         </Box>
     );
 

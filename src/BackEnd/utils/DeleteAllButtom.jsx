@@ -1,20 +1,20 @@
 // DeleteAllButton.js
 import React from 'react';
-import db from '../config/firebase';
+import {db} from '../config/firebase';
 import 'firebase/firestore';
+import {collection, getDocs, deleteDoc} from "firebase/firestore";
 
-const DeleteAllButton = (name) => {
+const DeleteAllButton = ({name}) => {
     const handleDeleteAll = () => {
 
         // Replace 'collectionName' with the name of your collection
-        const collectionRef = db.collection(name);
-
-        // Delete all documents in the collection
-        collectionRef.get().then((querySnapshot) => {
+        getDocs(collection(db, name)).then((querySnapshot) =>
+        {
             querySnapshot.forEach((doc) => {
-                doc.ref.delete();
-            });
-        });
+                deleteDoc(doc.ref).then(r => {});
+
+        })});
+
     };
 
     return (

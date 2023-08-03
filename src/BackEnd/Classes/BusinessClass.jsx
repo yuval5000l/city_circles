@@ -54,7 +54,6 @@ export default class Business {
             circlesFootprint = {};
             // console.log(User.ListOfCircles);
             User.ListOfCircles.forEach(b_type => circlesFootprint[b_type] = 0);
-
         }
         if (circlesReviews.size === 0) {
             circlesReviews = {}

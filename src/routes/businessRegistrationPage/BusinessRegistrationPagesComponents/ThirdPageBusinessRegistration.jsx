@@ -142,7 +142,12 @@ export default function ThirdPageBusinessRegistration({onNext, onBack, data}) {
             "Friday": getHoursAndMinutes(friday), "Saturday": getHoursAndMinutes(saturday)
         }]);
     }
-
+    // console.log({
+    //     "Sunday": getHoursAndMinutes(sunday),
+    //     "Monday": getHoursAndMinutes(monday), "Tuesday": getHoursAndMinutes(tuesday),
+    //     "Wednesday": getHoursAndMinutes(wednesday), "Thursday": getHoursAndMinutes(thursday),
+    //     "Friday": getHoursAndMinutes(friday), "Saturday": getHoursAndMinutes(saturday)
+    // });
 
     return (
         <div>
