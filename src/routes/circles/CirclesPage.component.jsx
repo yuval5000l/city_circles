@@ -14,7 +14,7 @@ import Business from "../../BackEnd/Classes/BusinessClass";
 import StyledBusinessFeedItem from "../../Components/Styled Components/StyledBusinessFeedItem";
 import StyledGifLoading from "../../Components/Styled Components/StyledGifLoading";
 import Joyride, {STATUS} from 'react-joyride';
-
+import StyledGifNothingHere from "../../Components/Styled Components/StyledGifNothingHere";
 
 function Tutorial2() {
     const [steps, setSteps] = useState([
@@ -127,10 +127,9 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}) 
     // console.log("third Layer Sort", thirdLayerSort);
 
     let searchLayerFilter = thirdLayerSort.filter(business => (business.name.toLowerCase()).includes(searchRes.toLowerCase()));
-    // console.log("search Layer Filter", searchLayerFilter);
     return (
         <>
-            {(searchLayerFilter === []) ? (<></>) : (searchLayerFilter.map((filteredBusiness, index) =>
+            {(searchLayerFilter.length === 0) ? (<StyledGifNothingHere/>) : (searchLayerFilter.map((filteredBusiness, index) =>
                 (
                     <ListItem sx={{padding: "unset!important"}} width="100%"
                               key={filteredBusiness.name + index.toString()}>
