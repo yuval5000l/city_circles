@@ -13,7 +13,9 @@ import Alert from "@mui/material/Alert";
 import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Snackbar from "@mui/material/Snackbar";
-
+import {auth, db, googleProvider} from "../../BackEnd/config/firebase";
+import {signInWithPopup} from "firebase/auth";
+import {doc, setDoc} from "firebase/firestore";
 
 export default function UserRegistrationForm() {
     const [email, setEmail] = useState("");
@@ -21,7 +23,32 @@ export default function UserRegistrationForm() {
     const [errorMessage, setErrorMessage] = useState('');
     const [openAlert, setOpenAlert] = useState(false)
 
+    const handleGoogleSignUp = () => {
+        signInWithPopup(auth, googleProvider)
+            .then((result) => {
+                // Handle successful sign-up here if needed
+                // Adds a user with the same uid
+                const data = {
+                    name: "",
+                    email: result.user.email,
+                    password: "",
+                    userID: result.user.uid,
+                    reviews: [],
+                    footprints: [],
+                    circles: [],
+                    // birthday: null
+                    profile_pic: "",
+                    friends: [],
+                }
+                console.log(data);
+                setDoc(doc(db, "Users", result.user.uid), data).then(() => window.location.replace('/SignUpPage'));
 
+            })
+            .catch((error) => {
+                // Handle errors here if needed
+                console.error(error);
+            });
+    };
     const handleLogIn = async (e) => {
         e.preventDefault();
 
@@ -138,7 +165,8 @@ export default function UserRegistrationForm() {
                 <Stack direction="column" justifyContent="center" alignItems="center" spacing={2} marginY={5}>
                     {errorMessage &&
                         // <div className="error">{errorMessage}</div>
-                        <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert} sx={{position: "relative", display: "flex", width: '95%', justifyContent: "center"}}>
+                        <Snackbar open={openAlert} autoHideDuration={6000} onClose={handleCloseAlert}
+                                  sx={{position: "relative", display: "flex", width: '95%', justifyContent: "center"}}>
                             <Alert onClose={handleCloseAlert} severity="warning"
                                    action={
                                        <IconButton
@@ -149,27 +177,28 @@ export default function UserRegistrationForm() {
                                                setOpenAlert(false);
                                            }}
                                        >
-                                           <CloseIcon fontSize="inherit" />
+                                           <CloseIcon fontSize="inherit"/>
                                        </IconButton>
                                    }
-                                   sx={{ mb: 1 }}
+                                   sx={{mb: 1}}
                             >
                                 {errorMessage}
                             </Alert>
                         </Snackbar>
                     }
-                    <StyledButtonGray onClick={handleLogIn}  sx={{width:"60%"}}>Log In</StyledButtonGray>
+                    <StyledButtonGray onClick={handleLogIn} sx={{width: "60%"}}>Log In</StyledButtonGray>
                     <Typography variant="h5">
                         Not Registered? you can register here
                     </Typography>
-                    <Link to={"../SignUpPageHelper"}><
-                        StyledButtonGray>
-                        Register
-                    </StyledButtonGray>
+                    <Link to={"../SignUpPageHelper"}>
+                        <StyledButtonGray>
+                            Register
+                        </StyledButtonGray>
                     </Link>
                     {/*<StyledButtonGray onClick={handleSignUp} >*/}
                     {/*    Register*/}
                     {/*</StyledButtonGray>*/}
+                    <StyledButtonGray onClick={handleGoogleSignUp}>Sign Up with Google</StyledButtonGray>
                 </Stack>
             </Box>
 
