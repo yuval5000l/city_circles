@@ -127,6 +127,7 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}) 
     // console.log("third Layer Sort", thirdLayerSort);
 
     let searchLayerFilter = thirdLayerSort.filter(business => (business.name.toLowerCase()).includes(searchRes.toLowerCase()));
+    // console.log("search Layer Filter", searchLayerFilter);
     return (
         <>
             {(searchLayerFilter.length === 0) ? (<StyledGifNothingHere/>) : (searchLayerFilter.map((filteredBusiness, index) =>
