@@ -35,8 +35,14 @@ function Tutorial2() {
         },
         {
             target: '.step-4',
-            content: 'Aaand filter them as you want',
+            content: 'And filter them as you want',
             placement: 'top',
+
+        },
+        {
+            target: '.step-5',
+            content: 'Add reviews or footprints',
+            placement: 'bottom',
 
         },
     ]);
