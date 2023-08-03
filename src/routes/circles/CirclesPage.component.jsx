@@ -153,7 +153,8 @@ const CirclesPageComponent = () => {
     const [sortMethod, setSortMethod] = useState(""); // Sort by People or Rating (empty string if null)
     const [filterTypeBusiness, setFilterTypeBusiness] = useState(""); // Filters by the type of business (empty string if null)
     // console.log(filterTypeBusiness);
-    const location = useLocation()
+    const location = useLocation();
+    let check_state = location.state;
     useEffect(() => {
         getUser();
         getBusinesses();
@@ -195,11 +196,11 @@ const CirclesPageComponent = () => {
 
         return inner;
     }
-
+    // console.log(location);
     // console.log(lstBusiness[0].getReviews()[0].rating);
     // const position = [31.777587, 35.215094]; //[this.state.location.lat, this.state.location.lng];
     return (<>
-        {location.state && <Tutorial2/>}
+        {check_state && <Tutorial2/>}
         {(lstBusiness === [] || user === null)
             ?
             (<StyledGifLoading/>)

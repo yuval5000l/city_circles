@@ -11,7 +11,7 @@ import {
 } from "@mui/material";
 import LogoutIcon from '@mui/icons-material/Logout';
 import AddBoxOutlinedIcon from '@mui/icons-material/AddBoxOutlined';
-import {Link} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 import {
     StyledAvatarUserCanvas,
     StyledHamburgerButton
@@ -21,8 +21,7 @@ import {onAuthStateChanged, signOut} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
 import {getUserById} from "../../BackEnd/Classes/UserClass";
 import PersonIcon from "@mui/icons-material/Person";
-// import BusinessRegistration1 from "../../routes/business_registratin_pages/BusinessRegistrationPage1";
-
+import LocalLibraryRoundedIcon from '@mui/icons-material/LocalLibraryRounded';
 
 const drawerWidth = '60%';
 
@@ -99,7 +98,11 @@ function ResponsiveDrawer(props) {
         // {text: 'Settings', path: "/", icon: <SettingsIcon/>}
 
     ];
+    let navigate = useNavigate();
 
+    const handleTutorial = () => {
+        navigate("/", { state: {from:true} });
+    }
     const drawer = (
         <Box sx={{
             backgroundColor: theme.palette.primary.light,
@@ -128,6 +131,14 @@ function ResponsiveDrawer(props) {
                             <PersonIcon sx={{fontSize:"2.5rem"}}/>
                         </ListItemIcon>
                         <ListItemText primary="My Profile"/>
+                    </ListItemButton>
+                </ListItem>
+                <ListItem disablePadding>
+                    <ListItemButton onClick={handleTutorial}>
+                        <ListItemIcon>
+                            <LocalLibraryRoundedIcon sx={{fontSize:"2.5rem"}}/>
+                        </ListItemIcon>
+                        <ListItemText primary="Tutorial"/>
                     </ListItemButton>
                 </ListItem>
                 {drawer_content.map((key, index) => (

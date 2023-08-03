@@ -20,7 +20,7 @@ export default function StyledBottomNavigationBar({value1, setValue1}) {
             }}
         >
             <StyledBottomNavigationAction component={Link} to="/" label="circles"
-                                          // state={{from: true}}
+                                          state={{from: true}}
                                           icon={<SupervisedUserCircleIcon
                                               sx={{
                                                   fontSize: {

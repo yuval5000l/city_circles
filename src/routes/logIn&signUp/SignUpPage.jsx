@@ -66,11 +66,10 @@ export default function SignupPage() {
     }, [file]);
     const handleSubmit = async (e) => {
         e.preventDefault();
-        console.log(auth?.currentUser?.uid);
+        // console.log(auth?.currentUser?.uid);
         const user = await getUserById(auth?.currentUser?.uid);
         await user.AddUserMoreInfo(name, chosenSchool, chosenNeighborhood, picturePath);
-        // console.log("after user")
-        navigate("/", { data: true });
+        navigate("/", { state: {from:true} });
     };
     const handleUploadPic = async () => {
         uploadFile(file).then((pathy) => {
