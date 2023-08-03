@@ -31,16 +31,18 @@ export function showBusiness(business) {
         if (value !== "" && key !== "Whatsapp") {
             if (key === "Phone") {
                 if(isMobile) {
-                    Contacts['Whatsapp'] = "https://https://wa.me/" + value;
+                    Contacts['Whatsapp'] = "https://wa.me/" + value;
                 }
-                Contacts['Whatsapp'] = "https://web.whatsapp.com/send?phone=" + value;
+                else
+                {
+                    Contacts['Whatsapp'] = "https://web.whatsapp.com/send?phone=" + value;
+                }
             }
             if (value !== "" && key !== "Phone"){
                 Contacts[key] = value;
             }
         }
     }
-
     return (
         <Box>
             {/*Top Rectangle*/}

@@ -39,7 +39,7 @@ export default function SecondPageBusinessRegistration({onNext, onBack, data}) {
         // creating link to web:
         setWhatsAppLink("https://web.whatsapp.com/send?phone=" + num)
         //     creating link to mobile:
-        //     setWhatsAppLink("https://https://wa.me/"+phoneNum)
+        //     setWhatsAppLink("https://wa.me/"+phoneNum)
     }
 
     // const handleClose = (event, reason) => {
