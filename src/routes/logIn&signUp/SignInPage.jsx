@@ -208,7 +208,7 @@ export default function UserRegistrationForm() {
                     {/*<StyledButtonGray onClick={handleSignUp} >*/}
                     {/*    Register*/}
                     {/*</StyledButtonGray>*/}
-                    <StyledButtonGray onClick={handleGoogleSignUp}>Sign Up with Google</StyledButtonGray>
+                    <StyledButtonGray onClick={handleGoogleSignUp}>Sign In\Up with Google</StyledButtonGray>
                 </Stack>
             </Box>
 
