@@ -10,7 +10,7 @@ export default function StyledAvatarWithBadge({bigPhoto, smallPhoto}) {
                 <SmallAvatar alt="User" src={smallPhoto} />
             }
         >
-            <StyledAvatarFriendProfile sx={{width:"7rem !important", height:"7rem !important"}} alt="Business" src={bigPhoto}/>
+            <StyledAvatarFriendProfile sx={{width:"5rem !important", height:"5rem !important"}} alt="Business" src={bigPhoto}/>
         </Badge>
     );
 }
