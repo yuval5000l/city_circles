@@ -120,7 +120,7 @@ export default function StyledProfileTabs({user}) {
                             <StyledReviewForUser
                                 userName={user.getUserName()}
                                 BusinessName={review.businessName}
-                                review={review.content}
+                                reviewContent={review.content}
                                 businessPhoto={review.businessPhoto}
                                 userPhoto={user.getPic()}
                                 rating={review.rating}
