@@ -26,21 +26,32 @@ const FileReaderComponent = () => {
     // });
     const handleSubmit = async () =>
     {
+        let businessType = [];
         for (let i = 1; i < data.length; i ++)
         {
-            let bussinessType = data[i][1];
-            let businessName = data[i][2];
-            let businessLocation = data[i][3];
-            let businessPhone = data[i][4];
-            let whatsappLink = data[i][5];
-            let instagramLink = data[i][6];
-            let facebookLink = data[i][7];
-            let websiteLink = data[i][8];
-            let photoUrl = "";
-            if (i < 32) {
-                photoUrl = `https://firebasestorage.googleapis.com/v0/b/citycircle-a1014.appspot.com/o/projectFiles%2FBusinessPhotos%2F${i}.jpg?alt=media&token=275cfe50-41a2-4bd7-bfe7-05f39707bed7`
+            if (data[i][1] !== "")
+            {
+                businessType.push(data[i][1])
             }
-                await Business.makeBusiness(businessName, [bussinessType], businessLocation,
+            if (data[i][2] !== "")
+            {
+                businessType.push(data[i][2])
+            }
+            if (data[i][3] !== "")
+            {
+                businessType.push(data[i][3])
+            }
+            let businessName = data[i][4];
+            let businessLocation = data[i][5];
+            let businessPhone = data[i][6];
+            let whatsappLink = data[i][7];
+            let instagramLink = data[i][8];
+            let facebookLink = data[i][9];
+            let websiteLink = data[i][10];
+            let photoUrl = "";
+            photoUrl = `https://firebasestorage.googleapis.com/v0/b/citycircle-a1014.appspot.com/o/projectFiles%2FBusinessPhotos%2F${i}.jpg?alt=media&token=275cfe50-41a2-4bd7-bfe7-05f39707bed7`
+
+                await Business.makeBusiness(businessName, businessType, businessLocation,
                 photoUrl, [{
                     "Sunday": getHoursAndMinutes([dayjs(),dayjs(),]),
                     "Monday": getHoursAndMinutes([dayjs(),dayjs(),]), "Tuesday": getHoursAndMinutes([dayjs(),dayjs(),]),
@@ -55,6 +66,7 @@ const FileReaderComponent = () => {
                     Whatsapp: whatsappLink},
 
                 )
+            businessType = [];
         }
         console.log("FINISHED");
     }

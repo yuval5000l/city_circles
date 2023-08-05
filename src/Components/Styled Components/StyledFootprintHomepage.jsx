@@ -6,7 +6,7 @@ import React from "react";
 import {ReactComponent as FootprintsIcon} from "./Icons/footprints-svgrepo-com.svg";
 import theme from "../../Theme/Theme";
 import StyledSmallCircleButton from "./StyledSmallCirclesButton";
-
+import {Link} from "react-router-dom";
 export default function StyledFootprintHomepage({
                                                     businessPhoto,
                                                     userPhoto,
@@ -39,11 +39,11 @@ export default function StyledFootprintHomepage({
                 }}>
                     <Box sx={{display: 'flex', alignItems: 'center', justifyContent: "space-between"}}>
                         <Box sx={{marginRight: '1rem'}}>
-                            <StyledAvatarWithBadge bigPhoto={businessPhoto} smallPhoto={userPhoto}/>
+                            <Link to={"../BusinessPage"} state={{from: BusinessName}}><StyledAvatarWithBadge bigPhoto={businessPhoto} smallPhoto={userPhoto}/></Link>
                         </Box>
                         <Stack direction="column" justifyContent="center" alignItems="flex-start" color="white">
                             <Stack direction="row" spacing={1} alignItems="flex-start" textAlign="left">
-                                <Typography variant="h3"> {UserName} </Typography>
+                                <Typography variant="h4"> {UserName} </Typography>
                                 <Box backgroundColor="white" borderRadius="50%" height="1.25rem">
                                     <StyledSmallCircleButton userID={UserName} circles_={circles}/>
                                 </Box>
@@ -52,13 +52,13 @@ export default function StyledFootprintHomepage({
 
                             <Stack direction="column" justifyContent="flex-start"
                                    alignItems="flex-start" minWidth='fit-content'>
-                                <Typography variant="h5" textAlign="left" color="white">
+                                <Typography variant="h6" textAlign="left" color="white">
                                     visited
                                 </Typography>
-                                <Typography variant="h3" textAlign="left" color="white">
+                                <Typography variant="h4" textAlign="left" color="white">
                                     {BusinessName}
                                 </Typography>
-                                <Typography variant="h6" textAlign="left" color="white">
+                                <Typography variant="h7" textAlign="left" color="white">
                                     {calculateTime(timestamp)} ago
                                 </Typography>
                             </Stack>

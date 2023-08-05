@@ -20,7 +20,9 @@ function Tutorial2() {
     const [steps, setSteps] = useState([
         {
             target: '.step-1',
-            content: 'This is were you search for businesses & services, filter the results and sort them',
+            content: 'Add reviews or footprints',
+            placement: 'bottom',
+
         },
         {
             target: '.step-2',
@@ -41,9 +43,7 @@ function Tutorial2() {
         },
         {
             target: '.step-5',
-            content: 'Add reviews or footprints',
-            placement: 'bottom',
-
+            content: 'This is where you search for businesses & services, filter the results and sort them',
         },
     ]);
     let navigate = useNavigate();

@@ -241,7 +241,7 @@ function ProfilePageComponent() {
                         </>)
             }
             {/*<FileReaderComponent></FileReaderComponent>*/}
-            {/*<DeleteAllButton name={"Test"}></DeleteAllButton>*/}
+            {/*<DeleteAllButton name={"Users"}></DeleteAllButton>*/}
         </Box>
     );
 

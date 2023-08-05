@@ -50,10 +50,7 @@ export default function StyledBusinessFeedItem({business}) {
                             </Typography>
                         </Stack>
 
-                        {/*<Stack direction="row" display="flex" flexWrap="wrap">*/}
-                        {/*    {business.getBusinessType().map(b_type => <StyledTypeBox> {b_type} </StyledTypeBox>)}*/}
-                        {/*</Stack>*/}
-                        <Stack direction="row" spacing={0.3} justifyContent="center" alignItems="center">
+                        <Stack direction="row" spacing={0.3} justifyContent="flex-start" alignItems="center">
                             <Typography variant="h5"
                                         fontWeight="700">{"0" | business.getRating().toFixed(2)}</Typography>
                             <StyledRating value={business.getRating()}/>

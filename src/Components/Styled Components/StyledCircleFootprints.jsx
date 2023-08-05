@@ -30,7 +30,7 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
     const [lstBusiness, setLstBusiness] = useState([]);
 
     const getBusinesses = ()=> {
-        Business.getAllBusinessesNamesLabels().then((lst) => {
+        Business.getAllBusinessesNamesLabelsWithoutMyFootprint().then((lst) => {
             setLstBusiness(lst);
             // console.log(lstBusiness);
         }).catch((error) => {
@@ -46,21 +46,6 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
         setOpen(false);
         closeSmallDialog();
     };
-
-    // const IsBusinessSet = () => {
-    //     if (chosenBusiness !== "") {
-    //         setIsDisabled(false);
-    //         return false
-    //     }
-    //     if(chosenBusiness==="") {
-    //         setIsDisabled(true);
-    //         return true
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     IsBusinessSet();
-    // }, []);
 
     const HandleSend = async () => {
         if (chosenBusiness !== "")

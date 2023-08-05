@@ -1,4 +1,4 @@
-import {db, timestamp} from "../config/firebase";
+import {auth, db, timestamp} from "../config/firebase";
 import {collection, doc, setDoc, getDocs, getDoc, updateDoc} from "firebase/firestore";
 import User from "./UserClass"
 
@@ -14,7 +14,51 @@ export default class Business {
         });
         return lst;
     }
+    static async getAllBusinessesNamesLabelsWithoutMyReview() {
+        let lst = [];
+        const querySnapshot = await getDocs(collection(db, "Business"));
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            // console.log(doc.id, " => ", doc.data());
+            let flag = true;
+            for (const review of doc.data().reviews)
+            {
+                if (review.userID === auth.currentUser.uid)
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag)
+            {
+                lst.push({label: doc.data().name});
+            }
+        });
+        return lst;
+    }
 
+    static async getAllBusinessesNamesLabelsWithoutMyFootprint() {
+        let lst = [];
+        const querySnapshot = await getDocs(collection(db, "Business"));
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            // console.log(doc.id, " => ", doc.data());
+            let flag = true;
+            for (const footprint of doc.data().footprints)
+            {
+                if (footprint.userID === auth.currentUser.uid)
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag)
+            {
+                lst.push({label: doc.data().name});
+            }
+        });
+        return lst;
+    }
     static async getAllBusinessesData() {
         let lst = [];
         const querySnapshot = await getDocs(collection(db, "Business"));

@@ -73,7 +73,7 @@ export default function StyledFeedItem({
                 <Box>
                     <Stack direction="column" spacing={2}>
                         <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
-                            <Typography variant="h3" textAlign="left">{business_name}</Typography>
+                            <Typography variant="h4" textAlign="left">{business_name}</Typography>
                             <StyledRating value={rating}/>
                         </Stack>
                         <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
