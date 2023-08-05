@@ -44,6 +44,10 @@ const FileReaderComponent = () => {
             let businessName = data[i][4];
             let businessLocation = data[i][5];
             let businessPhone = data[i][6];
+            if (businessPhone !== undefined && businessPhone !== null && businessPhone !== "")
+            {
+                businessPhone = businessPhone.slice(1);
+            }
             let whatsappLink = data[i][7];
             let instagramLink = data[i][8];
             let facebookLink = data[i][9];

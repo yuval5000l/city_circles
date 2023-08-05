@@ -14,7 +14,7 @@ import IconButton from "@mui/material/IconButton";
 import CloseIcon from "@mui/icons-material/Close";
 import Snackbar from "@mui/material/Snackbar";
 import {auth, db, googleProvider} from "../../BackEnd/config/firebase";
-import {signInWithPopup} from "firebase/auth";
+import {signInWithPopup, getAdditionalUserInfo} from "firebase/auth";
 import {doc, setDoc} from "firebase/firestore";
 
 export default function UserRegistrationForm() {
@@ -26,23 +26,33 @@ export default function UserRegistrationForm() {
     const handleGoogleSignUp = () => {
         signInWithPopup(auth, googleProvider)
             .then((result) => {
-                // Handle successful sign-up here if needed
-                // Adds a user with the same uid
-                const data = {
-                    name: "",
-                    email: result.user.email,
-                    password: "",
-                    userID: result.user.uid,
-                    reviews: [],
-                    footprints: [],
-                    circles: [],
-                    // birthday: null
-                    profile_pic: "",
-                    friends: [],
-                }
-                console.log(data);
-                setDoc(doc(db, "Users", result.user.uid), data).then(() => window.location.replace('/SignUpPage'));
+                const {isNewUser} = getAdditionalUserInfo(result);
 
+                    if(isNewUser === false)
+                    {
+                        window.location.replace('/');
+                    }
+                    else {
+
+
+                        // Handle successful sign-up here if needed
+                        // Adds a user with the same uid
+                        const data = {
+                            name: "",
+                            email: result.user.email,
+                            password: "",
+                            userID: result.user.uid,
+                            reviews: [],
+                            footprints: [],
+                            circles: [],
+                            // birthday: null
+                            profile_pic: "",
+                            friends: [],
+                        }
+
+                        console.log(data);
+                        setDoc(doc(db, "Users", result.user.uid), data).then(() => window.location.replace('/SignUpPage'));
+                    }
             })
             .catch((error) => {
                 // Handle errors here if needed
