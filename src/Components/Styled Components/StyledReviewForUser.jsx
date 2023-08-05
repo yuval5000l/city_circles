@@ -35,7 +35,7 @@ export default function StyledReviewForUser({
                     <Typography variant="h5" textAlign="left">
                         {calculateTime(timestamp)}
                     </Typography>
-                    <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
+                    <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center" flexWrap="wrap">
                         <Typography>{rating}</Typography>
                         <StyledRating value={rating} readOnly/>
                         <Typography>{rating[1]}</Typography>
