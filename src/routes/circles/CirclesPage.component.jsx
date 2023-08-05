@@ -20,22 +20,22 @@ function Tutorial2() {
     const [steps, setSteps] = useState([
         {
             target: '.step-1',
-            content: 'This the circles filter!',
+            content: 'This is were you search for businesses & services, filter the results and sort them',
         },
         {
             target: '.step-2',
-            content: 'Here you can choose to filter the business by your social circles!',
+            content: 'Here you can filter by your circles!',
 
         },
         {
             target: '.step-3',
-            content: 'you can sort them..',
+            content: 'you can sort them by PEOPLE or Rating',
             placement: 'top',
 
         },
         {
             target: '.step-4',
-            content: 'And filter them as you want',
+            content: 'you can also filter them by business TYPE',
             placement: 'top',
 
         },
@@ -51,7 +51,7 @@ function Tutorial2() {
     const [runTutorial, setRunTutorial] = useState(false);
 
     const handleJoyrideCallback = (data) => {
-        const { status } = data;
+        const {status} = data;
         if (status === STATUS.FINISHED) {
             setRunTutorial(false);
             navigate("/", {data: false});
@@ -59,7 +59,7 @@ function Tutorial2() {
         }
     };
     useEffect(() => {
-            setRunTutorial(true);
+        setRunTutorial(true);
     }, []);
     return (<>
         <Joyride
@@ -80,14 +80,12 @@ function Tutorial2() {
             styles={{
                 options: {
                     arrowColor: '#fff',
-                    primaryColor: '#3f51b5',
+                    primaryColor: '#775CDF',
                     textColor: '#333',
                     overlayColor: 'rgba(0, 0, 0, 0.5)',
                     spotlightShadow: '0 0 15px rgba(0, 0, 0, 0.5)',
-                    // padding: 10,
-
-                    // margin: 20,
-                },tooltipContainer: {
+                    fontSize: "20px",
+                }, tooltipContainer: {
                     padding: '1px', // Customize the padding inside the messages (steps)
                 },
 
@@ -136,7 +134,8 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}) 
     // console.log("search Layer Filter", searchLayerFilter);
     return (
         <>
-            {(searchLayerFilter.length === 0) ? (<StyledGifNothingHere/>) : (searchLayerFilter.map((filteredBusiness, index) =>
+            {(searchLayerFilter.length === 0) ? (
+                <StyledGifNothingHere/>) : (searchLayerFilter.map((filteredBusiness, index) =>
                 (
                     <ListItem sx={{padding: "unset!important"}} width="100%"
                               key={filteredBusiness.name + index.toString()}>
@@ -203,6 +202,7 @@ const CirclesPageComponent = () => {
 
         return inner;
     }
+
     // console.log(location);
     // console.log(lstBusiness[0].getReviews()[0].rating);
     // const position = [31.777587, 35.215094]; //[this.state.location.lat, this.state.location.lng];
@@ -222,7 +222,8 @@ const CirclesPageComponent = () => {
                     }}>
 
                         <Stack direction="column" spacing={1} alignItems="center" justifyContent="center">
-                            <Stack className="step-2"  direction="row" spacing={2} alignItems="center" justifyContent="center"
+                            <Stack className="step-2" direction="row" spacing={2} alignItems="center"
+                                   justifyContent="center"
                                    paddingTop="0.65rem">
                                 <>
                                     {
@@ -230,7 +231,7 @@ const CirclesPageComponent = () => {
                                                 // <ListItem sx={{padding: "unset!important"}} width="100%" key={user.getCircles()[index]+index.toString()}
                                                 <div key={user.getCircles()[index] + index.toString()}>
                                                     <StyledCirclesSearchItem name={user.getCircles()[index]}
-                                                                                  checkFunction={CircleClicked(index)}/>
+                                                                             checkFunction={CircleClicked(index)}/>
 
                                                 </div>
                                             //</ListItem>
@@ -239,8 +240,11 @@ const CirclesPageComponent = () => {
                             </Stack>
                             <Stack direction="row" spacing={2} alignItems="center" justifyContent="center"
                                    padding="0.4rem">
-                                <div className="step-3"><StyledDropdownMenuSortBy className="step-3" setSortMethod={setSortMethod}/></div>
-                                <div className="step-4"><StyledDropdownMenuFilter className="step-4" setFilterMethod={setFilterTypeBusiness}/></div>
+                                <div className="step-3"><StyledDropdownMenuSortBy className="step-3"
+                                                                                  setSortMethod={setSortMethod}/></div>
+                                <div className="step-4"><StyledDropdownMenuFilter className="step-4"
+                                                                                  setFilterMethod={setFilterTypeBusiness}/>
+                                </div>
                             </Stack>
                         </Stack>
                     </Box>

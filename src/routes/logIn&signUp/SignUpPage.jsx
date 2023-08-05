@@ -111,11 +111,10 @@ export default function SignupPage() {
                     <Typography variant="h4" sx={{textAlign: "start", margin: '1rem'}}>
                         We are <strong>CityCircle</strong> nice to meet you! We want your relocation process to be as
                         comfortable as it gets.
-                        So... we are going to ask some question! Feel free to answer (you can change your decisions
-                        later).
+                        Here are some questions:
                     </Typography>
                     <Typography variant="h4" sx={{textAlign: "start", margin: '1rem'}}>
-                        We want you to chose 3 <strong>CityCircle</strong> to be a part of, so we will understand a
+                        We want you to chose 2 <strong>CityCircles</strong> to be a part of, so we will understand a
                         little
                         more about what you
                         like. The rest will come naturally :)

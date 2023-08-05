@@ -101,7 +101,8 @@ function ResponsiveDrawer(props) {
     let navigate = useNavigate();
 
     const handleTutorial = () => {
-        handleDrawerToggle();
+        setMobileOpen(!mobileOpen);
+        // handleDrawerToggle();
         navigate("/", { state: {from:true} });
     }
     const drawer = (
@@ -135,7 +136,7 @@ function ResponsiveDrawer(props) {
                     </ListItemButton>
                 </ListItem>
                 <ListItem disablePadding>
-                    <ListItemButton onClick={handleTutorial}>
+                    <ListItemButton onClick={handleTutorial} >
                         <ListItemIcon>
                             <LocalLibraryRoundedIcon sx={{fontSize:"2.5rem"}}/>
                         </ListItemIcon>
