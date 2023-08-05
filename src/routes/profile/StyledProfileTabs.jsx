@@ -130,7 +130,6 @@ export default function StyledProfileTabs({user}) {
                     )))
                         :
                         (<Stack direction="column">
-                            <Typography variant="h3">There are no reviews yet</Typography>
                             <StyledGifNothingHere/>
                         </Stack>)
                     }
