@@ -26,6 +26,7 @@ export const StyledButtonGray = styled(Button)(({theme}) => ({
     padding: '0.3rem',
     boxShadow: '0px 4px 4px rgba(0, 0, 0, 0.25)',
     borderRadius: '15px',
+    textDecoration:"unset",
     [theme.breakpoints.up('xs')]: {
         fontSize: '0.8rem',
     },

@@ -192,7 +192,7 @@ export default function UserRegistrationForm() {
                     </Typography>
                     <Link to={"../SignUpPageHelper"}>
                         <StyledButtonGray>
-                            Register
+                            Register now >>
                         </StyledButtonGray>
                     </Link>
                     {/*<StyledButtonGray onClick={handleSignUp} >*/}
