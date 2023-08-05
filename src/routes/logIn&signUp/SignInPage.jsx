@@ -190,7 +190,7 @@ export default function UserRegistrationForm() {
                     <Typography variant="h5">
                         Not Registered? you can register here
                     </Typography>
-                    <Link to={"../SignUpPageHelper"}>
+                    <Link to={"../SignUpPageHelper"} style={{textDecoration: "none"}}>
                         <StyledButtonGray>
                             Register now >>
                         </StyledButtonGray>
