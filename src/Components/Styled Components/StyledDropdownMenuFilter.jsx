@@ -36,7 +36,7 @@ const StyledDropdownMenuFilter = ({setFilterMethod}) => {
             setButtonText(option)
             setAnchorEl(null);
             setIsClicked(true);
-            setFilterMethod(option);
+            setFilterMethod(option.toUpperCase());
 
         };
 
