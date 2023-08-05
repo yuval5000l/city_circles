@@ -65,6 +65,9 @@ export default function CreateUser() {
                 <Typography variant="h1" marginTop={4}>
                     Sign Up
                 </Typography>
+                <Typography variant="h4" marginTop={1}>
+                    Add your E-mail and password
+                </Typography>
                 <Stack direction="column" spacing={5} marginBottom={4} marginTop={4}>
                     <Stack direction="column" spacing={1}>
                         <Typography variant="h3">
