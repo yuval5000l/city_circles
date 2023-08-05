@@ -101,6 +101,7 @@ function ResponsiveDrawer(props) {
     let navigate = useNavigate();
 
     const handleTutorial = () => {
+        handleDrawerToggle();
         navigate("/", { state: {from:true} });
     }
     const drawer = (

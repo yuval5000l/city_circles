@@ -20,7 +20,7 @@ export default function StyledBottomNavigationBar({value1, setValue1}) {
             }}
         >
             <StyledBottomNavigationAction component={Link} to="/" label="circles"
-                                          state={{from: true}}
+                                          // state={{from: false}}
                                           icon={<SupervisedUserCircleIcon
                                               sx={{
                                                   fontSize: {
@@ -32,7 +32,7 @@ export default function StyledBottomNavigationBar({value1, setValue1}) {
                                           selected={location.pathname === '/'}
 
             />
-            <div className="step-5"><StyledBottomNavigationPlus /></div>
+            <StyledBottomNavigationPlus Name={"step-5"}/>
             <StyledBottomNavigationAction component={Link} to="/FeedPageComponent" label="feed" icon={<DynamicFeedIcon
                 sx={{
                     fontSize: {

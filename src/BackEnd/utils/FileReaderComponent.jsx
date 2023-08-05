@@ -36,9 +36,12 @@ const FileReaderComponent = () => {
             let instagramLink = data[i][6];
             let facebookLink = data[i][7];
             let websiteLink = data[i][8];
-
-            await Business.makeBusiness(businessName, [bussinessType], businessLocation,
-                "", [{
+            let photoUrl = "";
+            if (i < 32) {
+                photoUrl = `https://firebasestorage.googleapis.com/v0/b/citycircle-a1014.appspot.com/o/projectFiles%2FBusinessPhotos%2F${i}.jpg?alt=media&token=275cfe50-41a2-4bd7-bfe7-05f39707bed7`
+            }
+                await Business.makeBusiness(businessName, [bussinessType], businessLocation,
+                photoUrl, [{
                     "Sunday": getHoursAndMinutes([dayjs(),dayjs(),]),
                     "Monday": getHoursAndMinutes([dayjs(),dayjs(),]), "Tuesday": getHoursAndMinutes([dayjs(),dayjs(),]),
                     "Wednesday": getHoursAndMinutes([dayjs(),dayjs(),]), "Thursday": getHoursAndMinutes([dayjs(),dayjs(),]),
@@ -53,7 +56,10 @@ const FileReaderComponent = () => {
 
                 )
         }
+        console.log("FINISHED");
     }
+
+
     // console.log(data[1][1])
     return (
         <div>

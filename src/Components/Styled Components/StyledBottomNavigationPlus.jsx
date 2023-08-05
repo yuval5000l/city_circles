@@ -5,7 +5,7 @@ import StyledCircleReview from "./StyledCircleReview";
 import StyledCircleFootprint from "./StyledCircleFootprints";
 import theme from "../../Theme/Theme";
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-export default function StyledBottomNavigationPlus() {
+export default function StyledBottomNavigationPlus({Name}) {
     const [openDialog, setOpenDialog] = useState(false);
 
     const handleClick = () => {
@@ -17,7 +17,7 @@ export default function StyledBottomNavigationPlus() {
     };
     return (
         <>
-            <Stack  direction="column"
+            <Stack className={Name} direction="column"
                     justifyContent="center"
                     alignItems="center">
                 <AddCircleOutlineRoundedIcon label = "add"

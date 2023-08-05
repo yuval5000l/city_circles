@@ -229,18 +229,17 @@ function ProfilePageComponent() {
         <Box marginBottom="4.5rem">
             {
                 (check_null === true) ?
-                    (<div>Profile!</div>)
+                    (<>Profile!</>)
                     :
                     (
-                        <div>
+                        <>
                             {
                                 (user && (user?.getUserId() === auth?.currentUser?.uid)) ?
-                                    (<div>{ShowMyProfile(user, file, setFile, upload)}</div>) :
-                                    (<div>{showUserProfile(user, lstOfReviews)}</div>)
+                                    (<>{ShowMyProfile(user, file, setFile, upload)}</>) :
+                                    (<>{showUserProfile(user, lstOfReviews)}</>)
                             }
-                        </div>)
+                        </>)
             }
-            {/*yo*/}
             {/*<FileReaderComponent></FileReaderComponent>*/}
             {/*<DeleteAllButton name={"Test"}></DeleteAllButton>*/}
         </Box>
