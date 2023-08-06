@@ -6,10 +6,10 @@ import {useOutletContext} from "react-router-dom";
 const FeedPageComponent = () => {
     // const [setButtomBarValue] = useOutletContext(); // [searchRes, setSearchRes, setButtomBarValue]
 
-    const [searchRes, setSearchRes, setButtomBarValue, lstBusiness, lstUsers, user] = useOutletContext();
+    const [searchRes, setSearchRes, setButtomBarValue, dictBusiness, lstUsers, user] = useOutletContext();
 
     return (<>
-            <FeedItemPage lstBusiness={lstBusiness} lstUsers={lstUsers} user={user}/>
+            <FeedItemPage dictBusiness={dictBusiness} lstUsers={lstUsers} user={user}/>
             {/*<FeedItemPage setValue={setButtomBarValue}/>*/}
         </>
     );

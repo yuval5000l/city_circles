@@ -65,7 +65,7 @@ export default class User {
             businessPhoto: Photo,
             content: reviewContent,
             rating: rating,
-            timestamp: timestamp.now().toDate(),
+            timestamp: timestamp.now(),
             circles: this.circles
         };
         this.reviews.push(review);
@@ -78,7 +78,7 @@ export default class User {
             businessID: businessID,
             businessName: businessName,
             businessPhoto: Photo,
-            timestamp: timestamp.now().toDate(),
+            timestamp: timestamp.now(),
             circles: this.circles
         };
         this.footprints.push(footprint);
@@ -183,7 +183,7 @@ export default class User {
             circles: review.circles, time: review.timestamp.toDate(),
             business_name: business.getName(), business_photo_url: business.getProfilePic(),
             rating: (business.getRating()),
-            url_to_business: business.getName(), review: review.content,
+            url_to_business: business, review: review.content,
             review_address: review.content, typeOfItem: "review"
         }
     }
@@ -192,8 +192,8 @@ export default class User {
         return {
             user_id: user.userID_, user_name: user.name_, profile_photo_url: user.profile_pic,
             circles: review.circles, time: review.timestamp.toDate(),
-            business_name: business.name, business_photo_url: business.profilePic,
-            url_to_business: business.id, typeOfItem: "footprint"
+            business_name: business.getName(), business_photo_url: business.profilePic,
+            url_to_business: business, typeOfItem: "footprint"
         }
     }
     static async getAllUsers()

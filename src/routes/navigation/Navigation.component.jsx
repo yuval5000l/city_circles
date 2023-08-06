@@ -47,14 +47,16 @@ const NavigationComponent = () => {
     }, [pageDictionary, location.pathname]);
     // console.log(buttomBarValue);
 
-    const [lstBusiness, setLstBusiness] = useState([]);
+    const [dictBusiness, setDictBusiness] = useState({});
     const [lstUsers, setLstUsers] = useState([]);
     const [user, setUser] = useState(null);
     const [readDocs, setReadDocs]= useState(false);
+
+
     const getBusinesses = () => {
-        Business.getAllBusinesses().then((lst) => {
-            setLstBusiness(lst);
-            // console.log(lstBusiness);
+        Business.getAllBusinessesNamesDictionary().then((dict) => {
+            setDictBusiness(dict);
+
         }).catch((error) => {
             console.error(error);
         });
@@ -70,7 +72,6 @@ const NavigationComponent = () => {
                     break;
                 }
             }
-            // console.log(lstBusiness);
         }).catch((error) => {
             console.error(error);
         });
@@ -81,6 +82,7 @@ const NavigationComponent = () => {
         {
             getUsers();
             getBusinesses();
+            // console.log("READ FROM DB");
         });
     }, []);
 
@@ -102,7 +104,7 @@ const NavigationComponent = () => {
                     <StyledTopBackMenu user={user}/>
                     <Box sx={{width: "100%", marginTop: "4.6rem", marginBottom: "4.5rem"}}>
                         <Outlet context={[searchRes, setSearchRes, setButtomBarValue,
-                            lstBusiness, lstUsers, user]}/>
+                            dictBusiness, lstUsers, user]}/>
                     </Box>
                 </>
             ) : (
@@ -110,11 +112,14 @@ const NavigationComponent = () => {
                     <StyledTopMenuNew setSearch={setSearchRes} setValue={setButtomBarValue} user={user}/>
                     <Box sx={{width: "100%", marginTop: "4.6rem", marginBottom: "4.5rem"}}>
                         <Outlet context={[searchRes, setSearchRes, setButtomBarValue,
-                            lstBusiness, lstUsers, user]}/>
+                            dictBusiness, lstUsers, user]}/>
                     </Box>
                 </>
             )}
-            {(isVirtualKeyboardOpen) ? (<></>) : (<StyledBottomNavigationBar value1={buttomBarValue} setValue1={setButtomBarValue} lstBusiness={lstBusiness}/>)}
+            {(isVirtualKeyboardOpen) ? (<></>) : (<StyledBottomNavigationBar
+                value1={buttomBarValue} setValue1={setButtomBarValue}
+                dictBusiness={dictBusiness} setDictBusiness={setDictBusiness}
+                user={user}/>)}
         </>
     )
     // CirclePage doesn't call to anreads!

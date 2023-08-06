@@ -15,7 +15,7 @@ import Business, {getBusinessByName} from "../../BackEnd/Classes/BusinessClass"
 import {auth} from "../../BackEnd/config/firebase"
 import {getUserById} from "../../BackEnd/Classes/UserClass"
 
-export default function StyledCircleFootprint({closeSmallDialog= ()=>{}, lstBusiness}){
+export default function StyledCircleFootprint({closeSmallDialog= ()=>{}, dictBusiness, setDictBusiness, user}){
 
     const [open, setOpen] = useState(false);
     const [chosenBusiness, setChosenBusiness] = useState("");
@@ -26,7 +26,7 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}, lstBusi
     useEffect(() => {
         // getBusinesses()
         let lst = [];
-        for (const business of lstBusiness)
+        for (const [key, business] of Object.entries(dictBusiness))
         {
             // doc.data() is never undefined for query doc snapshots
             // console.log(doc.id, " => ", doc.data());
@@ -46,7 +46,7 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}, lstBusi
         }
         setFilteredBusiness(lst);
 
-    }, [lstBusiness]);
+    }, [dictBusiness]);
     //
     // const [lstBusiness, setLstBusiness] = useState([]);
     //
@@ -74,9 +74,10 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}, lstBusi
             handleOpenSecond()
             if (auth?.currentUser?.uid !== undefined)
             {
-                const business = await getBusinessByName(chosenBusiness);
+                let business = dictBusiness[chosenBusiness];
+                // console.log("Before", business);
+                // console.log("Before dict", dictBusiness);
 
-                const user = await getUserById(auth?.currentUser?.uid);
                 if (business !== null) {
                     await user.addBusinessFootprint(chosenBusiness, chosenBusiness, business.getProfilePic())
                 }
@@ -85,6 +86,13 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}, lstBusi
                 {
                     await business.addUserFootprint(auth?.currentUser?.uid, user.getUserName(), user.getPic(), user.getCircles());
                 }
+                // console.log("After", business);
+
+                dictBusiness[chosenBusiness] = business;
+                setDictBusiness(dictBusiness);
+                // console.log("After dict", dictBusiness);
+                //
+                // console.log("AfterSetDictionary");
             }
             else
             {

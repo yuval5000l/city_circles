@@ -14,6 +14,16 @@ export default class Business {
         });
         return lst;
     }
+    static async getAllBusinessesNamesDictionary() {
+        let dictionary = {};
+        const querySnapshot = await getDocs(collection(db, "Business"));
+        querySnapshot.forEach((doc) => {
+            // doc.data() is never undefined for query doc snapshots
+            // console.log(doc.id, " => ", doc.data());
+            dictionary[doc.data().name] = businessConverter["fromFirestore"](doc, doc.data());
+        });
+        return dictionary;
+    }
     static async getAllBusinessesNamesLabelsWithoutMyReview() {
         let lst = [];
         const querySnapshot = await getDocs(collection(db, "Business"));

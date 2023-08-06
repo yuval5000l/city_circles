@@ -17,7 +17,8 @@ import {auth} from "../../BackEnd/config/firebase"
 import {getUserById} from "../../BackEnd/Classes/UserClass"
 
 
-export default function StyledCircleReview({closeSmallDialog = () => {}, lstBusiness}) {
+export default function StyledCircleReview({closeSmallDialog = () => {}, dictBusiness, setDictBusiness, user}) {
+
     const [open, setOpen] = useState(false);
     const [review, setReview] = useState("");
     const [rating, setRating] = useState(0);
@@ -30,7 +31,7 @@ export default function StyledCircleReview({closeSmallDialog = () => {}, lstBusi
         // getBusinesses()
         let lst = [];
 
-        for (const business of lstBusiness)
+        for (const [key, business] of Object.entries(dictBusiness))
         {
             // doc.data() is never undefined for query doc snapshots
             // console.log(doc.id, " => ", doc.data());
@@ -51,7 +52,7 @@ export default function StyledCircleReview({closeSmallDialog = () => {}, lstBusi
         setFilteredBusiness(lst);
 
 
-    }, [lstBusiness]);
+    }, [dictBusiness]);
     // useEffect(() => {
     //     getBusinesses()
     // }, [])
@@ -92,14 +93,20 @@ export default function StyledCircleReview({closeSmallDialog = () => {}, lstBusi
         {
             if (auth?.currentUser?.uid !== undefined)
             {
-                const business = await getBusinessByName(chosenBusiness);
-                const user = await getUserById(auth?.currentUser?.uid);
-                if (business !== null) {
+                let business = dictBusiness[chosenBusiness];
+                // const business = await getBusinessByName(chosenBusiness);
+                // const user = await getUserById(auth?.currentUser?.uid);
+                if (business !== null)
+                {
                     await user.addBusinessReview(chosenBusiness, chosenBusiness, business.getProfilePic(), review, rating)
                 }
-                if (business !== null) {
+                if (business !== null)
+                {
                     await business.addUserReview(auth?.currentUser?.uid, user.getUserName(), user.getPic(), review, rating, user.getCircles());
                 }
+
+                dictBusiness[chosenBusiness] = business;
+                setDictBusiness(dictBusiness);
             }
             else
             {

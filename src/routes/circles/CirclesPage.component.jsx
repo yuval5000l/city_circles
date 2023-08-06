@@ -95,7 +95,11 @@ function Tutorial2() {
 }
 
 
-function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}){
+function BigFilter({dictBusiness, circles, searchRes, businessType, sortMethod}){
+    let [lstBusiness, setLstBusiness] = useState(Object.values(dictBusiness));
+    useEffect(() => {
+        setLstBusiness(Object.values(dictBusiness));
+    }, [dictBusiness])
     // console.log("List Business ", lstBusiness);
     // console.log("Circles ", circles);
     // console.log("search Result ",searchRes);
@@ -118,11 +122,13 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}){
         // return business.getCirclesCount()[circles[0]] > 0;
         return (circles.length === 0) || circles.every(circle => business.getCirclesCount()[circle] > 0); // Checks if there is at least 1 circle relevant
     }
-
+    // console.log(dictBusiness);
+    // console.log("List", Object.values(dictBusiness));
     // Check if this business has any reviews in the relevant circle(s)
-    const firstLayerFilter = lstBusiness.filter(checkCircles);
+    let firstLayerFilter = lstBusiness.filter(checkCircles);
+    // console.log("1", firstLayerFilter);
 
-    let secondLayerFilter = firstLayerFilter.filter(business => {
+    let secondLayerFilter = firstLayerFilter.filter( (business) => {
         return (businessType === "") || (business.getBusinessType().includes(businessType));
     });
     // console.log("second Layer Sort", secondLayerFilter);
@@ -130,7 +136,7 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}){
     let thirdLayerSort = secondLayerFilter.sort(sortBy);
     // console.log("third Layer Sort", thirdLayerSort);
 
-    let searchLayerFilter = thirdLayerSort.filter(business => (business.name.toLowerCase()).includes(searchRes.toLowerCase()));
+    let searchLayerFilter = thirdLayerSort.filter((business) => (business.getName().toLowerCase()).includes(searchRes.toLowerCase()));
     // console.log("search Layer Filter", searchLayerFilter);
     return (
         <>
@@ -147,44 +153,15 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}){
 }
 
 const CirclesPageComponent = () => {
-    const [searchRes, setSearchRes, setButtomBarValue, lstBusiness, lstUsers, user] = useOutletContext();
-
-    // const [user, setUser] = useState(null);
-
-    // const [lstBusiness, setLstBusiness] = useState([]);
+    const [searchRes, setSearchRes, setButtomBarValue, dictBusiness, lstUsers, user] = useOutletContext();
 
     const [circleButtons, setCircleButtons] = useState([false, false, false]);
     const [circlesFilter, setCirclesFilter] = useState([]); // Filters by circles, first filter
-    // const [labelFilter, setLabelFilter] = useState([]); // Filter by labels, second filter (empty list if null)
     const [sortMethod, setSortMethod] = useState(""); // Sort by People or Rating (empty string if null)
     const [filterTypeBusiness, setFilterTypeBusiness] = useState(""); // Filters by the type of business (empty string if null)
-    // console.log(filterTypeBusiness);
     const location = useLocation();
     let check_state = location.state;
-    // useEffect(() => {
-    //     getUser();
-    //     getBusinesses();
-    // }, []);
-    //
-    // const getBusinesses = () => {
-    //     Business.getAllBusinesses().then((lst) => {
-    //         setLstBusiness(lst);
-    //         // console.log(lstBusiness);
-    //     }).catch((error) => {
-    //         console.error(error);
-    //     });
-    // }
-    // const getUser = () => {
-    //     onAuthStateChanged(auth, (usery) => {
-    //         if (usery) {
-    //             getUserById(auth?.currentUser?.uid).then((useryy) => {
-    //                 setUser(useryy);
-    //             }).catch((error) => {
-    //                 console.error(error);
-    //             });
-    //         }
-    //     });
-    // };
+
 
     function CircleClicked(num) {
         function inner() {
@@ -208,7 +185,7 @@ const CirclesPageComponent = () => {
     // const position = [31.777587, 35.215094]; //[this.state.location.lat, this.state.location.lng];
     return (<>
         {check_state && <Tutorial2/>}
-        {(lstBusiness === [] || user === null)
+        {(Object.keys(dictBusiness).length === 0 || user === null)
             ?
             (<StyledGifLoading/>)
             :
@@ -248,7 +225,7 @@ const CirclesPageComponent = () => {
                             </Stack>
                         </Stack>
                     </Box>
-                    <BigFilter lstBusiness={lstBusiness} circles={circlesFilter}
+                    <BigFilter dictBusiness={dictBusiness} circles={circlesFilter}
                                searchRes={searchRes} businessType={filterTypeBusiness} sortMethod={sortMethod}/>
                 </>
             )

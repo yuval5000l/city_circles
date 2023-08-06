@@ -1,54 +1,41 @@
 import {useEffect, useState} from "react";
 import User, {CompareUserTimeStamp} from "../../BackEnd/Classes/UserClass";
-import {auth} from "../../BackEnd/config/firebase";
 import Box from "@mui/material/Box";
 import StyledFeedItem from "./StyledFeedItem";
-import {onAuthStateChanged} from "firebase/auth";
 import StyledFootprintHomepage from "./StyledFootprintHomepage";
 import StyledGifLoading from "./StyledGifLoading";
-import Business from "../../BackEnd/Classes/BusinessClass";
 
 
-export default function FeedItemPage({lstBusiness, lstUsers, user}) {
+export default function FeedItemPage({dictBusiness, lstUsers, user}) {
 
     useEffect(() => {
         getFriendsReviewsHelper()
-    }, [])
+    }, [dictBusiness, lstUsers])
 
 
     const [listReviews, setListReviews] = useState([]);
-
-    const createBusinessDict = (lstBusiness) =>{
-        let dictionary = {};
-        for (const business of lstBusiness)
-        {
-            dictionary[business.getName()] = business;
-        }
-        return dictionary;
-    }
     const getFriendsReviewsHelper = () => {
-        if (user)
+        if (user && dictBusiness && lstUsers)
         {
             let filteredListUsers = lstUsers.filter(user => {
                 return user.getCircles().filter(circle => user.getCircles().includes(circle)).length !== 0;
             })
-            let dicBusiness = createBusinessDict(lstBusiness);
             let listOfReviewsAndFootprints = [];
             for (const user of filteredListUsers)
             {
                 for (const review of user.getUserReviews())
                 {
-                    const business = dicBusiness[review.businessID];
+                    const business = dictBusiness[review.businessID];
                     listOfReviewsAndFootprints.push(User.feedItemConverter(user, review, business));
                 }
                 for (const review of user.getUserFootprints())
                 {
-                    const business = dicBusiness[review.businessID];
+                    const business = dictBusiness[review.businessID];
                     listOfReviewsAndFootprints.push(User.feedItemFootprintConverter(user, review, business));
                 }
             }
 
-            setListReviews(listOfReviewsAndFootprints);
+            setListReviews(listOfReviewsAndFootprints.sort(CompareUserTimeStamp));
         }
         // onAuthStateChanged(auth, (user) => {
         //     if (user) {

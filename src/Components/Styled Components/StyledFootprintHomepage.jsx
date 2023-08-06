@@ -13,7 +13,7 @@ export default function StyledFootprintHomepage({
                                                     circles,
                                                     timestamp = null,
                                                     BusinessName = "business name",
-                                                    UserName = "user name"
+                                                    UserName = "user name",
                                                 }) {
 
     return (

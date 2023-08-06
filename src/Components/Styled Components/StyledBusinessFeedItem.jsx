@@ -28,9 +28,8 @@ function getUnion(array1, array2) {
 }
 
 export default function StyledBusinessFeedItem({business}) {
-
     const allUsers = getUnion(business.getReviews(), business.getFootprints());
-    // console.log(allUsers);
+    // console.log(business.getName());
     return (
         <Box sx={{
             padding: "1rem",
@@ -41,6 +40,8 @@ export default function StyledBusinessFeedItem({business}) {
             <Stack direction="column" alignItems="flex-start" spacing={1}>
                 <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
                     <Link to={"../BusinessPage"} state={{from: business.getName()}} style={{textDecoration: 'none'}}>
+                    {/*<Link to={"../BusinessPage"} state={business_data_members} style={{textDecoration: 'none'}}>*/}
+
                         <StyledAvatarBusinessFeed src={business.getProfilePic()}/>
                     </Link>
                     <Stack direction="column" spacing={0.5} justifyContent="flex-start">

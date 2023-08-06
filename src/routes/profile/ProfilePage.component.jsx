@@ -28,6 +28,7 @@ import StyledProfileAvatarWithBadge from "../../Components/Styled Components/Sty
 import PhotoCameraIcon from '@mui/icons-material/PhotoCamera';
 import FileReaderComponent from "../../BackEnd/utils/FileReaderComponent";
 import DeleteAllButton from "../../BackEnd/utils/DeleteAllButtom";
+import {getBusinessByName} from "../../BackEnd/Classes/BusinessClass";
 
 function FeedItem(user, lstOfReviews) {
     if (lstOfReviews === []) {
@@ -52,17 +53,17 @@ function FeedItem(user, lstOfReviews) {
         </Box>)
 }
 
-function showUserProfile(user, lstOfReviews) {
-    const footprints2 = (user !== null) ? (user.getFootprints()) : ([]); // [{businessID: "", businessName: "", businessPhoto: "", timestamp: timestamp},..]
+function showUserProfile(curUser, lstOfReviews) {
+    const footprints2 = (curUser !== null) ? (curUser.getFootprints()) : ([]); // [{businessID: "", businessName: "", businessPhoto: "", timestamp: timestamp},..]
     return (
         <div>
-            {(user === null) ? (<StyledGifLoading/>) :
+            {(curUser === null) ? (<StyledGifLoading/>) :
                 (<div>
                     <TopBoxWithProfileImg
-                        img_url={(user.getPic() === "") ? ("") : (user.getPic())}
+                        img_url={(curUser.getPic() === "") ? ("") : (curUser.getPic())}
                     />
                     <Typography variant="h2" marginTop="4rem">
-                        {user.getUserName()}
+                        {curUser.getUserName()}
                     </Typography>
                     <Stack direction="column" spacing={1.5} marginTop="1rem">
                         <SmallPurpleBox>
@@ -70,7 +71,7 @@ function showUserProfile(user, lstOfReviews) {
                                 <SupervisedUserCircleIcon
                                     sx={{height: "2.5rem", width: "2.5rem", position: "start", fill: "white"}}/>
                                 <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
-                                    {user.getCircles().map(circle =>
+                                    {curUser.getCircles().map(circle =>
                                         <Box key={circle}>
                                             <StyledLightCircleBox>
                                                 <Typography variant="h4" color="black">
@@ -108,7 +109,7 @@ function showUserProfile(user, lstOfReviews) {
                                 </div>
                             </Stack>
                         </SmallPurpleBox>
-                        {FeedItem(user, lstOfReviews)}
+                        {FeedItem(curUser, lstOfReviews)}
                     </Stack>
                 </div>)
             }
@@ -116,7 +117,7 @@ function showUserProfile(user, lstOfReviews) {
 }
 
 
-function ShowMyProfile(user, file, setFile, upload) {
+function ShowMyProfile(curUser, file, setFile, upload) {
     return (
         <>
             {(upload === false) ? (<><Box
@@ -132,9 +133,9 @@ function ShowMyProfile(user, file, setFile, upload) {
                     <Stack direction="column" spacing={1} justifyContent="flex-start"
                            alignItems="center" >
                         <Typography variant="h2" color="white">
-                            {user.getUserName()}
+                            {curUser.getUserName()}
                         </Typography>
-                        {(user.getPic() === "") ? (<Avatar width="6rem" height="6rem"/>)
+                        {(curUser.getPic() === "") ? (<Avatar width="6rem" height="6rem"/>)
                             : (<Button variant={"contained"} component={"label"} >
                                 <input
                                     type="file"
@@ -144,13 +145,13 @@ function ShowMyProfile(user, file, setFile, upload) {
                                 {/*<StyledAvatarFriendProfile src={user.getPic()}>*/}
                                 {/*</StyledAvatarFriendProfile>*/}
                                 <StyledProfileAvatarWithBadge
-                                                              bigPhoto={user.getPic()}
+                                                              bigPhoto={curUser.getPic()}
                                                               smallPhoto={<PhotoCameraIcon width="1rem" height="1rem" sx={{backgroundColor: "#c3ed5b", color: "white", borderRadius: "50%", padding: "0.3rem", fontSize: "2rem", border: '0.2rem !important', borderColor: 'white'}}/>}/>
                             </Button>)}
                     </Stack>
 
                 </Box>
-                <StyledProfileTabs user={user}/></>) : (<>No!</>)}
+                <StyledProfileTabs user={curUser}/></>) : (<>No!</>)}
 
         </>
     )
@@ -159,20 +160,20 @@ function ShowMyProfile(user, file, setFile, upload) {
 
 
 function ProfilePageComponent() {
-    // const [searchRes, setSearchRes, setButtomBarValue, lstBusiness, lstUsers, user] = useOutletContext();
+    const [searchRes, setSearchRes, setButtomBarValue, dictBusiness, lstUsers, user] = useOutletContext();
 
     const [picturePath, setPicturePath] = useState("");
     const [file, setFile] = useState(null);
     const location = useLocation()
     const check_null = location.state === null;
     let {from} = (check_null === true) ? null : location.state;
-    let [user, setUser] = useState(null);
+    let [curUser, setCurUser] = useState(null);
     const [lstOfReviews, setLstOfReviews] = useState([]);
     const [upload, setUpload] = useState(false);
     const handleUploadPic = async () => {
         uploadFile(file).then((pathy) => {
             setPicturePath(pathy);
-            user.setPic(pathy);
+            curUser.setPic(pathy);
         }).catch((error) => {
             console.error(error);
         });
@@ -183,48 +184,85 @@ function ProfilePageComponent() {
             if (file !== null && upload === false) {
                 setUpload(true);
                 await handleUploadPic();
-                await user.saveToFirebase(setUpload); //.then(setUpload(false));
+                await curUser.saveToFirebase(setUpload); //.then(setUpload(false));
                 // await user.saveToFirebase(setUpload);
             }
         }
         // noinspection JSIgnoredPromiseFromCall
         foo();
     }, [file]);
-
-
+    const getReviewsHelper = (user_) =>
+    {
+        let listOfReviews = [];
+        for (const review of user_.getUserReviews()) {
+            const business = dictBusiness[review.businessID];
+            listOfReviews.push(user_.feedItemConverter(review, business));
+        }
+        return listOfReviews;
+    }
+    const getUserByIdHelper = () => {
+        let user_ = user;
+        for (const user_ of lstUsers)
+        {
+            if (user_.getUserId() === from)
+            {
+                setCurUser(user_);
+                return user_;
+            }
+        }
+        return user_;
+    }
     useEffect(() => {
         if (check_null !== true) {
             onAuthStateChanged(auth, (user_) => {
                 if (user_) {
-                    if (user === null) {
-                        getUserById(from).then((user__) => {
-                            setUser(user__);
-                            user__.getMyReviews()?.then((reviews) => {
-                                setLstOfReviews(reviews);
-                            setPicturePath(user__.getPic());
-                            }).catch((error) => {
-                                console.error(error);
-                            });
-                        }).catch((error) => {
-                            console.error(error);
-                        });
-                    } else if (user.getUserId() !== auth?.currentUser?.uid) {
-                        getUserById(from).then((user__) => {
-                            setUser(user__);
-                            user__.getMyReviews().then((reviews) => {
-                            setLstOfReviews(reviews);
-                        }).catch((error) => {
-                            console.error(error);
-                        });
-                        }).catch((error) => {
-                            console.error(error);
-                        });
+                    if (curUser === null) {
+                        let tmp_user = getUserByIdHelper(from);
+                        setLstOfReviews(getReviewsHelper(tmp_user));
+                        setPicturePath(tmp_user.getPic());
+
+                    } else if (curUser.getUserId() !== auth?.currentUser?.uid) {
+                        let tmp_user = getUserByIdHelper(from);
+                        setLstOfReviews(getReviewsHelper(tmp_user));
                     }
                 }
             });
         }
 
-    }, [check_null, from, user]);
+    }, [check_null, from, curUser]);
+    // useEffect(() => {
+    //     if (check_null !== true) {
+    //         onAuthStateChanged(auth, (user_) => {
+    //             if (user_) {
+    //                 if (user === null) {
+    //                     getUserById(from).then((user__) => {
+    //                         setUser(user__);
+    //                         user__.getMyReviews()?.then((reviews) => {
+    //                             setLstOfReviews(reviews);
+    //                         setPicturePath(user__.getPic());
+    //                         }).catch((error) => {
+    //                             console.error(error);
+    //                         });
+    //                     }).catch((error) => {
+    //                         console.error(error);
+    //                     });
+    //                 } else if (user.getUserId() !== auth?.currentUser?.uid) {
+    //                     getUserById(from).then((user__) => {
+    //                         setUser(user__);
+    //                         user__.getMyReviews().then((reviews) => {
+    //                         setLstOfReviews(reviews);
+    //                     }).catch((error) => {
+    //                         console.error(error);
+    //                     });
+    //                     }).catch((error) => {
+    //                         console.error(error);
+    //                     });
+    //                 }
+    //             }
+    //         });
+    //     }
+    //
+    // }, [check_null, from, user]);
 
     return (
         <Box marginBottom="4.5rem">
@@ -235,9 +273,9 @@ function ProfilePageComponent() {
                     (
                         <>
                             {
-                                (user && (user?.getUserId() === auth?.currentUser?.uid)) ?
-                                    (<>{ShowMyProfile(user, file, setFile, upload)}</>) :
-                                    (<>{showUserProfile(user, lstOfReviews)}</>)
+                                (curUser && (curUser?.getUserId() === auth?.currentUser?.uid)) ?
+                                    (<>{ShowMyProfile(curUser, file, setFile, upload)}</>) :
+                                    (<>{showUserProfile(curUser, lstOfReviews)}</>)
                             }
                         </>)
             }

@@ -1,8 +1,5 @@
-import {useLocation} from 'react-router-dom';
+import {useLocation, useOutletContext} from 'react-router-dom';
 import React, {useEffect, useState} from "react";
-import {getBusinessByName} from "../../BackEnd/Classes/BusinessClass";
-import {onAuthStateChanged} from "firebase/auth";
-import {auth} from "../../BackEnd/config/firebase";
 import theme from "../../Theme/Theme";
 import {Box, Avatar, Stack, Typography} from "@mui/material";
 import {StyledRating, StyledTypeBox} from "../../Components/Styled Components/styledComponents";
@@ -18,6 +15,7 @@ import LanguageIcon from '@mui/icons-material/Language';
 import {isMobile} from 'react-device-detect';
 
 import StyledGifLoading from "../../Components/Styled Components/StyledGifLoading";
+
 export function showBusiness(business) {
     let Contacts = {};
     const Icons =
@@ -30,15 +28,13 @@ export function showBusiness(business) {
     for (const [key, value] of Object.entries(business.getContacts())) {
         if (value !== "" && key !== "Whatsapp") {
             if (key === "Phone") {
-                if(isMobile) {
+                if (isMobile) {
                     Contacts['Whatsapp'] = "https://wa.me/" + value;
-                }
-                else
-                {
+                } else {
                     Contacts['Whatsapp'] = "https://web.whatsapp.com/send?phone=" + value;
                 }
             }
-            if (value !== "" && key !== "Phone"){
+            if (value !== "" && key !== "Phone") {
                 Contacts[key] = value;
             }
         }
@@ -61,15 +57,20 @@ export function showBusiness(business) {
                             <Typography variant="h2" textAlign="left">
                                 {business.name}
                             </Typography>
-                            <Stack direction="row" sx={{display: "flex", flexWrap: "wrap", margin: "auto", justifyContent: "space-between"}}
-                                  // justifyContent="flex-start"
-                                  // alignItems="flex-start"
+                            <Stack direction="row" sx={{
+                                display: "flex",
+                                flexWrap: "wrap",
+                                margin: "auto",
+                                justifyContent: "space-between"
+                            }}
+                                // justifyContent="flex-start"
+                                // alignItems="flex-start"
 
-                                 >
+                            >
                                 {business.type.map((category) =>
                                     <StyledTypeBox
                                         marginTop="0.5rem"
-                                                   key={category}>{category}</StyledTypeBox>)}
+                                        key={category}>{category}</StyledTypeBox>)}
                             </Stack>
                             {/*<Container container direction="column"*/}
                             {/*           justifyContent="flex-start"*/}
@@ -84,7 +85,7 @@ export function showBusiness(business) {
                             <Stack direction="row" spacing={1}>
                                 <Typography>
                                     {(business.getRating() !== 0) ?
-                                    (business.getRating().toFixed(2)) : (business.getRating())}
+                                        (business.getRating().toFixed(2)) : (business.getRating())}
                                 </Typography>
                                 <StyledRating value={business.getRating()}/>
                                 <Typography>({business.rating[1]})</Typography>
@@ -95,7 +96,9 @@ export function showBusiness(business) {
                                 (business.profile_pic === "") ?
                                     (<Avatar sx={{width: "6.25rem", height: "6.25rem"}} alt={business.name}/>)
                                     :
-                                    (<Avatar variant={"circular"} sx={{width: "6.25rem", height: "6.25rem", margin: "auto" }} alt={business.name}
+                                    (<Avatar variant={"circular"}
+                                             sx={{width: "6.25rem", height: "6.25rem", margin: "auto"}}
+                                             alt={business.name}
                                              src={business.profilePic}/>)
                             }
                         </Box>
@@ -107,12 +110,14 @@ export function showBusiness(business) {
                         </Typography>
                     </Stack>
                     <Stack direction="row" spacing={1} alignItems="center">
-                        <Box sx={{ display: 'flex',
+                        <Box sx={{
+                            display: 'flex',
                             flexWrap: 'wrap',
                             alignContent: 'stretch',
                             height: "100%",
-                                // alignItems: "center",
-                            borderRadius: 1, paddingTop: "1rem"}}>
+                            // alignItems: "center",
+                            borderRadius: 1, paddingTop: "1rem"
+                        }}>
                             <AccessTimeIcon/>
                         </Box>
                         <StyledTimeTable business={business}/>
@@ -149,24 +154,15 @@ export function showBusiness(business) {
 }
 
 export default function BusinessPage() {
+    const [searchRes, setSearchRes, setButtomBarValue, dictBusiness, lstUsers, user] = useOutletContext();
 
     const location = useLocation();
     const check_null = location.state === null;
     let {from} = (check_null === true) ? null : location.state;
+
     let [business, setBusiness] = useState("");
     useEffect(() => {
-        if (check_null !== true) {
-            onAuthStateChanged(auth, (user) => {
-                if (user) {
-                    getBusinessByName(from).then((business_) => {
-                        setBusiness(business_)
-                    }).catch((error) => {
-                        console.error(error);
-                    });
-                }
-            });
-        }
-
+        setBusiness(dictBusiness[from]);
     }, [check_null, from]);
 
     return (

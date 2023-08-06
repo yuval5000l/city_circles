@@ -5,9 +5,8 @@ import StyledCircleReview from "./StyledCircleReview";
 import StyledCircleFootprint from "./StyledCircleFootprints";
 import theme from "../../Theme/Theme";
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-export default function StyledBottomNavigationPlus({Name, lstBusiness}) {
+export default function StyledBottomNavigationPlus({Name, dictBusiness, setDictBusiness, user}) {
     const [openDialog, setOpenDialog] = useState(false);
-
     const handleClick = () => {
         setOpenDialog(true);
     };
@@ -15,6 +14,7 @@ export default function StyledBottomNavigationPlus({Name, lstBusiness}) {
     const handleCloseSmallDialog = () => {
         setOpenDialog(false);
     };
+
     return (
         <>
             <Stack className={Name} direction="column"
@@ -41,8 +41,10 @@ export default function StyledBottomNavigationPlus({Name, lstBusiness}) {
                 }}>
 
                 <Stack direction = "row" spacing={2} justifyContent="center" alignItems={"center"}>
-                    <StyledCircleReview closeSmallDialog={handleCloseSmallDialog} lstBusiness={lstBusiness}/>
-                    <StyledCircleFootprint closeSmallDialog={handleCloseSmallDialog} lstBusiness={lstBusiness}/>
+                    <StyledCircleReview closeSmallDialog={handleCloseSmallDialog}
+                                        dictBusiness={dictBusiness} setDictBusiness={setDictBusiness} user={user}/>
+                    <StyledCircleFootprint closeSmallDialog={handleCloseSmallDialog}
+                                           dictBusiness={dictBusiness} setDictBusiness={setDictBusiness} user={user}/>
                 </Stack>
                 </DialogContent>
             </Dialog>
