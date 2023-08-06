@@ -6,9 +6,10 @@ import StyledFeedItem from "./StyledFeedItem";
 import {onAuthStateChanged} from "firebase/auth";
 import StyledFootprintHomepage from "./StyledFootprintHomepage";
 import StyledGifLoading from "./StyledGifLoading";
+import Business from "../../BackEnd/Classes/BusinessClass";
 
 
-export default function FeedItemPage() {
+export default function FeedItemPage({lstBusiness, lstUsers, user}) {
 
     useEffect(() => {
         getFriendsReviewsHelper()
@@ -17,23 +18,37 @@ export default function FeedItemPage() {
 
     const [listReviews, setListReviews] = useState([]);
     const getFriendsReviewsHelper = () => {
-        onAuthStateChanged(auth, (user) => {
-            // if (user) {
-            //     User.getAllUsersReviewsFootprintsExceptCurrentUser().then((lst) => {
-            //         setListReviews(lst.sort(CompareUserTimeStamp));
-            //     }).catch((error) => {
-            //         console.error(error);
-            //     });
-            // }
-
-            if (user) {
-                User.getAllUsersReviewsFootprintsIncludeCurrentUser().then((lst) => {
-                    setListReviews(lst.sort(CompareUserTimeStamp));
-                }).catch((error) => {
-                    console.error(error);
-                });
+        if (user)
+        {
+            let filteredListUsers = lstUsers.filter(user => {
+                return user.getCircles().filter(circle => user.getCircles().includes(circle)).length !== 0;
+            })
+            let listOfReviewsAndFootprints = [];
+            for (const user of filteredListUsers)
+            {
+                for (const review of user.getUserReviews())
+                {
+                    const business = lstBusiness[review.businessID];
+                    listOfReviewsAndFootprints.push(User.feedItemConverter(user, review, business));
+                }
+                for (const review of user.getUserFootprints())
+                {
+                    const business = lstBusiness[review.businessID];
+                    listOfReviewsAndFootprints.push(User.feedItemFootprintConverter(user, review, business));
+                }
             }
-        });
+
+            setListReviews(listOfReviewsAndFootprints);
+        }
+        // onAuthStateChanged(auth, (user) => {
+        //     if (user) {
+        //         User.getAllUsersReviewsFootprintsIncludeCurrentUser().then((lst) => {
+        //             setListReviews(lst.sort(CompareUserTimeStamp));
+        //         }).catch((error) => {
+        //             console.error(error);
+        //         });
+        //     }
+        // });
     };
     return (<Box>
         {(listReviews.length === 0) ?

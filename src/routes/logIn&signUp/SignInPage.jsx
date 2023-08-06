@@ -50,7 +50,7 @@ export default function UserRegistrationForm() {
                             friends: [],
                         }
 
-                        console.log(data);
+                        // console.log(data);
                         setDoc(doc(db, "Users", result.user.uid), data).then(() => window.location.replace('/SignUpPage'));
                     }
             })

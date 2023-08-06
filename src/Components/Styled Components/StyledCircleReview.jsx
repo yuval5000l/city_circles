@@ -17,7 +17,7 @@ import {auth} from "../../BackEnd/config/firebase"
 import {getUserById} from "../../BackEnd/Classes/UserClass"
 
 
-export default function StyledCircleReview({closeSmallDialog = () => {}}) {
+export default function StyledCircleReview({closeSmallDialog = () => {}, lstBusiness}) {
     const [open, setOpen] = useState(false);
     const [review, setReview] = useState("");
     const [rating, setRating] = useState(0);
@@ -25,21 +25,45 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
     const [isDisabled, setIsDisabled] = useState(true);
     const [openSecond, setOpenSecond] = useState(false);
 
-
+    const [filteredBusiness, setFilteredBusiness] = useState([]);
     useEffect(() => {
-        getBusinesses()
+        // getBusinesses()
+        for (const business of lstBusiness)
+        {
+            // doc.data() is never undefined for query doc snapshots
+            // console.log(doc.id, " => ", doc.data());
+            let flag = true;
+            let lst = [];
+            for (const review of business.getReviews())
+            {
+                if (review.userID === auth.currentUser.uid)
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag)
+            {
+                lst.push({label: business.getName()});
+            }
+            setFilteredBusiness(lst);
+        }
+
     }, [])
-
-
-    const [lstBusiness, setLstBusiness] = useState([]);
-    const getBusinesses = ()=> {
-        Business.getAllBusinessesNamesLabelsWithoutMyReview().then((lst) => {
-            setLstBusiness(lst);
-            // console.log(lstBusiness);
-        }).catch((error) => {
-            console.error(error);
-        });
-    }
+    // useEffect(() => {
+    //     getBusinesses()
+    // }, [])
+    //
+    //
+    // const [lstBusiness, setLstBusiness] = useState([]);
+    // const getBusinesses = ()=> {
+    //     Business.getAllBusinessesNamesLabelsWithoutMyReview().then((lst) => {
+    //         setLstBusiness(lst);
+    //         // console.log(lstBusiness);
+    //     }).catch((error) => {
+    //         console.error(error);
+    //     });
+    // }
     // console.log(auth?.currentUser?.uid);
 
     const handleClickOpen = () => {
@@ -136,7 +160,7 @@ export default function StyledCircleReview({closeSmallDialog = () => {}}) {
                                     }
                                 }}
                                 id="combo-box-demo"
-                                options={lstBusiness}
+                                options={filteredBusiness}
                                 renderInput={(params) => <TextField
                                     {...params}
                                     label="Business"/>}

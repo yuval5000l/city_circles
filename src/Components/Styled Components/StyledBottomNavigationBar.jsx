@@ -4,7 +4,7 @@ import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
 import DynamicFeedIcon from '@mui/icons-material/DynamicFeed';
 import StyledBottomNavigationPlus from "./StyledBottomNavigationPlus";
 
-export default function StyledBottomNavigationBar({value1, setValue1}) {
+export default function StyledBottomNavigationBar({value1, setValue1, lstBusiness}) {
     const location = useLocation();
     // console.log(value1);
     // console.log(setValue1);
@@ -32,7 +32,7 @@ export default function StyledBottomNavigationBar({value1, setValue1}) {
                                           selected={location.pathname === '/'}
 
             />
-            <StyledBottomNavigationPlus Name={"step-5"}/>
+            <StyledBottomNavigationPlus Name={"step-5"} lstBusiness={lstBusiness}/>
             <StyledBottomNavigationAction component={Link} to="/FeedPageComponent" label="feed" icon={<DynamicFeedIcon
                 sx={{
                     fontSize: {

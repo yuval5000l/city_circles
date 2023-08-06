@@ -1,6 +1,6 @@
 // noinspection JSIgnoredPromiseFromCall
 
-import {useLocation} from "react-router-dom";
+import {useLocation, useOutletContext} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
@@ -159,6 +159,7 @@ function ShowMyProfile(user, file, setFile, upload) {
 
 
 function ProfilePageComponent() {
+    // const [searchRes, setSearchRes, setButtomBarValue, lstBusiness, lstUsers, user] = useOutletContext();
 
     const [picturePath, setPicturePath] = useState("");
     const [file, setFile] = useState(null);

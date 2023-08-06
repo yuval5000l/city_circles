@@ -31,7 +31,7 @@ const StyledFakeSearchBar = styled(Input)(({theme}) => ({
     }
 }));
 
-function StyledTopBackMenu() {
+function StyledTopBackMenu({user}) {
     // const goHome = () =>{
     //     window.location.href = "/";
     // }
@@ -41,7 +41,7 @@ function StyledTopBackMenu() {
         <StyledProfileBarTop>
             <Stack direction="row" alignItems="center" spacing={1} justifyContent="space-evenly" >
                 <Box sx={{display: "flex"}}>
-                    <StyledHamburgerButtonWithCanvas/>
+                    <StyledHamburgerButtonWithCanvas user={user}/>
                 </Box>
                 <Box
                     // sx={{display: "flex", width: "100%", marginX: "auto"}}
@@ -54,48 +54,6 @@ function StyledTopBackMenu() {
                 </Box>
             </Stack>
         </StyledProfileBarTop>
-
-        // <Stack direction="row" alignItems="center" spacing={1} justifyContent="space-between"
-        // sx={{display: "flex", backgroundColor: theme.palette.primary.main}}>
-        //
-        // {/*// <Box*/}
-        // {/*//     sx={{*/}
-        // {/*//         display: 'flex',*/}
-        // {/*//         flexDirection: 'row',*/}
-        // {/*//         justifyContent: 'space-between',*/}
-        // {/*//         alignItems: 'center',*/}
-        // {/*//         backgroundColor: theme.palette.primary.main,*/}
-        // {/*//     }}*/}
-        // {/*// >*/}
-        //     {/*<Box sx={{display: 'inline-block', marginLeft: '6px',marginTop:'5px'}}>*/}
-        //     {/*    <GoBackButton/>*/}
-        //     {/*</Box>*/}
-        //     <Box sx={{display: "flex", padding:"0.2rem"}}>
-        //         <StyledHamburgerButtonWithCanvas/>
-        //     </Box>
-        //     <Box>
-        //         <StyledLogo/>
-        //     </Box>
-        // </Stack>
-
-        // </Box>
-
-        // <Box
-        //     sx={{
-        //         display: 'flex',
-        //         flexDirection: 'row',
-        //         justifycontent: 'space-between',
-        //         alignItems: 'flex-start',
-        //         backgroundColor: theme.palette.primary.main,
-        //     }}
-        // >
-        //     {/*<Box sx={{display: 'inline-block', marginLeft: '6px',marginTop:'5px'}}>*/}
-        //     {/*    <GoBackButton/>*/}
-        //     {/*</Box>*/}
-        //     <Box sx={{display: "flex", padding:"0.5rem"}}>
-        //         <StyledHamburgerButtonWithCanvas/>
-        //     </Box>
-        // </Box>
     );
 }
 

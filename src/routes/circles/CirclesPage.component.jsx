@@ -147,11 +147,11 @@ function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}) 
 }
 
 const CirclesPageComponent = () => {
-    const [searchRes] = useOutletContext();
+    const [searchRes, setSearchRes, setButtomBarValue, lstBusiness, lstUsers, user] = useOutletContext();
 
-    const [user, setUser] = useState(null);
+    // const [user, setUser] = useState(null);
 
-    const [lstBusiness, setLstBusiness] = useState([]);
+    // const [lstBusiness, setLstBusiness] = useState([]);
 
     const [circleButtons, setCircleButtons] = useState([false, false, false]);
     const [circlesFilter, setCirclesFilter] = useState([]); // Filters by circles, first filter
@@ -161,30 +161,30 @@ const CirclesPageComponent = () => {
     // console.log(filterTypeBusiness);
     const location = useLocation();
     let check_state = location.state;
-    useEffect(() => {
-        getUser();
-        getBusinesses();
-    }, []);
-
-    const getBusinesses = () => {
-        Business.getAllBusinesses().then((lst) => {
-            setLstBusiness(lst);
-            // console.log(lstBusiness);
-        }).catch((error) => {
-            console.error(error);
-        });
-    }
-    const getUser = () => {
-        onAuthStateChanged(auth, (usery) => {
-            if (usery) {
-                getUserById(auth?.currentUser?.uid).then((useryy) => {
-                    setUser(useryy);
-                }).catch((error) => {
-                    console.error(error);
-                });
-            }
-        });
-    };
+    // useEffect(() => {
+    //     getUser();
+    //     getBusinesses();
+    // }, []);
+    //
+    // const getBusinesses = () => {
+    //     Business.getAllBusinesses().then((lst) => {
+    //         setLstBusiness(lst);
+    //         // console.log(lstBusiness);
+    //     }).catch((error) => {
+    //         console.error(error);
+    //     });
+    // }
+    // const getUser = () => {
+    //     onAuthStateChanged(auth, (usery) => {
+    //         if (usery) {
+    //             getUserById(auth?.currentUser?.uid).then((useryy) => {
+    //                 setUser(useryy);
+    //             }).catch((error) => {
+    //                 console.error(error);
+    //             });
+    //         }
+    //     });
+    // };
 
     function CircleClicked(num) {
         function inner() {

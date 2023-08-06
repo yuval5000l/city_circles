@@ -15,28 +15,49 @@ import Business, {getBusinessByName} from "../../BackEnd/Classes/BusinessClass"
 import {auth} from "../../BackEnd/config/firebase"
 import {getUserById} from "../../BackEnd/Classes/UserClass"
 
-export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
+export default function StyledCircleFootprint({closeSmallDialog= ()=>{}, lstBusiness}){
 
     const [open, setOpen] = useState(false);
     const [chosenBusiness, setChosenBusiness] = useState("");
     const [isDisabled, setIsDisabled] = useState(true);
     const [openSecond, setOpenSecond] = useState(false);
-
+    const [filteredBusiness, setFilteredBusiness] = useState([]);
 
     useEffect(() => {
-        getBusinesses()
-    }, [])
+        // getBusinesses()
+        for (const business of lstBusiness)
+        {
+            // doc.data() is never undefined for query doc snapshots
+            // console.log(doc.id, " => ", doc.data());
+            let flag = true;
+            let lst = [];
+            for (const footprint of business.getFootprints())
+            {
+                if (footprint.userID === auth.currentUser.uid)
+                {
+                    flag = false;
+                    break;
+                }
+            }
+            if (flag)
+            {
+                lst.push({label: business.getName()});
+            }
+            setFilteredBusiness(lst);
+        }
 
-    const [lstBusiness, setLstBusiness] = useState([]);
-
-    const getBusinesses = ()=> {
-        Business.getAllBusinessesNamesLabelsWithoutMyFootprint().then((lst) => {
-            setLstBusiness(lst);
-            // console.log(lstBusiness);
-        }).catch((error) => {
-            console.error(error);
-        });
-    }
+    }, []);
+    //
+    // const [lstBusiness, setLstBusiness] = useState([]);
+    //
+    // const getBusinesses = ()=> {
+    //     Business.getAllBusinessesNamesLabelsWithoutMyFootprint().then((lst) => {
+    //         setLstBusiness(lst);
+    //         // console.log(lstBusiness);
+    //     }).catch((error) => {
+    //         console.error(error);
+    //     });
+    // }
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -124,7 +145,7 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}}){
                                     }
                                 }}
                                 id="combo-box-demo"
-                                options={lstBusiness}
+                                options={filteredBusiness}
                                 renderInput={(params) => <TextField
                                     {...params}
                                     label="Business"

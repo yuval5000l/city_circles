@@ -6,6 +6,8 @@ import {auth} from "../../BackEnd/config/firebase"
 import {onAuthStateChanged} from "firebase/auth";
 import {useEffect, useState} from "react";
 import StyledTopBackMenu from "../../Components/Styled Components/StyledTopBackMenu";
+import Business from "../../BackEnd/Classes/BusinessClass";
+import User from "../../BackEnd/Classes/UserClass";
 
 const NavigationComponent = () => {
     const location = useLocation();
@@ -17,31 +19,6 @@ const NavigationComponent = () => {
     const [searchRes, setSearchRes] = useState("");
     const [buttomBarValue, setButtomBarValue] = useState(0); // For BottomBarChosenThingy
     const [isVirtualKeyboardOpen, setVirtualKeyboardOpen] = useState(false);
-    // const [mobileOS, setMobileOS] = useState("");
-    // function getMobileOperatingSystem() {
-    //     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
-    //
-    //     // Windows Phone must come first because its UA also contains "Android"
-    //     if (/windows phone/i.test(userAgent)) {
-    //         setMobileOS("winphone");
-    //         return "winphone";
-    //     }
-    //
-    //     if (/android/i.test(userAgent)) {
-    //         setMobileOS("android");
-    //         return "android";
-    //     }
-    //
-    //     // iOS detection from: http://stackoverflow.com/a/9039885/177710
-    //     if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
-    //         setMobileOS("ios");
-    //         return "ios";
-    //     }
-    //     setMobileOS("");
-    //     return "";
-    // }
-
-
 
     useEffect(() => {
         const handleFocus = () => setVirtualKeyboardOpen(true);
@@ -70,8 +47,46 @@ const NavigationComponent = () => {
     }, [pageDictionary, location.pathname]);
     // console.log(buttomBarValue);
 
+    const [lstBusiness, setLstBusiness] = useState([]);
+    const [lstUsers, setLstUsers] = useState([]);
+    const [user, setUser] = useState(null);
+    const [readDocs, setReadDocs]= useState(false);
+    const getBusinesses = () => {
+        Business.getAllBusinesses().then((lst) => {
+            setLstBusiness(lst);
+            // console.log(lstBusiness);
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
+    const getUsers = () => {
+        User.getAllUsers().then((lst) => {
+            setLstUsers(lst);
+            for (const user of lst)
+            {
+                if (auth.currentUser.uid === user.getUserId())
+                {
+                    setUser(user);
+                    break;
+                }
+            }
+            // console.log(lstBusiness);
+        }).catch((error) => {
+            console.error(error);
+        });
+    }
+
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) =>
+        {
+            getUsers();
+            getBusinesses();
+        });
+    }, []);
+
     const check_sign_in = () => {
-        onAuthStateChanged(auth, (user) => {
+        onAuthStateChanged(auth, (user) =>
+        {
             if (!user || window.location.pathname === "/SignUpPage") {
                 window.location.replace("/signInPage");
             }
@@ -84,22 +99,57 @@ const NavigationComponent = () => {
             {/* todo: make this a styled component */}
             {window.location.pathname === "/ProfilePageComponent" ? (
                 <>
-                    <StyledTopBackMenu/>
+                    <StyledTopBackMenu user={user}/>
                     <Box sx={{width: "100%", marginTop: "4.6rem", marginBottom: "4.5rem"}}>
-                        <Outlet context={[searchRes, setSearchRes, setButtomBarValue]}/>
+                        <Outlet context={[searchRes, setSearchRes, setButtomBarValue,
+                            lstBusiness, lstUsers, user]}/>
                     </Box>
                 </>
             ) : (
                 <>
-                    <StyledTopMenuNew setSearch={setSearchRes} setValue={setButtomBarValue}/>
+                    <StyledTopMenuNew setSearch={setSearchRes} setValue={setButtomBarValue} user={user}/>
                     <Box sx={{width: "100%", marginTop: "4.6rem", marginBottom: "4.5rem"}}>
-                        <Outlet context={[searchRes, setSearchRes, setButtomBarValue]}/>
+                        <Outlet context={[searchRes, setSearchRes, setButtomBarValue,
+                            lstBusiness, lstUsers, user]}/>
                     </Box>
                 </>
             )}
-            {(isVirtualKeyboardOpen) ? (<></>) : (<StyledBottomNavigationBar value1={buttomBarValue} setValue1={setButtomBarValue}/>)}
+            {(isVirtualKeyboardOpen) ? (<></>) : (<StyledBottomNavigationBar value1={buttomBarValue} setValue1={setButtomBarValue} lstBusiness={lstBusiness}/>)}
         </>
     )
+    // CirclePage doesn't call to anreads!
+    // StyledBottomNavigationBar Doesn't call to any reads! only writes. PLus botton used StyledReview and StyledFootprint used reads for all documents
+    // StyledTopBackMenu, StyledTopMenuNew Doesn't call to any reads!!
+    // FeedItemPage, 0 reads and 0 writes
+    // Profile still reads
+    // Profile other still reads
+    // BusinessPage still reads
 };
 
 export default NavigationComponent;
+
+
+
+// const [mobileOS, setMobileOS] = useState("");
+// function getMobileOperatingSystem() {
+//     var userAgent = navigator.userAgent || navigator.vendor || window.opera;
+//
+//     // Windows Phone must come first because its UA also contains "Android"
+//     if (/windows phone/i.test(userAgent)) {
+//         setMobileOS("winphone");
+//         return "winphone";
+//     }
+//
+//     if (/android/i.test(userAgent)) {
+//         setMobileOS("android");
+//         return "android";
+//     }
+//
+//     // iOS detection from: http://stackoverflow.com/a/9039885/177710
+//     if (/iPad|iPhone|iPod/.test(userAgent) && !window.MSStream) {
+//         setMobileOS("ios");
+//         return "ios";
+//     }
+//     setMobileOS("");
+//     return "";
+// }

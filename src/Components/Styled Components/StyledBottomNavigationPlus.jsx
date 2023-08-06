@@ -5,7 +5,7 @@ import StyledCircleReview from "./StyledCircleReview";
 import StyledCircleFootprint from "./StyledCircleFootprints";
 import theme from "../../Theme/Theme";
 import AddCircleOutlineRoundedIcon from '@mui/icons-material/AddCircleOutlineRounded';
-export default function StyledBottomNavigationPlus({Name}) {
+export default function StyledBottomNavigationPlus({Name, lstBusiness}) {
     const [openDialog, setOpenDialog] = useState(false);
 
     const handleClick = () => {
@@ -41,8 +41,8 @@ export default function StyledBottomNavigationPlus({Name}) {
                 }}>
 
                 <Stack direction = "row" spacing={2} justifyContent="center" alignItems={"center"}>
-                    <StyledCircleReview closeSmallDialog={handleCloseSmallDialog}/>
-                    <StyledCircleFootprint closeSmallDialog={handleCloseSmallDialog}/>
+                    <StyledCircleReview closeSmallDialog={handleCloseSmallDialog} lstBusiness={lstBusiness}/>
+                    <StyledCircleFootprint closeSmallDialog={handleCloseSmallDialog} lstBusiness={lstBusiness}/>
                 </Stack>
                 </DialogContent>
             </Dialog>

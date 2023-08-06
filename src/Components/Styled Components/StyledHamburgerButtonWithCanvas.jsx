@@ -25,47 +25,53 @@ import LocalLibraryRoundedIcon from '@mui/icons-material/LocalLibraryRounded';
 
 const drawerWidth = '60%';
 
+// function ResponsiveDrawer(props) {
 function ResponsiveDrawer(props) {
     let [name, setName] = useState("static name");
     let [userPic, setUserPic] = useState("")
 
+
+    // useEffect(() => {
+    //     getPic()
+    // }, []);
+
+    // const getPic = () => {
+    //     onAuthStateChanged(auth, (user) => {
+    //         if (user) {
+    //             getUserById(auth?.currentUser?.uid).then((user) => {
+    //                 if (user !== null) {
+    //                     setUserPic(user.getPic());
+    //                 }
+    //             }).catch((error) => {
+    //                 console.error(error);
+    //             });
+    //         }
+    //     });
+    // }
+    // const getName = () => {
+    //     onAuthStateChanged(auth, (user) => {
+    //         if (user) {
+    //             getUserById(auth?.currentUser?.uid).then((user) => {
+    //                 if (user !== null) {
+    //                     setName(user.getUserName());
+    //                 }
+    //             }).catch((error) => {
+    //                 console.error(error);
+    //             });
+    //         }
+    //     });
+    //
+    // }
+    const {window, user} = props;
+    // console.log(user);
     useEffect(() => {
-        getName()
-    }, []);
-
-    useEffect(() => {
-        getPic()
-    }, []);
-
-    const getPic = () => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                getUserById(auth?.currentUser?.uid).then((user) => {
-                    if (user !== null) {
-                        setUserPic(user.getPic());
-                    }
-                }).catch((error) => {
-                    console.error(error);
-                });
-            }
-        });
-    }
-    const getName = () => {
-        onAuthStateChanged(auth, (user) => {
-            if (user) {
-                getUserById(auth?.currentUser?.uid).then((user) => {
-                    if (user !== null) {
-                        setName(user.getUserName());
-                    }
-                }).catch((error) => {
-                    console.error(error);
-                });
-            }
-        });
-
-    }
-
-    const {window} = props;
+        if (user)
+        {
+            setName(user.getUserName());
+            setUserPic(user.getPic());
+        }
+        // getName()
+    }, [user]);
     const [mobileOpen, setMobileOpen] = useState(false);
 
     const handleDrawerToggle = () => {
