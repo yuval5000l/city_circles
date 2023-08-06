@@ -53,7 +53,7 @@ const FileReaderComponent = () => {
             let facebookLink = data[i][9];
             let websiteLink = data[i][10];
             let photoUrl = "";
-            photoUrl = `https://firebasestorage.googleapis.com/v0/b/citycircle-a1014.appspot.com/o/projectFiles%2FBusinessPhotos%2F${i}.jpg?alt=media&token=275cfe50-41a2-4bd7-bfe7-05f39707bed7`
+            // photoUrl = `https://firebasestorage.googleapis.com/v0/b/citycircle-a1014.appspot.com/o/projectFiles%2FBusinessPhotos%2F${i}.jpg?alt=media&token=275cfe50-41a2-4bd7-bfe7-05f39707bed7`
 
                 await Business.makeBusiness(businessName, businessType, businessLocation,
                 photoUrl, [{
