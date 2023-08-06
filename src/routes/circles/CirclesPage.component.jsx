@@ -95,7 +95,7 @@ function Tutorial2() {
 }
 
 
-function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}) {
+function BigFilter({lstBusiness, circles, searchRes, businessType, sortMethod}){
     // console.log("List Business ", lstBusiness);
     // console.log("Circles ", circles);
     // console.log("search Result ",searchRes);
