@@ -17,23 +17,33 @@ export default function FeedItemPage({lstBusiness, lstUsers, user}) {
 
 
     const [listReviews, setListReviews] = useState([]);
+
+    const createBusinessDict = (lstBusiness) =>{
+        let dictionary = {};
+        for (const business of lstBusiness)
+        {
+            dictionary[business.getName()] = business;
+        }
+        return dictionary;
+    }
     const getFriendsReviewsHelper = () => {
         if (user)
         {
             let filteredListUsers = lstUsers.filter(user => {
                 return user.getCircles().filter(circle => user.getCircles().includes(circle)).length !== 0;
             })
+            let dicBusiness = createBusinessDict(lstBusiness);
             let listOfReviewsAndFootprints = [];
             for (const user of filteredListUsers)
             {
                 for (const review of user.getUserReviews())
                 {
-                    const business = lstBusiness[review.businessID];
+                    const business = dicBusiness[review.businessID];
                     listOfReviewsAndFootprints.push(User.feedItemConverter(user, review, business));
                 }
                 for (const review of user.getUserFootprints())
                 {
-                    const business = lstBusiness[review.businessID];
+                    const business = dicBusiness[review.businessID];
                     listOfReviewsAndFootprints.push(User.feedItemFootprintConverter(user, review, business));
                 }
             }

@@ -177,16 +177,18 @@ export default class User {
     }
 
     static feedItemConverter(user, review, business) {
+        // Todo change url_to_business
         return {
-            user_id: user.userID_, user_name: user.name_, profile_photo_url: user.profile_pic,
+            user_id: user.getUserId(), user_name: user.getUserName(), profile_photo_url: user.profile_pic,
             circles: review.circles, time: review.timestamp.toDate(),
-            business_name: business.name, business_photo_url: business.profilePic,
-            rating: (business.rating[0] / business.rating[1]),
-            url_to_business: business.id, review: review.content,
+            business_name: business.getName(), business_photo_url: business.getProfilePic(),
+            rating: (business.getRating()),
+            url_to_business: business.getName(), review: review.content,
             review_address: review.content, typeOfItem: "review"
         }
     }
     static feedItemFootprintConverter(user, review, business) {
+        // Todo change url_to_business to business object
         return {
             user_id: user.userID_, user_name: user.name_, profile_photo_url: user.profile_pic,
             circles: review.circles, time: review.timestamp.toDate(),

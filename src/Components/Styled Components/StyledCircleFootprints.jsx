@@ -25,12 +25,12 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}, lstBusi
 
     useEffect(() => {
         // getBusinesses()
+        let lst = [];
         for (const business of lstBusiness)
         {
             // doc.data() is never undefined for query doc snapshots
             // console.log(doc.id, " => ", doc.data());
             let flag = true;
-            let lst = [];
             for (const footprint of business.getFootprints())
             {
                 if (footprint.userID === auth.currentUser.uid)
@@ -43,10 +43,10 @@ export default function StyledCircleFootprint({closeSmallDialog= ()=>{}, lstBusi
             {
                 lst.push({label: business.getName()});
             }
-            setFilteredBusiness(lst);
         }
+        setFilteredBusiness(lst);
 
-    }, []);
+    }, [lstBusiness]);
     //
     // const [lstBusiness, setLstBusiness] = useState([]);
     //

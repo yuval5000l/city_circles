@@ -28,12 +28,13 @@ export default function StyledCircleReview({closeSmallDialog = () => {}, lstBusi
     const [filteredBusiness, setFilteredBusiness] = useState([]);
     useEffect(() => {
         // getBusinesses()
+        let lst = [];
+
         for (const business of lstBusiness)
         {
             // doc.data() is never undefined for query doc snapshots
             // console.log(doc.id, " => ", doc.data());
             let flag = true;
-            let lst = [];
             for (const review of business.getReviews())
             {
                 if (review.userID === auth.currentUser.uid)
@@ -46,10 +47,11 @@ export default function StyledCircleReview({closeSmallDialog = () => {}, lstBusi
             {
                 lst.push({label: business.getName()});
             }
-            setFilteredBusiness(lst);
         }
+        setFilteredBusiness(lst);
 
-    }, [])
+
+    }, [lstBusiness]);
     // useEffect(() => {
     //     getBusinesses()
     // }, [])
