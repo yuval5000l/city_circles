@@ -58,7 +58,7 @@ export default function SignupPage() {
 
 
     useEffect(() => {
-        async function IsAllRequiredFull(){
+        function IsAllRequiredFull(){
             if (name !== '' && chosenNeighborhood !== '' && chosenSchool !== ''){
                 setNot2circlesSet(false);
             } else {
