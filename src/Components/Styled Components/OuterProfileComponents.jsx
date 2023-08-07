@@ -279,7 +279,7 @@ export function StyledFeedItemProfile({user_id, user_name="name", profile_photo_
                                 </Box>
                                 <Box>
                                     <Stack direction = "row" spacing = {0.5}>
-                                        <StyledGrayButtonFullReview content={review}/>
+                                        <StyledGrayButtonFullReview content={review} userName={user_name}/>
                                         <Link to="../BusinessPage" state={{ from: business_name}} style={{textDecoration: "none"}}><StyledGrayButtonVisitBusiness/></Link>
                                     </Stack>
                                 </Box>

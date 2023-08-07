@@ -151,6 +151,7 @@ export default function SignupPage() {
                 <Stack direction="column" margin="1rem" alignItems="start" spacing={1}>
                     <Typography variant="h3" textAlign="start">You live in..</Typography>
                     <StyledAutoComplete
+                        required={true}
                         disablePortal
                         inputValue={chosenNeighborhood}
                         onInputChange={(event, newInputValue) => {
