@@ -47,12 +47,28 @@ export default function SignupPage() {
     // const [chosenHobby, setChosenHobby] = useState("");
     const [picturePath, setPicturePath] = useState("");
     const [file, setFile] = useState(null);
+    const [not2circlesSet, setNot2circlesSet] = useState(true)
 
     // TODO: in the future- create a data base of circles and connect it to firebase/firestore
     const SchoolsLst = User.ListOfCirclesSchools;
     const NeighborhoodLst = User.ListOfCirclesNeighborhoods;
     // const HobbyLst = User.ListOfCirclesPersonalities;
     let navigate = useNavigate();
+
+
+
+    useEffect(() => {
+        async function IsAllRequiredFull(){
+            if (name !== '' && chosenNeighborhood !== '' && chosenSchool !== ''){
+                setNot2circlesSet(false);
+            } else {
+                setNot2circlesSet(true);
+            }
+        }
+
+        IsAllRequiredFull();
+    }, [name, chosenSchool, chosenNeighborhood]);
+
 
     useEffect(() => {
         async function foo() {
@@ -127,7 +143,7 @@ export default function SignupPage() {
                     <Typography variant="h3">
                         Your Name Is..
                     </Typography>
-                    <StyledDialogTextFieldReview sx={{padding: "unset !important"}} value={name} onChange={(event) => {
+                    <StyledDialogTextFieldReview lable="name" required={true} sx={{padding: "unset !important"}} value={name} onChange={(event) => {
                         setName(event.target.value)
                     }}/>
                 </Stack>
@@ -142,7 +158,7 @@ export default function SignupPage() {
                         id="combo-box-demo"
                         options={SchoolsLst}
                         sx={{width: "80%", padding: "unset"}}
-                        renderInput={(params) => <TextField
+                        renderInput={(params) => <TextField required={true}
                             {...params}
                             label="School"
                         />}
@@ -151,7 +167,6 @@ export default function SignupPage() {
                 <Stack direction="column" margin="1rem" alignItems="start" spacing={1}>
                     <Typography variant="h3" textAlign="start">You live in..</Typography>
                     <StyledAutoComplete
-                        required={true}
                         disablePortal
                         inputValue={chosenNeighborhood}
                         onInputChange={(event, newInputValue) => {
@@ -160,7 +175,7 @@ export default function SignupPage() {
                         id="combo-box-demo"
                         options={NeighborhoodLst}
                         sx={{width: "80%", padding: "unset"}}
-                        renderInput={(params) => <TextField
+                        renderInput={(params) => <TextField required={true}
                             {...params}
                             label="Neighborhood"
                         />}
@@ -251,7 +266,9 @@ export default function SignupPage() {
                         (<Avatar src={picturePath} sx={{width: 100, height: 100}}/>)}
                 </Stack>
             </Stack>
-            <Button onClick={handleSubmit} sx={{
+            <Button
+                disabled={not2circlesSet}
+                onClick={handleSubmit} sx={{
                 borderRadius: "15px",
                 backgroundColor: `${theme.palette.primary.main}`,
                 color: "white",
