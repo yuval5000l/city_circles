@@ -1,6 +1,6 @@
 // noinspection JSIgnoredPromiseFromCall
 
-import {useLocation, useOutletContext} from "react-router-dom";
+import {Link, useLocation, useOutletContext} from "react-router-dom";
 import {useEffect, useState} from "react";
 import {onAuthStateChanged} from "firebase/auth";
 import {auth} from "../../BackEnd/config/firebase";
@@ -14,7 +14,7 @@ import {
 } from "../../Components/Styled Components/styledComponents";
 import * as React from "react";
 import {
-    SmallPurpleBox, StyledLightCircleBoxForProfile,
+    SmallPurpleBox, StyledLightCircleBoxForProfile,SmallerPurpleBox,
     // FeedItem
 } from "../../Components/Styled Components/OuterProfileComponents";
 import SupervisedUserCircleIcon from "@mui/icons-material/SupervisedUserCircle";
@@ -53,6 +53,75 @@ function FeedItem(user, lstOfReviews) {
         </Box>)
 }
 
+function showUserProfileExample(user, lstOfReviews) {
+    const footprints2 = (user !== null) ? (user.getFootprints()) : ([]); // [{businessID: "", businessName: "", businessPhoto: "", timestamp: timestamp},..]
+    return (
+        <div>
+            {(user === null) ? (<StyledGifLoading/>) :
+                (<div>
+                    <TopBoxWithProfileImg
+                        img_url={(user.getPic() === "") ? ("") : (user.getPic())}
+                    />
+                    <Typography variant="h2" marginTop="4rem">
+                        {user.getUserName()}
+                    </Typography>
+                    <Stack direction="column" spacing={1.5} marginTop="1rem">
+                        <SmallPurpleBox>
+                            <Stack direction="column" spacing="auto" justifyContent="center" margin="auto">
+                                <SupervisedUserCircleIcon
+                                    sx={{height: "2.5rem", width: "2.5rem", position: "start", fill: "white"}}/>
+                                <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
+                                    {user.getCircles().map(circle =>
+                                        <Box key={circle}>
+                                            <StyledLightCircleBox>
+                                                <Typography variant="h4" color="black">
+                                                    {circle}
+                                                </Typography>
+                                            </StyledLightCircleBox>
+                                        </Box>
+                                    )}
+                                </Stack>
+                            </Stack>
+                        </SmallPurpleBox>
+
+                        <SmallPurpleBox>
+                            <Stack padding="auto" direction="column" spacing="auto" justifyContent="center" margin="auto">
+                                <FootprintsIcon width="2.5rem" height="2.5rem" sx={{
+                                    fontSize: "3rem",
+                                    margin: "auto",
+                                    fill: "white",
+                                }}/>
+                                <div style={{overflowX: 'auto'}}>
+                                    <Stack direction="row" spacing={"1rem"} justifyContent="flex-start" margin="1rem">
+                                        {(footprints2.length > 0) ? (footprints2.map(footprint =>
+                                            <Stack direction="column" spacing={'0.5rem'} key={footprint.businessID} alignItems="center">
+                                                <StyledLightCircleBoxForProfile>
+                                                    <Avatar sx={{width: '95%', height: '95%'}}
+                                                            src={footprint.businessPhoto}
+                                                    />
+                                                </StyledLightCircleBoxForProfile>
+
+                                                <Typography variant="h5" color="black" flexShrink={1}
+                                                            maxHeight="3.2rem"
+                                                            textOverflow="ellipsis"
+                                                            overflow="hidden"
+                                                            overflowWrap="break-word"
+
+                                                >
+                                                    {footprint['businessName']}
+                                                </Typography>
+                                            </Stack>)) : (<Typography variant="h3" color="white">No footprints yet..</Typography>)}
+                                    </Stack>
+                                </div>
+                            </Stack>
+                        </SmallPurpleBox>
+                        {FeedItem(user, lstOfReviews)}
+                    </Stack>
+                </div>)
+            }
+        </div>);
+}
+
 function showUserProfile(curUser, lstOfReviews) {
     const footprints2 = (curUser !== null) ? (curUser.getFootprints()) : ([]); // [{businessID: "", businessName: "", businessPhoto: "", timestamp: timestamp},..]
     return (
@@ -66,7 +135,7 @@ function showUserProfile(curUser, lstOfReviews) {
                         {curUser.getUserName()}
                     </Typography>
                     <Stack direction="column" spacing={1.5} marginTop="1rem">
-                        <SmallPurpleBox>
+                        <SmallerPurpleBox>
                             <Stack direction="column" spacing="auto" justifyContent="center" margin="auto">
                                 <SupervisedUserCircleIcon
                                     sx={{height: "2.5rem", width: "2.5rem", position: "start", fill: "white"}}/>
@@ -82,7 +151,7 @@ function showUserProfile(curUser, lstOfReviews) {
                                     )}
                                 </Stack>
                             </Stack>
-                        </SmallPurpleBox>
+                        </SmallerPurpleBox>
 
                         <SmallPurpleBox>
                             <Stack direction="column" spacing="auto" justifyContent="center" margin="auto">
@@ -92,16 +161,21 @@ function showUserProfile(curUser, lstOfReviews) {
                                     fill: "white",
                                 }}/>
                                 <div style={{overflowX: 'auto'}}>
-                                    <Stack direction="row" spacing={"1rem"} justifyContent="center" margin="auto">
+                                    <Stack direction="row" spacing={"1rem"} justifyContent="flex-start" margin="1rem">
                                         {(footprints2.length > 0) ? (footprints2.map(footprint =>
-                                                <Stack direction="column" spacing={'0.5rem'} key={footprint.businessID}>
+                                                <Stack direction="column" spacing={'0.5rem'} key={footprint.businessID} alignItems="center">
+                                                    {/*<Link to="../BusinessPage" state={{ from: business_name}} style={{textDecoration: "none"}}></Link>*/}
                                                     <StyledLightCircleBoxForProfile>
                                                         <Avatar sx={{width: '95%', height: '95%'}}
                                                             src={footprint.businessPhoto}
                                                         />
                                                     </StyledLightCircleBoxForProfile>
 
-                                                    <Typography variant="h5" color="black">
+                                                    <Typography variant="h5" color="white" flexShrink={1}
+                                                                maxHeight="3.2rem"
+                                                                textOverflow="ellipsis"
+                                                                overflow="hidden"
+                                                                overflowWrap="break-word">
                                                         {footprint['businessName']}
                                                     </Typography>
                                                 </Stack>)) : (<Typography variant="h3" color="white">No footprints yet..</Typography>)}

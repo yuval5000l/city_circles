@@ -22,7 +22,17 @@ export const SmallPurpleBox = styled(Box)(({ theme })=> ({
     borderRadius: 20,
     width: "100%",
     [theme.breakpoints.up('xs')]: {
-        height:'12rem',
+        height:'14rem',
+    }
+}));
+
+export const SmallerPurpleBox = styled(Box)(({ theme })=> ({
+    backgroundColor:theme.palette.primary.main,
+    position: 'relative',
+    borderRadius: 20,
+    width: "100%",
+    [theme.breakpoints.up('xs')]: {
+        height:'11rem',
     }
 }));
 
