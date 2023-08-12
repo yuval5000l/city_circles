@@ -100,16 +100,10 @@ function BigFilter({dictBusiness, circles, searchRes, businessType, sortMethod})
     useEffect(() => {
         setLstBusiness(Object.values(dictBusiness));
     }, [dictBusiness])
-    // console.log("List Business ", lstBusiness);
-    // console.log("Circles ", circles);
-    // console.log("search Result ",searchRes);
-    // console.log("business Type ",businessType);
-    // console.log("Sort Method ", sortMethod);
-
     function sortBy(a, b) {
-        if (sortMethod === "Rating") {
+        if (sortMethod.toLowerCase() === "rating") {
             return b.getRatingCircles(circles) - a.getRatingCircles(circles);
-        } else if (sortMethod === "People") {
+        } else if (sortMethod.toLowerCase() === "people") {
             // Don't count the same user twice, Count how many people rated this business
 
             return b.getAllUsersThatUsedService(circles) - a.getAllUsersThatUsedService(circles);
@@ -119,25 +113,18 @@ function BigFilter({dictBusiness, circles, searchRes, businessType, sortMethod})
 
     function checkCircles(business) {
 
-        // return business.getCirclesCount()[circles[0]] > 0;
         return (circles.length === 0) || circles.every(circle => business.getCirclesCount()[circle] > 0); // Checks if there is at least 1 circle relevant
     }
-    // console.log(dictBusiness);
-    // console.log("List", Object.values(dictBusiness));
     // Check if this business has any reviews in the relevant circle(s)
     let firstLayerFilter = lstBusiness.filter(checkCircles);
-    // console.log("1", firstLayerFilter);
 
     let secondLayerFilter = firstLayerFilter.filter( (business) => {
         return (businessType === "") || (business.getBusinessType().includes(businessType));
     });
-    // console.log("second Layer Sort", secondLayerFilter);
 
     let thirdLayerSort = secondLayerFilter.sort(sortBy);
-    // console.log("third Layer Sort", thirdLayerSort);
 
     let searchLayerFilter = thirdLayerSort.filter((business) => (business.getName().toLowerCase()).includes(searchRes.toLowerCase()));
-    // console.log("search Layer Filter", searchLayerFilter);
     return (
         <>
             {(searchLayerFilter.length === 0) ? (
@@ -180,9 +167,6 @@ const CirclesPageComponent = () => {
         return inner;
     }
 
-    // console.log(location);
-    // console.log(lstBusiness[0].getReviews()[0].rating);
-    // const position = [31.777587, 35.215094]; //[this.state.location.lat, this.state.location.lng];
     return (<>
         {check_state && <Tutorial2/>}
         {(Object.keys(dictBusiness).length === 0 || user === null)

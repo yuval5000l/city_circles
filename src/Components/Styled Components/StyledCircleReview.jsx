@@ -15,6 +15,7 @@ import theme from "../../Theme/Theme";
 import Business, {getBusinessByName} from "../../BackEnd/Classes/BusinessClass"
 import {auth} from "../../BackEnd/config/firebase"
 import {getUserById} from "../../BackEnd/Classes/UserClass"
+import {useLocation} from "react-router-dom";
 
 
 export default function StyledCircleReview({closeSmallDialog = () => {}, dictBusiness, setDictBusiness, user}) {
@@ -22,10 +23,13 @@ export default function StyledCircleReview({closeSmallDialog = () => {}, dictBus
     const [open, setOpen] = useState(false);
     const [review, setReview] = useState("");
     const [rating, setRating] = useState(0);
-    const [chosenBusiness, setChosenBusiness] = useState("");
+    const [chosenBusiness, setChosenBusiness] = useState(" Idit Benyamin Acupuncture");
     const [isDisabled, setIsDisabled] = useState(true);
     const [openSecond, setOpenSecond] = useState(false);
 
+    // const [clickty, setClickty] = useState("Business");
+    // const location = useLocation();
+    // let from = location.state.from;
     const [filteredBusiness, setFilteredBusiness] = useState([]);
     useEffect(() => {
         // getBusinesses()
@@ -53,21 +57,15 @@ export default function StyledCircleReview({closeSmallDialog = () => {}, dictBus
 
 
     }, [dictBusiness]);
+    // console.log(window.location.pathname);
     // useEffect(() => {
-    //     getBusinesses()
-    // }, [])
-    //
-    //
-    // const [lstBusiness, setLstBusiness] = useState([]);
-    // const getBusinesses = ()=> {
-    //     Business.getAllBusinessesNamesLabelsWithoutMyReview().then((lst) => {
-    //         setLstBusiness(lst);
-    //         // console.log(lstBusiness);
-    //     }).catch((error) => {
-    //         console.error(error);
-    //     });
-    // }
-    // console.log(auth?.currentUser?.uid);
+    //     if (window.location.pathname === '/BusinessPage' && from !== null)
+    //     {
+    //         setChosenBusiness(from);
+    //         setClickty("Businesses");
+    //     }
+    // },[from]);
+
 
     const handleClickOpen = () => {
         setOpen(true);
@@ -172,6 +170,8 @@ export default function StyledCircleReview({closeSmallDialog = () => {}, dictBus
                                 options={filteredBusiness}
                                 renderInput={(params) => <TextField
                                     {...params}
+                                    // inputValue={chosenBusiness}
+
                                     label="Business"/>}
 
                             />

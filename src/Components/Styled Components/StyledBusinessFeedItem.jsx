@@ -52,10 +52,10 @@ export default function StyledBusinessFeedItem({business}) {
                         </Stack>
 
                         <Stack direction="row" spacing={0.3} justifyContent="flex-start" alignItems="center">
-                            <Typography variant="h5"
-                                        fontWeight="700">{"0" | business.getRating().toFixed(2)}</Typography>
+                            {/*<Typography variant="h5"*/}
+                            {/*            fontWeight="700">{"0" | business.getRating().toFixed(2)}</Typography>*/}
                             <StyledRating value={business.getRating()}/>
-                            <Typography variant="h6">({business.rating[1]})</Typography>
+                            {/*<Typography variant="h6">({business.rating[1]})</Typography>*/}
                         </Stack>
                         <Stack direction="row" spacing={1} justifyContent="flex-start" alignItems="center">
                             {/*<StyledInfoBox>*/}

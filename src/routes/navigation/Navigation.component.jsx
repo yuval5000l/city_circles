@@ -20,24 +20,23 @@ const NavigationComponent = () => {
     const [buttomBarValue, setButtomBarValue] = useState(0); // For BottomBarChosenThingy
     const [isVirtualKeyboardOpen, setVirtualKeyboardOpen] = useState(false);
 
-    useEffect(() => {
-        const handleFocus = () => setVirtualKeyboardOpen(true);
-        const handleBlur = () => setVirtualKeyboardOpen(false);
-
-        const inputElement = document.getElementById('search-bar-main'); // Replace with the ID of your input element
-        // console.log(inputElement);
-        if (inputElement) {
-            inputElement.addEventListener('focus', handleFocus);
-            inputElement.addEventListener('blur', handleBlur);
-        }
-
-        return () => {
-            if (inputElement) {
-                inputElement.removeEventListener('focus', handleFocus);
-                inputElement.removeEventListener('blur', handleBlur);
-            }
-        };
-    }, []);
+    // useEffect(() => {
+    //     const handleFocus = () => setVirtualKeyboardOpen(true);
+    //     const handleBlur = () => setVirtualKeyboardOpen(false);
+    //
+    //     const inputElement = document.getElementById('search-bar-main'); // Replace with the ID of your input element
+    //     if (inputElement) {
+    //         inputElement.addEventListener('focus', handleFocus);
+    //         inputElement.addEventListener('blur', handleBlur);
+    //     }
+    //
+    //     return () => {
+    //         if (inputElement) {
+    //             inputElement.removeEventListener('focus', handleFocus);
+    //             inputElement.removeEventListener('blur', handleBlur);
+    //         }
+    //     };
+    // }, []);
 
     useEffect(() => {
         check_sign_in();
@@ -45,12 +44,11 @@ const NavigationComponent = () => {
         // getMobileOperatingSystem();
 
     }, [pageDictionary, location.pathname]);
-    // console.log(buttomBarValue);
 
     const [dictBusiness, setDictBusiness] = useState({});
     const [lstUsers, setLstUsers] = useState([]);
     const [user, setUser] = useState(null);
-    const [readDocs, setReadDocs]= useState(false);
+    // const [readDocs, setReadDocs]= useState(false);
 
 
     const getBusinesses = () => {
@@ -97,8 +95,6 @@ const NavigationComponent = () => {
 
     return (
         <>
-
-            {/* todo: make this a styled component */}
             {window.location.pathname === "/ProfilePageComponent" ? (
                 <>
                     <StyledTopBackMenu user={user}/>
@@ -122,13 +118,6 @@ const NavigationComponent = () => {
                 user={user}/>)}
         </>
     )
-    // CirclePage doesn't call to anreads!
-    // StyledBottomNavigationBar Doesn't call to any reads! only writes. PLus botton used StyledReview and StyledFootprint used reads for all documents
-    // StyledTopBackMenu, StyledTopMenuNew Doesn't call to any reads!!
-    // FeedItemPage, 0 reads and 0 writes
-    // Profile still reads
-    // Profile other still reads
-    // BusinessPage still reads
 };
 
 export default NavigationComponent;
